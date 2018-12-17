@@ -29,19 +29,28 @@ class Home extends Component {
         <Grid container>
           <Grid item>
             <Card className={classes.card}>
+            {/* TO DO: add a number of card classes, color formatting based on IZI category? */}
 
               <CardActionArea>
                 <CardContent>
 
-                  <Typography gutterBottom variant="h3" component="h3">
+                  <Typography gutterBottom variant="h4" component="h4">
                     Health Matters!
                   </Typography>
 
                   <img src={MarnitaLogo} alt="Marnita's Table Placeholder" class=""/>
 
                   <Typography component="p">
-                    A brief description of this will be here ... some cool facts and stuff like that
+                    A brief description of the IZI will be here
                   </Typography>
+                  <Typography component="p">
+                    December 17, 2018
+                  </Typography>
+                  <Typography component="p">
+                    Location of IZI
+                  </Typography>
+
+
 
                 </CardContent>
               </CardActionArea>

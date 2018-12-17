@@ -27,22 +27,23 @@ class Home extends Component {
      <div>
         <Typography variant="h3" className={classes.header}>Check out some recent IZI 360 Reports</Typography>
         <Grid container>
-          <Grid item>
+          <Grid item xs={4}>
             <Card className={classes.card}>
             {/* TO DO: add a number of card classes, color formatting based on IZI category? */}
 
               <CardActionArea>
                 <CardContent>
 
+                  <img src={MarnitaLogo} alt="Marnita's Table Placeholder" className={classes.image}/>
+
                   <Typography gutterBottom variant="h4" component="h4">
                     Health Matters!
                   </Typography>
 
-                  <img src={MarnitaLogo} alt="Marnita's Table Placeholder" class=""/>
-
                   <Typography component="p">
-                    A brief description of the IZI will be here
+                    A brief description of the IZI will be here ... if the text is longer
                   </Typography>
+                  <br></br>
                   <Typography component="p">
                     December 17, 2018
                   </Typography>
@@ -50,12 +51,10 @@ class Home extends Component {
                     Location of IZI
                   </Typography>
 
-
-
                 </CardContent>
               </CardActionArea>
 
-              <CardActions>
+              <CardActions className={classes.cardActions}>
                 <Button size="small" color="primary">
                   View 360 Report
                 </Button>
@@ -72,9 +71,19 @@ class Home extends Component {
 };
 
 const styles = {
- header: {
+  card: {
+    textAlign: 'center',
+    justifyContent: 'center'
+  },
 
- }
+  image: {
+    width: 150,
+  },
+
+  cardActions: {
+    display: 'flex',
+    justifyContent: 'center'
+  }
 };
 
 const mapReduxStateToProps = (reduxState) => ({

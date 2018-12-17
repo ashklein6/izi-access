@@ -34,6 +34,8 @@ class CreateUser extends Component {
   }
 
   render() {
+    const { classes } = this.props;
+
     return (
       <div>
         {this.props.errors.registrationMessage && (
@@ -44,7 +46,7 @@ class CreateUser extends Component {
             {this.props.errors.registrationMessage}
           </h2>
         )}
-        <form onSubmit={this.registerUser}>
+        <form onSubmit={this.registerUser} className={classes.form}>
           <h1>Register User</h1>
           <div>
             <label htmlFor="username">
@@ -92,9 +94,14 @@ class CreateUser extends Component {
 }
 
 const styles = {
- header: {
-
- }
+  form: {
+    backgroundColor: "var(--main-light-grey)",
+    width: "30%",
+    height: "250px",
+    margin: "20px auto",
+    padding: "25px",
+    borderRadius: "2px",
+  }
 };
 
 const mapReduxStateToProps = (state) => ({

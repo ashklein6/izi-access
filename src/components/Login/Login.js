@@ -34,6 +34,8 @@ class Login extends Component {
   }
 
   render() {
+    const { classes } = this.props;
+    
     return (
       <div>
         {this.props.errors.loginMessage && (
@@ -44,7 +46,7 @@ class Login extends Component {
             {this.props.errors.loginMessage}
           </h2>
         )}
-        <form onSubmit={this.login}>
+        <form onSubmit={this.login} className={classes.form}>
           <h1>Login</h1>
           <div>
             <label htmlFor="username">
@@ -92,9 +94,14 @@ class Login extends Component {
 }
 
 const styles = {
- header: {
-
- }
+  form: {
+    backgroundColor: "var(--main-light-grey)",
+    width: "30%",
+    height: "250px",
+    margin: "20px auto",
+    padding: "25px",
+    borderRadius: "2px",
+  }
 };
 
 const mapReduxStateToProps = (state) => ({

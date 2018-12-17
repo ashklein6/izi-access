@@ -3,6 +3,13 @@ import { connect } from 'react-redux';
 
 // Material-UI
 import { withStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import Button from '@material-ui/core/Button';
+import { Grid } from '@material-ui/core'
 import Typography from '@material-ui/core/Typography';
 
 class Home extends Component {
@@ -16,7 +23,70 @@ class Home extends Component {
 
    return (
      <div>
-       <Typography variant="h2" className={classes.header}>Home</Typography>
+        <Typography variant="h3" className={classes.header}>Check out some recent IZI 360 Reports!</Typography>
+        <Grid container>
+          <Grid item>
+            <Card className={classes.card}>
+
+              <CardActionArea>
+                <CardMedia
+                  className={classes.media}
+                  src="./marnita_logo.png"
+                  title="Marnita's Table Logo"
+                />
+                <CardContent>
+                  <Typography gutterBottom variant="h3" component="h3">
+                    Health Matters!
+                  </Typography>
+                  <Typography component="p">
+                    A brief description of this will be here ... some cool facts and stuff like that
+                  </Typography>
+                </CardContent>
+              </CardActionArea>
+
+              <CardActions>
+                <Button size="small" color="primary">
+                  View 360 Report
+                </Button>
+              </CardActions>
+
+            </Card>
+          </Grid>
+
+
+          <Grid item>
+            <Card className={classes.card}>
+
+              <CardActionArea>
+                <CardMedia
+                  className={classes.media}
+                  image="./marnita_logo.png"
+                  title="Marnita's Table Logo"
+                />
+                <CardContent>
+                  <Typography gutterBottom variant="h3" component="h3">
+                    Another!
+                  </Typography>
+                  <Typography component="p">
+                    A brief description of this will be here ... some cool facts and stuff like that
+                  </Typography>
+                </CardContent>
+              </CardActionArea>
+
+              <CardActions>
+                <Button size="small" color="primary">
+                  View 360 Report
+                </Button>
+              </CardActions>
+
+            </Card>
+          </Grid>
+
+          <Grid item>
+          </Grid>
+
+        </Grid>
+
      </div>
    );
  }

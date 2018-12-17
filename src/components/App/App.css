@@ -1,0 +1,62 @@
+:root {
+    --main-purple: #7d52a1;
+    --main-purple-hover: #633589;
+    --main-red: #d71f2e;
+    --main-red-hover: #aa0f18;
+    --main-pink: #ec008c;
+    --main-pink-hover: #de0082;
+    --main-orange: #eb983f;
+    --main-orange-hover: #d17818;
+    --main-light-grey: #f2f2f2;
+}
+
+body {
+    font-family: 'Open Sans', Helvetica, Arial, Lucida, sans-serif;
+    margin: 0px;
+}
+
+.alert {
+    background-color: #ff4545;
+    margin: 50px;
+}
+
+form {
+    /* background-color: #dbd5d5; */
+    background-color: var(--main-light-grey);
+    width: 30%;
+    height: 250px;
+    margin: 20px auto;
+    padding: 25px;
+    border-radius: 2px;
+}
+
+input {
+    margin: 5px;
+    margin-bottom: 10px;
+}
+
+.log-in, .log-out, .register {
+  background-color: var(--main-pink);
+  border-radius: 4px;
+  color: #f8f8f8;
+  min-height: 50px;
+  min-width: 100px;
+  outline:0;
+  cursor: pointer;
+}
+
+.log-in:hover, .log-out:hover, .register:hover {
+  background-color: var(--main-pink-hover);
+}
+
+/* This line makes the "Register" and "Login" buttons look like links */
+.link-button {
+    background:none;
+    color:inherit;
+    border:none;
+    padding:0;
+    font: inherit;
+    outline:0;
+    border-bottom:1px solid #444; 
+    cursor: pointer;
+}

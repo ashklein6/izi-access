@@ -31,7 +31,7 @@ Before you get started, make sure you have the following software installed on y
 To get a copy of marnita-connect running on your local machine:
 
 1. Download this project.
-2. Create a new database called `marnita_connect` and create tables using the database.sql file. If you would like to name your database something else, you will need to change `prime_app` to the name of your new database name in `server/modules/pool.js`
+2. Create a new database called `marnita_connect` and create tables using the marnita_connect.sql file. If you would like to name your database something else, you will need to change `prime_app` to the name of your new database name in `server/modules/pool.js`
 3. Install node modules using `npm install`.
 4. Create a `.env` file at the root of the project and paste this line into the file:
     ```

@@ -81,7 +81,7 @@ class App extends Component {
               path="/create360"
               component={Create360}
             />
-            <ProtectedRoute
+            <Route
               exact
               path="/manage360s"
               component={Manage360s}

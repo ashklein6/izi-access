@@ -32,13 +32,38 @@ const ranges = [
 class Manage360s extends Component {
 
   state = {
-    category: '',
+      unpublishedName: '',
+      unpublishedLocation: '',
+      unpublishedDate: '',
+      unpublishedCategory: '',
+      publishedName: '',
+      publishedLocation: '',
+      publishedDate: '',
+      publishedCategory: '',
   };
 
   handleChange = (event) => {
     this.setState({
       [event.target.name]: event.target.value,
     })
+  };
+
+  searchPublished = (event) => {
+    event.preventDefault();
+    console.log('payload', this.state.publishedCategory, this.state.publishedDate, this.state.publishedLocation, this.state.publishedName);
+  };
+
+  searchUnpublished = (event) => {
+    event.preventDefault();
+    console.log('payload', this.state.unpublishedCategory, this.state.unpublishedDate, this.state.unpublishedLocation, this.state.unpublishedName);
+  };
+
+  returnToDash = () => {
+    this.props.history.push('/dashboard');
+  };
+
+  goToGenerator = () => {
+    this.props.history.push('/generate360');
   }
 
  render() {
@@ -46,23 +71,26 @@ class Manage360s extends Component {
 
    return (
       <div >
-        <Button variant="contained">Return to Dashboard</Button>
+        <Button variant="contained" onClick={this.returnToDash}>Return to Dashboard</Button>
         <span>
           <Typography variant="h4" className={classes.header}>Unpublished 360s</Typography>
-          <Button variant="contained">Create New 360</Button>
+          <Button variant="contained" onClick={this.goToGenerator}>Create New 360</Button>
         </span>
         <span>
           <p>Search By</p>
-          <form>
-            <TextField placeholder="Name or Client" type="search"/>
-            <TextField placeholder="Location" type="search"/>
-            <TextField placeholder="name" type="date"/>
+          <form onSubmit={this.searchUnpublished}>
+            <TextField placeholder="Name or Client" type="search" onChange={this.handleChange}
+              name="unpublishedName" value={this.state.unpublishedName}/>
+            <TextField placeholder="Location" type="search" onChange={this.handleChange}
+              name="unpublishedLocation" value={this.state.unpublishedLocation}/>
+            <TextField placeholder="Date" type="date" onChange={this.handleChange}
+              name="unpublishedDate" value={this.state.unpublishedDate}/>
             <TextField
               select
               className={classNames(classes.margin, classes.textField)}
-              value={this.state.category}
+              value={this.state.unpublishedCategory}
               onChange={this.handleChange}
-              name="category"
+              name="unpublishedCategory"
               InputProps={{
                 startAdornment: <InputAdornment position="start">Category</InputAdornment>,
               }}
@@ -73,21 +101,26 @@ class Manage360s extends Component {
                 </MenuItem>
               ))}
             </TextField>
+            <Button type="submit">Search</Button>
           </form>
         </span>
         <Table360s/>
         <span>
           <Typography variant="h4" className={classes.header}>Published 360s</Typography>
           <p>Search By</p>
-          <form>
-            <TextField placeholder="Name or Client" type="search"/>
-            <TextField placeholder="Location" type="search"/>
-            <TextField placeholder="name" type="date"/>
+          <form onSubmit={this.searchPublished}>
+            <TextField placeholder="Name or Client" type="search" onChange={this.handleChange}
+              name="publishedName" value={this.state.publishedName}/>
+            <TextField placeholder="Location" type="search" onChange={this.handleChange}
+              name="publishedLocation" value={this.state.publishedLocation} />
+            <TextField placeholder="Date" type="date" onChange={this.handleChange}
+              name="publishedDate" value={this.state.publishedDate}/>
             <TextField
               select
               className={classNames(classes.margin, classes.textField)}
-              value={this.state.category}
+              value={this.state.publishedCategory}
               onChange={this.handleChange}
+              name="publishedCategory"
               InputProps={{
                 startAdornment: <InputAdornment position="start">Category</InputAdornment>,
               }}
@@ -98,6 +131,7 @@ class Manage360s extends Component {
                 </MenuItem>
               ))}
             </TextField>
+            <Button type="submit">Search</Button>
           </form>
         </span>
         <Table360s/>

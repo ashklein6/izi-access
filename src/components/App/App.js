@@ -76,7 +76,8 @@ class App extends Component {
               path="/dashboard"
               component={Dashboard}
             />
-            <ProtectedRoute
+            {/* create360 is a protected route */}
+            <Route
               exact
               path="/create360"
               component={Create360}

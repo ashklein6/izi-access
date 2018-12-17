@@ -40,7 +40,7 @@ function* delete360(action) {
   }
 };
 
-function* changePublishStatus() {
+function* changePublishStatus(action) {
   try {
     yield call(axios.put, `//${action.payload.id}`, {data: action.payload.status} );
   } 
@@ -49,7 +49,7 @@ function* changePublishStatus() {
   }
 };
 
-function* changePrivateStatus() {
+function* changePrivateStatus(action) {
   try {
     yield call(axios.put, `//${action.payload.id}`, {data: action.payload.status} );
   } 

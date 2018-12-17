@@ -13,9 +13,17 @@ import Footer from '../Footer/Footer';
 
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 
-import AboutPage from '../AboutPage/AboutPage';
-import UserPage from '../UserPage/UserPage';
-import InfoPage from '../InfoPage/InfoPage';
+import Create360 from '../Create360/Create360';
+import CreateUser from '../CreateUser/CreateUser';
+import Dashboard from '../Dashboard/Dashboard';
+import Generate360 from '../Generate360/Generate360';
+import Home from '../HomePage/HomePage';
+import Login from '../Login/Login';
+import Manage360s from '../Manage360s/Manage360s';
+import ManageUsers from '../ManageUsers/ManageUsers';
+import UserProfile from '../UserProfile/UserProfile';
+import View360 from '../View360/View360';
+
 
 import './App.css';
 
@@ -32,29 +40,63 @@ class App extends Component {
           <Switch>
             {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
             <Redirect exact from="/" to="/home" />
-            {/* Visiting localhost:3000/about will show the about page.
-            This is a route anyone can see, no login necessary */}
+
+            {/* For the following pages, no login is necessary. */}
             <Route
               exact
-              path="/about"
-              component={AboutPage}
-            />
-            {/* For protected routes, the view could show one of several things on the same route.
-            Visiting localhost:3000/home will show the UserPage if the user is logged in.
-            If the user is not logged in, the ProtectedRoute will show the 'Login' or 'Register' page.
-            Even though it seems like they are different pages, the user is always on localhost:3000/home */}
-            <ProtectedRoute
-              exact
               path="/home"
-              component={UserPage}
+              component={Home}
             />
-            {/* This works the same as the other protected route, except that if the user is logged in,
-            they will see the info page instead. */}
+            <Route
+              exact
+              path="/view360"
+              component={View360}
+            />
+            <Route
+              exact
+              path="/login"
+              component={Login}
+            />
+            <Route
+              exact
+              path="/register"
+              component={CreateUser}
+            />
+            <Route
+              exact
+              path="/profile"
+              component={UserProfile}
+            />
+
+            {/* The following pages are protected. The user's access level will be checked.
+              The user will be directed to the login page if they are not logged in, and to 
+              the home page if they are logged in without the appropriate authorization level */}
             <ProtectedRoute
               exact
-              path="/info"
-              component={InfoPage}
+              path="/dashboard"
+              component={Dashboard}
             />
+            <ProtectedRoute
+              exact
+              path="/create360"
+              component={Create360}
+            />
+            <ProtectedRoute
+              exact
+              path="/manage360s"
+              component={Manage360s}
+            />
+            <ProtectedRoute
+              exact
+              path="/manageUsers"
+              component={ManageUsers}
+            />
+            <ProtectedRoute
+              exact
+              path="/generate360"
+              component={Generate360}
+            />
+
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
           </Switch>

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import MarnitaLogo from './marnita_logo.png';
+
 // Material-UI
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -23,24 +25,24 @@ class Home extends Component {
 
    return (
      <div>
-        <Typography variant="h3" className={classes.header}>Check out some recent IZI 360 Reports!</Typography>
+        <Typography variant="h3" className={classes.header}>Check out some recent IZI 360 Reports</Typography>
         <Grid container>
           <Grid item>
             <Card className={classes.card}>
 
               <CardActionArea>
-                <CardMedia
-                  className={classes.media}
-                  src="./marnita_logo.png"
-                  title="Marnita's Table Logo"
-                />
                 <CardContent>
+
                   <Typography gutterBottom variant="h3" component="h3">
                     Health Matters!
                   </Typography>
+
+                  <img src={MarnitaLogo} alt="Marnita's Table Placeholder" class=""/>
+
                   <Typography component="p">
                     A brief description of this will be here ... some cool facts and stuff like that
                   </Typography>
+
                 </CardContent>
               </CardActionArea>
 
@@ -51,38 +53,6 @@ class Home extends Component {
               </CardActions>
 
             </Card>
-          </Grid>
-
-
-          <Grid item>
-            <Card className={classes.card}>
-
-              <CardActionArea>
-                <CardMedia
-                  className={classes.media}
-                  image="./marnita_logo.png"
-                  title="Marnita's Table Logo"
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h3" component="h3">
-                    Another!
-                  </Typography>
-                  <Typography component="p">
-                    A brief description of this will be here ... some cool facts and stuff like that
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-
-              <CardActions>
-                <Button size="small" color="primary">
-                  View 360 Report
-                </Button>
-              </CardActions>
-
-            </Card>
-          </Grid>
-
-          <Grid item>
           </Grid>
 
         </Grid>

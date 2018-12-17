@@ -4,9 +4,31 @@ import { connect } from 'react-redux';
 // Material-UI
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+
+const styles = {
+  container: {
+    margin: 25
+  },
+  textField: {
+    width: 400,
+    marginBottom: 10
+  },
+  form: {
+    textAlign: 'center',
+    padding: 50
+  },
+  header: {
+    textAlign: 'center',
+    marginBottom: 25
+  }
+};
 
 class CreateUser extends Component {
   state = {
+    firstname: '',
+    lastname: '',
     username: '',
     password: '',
   };
@@ -47,35 +69,61 @@ class CreateUser extends Component {
           </h2>
         )}
         <form onSubmit={this.registerUser} className={classes.form}>
-          <h1>Register User</h1>
-          <div>
-            <label htmlFor="username">
-              Username:
-              <input
+        <Typography variant="h2" className={classes.header}>Create Account</Typography>
+            <TextField
+                label="First Name"
+                className={classes.textField}
+                margin="dense"
+                variant="outlined"
                 type="text"
-                name="username"
-                value={this.state.username}
+                name="firstname"
+                placeholder="First Name"
+                value={this.state.firstname}
                 onChange={this.handleInputChangeFor('username')}
               />
-            </label>
-          </div>
-          <div>
-            <label htmlFor="password">
-              Password:
-              <input
-                type="password"
-                name="password"
+            <br />
+            <TextField
+                label="Last Name"
+                className={classes.textField}
+                margin="dense"
+                variant="outlined"
+                type="text"
+                name="lastname"
+                placeholder="Last Name"
+                value={this.state.lastname}
+                onChange={this.handleInputChangeFor('lastname')}
+              />
+            <br />
+            <TextField
+              label="Username"
+              className={classes.textField}
+              margin="dense"
+              variant="outlined"
+              type="text"
+              name="username"
+              placeholder="Username"
+              value={this.state.username}
+              onChange={this.handleInputChangeFor('username')}
+              />
+            <br />
+            <TextField
+              label="Password"
+              className={classes.textField}
+              margin="dense"
+              variant="outlined"
+              type="text"
+              name="password"
+              placeholder="password"
                 value={this.state.password}
                 onChange={this.handleInputChangeFor('password')}
               />
-            </label>
-          </div>
+            <br />
           <div>
             <input
               className="register"
               type="submit"
               name="submit"
-              value="Register"
+              value="Create User"
             />
           </div>
         </form>
@@ -93,16 +141,16 @@ class CreateUser extends Component {
   }
 }
 
-const styles = {
-  form: {
-    backgroundColor: "var(--main-light-grey)",
-    width: "30%",
-    height: "250px",
-    margin: "20px auto",
-    padding: "25px",
-    borderRadius: "2px",
-  }
-};
+// const styles = {
+//   form: {
+//     backgroundColor: "var(--main-light-grey)",
+//     width: "30%",
+//     height: "250px",
+//     margin: "20px auto",
+//     padding: "25px",
+//     borderRadius: "2px",
+//   }
+// };
 
 const mapReduxStateToProps = (state) => ({
  errors: state.errors

@@ -20,7 +20,7 @@ body {
     margin: 50px;
 }
 
-form {
+.form {
     /* background-color: #dbd5d5; */
     background-color: var(--main-light-grey);
     width: 30%;

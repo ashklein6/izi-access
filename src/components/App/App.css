@@ -60,3 +60,7 @@ input {
     border-bottom:1px solid #444; 
     cursor: pointer;
 }
+
+a {
+    text-decoration: none;
+}

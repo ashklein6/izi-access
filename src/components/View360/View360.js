@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import { HashLink as Link } from 'react-router-hash-link';
+
 // Material-UI
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
@@ -49,7 +51,7 @@ const styles = {
     height: '55vh',
     overflow: 'auto'
   },
-  paragraph:{
+  paragraph: {
     margin: '0px 5px 50px 5px',
     textIndent: '25px'
   }
@@ -80,23 +82,38 @@ class View360 extends Component {
             Return to Dashboard
           </Button>
           <Divider />
+
           <List className={classes.list}>
-            <ListItem button>
-              <Typography>Goals Assessment</Typography>
-            </ListItem>
+            <Link smooth to="#goals">
+              <ListItem button>
+                <Typography>Goals Assessment</Typography>
+              </ListItem>
+            </Link>
             <Divider />
-            <ListItem button>
-              <Typography>Dashboard</Typography>
-            </ListItem>
+
+            <Link smooth to="#dashboard">
+              <ListItem button>
+                <Typography>Dashboard</Typography>
+              </ListItem>
+            </Link>
             <Divider />
-            <ListItem button>
-              <Typography>360 Report</Typography>
-            </ListItem>
+
+            <Link smooth to="#360report">
+              <ListItem button>
+                <Typography>360 Report</Typography>
+              </ListItem>
+            </Link>
             <Divider />
-            <ListItem button>
-              <Typography>Analysis &amp; Recommendations</Typography>
-            </ListItem>
+
+            <Link smooth to="#analysis">
+              <ListItem button>
+                <Typography>
+                  Analysis &amp; Recommendations
+                </Typography>
+              </ListItem>
+            </Link>
             <Divider />
+
           </List>
         </Grid>
         <Grid className={classes.report} item xs={10}>
@@ -108,7 +125,7 @@ class View360 extends Component {
             <Divider className={classes.middleDivider} />
           </section>
           <section className={classes.content}>
-            <Typography variant="h5" className={classes.subHeader}>Goals Assessment</Typography>
+            <Typography variant="h5" className={classes.subHeader} id="goals">Goals Assessment</Typography>
             <div className={classes.paragraph}>
               <Typography>
                 Ut vel ipsum porttitor, varius nisl eget, suscipit leo. Maecenas mollis orci sagittis, vehicula ante ac, aliquet libero. Vivamus finibus finibus semper. 
@@ -119,7 +136,7 @@ class View360 extends Component {
               </Typography>
             </div>
 
-            <Typography variant="h5" className={classes.subHeader}>Dashboard</Typography>
+            <Typography variant="h5" className={classes.subHeader} id="dashboard">Dashboard</Typography>
             <div className={classes.paragraph}>
               <Typography>
                 Ut vel ipsum porttitor, varius nisl eget, suscipit leo. Maecenas mollis orci sagittis, vehicula ante ac, aliquet libero. Vivamus finibus finibus semper. 
@@ -130,7 +147,7 @@ class View360 extends Component {
               </Typography>
             </div>
 
-            <Typography variant="h5" className={classes.subHeader}>360 Report</Typography>
+            <Typography variant="h5" className={classes.subHeader} id="360report">360 Report</Typography>
             <div className={classes.paragraph}>
               <Typography>
                 Nullam sodales leo nec viverra semper. Fusce suscipit porttitor molestie. Phasellus blandit ut diam vel tempor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
@@ -151,7 +168,7 @@ class View360 extends Component {
               </Typography>
             </div>
 
-            <Typography variant="h5" className={classes.subHeader}>Analysis &amp; Recommendations</Typography>
+            <Typography variant="h5" className={classes.subHeader} id="analysis">Analysis &amp; Recommendations</Typography>
             <div className={classes.paragraph}>
               <Typography>
                 Ut vel ipsum porttitor, varius nisl eget, suscipit leo. Maecenas mollis orci sagittis, vehicula ante ac, aliquet libero. Vivamus finibus finibus semper. 

@@ -5,7 +5,7 @@ const router = express.Router();
 /**
  * GET route template
  */
-router.get('/', (req, res) => {
+router.get('/search', (req, res) => {
     console.log('params: ', req.query);
     let sqlText = `SELECT threesixty.*, izi_categories.category FROM threesixty
     JOIN izi_categories ON izi_categories.id = threesixty.category_id WHERE `;
@@ -54,6 +54,21 @@ router.get('/', (req, res) => {
     .catch(() => {
       res.sendStatus(500);
     });
+});
+
+router.get('/:status', (req,res) => {
+  const sqlText = `SELECT threesixty.*, izi_categories.category FROM threesixty
+                  JOIN izi_categories ON izi_categories.id = threesixty.category_id
+                  WHERE threesixty.published_status = $1;`;
+  const status = req.params.status;
+  console.log('status ', req.params.status);
+  pool.query(sqlText, [status])
+  .then((response) => {
+    res.send(response.rows);
+  })
+  .catch(() => {
+    res.sendStatus(500);
+  })
 });
 
 /**

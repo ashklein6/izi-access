@@ -12,7 +12,8 @@ function* fetchAll360s() {
 
 function* fetchPublished() {
   try {
-    
+    const response = yield call(axios.get, '/all360/true');
+    yield put({type: 'SET_PUBLISHED', payload: response.data});
   } 
   catch (error) {
     console.log('error', error);
@@ -21,7 +22,8 @@ function* fetchPublished() {
 
 function* fetchUnpublished() {
   try {
-    
+    const response = yield call(axios.get, '/all360/false');
+    yield put({type: 'SET_UNPUBLISHED', payload: response.data});
   } 
   catch (error) {
     console.log('error', error);
@@ -30,8 +32,9 @@ function* fetchUnpublished() {
 
 function* fetch360SearchPublished(action) {
   try {
-    const response = yield call( axios.get, '/all360', { params: action.payload } );
+    const response = yield call( axios.get, '/all360/search', { params: action.payload } );
     console.log('response', response.data);
+    yield put( { type: 'SET_PUBLISHED', payload: response.data } );
   } 
   catch (error) {
     console.log('error', error);
@@ -40,8 +43,9 @@ function* fetch360SearchPublished(action) {
 
 function* fetch360SearchUnpublished(action) {
   try {
-    const response = yield call( axios.get, '/all360', { params: action.payload } );
+    const response = yield call( axios.get, '/all360/search', { params: action.payload } );
     console.log('response', response.data);
+    yield put( { type: 'SET_UNPUBLISHED', payload: response.data } );
   } 
   catch (error) {
     console.log('error', error);

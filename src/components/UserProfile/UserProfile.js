@@ -4,9 +4,7 @@ import { connect } from 'react-redux';
 // Material-UI
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardContent from '@material-ui/core/CardContent';
+import Button from '@material-ui/core/Button';
 
 const styles = {
   container: {
@@ -17,12 +15,11 @@ const styles = {
     marginBottom: 15
   },
   text: {
-    textAlign: 'center',
-    width: 330,
-    margin: 'auto',
+    textAlign: 'left',
     paddingTop: 10,
     paddingBottom: 10,
-    fontSize: 18
+    fontSize: 18,
+    borderRadius: 10
   },
   form: {
     textAlign: 'center',
@@ -34,15 +31,27 @@ const styles = {
   },
   button: {
     width: 200,
-    marginTop: 15
+    marginTop: 15,
+  },
+  editButton: {
+    marginTop: 2,
+    marginRight: 10,
+    float: 'right',
+  },
+  viewButton: {
+    paddingTop: 10,
+    paddingBottom: 10,
+    marginRight: 200,
+    float: 'right'
   },
   div: {
-    textAlign: 'center',
-    width: 330,
+    textAlign: 'left',
+    width: 400,
     margin: 'auto',
-    paddingTop: 100,
-    paddingBottom: 10,
-    fontSize: 18
+    padding: 20,
+    fontSize: 18,
+    background: '#eceff0',
+    borderRadius: 10
   }
 };
 
@@ -59,8 +68,29 @@ class UserProfile extends Component {
      <div>
        <Typography variant="h2" className={classes.header}>User Profile</Typography>
        <form>
-         <div className={classes.text}>
-         <Typography className={classes.text}>Jane</Typography>
+         <div className={classes.div}>
+         <Button className={classes.editButton} variant="contained">Edit</Button>
+          <Typography variant="body1" className={classes.text}>First Name: Jane</Typography>
+          <Typography variant="body1" className={classes.text}>Last Name: Doe</Typography>
+          <Typography variant="body1" className={classes.text}>Email: janedoe@mail.com</Typography>
+          <Button 
+            className={classes.button} 
+            variant= "contained"
+            >Change Password</Button>
+          </div>
+       </form>
+       <br />
+       <form>
+         <div className={classes.div}>
+          <Typography className={classes.text}>
+            Your Accessable 360s
+            <Typography className={classes.text}>360 #1<Button className={classes.viewButton} variant="contained">View</Button></Typography>
+            <Typography className={classes.text}>360 #2<Button className={classes.viewButton} variant="contained">View</Button></Typography>
+          </Typography>
+          <Button 
+            className={classes.button} 
+            variant= "contained"
+            >Request 360 Access</Button>
           </div>
        </form>
      </div>

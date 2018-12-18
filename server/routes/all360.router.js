@@ -10,28 +10,45 @@ router.get('/', (req, res) => {
     let sqlText = `SELECT threesixty.*, izi_categories.category FROM threesixty
     JOIN izi_categories ON izi_categories.id = threesixty.category_id WHERE `;
     let search = req.query;
+    let searchFields = [search.publishedStatus];
+    let fieldCounter = 1;
     if(search.name) {
-      sqlText += 'name = $1 OR client = $1 ';
+      sqlText += `(name = $${fieldCounter} OR client = $${fieldCounter}) `;
+      fieldCounter++;
+      searchFields.unshift(search.name);
     };
     if(search.location && search.name) {
-      sqlText += 'AND location = $2 ';
+      sqlText += `AND location = $${fieldCounter} `;
+      fieldCounter++;
+      searchFields.unshift(search.location);
     } else if (search.location) {
-      sqlText += 'location = $2 ';
+      sqlText += `location = $${fieldCounter} `;
+      fieldCounter++;
+      searchFields.unshift(search.location);
     };
     if(search.date && (search.name || search.location)) {
-      sqlText += 'AND date = $3 ';
+      sqlText += `AND date = $${fieldCounter} `;
+      fieldCounter++;
+      searchFields.unshift(search.date);
     } else if(search.date) {
-      sqlText += 'date = $3 ';
+      sqlText += `date = $${fieldCounter} `;
+      fieldCounter++;
+      searchFields.unshift(search.date);
     };
     if(search.category && (search.name || search.location || search.date)) {
-      sqlText += 'AND category_id = $4 ';
+      sqlText += `AND category_id = $${fieldCounter} `;
+      fieldCounter++;
+      searchFields.unshift(search.category);
     } else if (search.category) {
-      sqlText += 'category_id = $4 ';
+      sqlText += `category_id = $${fieldCounter} `;
+      fieldCounter++;
+      searchFields.unshift(search.category);
     };
-    sqlText += 'AND published_status = $5;';
+    sqlText += `AND published_status = $${fieldCounter};`;
     console.log('text: ', sqlText);
-    pool.query(sqlText, [search.name, search.location, search.date, search.category, search.publishedStatus])
+    pool.query(sqlText, searchFields)
     .then((response) => {
+      console.log(response.rows);
       res.send(response.rows);
     })
     .catch(() => {

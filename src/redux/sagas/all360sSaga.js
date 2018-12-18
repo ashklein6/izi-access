@@ -31,7 +31,7 @@ function* fetchUnpublished() {
 function* fetch360SearchPublished(action) {
   try {
     const response = yield call( axios.get, '/all360', { params: action.payload } );
-    console.log('response', response);
+    console.log('response', response.data);
   } 
   catch (error) {
     console.log('error', error);
@@ -41,7 +41,7 @@ function* fetch360SearchPublished(action) {
 function* fetch360SearchUnpublished(action) {
   try {
     const response = yield call( axios.get, '/all360', { params: action.payload } );
-    console.log('response', response);
+    console.log('response', response.data);
   } 
   catch (error) {
     console.log('error', error);

@@ -13,7 +13,14 @@ const styles = {
   },
   textField: {
     width: 400,
-    marginBottom: 10
+    marginBottom: 15
+  },
+  text: {
+    textAlign: 'center',
+    width: 330,
+    margin: 'auto',
+    paddingTop: 15,
+    fontSize: 18
   },
   form: {
     textAlign: 'center',
@@ -22,6 +29,10 @@ const styles = {
   header: {
     textAlign: 'center',
     marginBottom: 25
+  },
+  button: {
+    width: 200,
+    marginTop: 15
   }
 };
 
@@ -31,6 +42,8 @@ class CreateUser extends Component {
     lastname: '',
     username: '',
     password: '',
+    iziName: '',
+    date: ''
   };
 
   registerUser = (event) => {
@@ -118,23 +131,61 @@ class CreateUser extends Component {
                 onChange={this.handleInputChangeFor('password')}
               />
             <br />
+            <Typography 
+            className={classes.text}
+            >If you are an IZI sponsor, please enter the following
+             information to request access to the full scope of the event data</Typography>
           <div>
-            <input
-              className="register"
+            <TextField
+              label="IZI Name"
+              className={classes.textField}
+              margin="dense"
+              variant="outlined"
+              type="text"
+              name="iziName"
+              placeholder="iziName"
+                value={this.state.iziName}
+                onChange={this.handleInputChangeFor('iziName')}
+                />
+              <br />
+            <Typography variant="h5">OR</Typography>
+            <TextField
+              // label="Date"
+              className={classes.textField}
+              type="date"
+              margin="dense"
+              variant="outlined"
+              onChange={this.handleInputChangeFor('date')}
+              value={this.state.date}
+              name ="date"
+                />
+              <br />
+            <Button
+              className={classes.button}
+              variant="contained"
+              // className="register"
               type="submit"
               name="submit"
-              value="Create User"
-            />
+              value="createUser"
+              >Create User</Button>
+              <br />
+            <Button
+              className={classes.button}
+              variant="contained"
+              onClick={this.handleCancel}
+              name="cancel"
+              value="cancel"
+              >Cancel</Button>
           </div>
         </form>
         <center>
-          <button
+          {/* <button
             type="button"
             className="link-button"
             onClick={() => {this.props.dispatch({type: 'SET_TO_LOGIN_MODE'})}}
           >
             Login
-          </button>
+          </button> */}
         </center>
       </div>
     );

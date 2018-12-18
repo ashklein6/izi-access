@@ -59,7 +59,7 @@ router.get('/search', (req, res) => {
 router.get('/:status', (req,res) => {
   const sqlText = `SELECT threesixty.*, izi_categories.category FROM threesixty
                   JOIN izi_categories ON izi_categories.id = threesixty.category_id
-                  WHERE threesixty.published_status = $1;`;
+                  WHERE threesixty.published_status = $1 LIMIT 5;`;
   const status = req.params.status;
   console.log('status ', req.params.status);
   pool.query(sqlText, [status])

@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
 
 const styles = {
   container: {
@@ -91,6 +92,114 @@ class UserProfile extends Component {
             className={classes.button} 
             variant= "contained"
             >Request 360 Access</Button>
+          </div>
+       </form>
+       <br />
+       <form>
+         <div className={classes.div}>
+            <TextField
+                label="Old Password"
+                className={classes.textField}
+                margin="dense"
+                variant="outlined"
+                type="text"
+                name="oldPassword"
+                placeholder="Old Password"
+              />
+              <br />
+              <TextField
+                label="New Password"
+                className={classes.textField}
+                margin="dense"
+                variant="outlined"
+                type="text"
+                name="newPassword"
+                placeholder="New Password"
+              />
+            <br />
+            <TextField
+                label="Confirm New Password"
+                className={classes.textField}
+                margin="dense"
+                variant="outlined"
+                type="text"
+                name="confirmNewPassword"
+                placeholder="Confirm New Password"
+              />
+            <br />
+          <Button 
+            className={classes.button} 
+            variant= "contained"
+            >Change Password</Button>
+          </div>
+       </form>
+       <br />
+       <form>
+         <div className={classes.div}>
+            <TextField
+                label="Edit First Name"
+                className={classes.textField}
+                margin="dense"
+                variant="outlined"
+                type="text"
+                name="editFirstName"
+                placeholder="Edit First Name"
+              />
+              <br />
+              <TextField
+                label="Edit Last Name"
+                className={classes.textField}
+                margin="dense"
+                variant="outlined"
+                type="text"
+                name="editLastName"
+                placeholder="Edit Last Name"
+              />
+            <br />
+            <TextField
+                label="Edit Email"
+                className={classes.textField}
+                margin="dense"
+                variant="outlined"
+                type="text"
+                name="editEmail"
+                placeholder="Edit Email"
+              />
+            <br />
+          <Button 
+            className={classes.button} 
+            variant= "contained"
+            >Submit</Button>
+          </div>
+       </form>
+       <br />
+       <form>
+         <div className={classes.div}>
+         <Typography variant="h4" className={classes.header}>Request 360 Access</Typography>
+            <TextField
+                label="IZI Name"
+                className={classes.textField}
+                margin="dense"
+                variant="outlined"
+                type="text"
+                name="iziName"
+                placeholder="IZI Name"
+              />
+              <Typography variant="h4" className={classes.header}>OR</Typography>
+              {/* <br /> */}
+              <TextField
+              label="Date of IZI"
+              className={classes.textField}
+              type="date"
+              margin="dense"
+              variant="outlined"
+              name ="date"
+                />
+            <br />
+          <Button 
+            className={classes.button} 
+            variant= "contained"
+            >Submit</Button>
           </div>
        </form>
      </div>

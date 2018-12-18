@@ -12,6 +12,7 @@ import Divider from '@material-ui/core/Divider';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItem';
+import { element } from 'prop-types';
 
 
 const styles = {
@@ -57,6 +58,15 @@ const styles = {
   }
 };
 
+const scrollWithOffset = (element, offset) => {
+  const elementPosition = element.offsetTop - offset;
+  console.log('element:', element, 'offset:', offset)
+  element.scrollIntoView({
+    block: 'start',
+    behavior: 'smooth'
+  });
+}
+
 class View360 extends Component {
 
   state = {
@@ -84,31 +94,83 @@ class View360 extends Component {
           <Divider />
 
           <List className={classes.list}>
-            <Link smooth to="#goals">
+            <Link smooth to="#goal-assessment"
+              scroll={el => scrollWithOffset(el, 150)}
+            >
               <ListItem button>
                 <Typography>Goals Assessment</Typography>
               </ListItem>
             </Link>
             <Divider />
 
-            <Link smooth to="#dashboard">
+            <Link smooth to="#dashboard"
+              scroll={el => scrollWithOffset(el, 150)}
+            >
               <ListItem button>
                 <Typography>Dashboard</Typography>
               </ListItem>
             </Link>
             <Divider />
 
-            <Link smooth to="#360report">
+            <Link smooth to="#360report"
+              scroll={el => scrollWithOffset(el, 150)}
+            >
               <ListItem button>
                 <Typography>360 Report</Typography>
               </ListItem>
             </Link>
             <Divider />
 
-            <Link smooth to="#analysis">
+            <Link smooth to="#analysis"
+              scroll={el => scrollWithOffset(el, 150)}
+            >
               <ListItem button>
                 <Typography>
                   Analysis &amp; Recommendations
+                </Typography>
+              </ListItem>
+            </Link>
+            <Divider />
+
+            <Link smooth to="#demo-data"
+              scroll={el => scrollWithOffset(el, 150)}
+            >
+              <ListItem button>
+                <Typography>
+                  Demo Data
+                </Typography>
+              </ListItem>
+            </Link>
+            <Divider />
+
+            <Link smooth to="#sticky-stats"
+              scroll={el => scrollWithOffset(el, 150)}
+            >
+              <ListItem button>
+                <Typography>
+                  Sticky Stats &amp; Event Materials
+                </Typography>
+              </ListItem>
+            </Link>
+            <Divider />
+
+            <Link smooth to="#mindstorm"
+              scroll={el => scrollWithOffset(el, 150)}
+            >
+              <ListItem button>
+                <Typography>
+                  Raw Mindstorm Discussions
+                </Typography>
+              </ListItem>
+            </Link>
+            <Divider />
+
+            <Link smooth to="#sign-in-sheets"
+              scroll={el => scrollWithOffset(el, 150)}
+            >
+              <ListItem button>
+                <Typography>
+                  Raw Sign-In Sheets
                 </Typography>
               </ListItem>
             </Link>
@@ -125,7 +187,7 @@ class View360 extends Component {
             <Divider className={classes.middleDivider} />
           </section>
           <section className={classes.content}>
-            <Typography variant="h5" className={classes.subHeader} id="goals">Goals Assessment</Typography>
+            <Typography variant="h5" className={classes.subHeader} id="goal-assessment">Goals Assessment</Typography>
             <div className={classes.paragraph}>
               <Typography>
                 Ut vel ipsum porttitor, varius nisl eget, suscipit leo. Maecenas mollis orci sagittis, vehicula ante ac, aliquet libero. Vivamus finibus finibus semper. 
@@ -169,6 +231,70 @@ class View360 extends Component {
             </div>
 
             <Typography variant="h5" className={classes.subHeader} id="analysis">Analysis &amp; Recommendations</Typography>
+            <div className={classes.paragraph}>
+              <Typography>
+                Ut vel ipsum porttitor, varius nisl eget, suscipit leo. Maecenas mollis orci sagittis, vehicula ante ac, aliquet libero. Vivamus finibus finibus semper. 
+                Praesent convallis arcu sapien, quis porttitor magna dapibus ac. Suspendisse facilisis ut felis et mattis. Duis et sem ante. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. 
+                Maecenas malesuada sem vitae urna pretium, id auctor neque vulputate. Proin sed urna ac tortor volutpat hendrerit sed in massa. Nunc varius neque eget nibh fringilla, a tincidunt nibh mollis. 
+                Aenean condimentum porta felis sed vestibulum. Donec placerat purus urna, vel consectetur libero rutrum sit amet. Vestibulum egestas sapien sed eros pellentesque, at malesuada dolor tempor. 
+                Vestibulum id libero vitae leo vehicula mattis. Etiam ante magna, rutrum at suscipit tempus, efficitur eu turpis. Sed in magna sed leo pretium rutrum eget eleifend risus.
+                <br/>
+                <br/>
+                Nullam sodales leo nec viverra semper. Fusce suscipit porttitor molestie. Phasellus blandit ut diam vel tempor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                Aenean molestie dui quis lectus tempor, a laoreet mi blandit. Curabitur quis elit mauris. Ut sollicitudin cursus volutpat. Donec sodales consectetur tincidunt. 
+                Duis posuere auctor risus. Donec sit amet ante urna.
+              </Typography>
+            </div>
+
+            <Typography variant="h5" className={classes.subHeader} id="demo-data">Demo Data</Typography>
+            <div className={classes.paragraph}>
+              <Typography>
+                Ut vel ipsum porttitor, varius nisl eget, suscipit leo. Maecenas mollis orci sagittis, vehicula ante ac, aliquet libero. Vivamus finibus finibus semper. 
+                Praesent convallis arcu sapien, quis porttitor magna dapibus ac. Suspendisse facilisis ut felis et mattis. Duis et sem ante. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. 
+                Maecenas malesuada sem vitae urna pretium, id auctor neque vulputate. Proin sed urna ac tortor volutpat hendrerit sed in massa. Nunc varius neque eget nibh fringilla, a tincidunt nibh mollis. 
+                Aenean condimentum porta felis sed vestibulum. Donec placerat purus urna, vel consectetur libero rutrum sit amet. Vestibulum egestas sapien sed eros pellentesque, at malesuada dolor tempor. 
+                Vestibulum id libero vitae leo vehicula mattis. Etiam ante magna, rutrum at suscipit tempus, efficitur eu turpis. Sed in magna sed leo pretium rutrum eget eleifend risus.
+                <br/>
+                <br/>
+                Nullam sodales leo nec viverra semper. Fusce suscipit porttitor molestie. Phasellus blandit ut diam vel tempor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                Aenean molestie dui quis lectus tempor, a laoreet mi blandit. Curabitur quis elit mauris. Ut sollicitudin cursus volutpat. Donec sodales consectetur tincidunt. 
+                Duis posuere auctor risus. Donec sit amet ante urna.
+              </Typography>
+            </div>
+
+            <Typography variant="h5" className={classes.subHeader} id="sticky-stats">Sticky Stats &amp; Event Materials</Typography>
+            <div className={classes.paragraph}>
+              <Typography>
+                Ut vel ipsum porttitor, varius nisl eget, suscipit leo. Maecenas mollis orci sagittis, vehicula ante ac, aliquet libero. Vivamus finibus finibus semper. 
+                Praesent convallis arcu sapien, quis porttitor magna dapibus ac. Suspendisse facilisis ut felis et mattis. Duis et sem ante. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. 
+                Maecenas malesuada sem vitae urna pretium, id auctor neque vulputate. Proin sed urna ac tortor volutpat hendrerit sed in massa. Nunc varius neque eget nibh fringilla, a tincidunt nibh mollis. 
+                Aenean condimentum porta felis sed vestibulum. Donec placerat purus urna, vel consectetur libero rutrum sit amet. Vestibulum egestas sapien sed eros pellentesque, at malesuada dolor tempor. 
+                Vestibulum id libero vitae leo vehicula mattis. Etiam ante magna, rutrum at suscipit tempus, efficitur eu turpis. Sed in magna sed leo pretium rutrum eget eleifend risus.
+                <br/>
+                <br/>
+                Nullam sodales leo nec viverra semper. Fusce suscipit porttitor molestie. Phasellus blandit ut diam vel tempor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                Aenean molestie dui quis lectus tempor, a laoreet mi blandit. Curabitur quis elit mauris. Ut sollicitudin cursus volutpat. Donec sodales consectetur tincidunt. 
+                Duis posuere auctor risus. Donec sit amet ante urna.
+              </Typography>
+            </div>
+
+            <Typography variant="h5" className={classes.subHeader} id="mindstorm">Raw Mindstorm Discussions</Typography>
+            <div className={classes.paragraph}>
+              <Typography>
+                Ut vel ipsum porttitor, varius nisl eget, suscipit leo. Maecenas mollis orci sagittis, vehicula ante ac, aliquet libero. Vivamus finibus finibus semper. 
+                Praesent convallis arcu sapien, quis porttitor magna dapibus ac. Suspendisse facilisis ut felis et mattis. Duis et sem ante. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. 
+                Maecenas malesuada sem vitae urna pretium, id auctor neque vulputate. Proin sed urna ac tortor volutpat hendrerit sed in massa. Nunc varius neque eget nibh fringilla, a tincidunt nibh mollis. 
+                Aenean condimentum porta felis sed vestibulum. Donec placerat purus urna, vel consectetur libero rutrum sit amet. Vestibulum egestas sapien sed eros pellentesque, at malesuada dolor tempor. 
+                Vestibulum id libero vitae leo vehicula mattis. Etiam ante magna, rutrum at suscipit tempus, efficitur eu turpis. Sed in magna sed leo pretium rutrum eget eleifend risus.
+                <br/>
+                <br/>
+                Nullam sodales leo nec viverra semper. Fusce suscipit porttitor molestie. Phasellus blandit ut diam vel tempor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                Aenean molestie dui quis lectus tempor, a laoreet mi blandit. Curabitur quis elit mauris. Ut sollicitudin cursus volutpat. Donec sodales consectetur tincidunt. 
+                Duis posuere auctor risus. Donec sit amet ante urna.
+              </Typography>
+            </div>
+
+            <Typography variant="h5" className={classes.subHeader} id="sign-in-sheets">Raw Sign-In Sheets</Typography>
             <div className={classes.paragraph}>
               <Typography>
                 Ut vel ipsum porttitor, varius nisl eget, suscipit leo. Maecenas mollis orci sagittis, vehicula ante ac, aliquet libero. Vivamus finibus finibus semper. 

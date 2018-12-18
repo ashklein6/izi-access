@@ -39,7 +39,7 @@ CREATE TABLE "person" (
 
 CREATE TABLE "360_user" (
     "id" SERIAL PRIMARY KEY,
-    "user_id" INT REFERENCES "user",
+    "user_id" INT REFERENCES "person",
     "360_id" INT REFERENCES "360"
 );
 

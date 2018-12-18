@@ -28,18 +28,20 @@ function* fetchUnpublished() {
   }
 };
 
-function* fetch360SearchPublished() {
+function* fetch360SearchPublished(action) {
   try {
-    
+    const response = yield call( axios.get, '/all360', { params: action.payload } );
+    console.log('response', response);
   } 
   catch (error) {
     console.log('error', error);
   }
 };
 
-function* fetch360SearchUnpublished() {
+function* fetch360SearchUnpublished(action) {
   try {
-    
+    const response = yield call( axios.get, '/all360', { params: action.payload } );
+    console.log('response', response);
   } 
   catch (error) {
     console.log('error', error);

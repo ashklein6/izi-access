@@ -6,14 +6,18 @@ const router = express.Router();
  * GET route template
  */
 router.get('/', (req, res) => {
-    
+    console.log('params: ', req.query);
+    let sqlText = `SELECT * FROM threesixty WHERE`;
+    if(req.query.name) {
+      sqlText += ''
+    }
 });
 
 /**
  * POST route template
  */
 router.post('/', (req, res) => {
-  console.log('req.body', req.body);
+
 });
 
 module.exports = router;

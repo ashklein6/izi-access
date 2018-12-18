@@ -56,7 +56,8 @@ class Manage360s extends Component {
         name: this.state.publishedName,
         location: this.state.publishedLocation,
         date: this.state.publishedDate,
-        category: this.state.publishedCategory
+        category: this.state.publishedCategory,
+        publishedStatus: true
       }
     })
   };
@@ -69,7 +70,8 @@ class Manage360s extends Component {
         name: this.state.unpublishedName,
         location: this.state.unpublishedLocation,
         date: this.state.unpublishedDate,
-        category: this.state.unpublishedCategory
+        category: this.state.unpublishedCategory,
+        publishedStatus: false
       }
     });
   };

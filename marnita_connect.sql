@@ -1,6 +1,6 @@
-CREATE TABLE "categories" (
+CREATE TABLE "izi_categories" (
     "id" SERIAL PRIMARY KEY,
-    "category" VARCHAR(80)
+    "category" VARCHAR(256)
 );
 
 CREATE TABLE "response_category" (
@@ -11,27 +11,26 @@ CREATE TABLE "response_category" (
 CREATE TABLE "access" (
     "id" SERIAL PRIMARY KEY,
     "access_level" INT,
-    "access_type" VARCHAR(80)
+    "access_type" VARCHAR(255)
 );
 
 CREATE TABLE "threesixty" (
     "id" SERIAL PRIMARY KEY,
-    "name" VARCHAR(80),
+    "name" VARCHAR(512),
     "date" DATE,
     "location" VARCHAR(255),
-    "category_id" INT REFERENCES "categories",
+    "category_id" INT REFERENCES "izi_categories",
     "client" VARCHAR(255),
     "published_status" BOOLEAN DEFAULT FALSE
 );
 
 CREATE TABLE "person" (
     "id" SERIAL PRIMARY KEY,
-    "threesixty_id" INT REFERENCES "threesixty",
-    "email" VARCHAR(80) UNIQUE,
-    "username" VARCHAR (80) UNIQUE NOT NULL,
+    "email" VARCHAR(255) UNIQUE,
+    "username" VARCHAR (255) UNIQUE NOT NULL,
     "password" VARCHAR (1000) NOT NULL,
-    "firstname" VARCHAR(80),
-    "lastname" VARCHAR(80),
+    "firstname" VARCHAR(255),
+    "lastname" VARCHAR(255),
     "access_id" INT REFERENCES "access",
     "notes" VARCHAR(1000),
     "date_added" TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -57,7 +56,7 @@ CREATE TABLE "goals" (
 CREATE TABLE "dashboard" (
     "id" SERIAL PRIMARY KEY,
     "threesixty_id" INT REFERENCES "threesixty",
-    "row_title" VARCHAR(80),
+    "row_title" VARCHAR(255),
     "row_info" VARCHAR(255),
     "private" BOOLEAN DEFAULT FALSE
 );
@@ -72,11 +71,11 @@ CREATE TABLE "analysis_recommendation" (
 CREATE TABLE "demographic" (
     "id" SERIAL PRIMARY KEY,
     "threesixty_id" INT REFERENCES "threesixty",
-    "ethnicity" VARCHAR(80),
+    "ethnicity" VARCHAR(255),
     "passion" VARCHAR(255),
-    "profession" VARCHAR(80),
-    "generation" VARCHAR(80),
-    "referral" VARCHAR(80),
+    "profession" VARCHAR(255),
+    "generation" VARCHAR(255),
+    "referral" VARCHAR(255),
     "comments" VARCHAR(255),
     "plans_to_tell" BOOLEAN DEFAULT FALSE,
     "first_time" BOOLEAN DEFAULT FALSE,
@@ -89,7 +88,7 @@ CREATE TABLE "demographic" (
 CREATE TABLE "threesixty_reports" (
     "id" SERIAL PRIMARY KEY,
     "threesixty_id" INT REFERENCES "threesixty",
-    "demographic" VARCHAR(80),
+    "demographic" VARCHAR(255),
     "summary" VARCHAR(255),
     "methodology" VARCHAR(255),
     "data_agg" VARCHAR(255),

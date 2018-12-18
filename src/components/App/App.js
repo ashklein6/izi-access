@@ -66,7 +66,7 @@ class App extends Component {
             {/* The following pages are protected. The user's access level will be checked.
               The user will be directed to the login page if they are not logged in, and to 
               the home page if they are logged in without the appropriate authorization level */}
-            <ProtectedRoute
+            <Route
               exact
               path="/profile"
               component={UserProfile}
@@ -77,12 +77,12 @@ class App extends Component {
               component={Dashboard}
             />
             {/* create360 is a protected route */}
-            <Route
+            <ProtectedRoute
               exact
               path="/create360"
               component={Create360}
             />
-            <Route
+            <ProtectedRoute
               exact
               path="/manage360s"
               component={Manage360s}

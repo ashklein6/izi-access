@@ -1,7 +1,7 @@
 @import '../App/App.css';
 
 .footer {
-    padding: 40px;
+    /* padding: 40px; */
     text-align: center;
     background-color: var(--main-purple);
     color: #fff;

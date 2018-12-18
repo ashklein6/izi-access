@@ -19,7 +19,8 @@ const styles = {
     textAlign: 'center',
     width: 330,
     margin: 'auto',
-    paddingTop: 15,
+    paddingTop: 100,
+    paddingBottom: 10,
     fontSize: 18
   },
   form: {
@@ -148,7 +149,7 @@ class CreateUser extends Component {
                 onChange={this.handleInputChangeFor('iziName')}
                 />
               <br />
-            <Typography variant="h5">OR</Typography>
+            <Typography variant="h6">OR</Typography>
             <TextField
               // label="Date"
               className={classes.textField}

@@ -125,3 +125,4 @@ CREATE TABLE "response" (
     "response" VARCHAR(255),
     "category_id" INT REFERENCES "response_category"
 );
+

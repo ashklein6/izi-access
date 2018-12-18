@@ -14,15 +14,15 @@ import classNames from 'classnames';
 // temporary data
 const ranges = [
   {
-    value: 'health',
+    value: 1,
     label: 'health',
   },
   {
-    value: 'transportation',
+    value: 2,
     label: 'transportation',
   },
   {
-    value: 'other',
+    value: 3,
     label: 'other',
   },
 ];
@@ -53,8 +53,8 @@ class Manage360s extends Component {
     this.props.dispatch({
       type: 'FETCH_360_SEARCH_PUBLISHED', 
       payload: {
-        name: this.state.publishedName,
-        location: this.state.publishedLocation,
+        name: this.state.publishedName.toLowerCase(),
+        location: this.state.publishedLocation.toLowerCase(),
         date: this.state.publishedDate,
         category: this.state.publishedCategory,
         publishedStatus: true
@@ -67,8 +67,8 @@ class Manage360s extends Component {
     this.props.dispatch({
       type: 'FETCH_360_SEARCH_UNPUBLISHED', 
       payload: {
-        name: this.state.unpublishedName,
-        location: this.state.unpublishedLocation,
+        name: this.state.unpublishedName.toLowerCase(),
+        location: this.state.unpublishedLocation.toLowerCase(),
         date: this.state.unpublishedDate,
         category: this.state.unpublishedCategory,
         publishedStatus: false

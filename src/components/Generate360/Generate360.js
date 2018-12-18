@@ -5,6 +5,9 @@ import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 
+// Import Expansion Panels for each subsection
+import GoalsAssessmentExpansionPanel from './ExpansionPanels/GoalAssessmentsExpansionPanel';
+
 class Generate360 extends Component {
 
  state = {
@@ -15,17 +18,22 @@ class Generate360 extends Component {
    const { classes } = this.props;
 
    return (
-     <div>
+     <div className={classes.div}>
        <Typography variant="h2" className={classes.header}>Generate360</Typography>
+       <GoalsAssessmentExpansionPanel />
      </div>
    );
  }
 };
 
 const styles = {
- header: {
-
- }
+  div: {
+    padding: 50
+  },
+  header: {
+    textAlign: 'center',
+    marginBottom: 25
+  }
 };
 
 const mapReduxStateToProps = (reduxState) => ({

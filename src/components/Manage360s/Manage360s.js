@@ -50,12 +50,28 @@ class Manage360s extends Component {
 
   searchPublished = (event) => {
     event.preventDefault();
-    console.log('payload', this.state.publishedCategory, this.state.publishedDate, this.state.publishedLocation, this.state.publishedName);
+    this.props.dispatch({
+      type: 'FETCH_360_SEARCH_PUBLISHED', 
+      payload: {
+        name: this.state.publishedName,
+        location: this.state.publishedLocation,
+        date: this.state.publishedDate,
+        category: this.state.publishedCategory
+      }
+    })
   };
 
   searchUnpublished = (event) => {
     event.preventDefault();
-    console.log('payload', this.state.unpublishedCategory, this.state.unpublishedDate, this.state.unpublishedLocation, this.state.unpublishedName);
+    this.props.dispatch({
+      type: 'FETCH_360_SEARCH_UNPUBLISHED', 
+      payload: {
+        name: this.state.unpublishedName,
+        location: this.state.unpublishedLocation,
+        date: this.state.unpublishedDate,
+        category: this.state.unpublishedCategory
+      }
+    });
   };
 
   returnToDash = () => {

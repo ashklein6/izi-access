@@ -11,22 +11,6 @@ import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
 import classNames from 'classnames';
 
-// temporary data
-const ranges = [
-  {
-    value: 'health',
-    label: 'health',
-  },
-  {
-    value: 'transportation',
-    label: 'transportation',
-  },
-  {
-    value: 'other',
-    label: 'other',
-  },
-];
-
 //this page has all sorts of weird problems, but the general idea is there...
 //ashley, if you're reading this, you should probs go get a hot apple blahst
 class Manage360s extends Component {
@@ -42,6 +26,11 @@ class Manage360s extends Component {
       publishedCategory: '',
   };
 
+  componentDidMount() {
+    this.props.dispatch({type: 'FETCH_PUBLISHED'});
+    this.props.dispatch({type: 'FETCH_UNPUBLISHED'});
+  }
+
   handleChange = (event) => {
     this.setState({
       [event.target.name]: event.target.value,
@@ -50,12 +39,30 @@ class Manage360s extends Component {
 
   searchPublished = (event) => {
     event.preventDefault();
-    console.log('payload', this.state.publishedCategory, this.state.publishedDate, this.state.publishedLocation, this.state.publishedName);
+    this.props.dispatch({
+      type: 'FETCH_360_SEARCH_PUBLISHED', 
+      payload: {
+        name: this.state.publishedName.toLowerCase(),
+        location: this.state.publishedLocation.toLowerCase(),
+        date: this.state.publishedDate,
+        category: this.state.publishedCategory,
+        publishedStatus: true
+      }
+    })
   };
 
   searchUnpublished = (event) => {
     event.preventDefault();
-    console.log('payload', this.state.unpublishedCategory, this.state.unpublishedDate, this.state.unpublishedLocation, this.state.unpublishedName);
+    this.props.dispatch({
+      type: 'FETCH_360_SEARCH_UNPUBLISHED', 
+      payload: {
+        name: this.state.unpublishedName.toLowerCase(),
+        location: this.state.unpublishedLocation.toLowerCase(),
+        date: this.state.unpublishedDate,
+        category: this.state.unpublishedCategory,
+        publishedStatus: false
+      }
+    });
   };
 
   returnToDash = () => {
@@ -77,7 +84,7 @@ class Manage360s extends Component {
           <Button variant="contained" onClick={this.goToGenerator}>Create New 360</Button>
         </span>
         <span>
-          <p>Search By</p>
+          <Typography>Search By</Typography>
           <form onSubmit={this.searchUnpublished}>
             <TextField placeholder="Name or Client" type="search" onChange={this.handleChange}
               name="unpublishedName" value={this.state.unpublishedName}/>
@@ -95,19 +102,19 @@ class Manage360s extends Component {
                 startAdornment: <InputAdornment position="start">Category</InputAdornment>,
               }}
             >
-              {ranges.map(option => (
-                <MenuItem key={option.value} value={option.value}>
-                  {option.label}
+              {this.props.reduxState.iziCategories.map(category => (
+                <MenuItem key={category.id} value={category.id}>
+                  {category.category}
                 </MenuItem>
               ))}
             </TextField>
             <Button type="submit">Search</Button>
           </form>
         </span>
-        <Table360s/>
+        <Table360s rows={this.props.reduxState.all360s.unpublished}/>
         <span>
           <Typography variant="h4" className={classes.header}>Published 360s</Typography>
-          <p>Search By</p>
+          <Typography>Search By</Typography>
           <form onSubmit={this.searchPublished}>
             <TextField placeholder="Name or Client" type="search" onChange={this.handleChange}
               name="publishedName" value={this.state.publishedName}/>
@@ -125,16 +132,16 @@ class Manage360s extends Component {
                 startAdornment: <InputAdornment position="start">Category</InputAdornment>,
               }}
             >
-              {ranges.map(option => (
-                <MenuItem key={option.value} value={option.value}>
-                  {option.label}
+              {this.props.reduxState.iziCategories.map(category => (
+                <MenuItem key={category.id} value={category.id}>
+                  {category.category}
                 </MenuItem>
               ))}
             </TextField>
             <Button type="submit">Search</Button>
           </form>
         </span>
-        <Table360s/>
+        <Table360s rows={this.props.reduxState.all360s.published}/>
       </div>
    );
  }

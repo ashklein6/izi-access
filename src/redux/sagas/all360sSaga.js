@@ -15,6 +15,7 @@ function* fetchPublished() {
   try {
     const response = yield call(axios.get, '/all360/true');
     yield put({type: 'SET_PUBLISHED', payload: response.data});
+    yield put( { type: 'SET_RECENT', payload: response.data.slice(0,3) } );
   } 
   catch (error) {
     console.log('error', error);

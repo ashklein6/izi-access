@@ -23,7 +23,6 @@ class ManageUsers extends Component {
   return (
     <div className={classes.root}>
       <Button variant="contained" onClick={this.returnToDash}>Return to Dashboard</Button>
-
       <PendingClientRequests />
       <Users />
       <DeactivatedUsers />

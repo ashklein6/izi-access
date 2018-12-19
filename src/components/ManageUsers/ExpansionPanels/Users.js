@@ -20,6 +20,10 @@ import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import classNames from 'classnames';
+import SearchIcon from '@material-ui/icons/Search';
+import IconButton from '@material-ui/core/IconButton';
+
+
 
 // temporary data
 const ranges = [
@@ -81,10 +85,19 @@ class Users extends Component {
   state = {
     open: false,
     rows: rows,
-    name: '',
+    searchBy: '',
     level: '',
     sortBy: '',
   };
+
+  // handles change for inputs
+  handleChange = (event) => {
+    console.log('in handleChange');
+    this.setState({
+      ...this.state,
+      [event.target.name]: event.target.value,
+    })
+  }
 
   // handles clicking of the "edit" button. Opens a dialog window.
   handleClickOpen = () => {
@@ -103,18 +116,41 @@ class Users extends Component {
     })
   } // end handleClickClose
 
+  // handle click of searchIcon button from 'Search by Name or Email' input
+  submitSearch = () => {
+    console.log('Submit Search');
+    
+  }
+
+  // handle click of 'View All Users' button
+  viewAllUsers = () => {
+    console.log('View All Useers');
+    
+  }
+
 render() {
   const { classes } = this.props;
 
   return (
     <div className={classes.root}>
+    {JSON.stringify(this.state)}
       <ExpansionPanel defaultExpanded>
       <div >
         <span>
           {/* <p>Search By</p> */}
           <form className={classes.form} onSubmit={this.searchUnpublished}>
-            <TextField placeholder="Name or Email" type="search" onChange={this.handleChange}
-              name="name" value={this.state.name}/>
+          
+            <TextField className={classes.searchField} placeholder="Search by Name or Email" type="search" onChange={this.handleChange}
+              name="searchBy" value={this.state.searchBy}
+              InputProps={{
+                endAdornment: 
+                <InputAdornment position="end">
+                  <IconButton variant="contained" size="small" className={classes.button} onClick={this.submitSearch}>
+                    <SearchIcon className={classNames(classes.leftIcon, classes.iconSmall)} />
+                  </IconButton>
+                </InputAdornment>,
+              }}
+            />
             
             <TextField
               select
@@ -150,7 +186,7 @@ render() {
               ))}
             </TextField>
 
-            <Button variant="contained">View All</Button>
+            <Button variant="contained" onClick={this.viewAllUsers}>View All Users</Button>
           </form>
         </span>
       </div>
@@ -258,8 +294,12 @@ const styles = {
   title: {
     flexBasis: '75.00%',
   },
+  searchField: {
+    width: 275,
+    margin: '0px 15px 25px 15px'
+  },
   textField: {
-    width: 200,
+    width: 150,
     margin: '0px 15px 25px 15px'
   },
   form: {

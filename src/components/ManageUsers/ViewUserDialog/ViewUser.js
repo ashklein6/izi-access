@@ -15,6 +15,8 @@ import InputLabel from '@material-ui/core/InputLabel';
 import IconButton from '@material-ui/core/IconButton';
 import Cancel from '@material-ui/icons/Cancel';
 import Tooltip from '@material-ui/core/Tooltip';
+import TextField from '@material-ui/core/TextField';
+
 
 // Hard coded data
 const user = [
@@ -31,7 +33,7 @@ class ViewUser extends Component {
 
 state = {
   open: true, // true for dev purposes
-  edit: true, // true should show view user, false should show edit user
+  edit: false, // true should show view user, false should show edit user
   firstname: '',
   lastname: '',
   email: '',
@@ -39,18 +41,20 @@ state = {
   notes: ''
 };
 
-handleChangeFor= (event) => {
-
-} // end handleChangeFor
+handleChange = (event) => {
+  console.log('in handleChange');
+  this.setState({
+    ...this.state,
+    [event.target.name]: event.target.value,
+  })
+}
 
 // handles clicking of the "edit" button. Opens a dialog window.
 handleClickOpen = () => {
-  this.props.dispatch({ type: 'FETCH_360_SECTION', payload: {section: 'goalsAssessment', current360Id: 1} });
+  // this.props.dispatch({ type: 'FETCH_360_SECTION', payload: {section: 'goalsAssessment', current360Id: 1} });
   this.setState({
     ...this.state,
     open: true,
-    updating: true
-    // rows: this.props.reduxState.current360.goalsAssessment
   })
 } // end handleClickOpen
 
@@ -68,10 +72,12 @@ handleSave = () => {
   this.handleClickClose();
 }
 
+
 editBtn = () => {
   this.setState({ edit: !this.state.edit})
 }
 
+// 
 removeAccess = () => {
   console.log('Remove Access');
   
@@ -146,17 +152,36 @@ removeAccess = () => {
       {user.map( user =>
       <DialogContent>
           <InputLabel>First Name:</InputLabel>
-          <Input className={classes.userInfoEdit} placeholder={user.firstname}/>
+          <Input 
+            className={classes.userInfoEdit} 
+            placeholder={user.firstname}
+            onChange={this.handleChange}
+            name="firstname"
+          />
           <br />
           <InputLabel>Last Name:</InputLabel>
-          <Input className={classes.userInfoEdit} placeholder={user.lastname}/>
+          <Input 
+            className={classes.userInfoEdit} 
+            placeholder={user.lastname}
+            onChange={this.handleChange}
+            name="lastname"
+          />
           <br />
           <InputLabel>Email:</InputLabel>
-          <Input className={classes.userInfoEdit} placeholder={user.email}/>
+          <Input 
+            className={classes.userInfoEdit} 
+            placeholder={user.email}
+            onChange={this.handleChange}
+            name="email"
+          />
           <br />
           <InputLabel>Level:</InputLabel>
-          <Input className={classes.userInfoEdit} placeholder={user.level}/>
-          
+          <Input 
+            className={classes.userInfoEdit} 
+            placeholder={user.level}
+            onChange={this.handleChange}
+            name="level"
+          />
           <br />
           <InputLabel>360 Access:</InputLabel>
           <br />
@@ -171,16 +196,23 @@ removeAccess = () => {
               </li>
             </ul>
           <InputLabel>Notes:</InputLabel>
-          <Typography variant="subheading">Notes here! Notes here! Notes here! Notes here! Notes here! Notes here! Notes here! Notes here!</Typography>
           <br />
-        <Button size="small" variant="contained">Cancel</Button>
+          <TextField 
+            className={classes.notes} 
+            placeholder={user.notes}
+            onChange={this.handleChange}
+            name="notes"
+            multiline
+            fullWidth
+            margin="normal"
+          />
+          <br />
+        <Button size="small" variant="contained" onClick={this.cancelEdit}>Cancel</Button>
         <Button size="small" variant="contained">Save Changes</Button>
       </DialogContent>)}
       {JSON.stringify(this.state)}
     </React.Fragment>
     )}
-
-    
     </Dialog>
     </React.Fragment>
    );
@@ -213,6 +245,11 @@ const styles = {
   },
   removeAccess: {
     marginLeft: 10
+  },
+  notes: {
+    margin: 'auto',
+    paddingBottom: 25,
+    width: '90%',
   }
 };
 

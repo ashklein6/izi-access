@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import colors from '../colors';
 
 // Material-UI
 import { withStyles } from '@material-ui/core/styles';
@@ -12,51 +13,35 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-// Hard coded data
-const rows = [
-  { id: 1,
-    description: 'Total Number', 
-    desired: 125, 
-    delivered: 140,
-    difference: 15,
-    percent: 112,
-    comments: 'Based on in-room count. In room count is taken 3 to 6 times per account by at least two different people.'
-  },
-  { id: 2,
-    description: 'Number of people of color/Indigenous', 
-    desired: 71, 
-    delivered: 70,
-    difference: -1,
-    percent: 99,
-    comments: 'We generally set this goal at 51% in communities with at least 15% POC/Immigrant/Indigenous. Based on an in-room count.'
-  },
-  { id: 3,
-    description: 'Number of people under 24', 
-    desired: 35, 
-    delivered: 33,
-    difference: -2,
-    percent: 94,
-    comments: 'We generally set this goal at 25 - 33% unless the [project/event] does not warrant. Based on both in room and sign-in sheet counts.'
-  },
-  { id: 4,
-    description: 'Measurable Indicators of Success 1: 80% of participants met 1 new person across race, class, culture or other means of self-identity', 
-    desired: 112, 
-    delivered: 126,
-    difference: 14,
-    percent: 113,
-    comments: '80% of the room is our target goal for this MIS.'
-  },
-]
-
 class GoalsAssessmentEditDialog extends Component {
 
  state = {
    open: false,
    updating: false,
-   rows: rows
+   rows: []
  };
 
- handleChangeFor= (event) => {
+ // Update the rows array when a textbox is typed in.
+ handleChangeFor= (event, index) => {
+  event.preventDefault();
+  // Pull the current values
+  let rows = this.state.rows;
+  // Isolate the object that contains the updated text
+  let objectToChange = rows[index];
+
+  // Update the text within the object
+  objectToChange = {
+    ...objectToChange,
+    [event.target.name]: event.target.value
+  }
+  // Redefine the object
+  rows[index]=objectToChange;
+
+  // Set state to the new values
+  this.setState({
+    ...this.state,
+    rows: rows
+  })
 
  } // end handleChangeFor
 
@@ -80,10 +65,14 @@ class GoalsAssessmentEditDialog extends Component {
   })
  } // end handleClickClose
 
+ // dispatches an action to update the database with the new values and 
+ // calls handleClickClose.
  handleSave = () => {
   this.handleClickClose();
- }
+ } // end handleSave
 
+ // called when this.props.reduxState.current360.updateNeeded[this section] is true (set true
+ // after the section is updated), this runs to copy the section into local state.
  loadCurrentData = () => {
   this.setState({
      ...this.state,
@@ -91,7 +80,7 @@ class GoalsAssessmentEditDialog extends Component {
      updating: false
   })
   this.props.dispatch({ type: 'CURRENT_360_SECTION_UPDATE_COMPLETE' });
- }
+ } // end loadCurrentData
 
  render() {
    const { classes } = this.props;
@@ -130,49 +119,83 @@ class GoalsAssessmentEditDialog extends Component {
           <DialogContentText>
             Remember to save changes before closing this edit dialog.
           </DialogContentText>
-          {this.state.rows.map( row => {
+          {this.state.rows.map( (row,index) => {
             return (
-              <div key={row.id}>
+              <div key={row.id} className={classes.inputGroup}>
+                <Typography variant="subtitle">Row {index + 1}</Typography>
                 <TextField
-                  autoFocus
+                  // Create focus on the first text box of the page:
+                  {...(index === 0) ? {autoFocus: true} : null}
                   margin="dense"
                   id="description"
+                  name="description"
                   label="Description"
                   type="text"
                   variant="outlined"
-                  value={row.description}
-                  onChange={this.handleChangeFor}
+                  value={this.state.rows[index].description}
+                  onChange={(event) => this.handleChangeFor(event,index)}
+                  className={classes.input}
+                  fullWidth
                   multiline
                 />
+                <div className={classes.spaceBetween}>
+                  <TextField
+                    margin="dense"
+                    id="desired"
+                    name="desired"
+                    label="Desired"
+                    type="number"
+                    variant="outlined"
+                    value={this.state.rows[index].desired}
+                    onChange={(event) => this.handleChangeFor(event,index)}
+                    className={classes.input}
+                  />
+                  <TextField
+                    margin="dense"
+                    id="delivered"
+                    name="delivered"
+                    label="Delivered"
+                    type="number"
+                    variant="outlined"
+                    value={this.state.rows[index].delivered}
+                    onChange={(event) => this.handleChangeFor(event,index)}
+                    className={classes.input}
+                  />
+                  <TextField
+                    margin="dense"
+                    id="difference"
+                    name="difference"
+                    label="Difference"
+                    type="number"
+                    variant="outlined"
+                    value={this.state.rows[index].difference}
+                    onChange={(event) => this.handleChangeFor(event,index)}
+                    className={classes.input}
+                  />
+                  <TextField
+                    margin="dense"
+                    id="percent"
+                    name="percent"
+                    label="Percent"
+                    type="number"
+                    variant="outlined"
+                    value={this.state.rows[index].percent}
+                    onChange={(event) => this.handleChangeFor(event,index)}
+                    className={classes.input}
+                  />
+                </div>
                 <TextField
-                  autoFocus
                   margin="dense"
-                  id="desired"
-                  label="Desired"
-                  type="number"
+                  id="comments"
+                  name="comments"
+                  label="Comments"
+                  type="text"
                   variant="outlined"
-                  value={row.desired}
-                  onChange={this.handleChangeFor}
-                />
-                <TextField
-                  autoFocus
-                  margin="dense"
-                  id="delivered"
-                  label="Delivered"
-                  type="number"
-                  variant="outlined"
-                  value={row.delivered}
-                  onChange={this.handleChangeFor}
-                />
-                <TextField
-                  autoFocus
-                  margin="dense"
-                  id="difference"
-                  label="Difference"
-                  type="number"
-                  variant="outlined"
-                  value={row.difference}
-                  onChange={this.handleChangeFor}
+                  value={this.state.rows[index].comments}
+                  onChange={(event) => this.handleChangeFor(event,index)}
+                  className={classes.input}
+                  fullWidth
+                  multiline
                 />
               </div>
             );
@@ -202,8 +225,23 @@ const styles = {
     textAlign: 'center',
     marginBottom: 25
   },
+  input: {
+    backgroundColor: 'white',
+    borderRadius: 5,
+  },
+  inputGroup: {
+    marginBottom: 20,
+    padding: 10,
+    backgroundColor: colors.lightGrey,
+    borderRadius: 5
+  },
   paper: {
     height: 'calc(100% - 96px)'
+  },
+  spaceBetween: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    flexWrap: 'wrap'
   }
 };
 

@@ -8,6 +8,7 @@ const colors = {
   pinkHover: window.getComputedStyle(root).getPropertyValue('--main-pink-hover'),
   orange: window.getComputedStyle(root).getPropertyValue('--main-orange'),
   orangeHover: window.getComputedStyle(root).getPropertyValue('--main-orange-hover'),
+  lightGrey: window.getComputedStyle(root).getPropertyValue('--main-light-grey'),
 };
 
 export default colors;

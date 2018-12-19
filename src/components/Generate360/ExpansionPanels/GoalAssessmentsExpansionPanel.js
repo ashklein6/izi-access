@@ -25,42 +25,6 @@ import Paper from '@material-ui/core/Paper';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 
-// Hard coded data
-const rows = [
-  { id: 1,
-    description: 'Total Number', 
-    desired: 125, 
-    delivered: 140,
-    difference: 15,
-    percent: 112,
-    comments: 'Based on in-room count. In room count is taken 3 to 6 times per account by at least two different people.'
-  },
-  { id: 2,
-    description: 'Number of people of color/Indigenous', 
-    desired: 71, 
-    delivered: 70,
-    difference: -1,
-    percent: 99,
-    comments: 'We generally set this goal at 51% in communities with at least 15% POC/Immigrant/Indigenous. Based on an in-room count.'
-  },
-  { id: 3,
-    description: 'Number of people under 24', 
-    desired: 35, 
-    delivered: 33,
-    difference: -2,
-    percent: 94,
-    comments: 'We generally set this goal at 25 - 33% unless the [project/event] does not warrant. Based on both in room and sign-in sheet counts.'
-  },
-  { id: 4,
-    description: 'Measurable Indicators of Success 1: 80% of participants met 1 new person across race, class, culture or other means of self-identity', 
-    desired: 112, 
-    delivered: 126,
-    difference: 14,
-    percent: 113,
-    comments: '80% of the room is our target goal for this MIS.'
-  },
-]
-
 // Cleanly style table cells within Material-UI
 const CustomTableCell = withStyles(theme => ({
   head: {

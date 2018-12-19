@@ -2,9 +2,9 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 
-/**
- * GET route template
- */
+// this route handles the search function from the manage 360s page
+// it takes in a search query, then sets up the sql query based on the
+// the information the user has provided.
 router.get('/search', (req, res) => {
     console.log('params: ', req.query);
     let sqlText = `SELECT threesixty.*, izi_categories.category FROM threesixty
@@ -55,7 +55,10 @@ router.get('/search', (req, res) => {
       res.sendStatus(500);
     });
 });
+// end /search
 
+// this route gets 5 of the most recently published and unpublished 360s
+// and returns them to be added to the table on the manage 360s view.
 router.get('/:status', (req,res) => {
   const sqlText = `SELECT threesixty.*, izi_categories.category FROM threesixty
                   JOIN izi_categories ON izi_categories.id = threesixty.category_id
@@ -70,10 +73,9 @@ router.get('/:status', (req,res) => {
     res.sendStatus(500);
   })
 });
+// end /:status
 
-/**
- * POST route template
- */
+
 router.post('/', (req, res) => {
 
 });

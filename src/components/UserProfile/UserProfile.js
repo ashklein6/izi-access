@@ -75,13 +75,15 @@ class UserProfile extends Component {
             className={classes.text}>
             Your Accessable 360s
               <Typography 
-                className={classes.text}
-                >360 #1<Button className={classes.viewButton} 
-                variant="contained">View</Button></Typography>
+                className={classes.text}>360 #1
+                <Button className={classes.viewButton} 
+                variant="contained">View</Button>
+              </Typography>
             <Typography 
-              className={classes.text}
-              >360 #2<Button className={classes.viewButton} 
-              variant="contained">View</Button></Typography>
+              className={classes.text}>360 #2
+              <Button className={classes.viewButton} 
+              variant="contained">View</Button>
+            </Typography>
           </Typography>
           <RequestAccess />
           </div>

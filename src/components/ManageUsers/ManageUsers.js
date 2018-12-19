@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import PendingClientRequests from './ExpansionPanels/PendingClientRequests';
 import Users from './ExpansionPanels/Users';
 import DeactivatedUsers from './ExpansionPanels/DeactivatedUsers';
-import ViewUser from './ViewUserDialog/ViewUser';
 
 // Material-UI
 import { withStyles } from '@material-ui/core/styles';

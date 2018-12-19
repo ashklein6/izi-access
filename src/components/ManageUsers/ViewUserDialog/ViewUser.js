@@ -4,64 +4,47 @@ import { connect } from 'react-redux';
 // Material-UI
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import TextField from '@material-ui/core/TextField';
+import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import InputLabel from '@material-ui/core/InputLabel';
+import IconButton from '@material-ui/core/IconButton';
+import Cancel from '@material-ui/icons/Cancel';
+import Tooltip from '@material-ui/core/Tooltip';
 
 // Hard coded data
-const rows = [
+const user = [
   { id: 1,
-    description: 'Total Number', 
-    desired: 125, 
-    delivered: 140,
-    difference: 15,
-    percent: 112,
-    comments: 'Based on in-room count. In room count is taken 3 to 6 times per account by at least two different people.'
-  },
-  { id: 2,
-    description: 'Number of people of color/Indigenous', 
-    desired: 71, 
-    delivered: 70,
-    difference: -1,
-    percent: 99,
-    comments: 'We generally set this goal at 51% in communities with at least 15% POC/Immigrant/Indigenous. Based on an in-room count.'
-  },
-  { id: 3,
-    description: 'Number of people under 24', 
-    desired: 35, 
-    delivered: 33,
-    difference: -2,
-    percent: 94,
-    comments: 'We generally set this goal at 25 - 33% unless the [project/event] does not warrant. Based on both in room and sign-in sheet counts.'
-  },
-  { id: 4,
-    description: 'Measurable Indicators of Success 1: 80% of participants met 1 new person across race, class, culture or other means of self-identity', 
-    desired: 112, 
-    delivered: 126,
-    difference: 14,
-    percent: 113,
-    comments: '80% of the room is our target goal for this MIS.'
-  },
+    firstname: 'Jon', 
+    lastname: 'Doe', 
+    email: 'john_doe@email.com',
+    level: 'something',
+    notes: 'This is where you can enter notes about the user.',
+  }
 ]
 
 class ViewUser extends Component {
 
- state = {
-   open: false,
-   updating: false,
-   rows: rows
- };
+state = {
+  open: true, // true for dev purposes
+  edit: true, // true should show view user, false should show edit user
+  firstname: '',
+  lastname: '',
+  email: '',
+  level: '', // access_id???
+  notes: ''
+};
 
- handleChangeFor= (event) => {
+handleChangeFor= (event) => {
 
- } // end handleChangeFor
+} // end handleChangeFor
 
- // handles clicking of the "edit" button. Opens a dialog window.
- handleClickOpen = () => {
+// handles clicking of the "edit" button. Opens a dialog window.
+handleClickOpen = () => {
   this.props.dispatch({ type: 'FETCH_360_SECTION', payload: {section: 'goalsAssessment', current360Id: 1} });
   this.setState({
     ...this.state,
@@ -69,20 +52,30 @@ class ViewUser extends Component {
     updating: true
     // rows: this.props.reduxState.current360.goalsAssessment
   })
- } // end handleClickOpen
+} // end handleClickOpen
 
- // handles clicking of the "save" or "cancel" button from the dailog window 
- // and closes the dialog window.
- handleClickClose = () => {
+// handles clicking of the "save" or "cancel" button from the dailog window 
+// and closes the dialog window.
+handleClickClose = () => {
   this.setState({
     ...this.state,
-    open: false
+    open: false,
+    edit: false
   })
- } // end handleClickClose
+} // end handleClickClose
 
- handleSave = () => {
+handleSave = () => {
   this.handleClickClose();
- }
+}
+
+editBtn = () => {
+  this.setState({ edit: !this.state.edit})
+}
+
+removeAccess = () => {
+  console.log('Remove Access');
+  
+}
 
  loadCurrentData = () => {
   this.setState({
@@ -92,6 +85,7 @@ class ViewUser extends Component {
   })
   this.props.dispatch({ type: 'CURRENT_360_SECTION_UPDATE_COMPLETE' });
  }
+
 
  render() {
    const { classes } = this.props;
@@ -103,8 +97,8 @@ class ViewUser extends Component {
    }
 
    return (
-     <React.Fragment>
-    <Button size="small" color="primary" onClick={this.handleClickOpen}>View</Button>
+    <React.Fragment>
+    <Button size="small" variant="contained" onClick={this.handleClickOpen}>View</Button>
     <Dialog
       open={this.state.open}
       onClose={this.handleClickClose}
@@ -114,80 +108,79 @@ class ViewUser extends Component {
       maxWidth="sm"
       classes={{paper: classes.paper}}
     >
-    {(this.state.updating === true) ? 
+    {this.state.edit ? (    
     <React.Fragment>
-      <DialogTitle id="goal-assessment-edit-dialog">Edit Goals Assessment</DialogTitle>
+      <DialogTitle className={classes.dialogTitle} id="goal-assessment-edit-dialog">View User</DialogTitle>
+      {user.map( user =>
       <DialogContent>
-        <DialogContentText>
-          New information is currently loading...
-        </DialogContentText>
-      </DialogContent>
+      <Button className={classes.editBtn} size="small" variant="contained" onClick={this.editBtn}>Edit</Button>
+
+          <InputLabel>First Name:</InputLabel>
+          
+          <Typography className={classes.userInfo} variant="subheading">{user.firstname}</Typography>
+          <br />
+          <InputLabel>Last Name:</InputLabel>
+          <Typography className={classes.userInfo} variant="subheading">{user.lastname}</Typography>
+          <br />
+          <InputLabel>Email:</InputLabel>
+          <Typography className={classes.userInfo} variant="subheading">{user.email}</Typography>
+          <br />
+          <InputLabel>Level:</InputLabel>
+          <Typography className={classes.userInfo} variant="subheading">{user.level}</Typography>
+          <br />
+          <InputLabel>360 Access:</InputLabel>
+          <br />
+            <ul>
+              <li>
+                <Typography className={classes.userInfo} variant="subheading">360 They Have access to</Typography>
+              </li>
+            </ul>
+          <InputLabel>Notes:</InputLabel>
+          <Typography variant="subheading">{user.notes}</Typography>
+          <br />
+      </DialogContent>)}
     </React.Fragment>
-      :
-      <React.Fragment>
-        <DialogTitle id="goal-assessment-edit-dialog">Edit Goals Assessment</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            Remember to save changes before closing this edit dialog.
-          </DialogContentText>
-          {this.state.rows.map( row => {
-            return (
-              <div key={row.id}>
-                <TextField
-                  autoFocus
-                  margin="dense"
-                  id="description"
-                  label="Description"
-                  type="text"
-                  variant="outlined"
-                  value={row.description}
-                  onChange={this.handleChangeFor}
-                  multiline
-                />
-                <TextField
-                  autoFocus
-                  margin="dense"
-                  id="desired"
-                  label="Desired"
-                  type="number"
-                  variant="outlined"
-                  value={row.desired}
-                  onChange={this.handleChangeFor}
-                />
-                <TextField
-                  autoFocus
-                  margin="dense"
-                  id="delivered"
-                  label="Delivered"
-                  type="number"
-                  variant="outlined"
-                  value={row.delivered}
-                  onChange={this.handleChangeFor}
-                />
-                <TextField
-                  autoFocus
-                  margin="dense"
-                  id="difference"
-                  label="Difference"
-                  type="number"
-                  variant="outlined"
-                  value={row.difference}
-                  onChange={this.handleChangeFor}
-                />
-              </div>
-            );
-          })}
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={this.handleClickClose} color="primary">
-            Cancel
-          </Button>
-          <Button onClick={this.handleSave} color="primary">
-            Save Changes
-          </Button>
-        </DialogActions>
-      </React.Fragment>
-    }
+    ) : (
+    <React.Fragment>
+      <DialogTitle className={classes.dialogTitle} id="goal-assessment-edit-dialog">Edit User</DialogTitle>
+      {user.map( user =>
+      <DialogContent>
+          <InputLabel>First Name:</InputLabel>
+          <Input className={classes.userInfoEdit} placeholder={user.firstname}/>
+          <br />
+          <InputLabel>Last Name:</InputLabel>
+          <Input className={classes.userInfoEdit} placeholder={user.lastname}/>
+          <br />
+          <InputLabel>Email:</InputLabel>
+          <Input className={classes.userInfoEdit} placeholder={user.email}/>
+          <br />
+          <InputLabel>Level:</InputLabel>
+          <Input className={classes.userInfoEdit} placeholder={user.level}/>
+          
+          <br />
+          <InputLabel>360 Access:</InputLabel>
+          <br />
+            <ul>
+              <li>
+                <Typography className={classes.userInfo} variant="subheading">360 They Have access to</Typography>
+                <Tooltip title="Remove Access" placement="right">
+                  <IconButton className={classes.removeAccess} onClick={this.removeAccess}>
+                    <Cancel/>
+                  </IconButton>
+                </Tooltip>
+              </li>
+            </ul>
+          <InputLabel>Notes:</InputLabel>
+          <Typography variant="subheading">Notes here! Notes here! Notes here! Notes here! Notes here! Notes here! Notes here! Notes here!</Typography>
+          <br />
+        <Button size="small" variant="contained">Cancel</Button>
+        <Button size="small" variant="contained">Save Changes</Button>
+      </DialogContent>)}
+      {JSON.stringify(this.state)}
+    </React.Fragment>
+    )}
+
+    
     </Dialog>
     </React.Fragment>
    );
@@ -203,7 +196,23 @@ const styles = {
     marginBottom: 25
   },
   paper: {
-    // height: 'calc(100% - 96px)'
+    height: 'calc(75% - 96px)'
+  },
+  dialogTitle: {
+    textAlign: 'center'
+  },
+  userInfo: {
+    display: 'inline',
+    marginLeft: '15px'
+  },
+  editBtn: {
+    float: 'right'
+  },
+  userInfoEdit: {
+    margin: '0px 0px 15px 15px'
+  },
+  removeAccess: {
+    marginLeft: 10
   }
 };
 

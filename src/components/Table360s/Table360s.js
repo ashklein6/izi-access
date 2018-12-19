@@ -58,7 +58,9 @@ function CustomizedTable(props) {
               <TableRow className={classes.row} key={row.id}>
                 <CustomTableCell component="th" scope="row">
                   <Button>View</Button>
-                  <Button>Edit</Button>
+
+                  {!props.homeVersion && <Button>Edit</Button>}
+
                 </CustomTableCell>
                 <CustomTableCell>{row.name}</CustomTableCell>
                 <CustomTableCell>{row.client}</CustomTableCell>

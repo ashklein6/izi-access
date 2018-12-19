@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Table360s from '../Table360s/Table360s';
+import Search360s from '../Search360s/Search360s';
+import moment from 'moment';
 
 import MarnitaLogo from './marnita_logo.png';
 
@@ -20,6 +23,18 @@ class Home extends Component {
 
  };
 
+ componentDidMount() {
+  this.props.dispatch({type: 'FETCH_PUBLISHED'});
+ };
+
+ // when the user clicks 'view 360,' this function will route them to
+ // the view 360 page, and also dispatch the selected 360 id
+ // so the correct information can be displayed on the next page
+ handleClick = (id) => {
+  this.props.dispatch({type: 'FETCH_360', payload: id});
+  this.props.history.push('/view360');
+ };
+
  render() {
    const { classes } = this.props;
 
@@ -27,7 +42,11 @@ class Home extends Component {
      <div>
         <Typography variant="h3" className={classes.header}>Check out some recent IZI 360 Reports</Typography>
         <Grid container>
-          <Grid item xs={4}>
+        {/* the line below maps through the first 3 items in the array */}
+        {/* and uses that information to display the cards. */}
+        {/* the unaltered version of the array is sent to the table */}
+        {this.props.reduxState.all360s.published.slice(0,3).map( izi => (
+          <Grid item xs={4} key={izi.id}>
             <Card className={classes.card}>
             {/* TO DO: add a number of card classes, color formatting based on IZI category? */}
 
@@ -37,7 +56,7 @@ class Home extends Component {
                   <img src={MarnitaLogo} alt="Marnita's Table Placeholder" className={classes.image}/>
 
                   <Typography gutterBottom variant="h4" component="h4">
-                    Health Matters!
+                    {izi.name}
                   </Typography>
 
                   <Typography component="p">
@@ -45,25 +64,33 @@ class Home extends Component {
                   </Typography>
                   <br></br>
                   <Typography component="p">
-                    December 17, 2018
+                    {moment(izi.date).format('LL')}
                   </Typography>
                   <Typography component="p">
-                    Location of IZI
+                    {izi.location}
                   </Typography>
 
                 </CardContent>
               </CardActionArea>
 
               <CardActions className={classes.cardActions}>
-                <Button size="small" color="primary">
+                <Button size="small" color="primary" onClick={() => this.handleClick(izi.id)}>
                   View 360 Report
                 </Button>
               </CardActions>
 
             </Card>
           </Grid>
-
+        ))}
         </Grid>
+        <span>
+          <Typography>Search By</Typography>
+          <Search360s status="true"/>
+        </span>
+        {/* this sends the array of published 360s to the table, */}
+        {/* and specificies that this table is for the home page,  */}
+        {/* and will not render the edit button. */}
+        <Table360s rows={this.props.reduxState.all360s.published} homeVersion />
 
      </div>
    );

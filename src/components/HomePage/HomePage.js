@@ -45,7 +45,7 @@ class Home extends Component {
         {/* the line below maps through the first 3 items in the array */}
         {/* and uses that information to display the cards. */}
         {/* the unaltered version of the array is sent to the table */}
-        {this.props.reduxState.all360s.published.slice(0,3).map( izi => (
+        {this.props.reduxState.all360s.recent.map( izi => (
           <Grid item xs={4} key={izi.id}>
             <Card className={classes.card}>
             {/* TO DO: add a number of card classes, color formatting based on IZI category? */}

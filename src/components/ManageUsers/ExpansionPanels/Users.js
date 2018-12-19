@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import ViewUser from '../ViewUserDialog/ViewUser';
 
 // Material-UI
 import { withStyles } from '@material-ui/core/styles';
@@ -122,12 +123,6 @@ class Users extends Component {
     
   }
 
-  // handle click of 'View All Users' button
-  viewAllUsers = () => {
-    console.log('View All Useers');
-    
-  }
-
 render() {
   const { classes } = this.props;
 
@@ -142,14 +137,14 @@ render() {
           
             <TextField className={classes.searchField} placeholder="Search by Name or Email" type="search" onChange={this.handleChange}
               name="searchBy" value={this.state.searchBy}
-              InputProps={{
-                endAdornment: 
-                <InputAdornment position="end">
-                  <IconButton variant="contained" size="small" className={classes.button} onClick={this.submitSearch}>
-                    <SearchIcon className={classNames(classes.leftIcon, classes.iconSmall)} />
-                  </IconButton>
-                </InputAdornment>,
-              }}
+              // InputProps={{
+              //   endAdornment: 
+              //   <InputAdornment position="end">
+              //     <IconButton variant="contained" size="small" className={classes.button} onClick={this.submitSearch}>
+              //       <SearchIcon className={classNames(classes.leftIcon, classes.iconSmall)} />
+              //     </IconButton>
+              //   </InputAdornment>
+              // }}
             />
             
             <TextField
@@ -168,6 +163,9 @@ render() {
                 </MenuItem>
               ))}
             </TextField>
+            <Button variant="contained" onClick={this.submitSearch}>Search</Button>
+
+            <Button variant="contained" onClick={this.viewAllUsers}>View All Users</Button>
 
             <TextField
               select
@@ -176,7 +174,7 @@ render() {
               onChange={this.handleChange}
               name="sortBy"
               InputProps={{
-                startAdornment: <InputAdornment position="start">Sort By</InputAdornment>,
+                startAdornment: <InputAdornment position="start">Sort</InputAdornment>,
               }}
             >
               {ranges.map(option => (
@@ -186,7 +184,6 @@ render() {
               ))}
             </TextField>
 
-            <Button variant="contained" onClick={this.viewAllUsers}>View All Users</Button>
           </form>
         </span>
       </div>
@@ -222,7 +219,7 @@ render() {
                     <CustomTableCell className={classes.centerText}>{row.email}</CustomTableCell>
                     <CustomTableCell className={classes.centerText}>{row.level}</CustomTableCell>
                     <CustomTableCell className={classes.centerText} component="th" scope="row">
-                      <Button variant="contained">View</Button>
+                      <ViewUser />
                     </CustomTableCell>
                   </TableRow>
                 );
@@ -295,7 +292,7 @@ const styles = {
     flexBasis: '75.00%',
   },
   searchField: {
-    width: 275,
+    width: 200,
     margin: '0px 15px 25px 15px'
   },
   textField: {

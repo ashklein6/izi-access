@@ -12,21 +12,31 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
 const styles = {
-    
+    container: {
+      margin: 25
+    },
     textField: {
       width: 400,
       marginBottom: 15
     },
-    
+    text: {
+      textAlign: 'left',
+      paddingTop: 10,
+      paddingBottom: 10,
+      fontSize: 18,
+      borderRadius: 10
+    },
+    form: {
+      textAlign: 'center',
+      padding: 50
+    },
     header: {
       textAlign: 'center',
       marginBottom: 25
     },
-    
-    editButton: {
-      marginTop: 2,
-      marginRight: 10,
-      float: 'right',
+    button: {
+      width: 200,
+      marginTop: 15,
     },
     
     div: {
@@ -40,7 +50,7 @@ const styles = {
     }
   };
 
-class EditUser extends Component {
+class RequestAccess extends Component {
 
 state = {
     open: false
@@ -55,8 +65,8 @@ handleClickOpen = () => {
 
 handleClickClose = () => {
     this.setState({
-        ...this.state,
-        open: false
+      ...this.state,
+      open: false
     })
 }
 
@@ -64,55 +74,49 @@ handleSave = () => {
     this.handleClickClose();
 }
 
-render () {
+render(){
     const { classes } = this.props;
 
-    return (
+    return(
         <div>
-            <Button className={classes.editButton} onClick={this.handleClickOpen} variant="contained">Edit</Button>
+            <Button
+            onClick={this.handleClickOpen} 
+            className={classes.button} 
+            variant= "contained"
+            >Request 360 Access</Button>
         <Dialog
          open={this.state.open}
          onClose={this.handleClickClose}
-         aria-labelledby="edit-user-info"
+         aria-labelledby="request-access"
          scroll="paper"
          width= '400'
          maxWidth="lg"
        >
-       <DialogTitle id="edit-user-info" className={classes.header} variant="h4">Edit User Info</DialogTitle>
+       <DialogTitle id="edit-password" className={classes.header}>Request IZI Access</DialogTitle>
          <DialogContent>
            <DialogContentText className={classes.header}>
              Remember to save changes before closing this edit dialog.
            </DialogContentText>
          <div className={classes.div}>
             <TextField
-                label="First Name"
+                label="IZI Name"
                 className={classes.textField}
                 margin="dense"
                 variant="outlined"
                 type="text"
-                name="firstName"
-                placeholder="First Name"
+                name="iziName"
+                placeholder="IZI Name"
               />
-              <br />
+              <Typography variant="h6" className={classes.header}>OR</Typography>
+              {/* <br /> */}
               <TextField
-                label="Last Name"
-                className={classes.textField}
-                margin="dense"
-                variant="outlined"
-                type="text"
-                name="lastName"
-                placeholder="Last Name"
-              />
-            <br />
-            <TextField
-                label="Email"
-                className={classes.textField}
-                margin="dense"
-                variant="outlined"
-                type="text"
-                name="email"
-                placeholder="Email"
-              />
+              label="Date of IZI"
+              className={classes.textField}
+              type="date"
+              margin="dense"
+              variant="outlined"
+              name ="date"
+                />
             <br />
           </div>
           </DialogContent>
@@ -133,4 +137,4 @@ render () {
 const mapReduxStateToProps = (reduxState) => ({
     reduxState
    });
-export default connect(mapReduxStateToProps)(withStyles(styles)(EditUser));
+export default connect(mapReduxStateToProps)(withStyles(styles)(RequestAccess));

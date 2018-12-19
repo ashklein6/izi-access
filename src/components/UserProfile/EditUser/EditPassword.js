@@ -22,11 +22,10 @@ const styles = {
       textAlign: 'center',
       marginBottom: 25
     },
-    
-    editButton: {
-      marginTop: 2,
-      marginRight: 10,
-      float: 'right',
+
+    button: {
+      width: 200,
+      marginTop: 15,
     },
     
     div: {
@@ -40,7 +39,8 @@ const styles = {
     }
   };
 
-class EditUser extends Component {
+
+class EditPassword extends Component {
 
 state = {
     open: false
@@ -55,75 +55,79 @@ handleClickOpen = () => {
 
 handleClickClose = () => {
     this.setState({
-        ...this.state,
-        open: false
+      ...this.state,
+      open: false
     })
 }
 
 handleSave = () => {
-    this.handleClickClose();
+  this.handleClickClose();
 }
 
-render () {
+render(){
     const { classes } = this.props;
 
-    return (
+    return(
         <div>
-            <Button className={classes.editButton} onClick={this.handleClickOpen} variant="contained">Edit</Button>
+            <Button 
+            onClick={this.handleClickOpen}
+            className={classes.button}
+            variant= "contained"
+            >Change Password</Button>
         <Dialog
          open={this.state.open}
          onClose={this.handleClickClose}
-         aria-labelledby="edit-user-info"
+         aria-labelledby="edit-password"
          scroll="paper"
          width= '400'
          maxWidth="lg"
        >
-       <DialogTitle id="edit-user-info" className={classes.header} variant="h4">Edit User Info</DialogTitle>
+       <DialogTitle id="edit-password" className={classes.header}>Change Password</DialogTitle>
          <DialogContent>
            <DialogContentText className={classes.header}>
              Remember to save changes before closing this edit dialog.
            </DialogContentText>
          <div className={classes.div}>
             <TextField
-                label="First Name"
+                label="Old Password"
                 className={classes.textField}
                 margin="dense"
                 variant="outlined"
                 type="text"
-                name="firstName"
-                placeholder="First Name"
+                name="oldPassword"
+                placeholder="Old Password"
               />
               <br />
               <TextField
-                label="Last Name"
+                label="New Password"
                 className={classes.textField}
                 margin="dense"
                 variant="outlined"
                 type="text"
-                name="lastName"
-                placeholder="Last Name"
+                name="newPassword"
+                placeholder="New Password"
               />
             <br />
             <TextField
-                label="Email"
+                label="Confirm New Password"
                 className={classes.textField}
                 margin="dense"
                 variant="outlined"
                 type="text"
-                name="email"
-                placeholder="Email"
+                name="confirmNewPassword"
+                placeholder="Confirm New Password"
               />
             <br />
           </div>
           </DialogContent>
             <DialogActions>
-                <Button onClick={this.handleClickClose} color="primary">
-                    Cancel
-                </Button>
-                <Button onClick={this.handleSave} color="primary">
-                    Save Changes
-                </Button>
-            </DialogActions>
+              <Button onClick={this.handleClickClose} color="primary">
+                Cancel
+              </Button>
+              <Button onClick={this.handleSave} color="primary">
+                Save Changes
+              </Button>
+          </DialogActions>
           </Dialog>
         </div>
     )
@@ -133,4 +137,4 @@ render () {
 const mapReduxStateToProps = (reduxState) => ({
     reduxState
    });
-export default connect(mapReduxStateToProps)(withStyles(styles)(EditUser));
+export default connect(mapReduxStateToProps)(withStyles(styles)(EditPassword));

@@ -54,13 +54,28 @@ class CreateUser extends Component {
       this.props.dispatch({
         type: 'REGISTER',
         payload: {
+          firstname: this.state.firstname,
+          lastname: this.state.lastname,
+          email: this.state.email,
           username: this.state.username,
           password: this.state.password,
+          iziName: this.state.iziName,
+          date: this.state.date
         },
       });
     } else {
       this.props.dispatch({type: 'REGISTRATION_INPUT_ERROR'});
     }
+    this.setState({
+      ...this.state,
+      firstname: '',
+      lastname: '',
+      email: '',
+      username: '',
+      password: '',
+      iziName: '',
+      date: ''
+    })
   } // end registerUser
 
   handleInputChangeFor = propertyName => (event) => {
@@ -93,7 +108,7 @@ class CreateUser extends Component {
                 name="firstname"
                 placeholder="First Name"
                 value={this.state.firstname}
-                onChange={this.handleInputChangeFor('username')}
+                onChange={this.handleInputChangeFor('firstname')}
               />
             <br />
             <TextField
@@ -106,6 +121,18 @@ class CreateUser extends Component {
                 placeholder="Last Name"
                 value={this.state.lastname}
                 onChange={this.handleInputChangeFor('lastname')}
+              />
+            <br />
+            <TextField
+              label="Email"
+              className={classes.textField}
+              margin="dense"
+              variant="outlined"
+              type="text"
+              name="email"
+              placeholder="Email"
+              value={this.state.email}
+              onChange={this.handleInputChangeFor('email')}
               />
             <br />
             <TextField

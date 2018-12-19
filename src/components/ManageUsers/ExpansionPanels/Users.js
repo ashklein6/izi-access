@@ -86,8 +86,6 @@ class Users extends Component {
     sortBy: '',
   };
 
-
-
   // handles clicking of the "edit" button. Opens a dialog window.
   handleClickOpen = () => {
     this.setState({
@@ -105,8 +103,8 @@ class Users extends Component {
     })
   } // end handleClickClose
 
-  render() {
-    const { classes } = this.props;
+render() {
+  const { classes } = this.props;
 
   return (
     <div className={classes.root}>

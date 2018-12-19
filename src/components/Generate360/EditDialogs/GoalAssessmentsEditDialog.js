@@ -51,91 +51,145 @@ const rows = [
 class GoalsAssessmentEditDialog extends Component {
 
  state = {
-  rows: rows
+   open: false,
+   updating: false,
+   rows: rows
  };
 
  handleChangeFor= (event) => {
-  
+
  } // end handleChangeFor
 
+ // handles clicking of the "edit" button. Opens a dialog window.
+ handleClickOpen = () => {
+  this.props.dispatch({ type: 'FETCH_360_SECTION', payload: {section: 'goalsAssessment', current360Id: 1} });
+  this.setState({
+    ...this.state,
+    open: true,
+    updating: true
+    // rows: this.props.reduxState.current360.goalsAssessment
+  })
+ } // end handleClickOpen
+
+ // handles clicking of the "save" or "cancel" button from the dailog window 
+ // and closes the dialog window.
+ handleClickClose = () => {
+  this.setState({
+    ...this.state,
+    open: false
+  })
+ } // end handleClickClose
+
  handleSave = () => {
-  this.props.handleClose();
+  this.handleClickClose();
+ }
+
+ loadCurrentData = () => {
+  this.setState({
+     ...this.state,
+     rows: this.props.reduxState.current360.goalsAssessment,
+     updating: false
+  })
+  this.props.dispatch({ type: 'CURRENT_360_SECTION_UPDATE_COMPLETE' });
  }
 
  render() {
    const { classes } = this.props;
 
+   // Check if the section information updated since this site was last loaded.
+   // A section is re-downloaded each time the edit dialog is opened.
+   if (this.props.reduxState.current360.updateNeeded === true) {
+     this.loadCurrentData();
+   }
+
    return (
+     <React.Fragment>
+    <Button size="small" color="primary" onClick={this.handleClickOpen}>Edit</Button>
     <Dialog
-      open={this.props.open}
-      onClose={this.props.handleClose}
+      open={this.state.open}
+      onClose={this.handleClickClose}
       aria-labelledby="goal-assessment-edit-dialog"
       scroll="paper"
       fullWidth
       maxWidth="lg"
+      classes={{paper: classes.paper}}
     >
+    {(this.state.updating === true) ? 
+    <React.Fragment>
       <DialogTitle id="goal-assessment-edit-dialog">Edit Goals Assessment</DialogTitle>
       <DialogContent>
         <DialogContentText>
-          Remember to save changes before closing this edit dialog.
+          New information is currently loading...
         </DialogContentText>
-        {this.state.rows.map( row => {
-          return (
-            <div>
-              <TextField
-                autoFocus
-                margin="dense"
-                id="description"
-                label="Description"
-                type="text"
-                variant="outlined"
-                value={row.description}
-                onChange={this.handleChangeFor}
-                multiline
-              />
-              <TextField
-                autoFocus
-                margin="dense"
-                id="desired"
-                label="Desired"
-                type="number"
-                variant="outlined"
-                value={row.desired}
-                onChange={this.handleChangeFor}
-              />
-              <TextField
-                autoFocus
-                margin="dense"
-                id="delivered"
-                label="Delivered"
-                type="number"
-                variant="outlined"
-                value={row.delivered}
-                onChange={this.handleChangeFor}
-              />
-              <TextField
-                autoFocus
-                margin="dense"
-                id="difference"
-                label="Difference"
-                type="number"
-                variant="outlined"
-                value={row.difference}
-                onChange={this.handleChangeFor}
-              />
-            </div>
-          );
-        })}
       </DialogContent>
-      <DialogActions>
-        <Button onClick={this.props.handleClose} color="primary">
-          Cancel
-        </Button>
-        <Button onClick={this.handleSave} color="primary">
-          Save Changes
-        </Button>
-      </DialogActions>
+    </React.Fragment>
+      :
+      <React.Fragment>
+        <DialogTitle id="goal-assessment-edit-dialog">Edit Goals Assessment</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Remember to save changes before closing this edit dialog.
+          </DialogContentText>
+          {this.state.rows.map( row => {
+            return (
+              <div key={row.id}>
+                <TextField
+                  autoFocus
+                  margin="dense"
+                  id="description"
+                  label="Description"
+                  type="text"
+                  variant="outlined"
+                  value={row.description}
+                  onChange={this.handleChangeFor}
+                  multiline
+                />
+                <TextField
+                  autoFocus
+                  margin="dense"
+                  id="desired"
+                  label="Desired"
+                  type="number"
+                  variant="outlined"
+                  value={row.desired}
+                  onChange={this.handleChangeFor}
+                />
+                <TextField
+                  autoFocus
+                  margin="dense"
+                  id="delivered"
+                  label="Delivered"
+                  type="number"
+                  variant="outlined"
+                  value={row.delivered}
+                  onChange={this.handleChangeFor}
+                />
+                <TextField
+                  autoFocus
+                  margin="dense"
+                  id="difference"
+                  label="Difference"
+                  type="number"
+                  variant="outlined"
+                  value={row.difference}
+                  onChange={this.handleChangeFor}
+                />
+              </div>
+            );
+          })}
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={this.handleClickClose} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={this.handleSave} color="primary">
+            Save Changes
+          </Button>
+        </DialogActions>
+      </React.Fragment>
+    }
     </Dialog>
+    </React.Fragment>
    );
  }
 };
@@ -147,6 +201,9 @@ const styles = {
   header: {
     textAlign: 'center',
     marginBottom: 25
+  },
+  paper: {
+    height: 'calc(100% - 96px)'
   }
 };
 

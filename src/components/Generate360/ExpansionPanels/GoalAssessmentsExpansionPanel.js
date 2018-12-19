@@ -80,8 +80,6 @@ class GoalsAssessmentExpansionPanel extends Component {
  state = {
   active: true,
   status: 'Active',
-  open: false,
-  rows: rows
  };
 
  // handle the toggle of active/inactive for the section
@@ -101,22 +99,9 @@ class GoalsAssessmentExpansionPanel extends Component {
    }
  } // end handleChange
 
- // handles clicking of the "edit" button. Opens a dialog window.
- handleClickOpen = () => {
-  this.setState({
-    ...this.state,
-    open: true
-  })
- } // end handleClickOpen
-
- // handles clicking of the "save" or "cancel" button from the dailog window 
- // and closes the dialog window.
- handleClickClose = () => {
-  this.setState({
-    ...this.state,
-    open: false
-  })
- } // end handleClickClose
+ componentDidMount() {
+   this.props.dispatch({ type: 'FETCH_360_SECTION', payload: {section: 'goalsAssessment', current360Id: 1} });
+ }
 
  render() {
    const { classes } = this.props;
@@ -153,7 +138,7 @@ class GoalsAssessmentExpansionPanel extends Component {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {this.state.rows.map(row => {
+                {this.props.reduxState.current360.goalsAssessment.map(row => {
                   return (
                     <TableRow key={row.id}>
                       <CustomTableCell component="th" scope="row" width="25%">
@@ -191,9 +176,8 @@ class GoalsAssessmentExpansionPanel extends Component {
             }
             label={this.state.status}
           />
-          <Button size="small" color="primary" onClick={this.handleClickOpen}>Edit</Button>
-          <GoalsAssessmentEditDialog open={this.state.open} handleOpen={this.handleClickOpen}
-          handleClose={this.handleClickClose}/>
+          
+          <GoalsAssessmentEditDialog />
         </ExpansionPanelActions>
 
       </ExpansionPanel>

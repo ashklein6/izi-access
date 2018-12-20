@@ -29,7 +29,7 @@ router.post('/register', (req, res, next) => {
 
   const queryText2 = `INSERT INTO client_request (person_id, name, date) VALUES ($1, $2, $3);`;
 
-  if (iziName === '' || date === '') {
+  if (iziName === '' && date === '') {
     pool.query(queryText1, [firstname, lastname, email, username, password])
       .then(() => { res.sendStatus(201); })
       .catch((err) => { next(err); });

@@ -15,36 +15,37 @@ router.get('/search', (req, res) => {
     if(search.name) {
       sqlText += `(name = $${fieldCounter} OR client = $${fieldCounter}) `;
       fieldCounter++;
-      searchFields.unshift(search.name);
+      searchFields.push(search.name);
     };
     if(search.location && search.name) {
       sqlText += `AND location = $${fieldCounter} `;
       fieldCounter++;
-      searchFields.unshift(search.location);
+      searchFields.push(search.location);
     } else if (search.location) {
       sqlText += `location = $${fieldCounter} `;
       fieldCounter++;
-      searchFields.unshift(search.location);
+      searchFields.push(search.location);
     };
     if(search.date && (search.name || search.location)) {
       sqlText += `AND date = $${fieldCounter} `;
       fieldCounter++;
-      searchFields.unshift(search.date);
+      searchFields.push(search.date);
     } else if(search.date) {
       sqlText += `date = $${fieldCounter} `;
       fieldCounter++;
-      searchFields.unshift(search.date);
+      searchFields.push(search.date);
     };
     if(search.category && (search.name || search.location || search.date)) {
       sqlText += `AND category_id = $${fieldCounter} `;
       fieldCounter++;
-      searchFields.unshift(search.category);
+      searchFields.push(search.category);
     } else if (search.category) {
       sqlText += `category_id = $${fieldCounter} `;
       fieldCounter++;
-      searchFields.unshift(search.category);
+      searchFields.push(search.category);
     };
     sqlText += `AND published_status = $${fieldCounter};`;
+    searchFields.push(search.publishedStatus);
     console.log('text: ', sqlText);
     pool.query(sqlText, searchFields)
     .then((response) => {

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import TableUsers from '../../TableUsers/TableUsers';
 import ViewUser from '../ViewUserDialog/ViewUser';
 
 // Material-UI
@@ -11,12 +12,6 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Button from '@material-ui/core/Button';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputAdornment from '@material-ui/core/InputAdornment';
@@ -24,23 +19,6 @@ import classNames from 'classnames';
 import SearchIcon from '@material-ui/icons/Search';
 import IconButton from '@material-ui/core/IconButton';
 
-
-
-// temporary data
-const ranges = [
-  {
-    value: 'health',
-    label: 'health',
-  },
-  {
-    value: 'transportation',
-    label: 'transportation',
-  },
-  {
-    value: 'other',
-    label: 'other',
-  },
-];
 
 let root = document.querySelector(':root');
 const colors = {
@@ -54,41 +32,19 @@ const colors = {
   orangeHover: window.getComputedStyle(root).getPropertyValue('--main-orange-hover'),
 };
 
-// Hard coded data
-let id = 0;
-function createData( first_name, last_name, email, level ) {
-  id += 1;
-  return { first_name, last_name, email, level };
-}
-
-const rows = [
-  createData('John', 'Doe', 'john_doe@email.com', 'Level'),
-  createData('John', 'Doe', 'john_doe@email.com', 'Level'),
-  createData('John', 'Doe', 'john_doe@email.com', 'Level'),
-];
-
-// Cleanly style table cells within Material-UI
-const CustomTableCell = withStyles(theme => ({
-  head: {
-    fontSize: '1rem',
-    backgroundColor: colors.orange,
-    color: 'white',
-    padding: 10,
-    textAlign: 'center'
-  },
-  body: {
-    padding: 5,
-  },
-}))(TableCell);
+const ranges = [];
 
 class Users extends Component {
 
   state = {
-    open: false,
-    rows: rows,
     searchBy: '',
     level: '',
     sortBy: '',
+  };
+
+  componentDidMount() {
+    this.viewAllUsers();
+    this.props.dispatch({type: 'FETCH_ACCESS_LEVELS'});
   };
 
   // handles change for inputs
@@ -98,44 +54,31 @@ class Users extends Component {
       ...this.state,
       [event.target.name]: event.target.value,
     })
-  }
-
-  // handles clicking of the "edit" button. Opens a dialog window.
-  handleClickOpen = () => {
-    this.setState({
-      ...this.state,
-      open: true
-    })
-  } // end handleClickOpen
-
-  // handles clicking of the "save" or "cancel" button from the dailog window 
-  // and closes the dialog window.
-  handleClickClose = () => {
-    this.setState({
-      ...this.state,
-      open: false
-    })
-  } // end handleClickClose
+  };
 
   // handle click of searchIcon button from 'Search by Name or Email' input
-  submitSearch = () => {
-    console.log('Submit Search');
-    
-  }
+  submitSearch = (event) => {
+    console.log('state to send', this.state);
+    event.preventDefault();
+    this.props.dispatch({type: 'FETCH_USERS_SEARCH', payload: this.state});
+  };
+
+  viewAllUsers = () => {
+    this.props.dispatch({type: 'FETCH_ALL_USERS'});
+  };
 
 render() {
   const { classes } = this.props;
+  const level = this.props.reduxState.userAccessLevel;
 
   return (
     <div className={classes.root}>
-    {JSON.stringify(this.state)}
       <ExpansionPanel defaultExpanded>
       <div >
         <span>
-          {/* <p>Search By</p> */}
-          <form className={classes.form} onSubmit={this.searchUnpublished}>
+          <form className={classes.form} onSubmit={this.submitSearch}>
           
-            <TextField className={classes.searchField} placeholder="Search by Name or Email" type="search" onChange={this.handleChange}
+            <TextField className={classes.searchField} placeholder="Search by Lastname or Email" type="search" onChange={this.handleChange}
               name="searchBy" value={this.state.searchBy}
               // InputProps={{
               //   endAdornment: 
@@ -157,9 +100,9 @@ render() {
                 startAdornment: <InputAdornment position="start">Level</InputAdornment>,
               }}
             >
-              {ranges.map(option => (
-                <MenuItem key={option.value} value={option.value}>
-                  {option.label}
+              {level.map(option => (
+                <MenuItem key={option.id} value={option.access_level}>
+                  {option.access_type}
                 </MenuItem>
               ))}
             </TextField>
@@ -178,7 +121,7 @@ render() {
               }}
             >
               {ranges.map(option => (
-                <MenuItem key={option.value} value={option.value}>
+                <MenuItem key={option.id} value={option.id}>
                   {option.label}
                 </MenuItem>
               ))}
@@ -197,36 +140,7 @@ render() {
 
         {/* Content that is within the expansion panel (shows when panel is expanded) */}
         <ExpansionPanelDetails className={classes.details}>
-          <Paper className={classes.rootTable}>
-            <Table className={classes.table}>
-              <TableHead>
-                <TableRow>
-                  <CustomTableCell>First Name</CustomTableCell>
-                  <CustomTableCell>Last Name</CustomTableCell>
-                  <CustomTableCell>Email</CustomTableCell>
-                  <CustomTableCell>Level</CustomTableCell>
-                  <CustomTableCell>Actions</CustomTableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {this.state.rows.map(row => {
-                return (
-                  <TableRow key={row.id}>
-                    <CustomTableCell className={classes.centerText} component="th" scope="row">
-                    {row.first_name}
-                    </CustomTableCell>
-                    <CustomTableCell className={classes.centerText}>{row.last_name}</CustomTableCell>
-                    <CustomTableCell className={classes.centerText}>{row.email}</CustomTableCell>
-                    <CustomTableCell className={classes.centerText}>{row.level}</CustomTableCell>
-                    <CustomTableCell className={classes.centerText} component="th" scope="row">
-                      <ViewUser />
-                    </CustomTableCell>
-                  </TableRow>
-                );
-                })}
-              </TableBody>
-            </Table>
-          </Paper>
+          <TableUsers users={this.props.reduxState.allUsers.allUsers} />
         </ExpansionPanelDetails>
       </ExpansionPanel>
     </div>

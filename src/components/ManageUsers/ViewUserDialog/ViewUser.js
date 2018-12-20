@@ -17,90 +17,83 @@ import Cancel from '@material-ui/icons/Cancel';
 import Tooltip from '@material-ui/core/Tooltip';
 import TextField from '@material-ui/core/TextField';
 
-
-// Hard coded data
-const user = [
-  { id: 1,
-    firstname: 'Jon', 
-    lastname: 'Doe', 
-    email: 'john_doe@email.com',
-    level: 'something',
-    notes: 'This is where you can enter notes about the user.',
-  }
-]
-
 class ViewUser extends Component {
 
-state = {
-  open: true, // true for dev purposes
-  edit: false, // true should show view user, false should show edit user
-  firstname: '',
-  lastname: '',
-  email: '',
-  level: '', // access_id???
-  notes: ''
-};
+  state = {
+    open: false, // true for dev purposes
+    edit: false, // true should show view user, false should show edit user
+    firstname: '',
+    lastname: '',
+    email: '',
+    access_id: 0, // access_id???
+    notes: '',
+    id: 0
+  };
 
-handleChange = (event) => {
-  console.log('in handleChange');
-  this.setState({
-    ...this.state,
-    [event.target.name]: event.target.value,
-  })
-}
+  handleChange = (event) => {
+    console.log('in handleChange');
+    this.setState({
+      ...this.state,
+      [event.target.name]: event.target.value,
+    })
+  };
 
-// handles clicking of the "edit" button. Opens a dialog window.
-handleClickOpen = () => {
-  // this.props.dispatch({ type: 'FETCH_360_SECTION', payload: {section: 'goalsAssessment', current360Id: 1} });
-  this.setState({
-    ...this.state,
-    open: true,
-  })
-} // end handleClickOpen
+  // handles clicking of the "edit" button. Opens a dialog window.
+  handleClickOpen = () => {
+    this.setState({
+      ...this.state,
+      open: true,
+    })
+  }; // end handleClickOpen
 
-// handles clicking of the "save" or "cancel" button from the dailog window 
-// and closes the dialog window.
-handleClickClose = () => {
-  this.setState({
-    ...this.state,
-    open: false,
-    edit: false
-  })
-} // end handleClickClose
+  // handles clicking of the "save" or "cancel" button from the dailog window 
+  // and closes the dialog window.
+  handleClickClose = () => {
+    this.setState({
+      ...this.state,
+      open: false,
+      edit: false
+    })
+  }; // end handleClickClose
 
-handleSave = () => {
-  this.handleClickClose();
-}
+  editBtn = () => {
+    this.setState({ 
+      open: true,
+      edit: true,
+      firstname: this.props.user.firstname,
+      lastname: this.props.user.lastname,
+      email: this.props.user.email,
+      access_id: this.props.user.access_id,
+      notes: this.props.user.notes,
+      id: this.props.user.id
+    })
+  };
 
+  removeAccess = () => {
+    console.log('Remove Access');
+  };
 
-editBtn = () => {
-  this.setState({ edit: !this.state.edit})
-}
+  endEdit = () => {
+    this.setState({
+      open: true,
+      edit: false,
+      firstname: '',
+      lastname: '',
+      email: '',
+      access_id: 0,
+      notes: '',
+      id: 0
+    })
+  };
 
-// 
-removeAccess = () => {
-  console.log('Remove Access');
-  
-}
+  saveChanges = () => {
+    this.props.dispatch({ type: 'EDIT_USER_INFO', payload: this.state });
+    this.endEdit();
+  };
 
- loadCurrentData = () => {
-  this.setState({
-     ...this.state,
-     rows: this.props.reduxState.current360.goalsAssessment,
-     updating: false
-  })
-  this.props.dispatch({ type: 'CURRENT_360_SECTION_UPDATE_COMPLETE' });
- }
-
-
- render() {
+  render() {
    const { classes } = this.props;
-
-   // Check if the section information updated since this site was last loaded.
-   // A section is re-downloaded each time the edit dialog is opened.
-   if (this.props.reduxState.current360.updateNeeded === true) {
-     this.loadCurrentData();
-   }
+   const user = this.props.user;
 
    return (
     <React.Fragment>
@@ -114,11 +107,11 @@ removeAccess = () => {
       maxWidth="sm"
       classes={{paper: classes.paper}}
     >
-    {this.state.edit ? (    
+    {!this.state.edit ? (    
     <React.Fragment>
       <DialogTitle className={classes.dialogTitle} id="goal-assessment-edit-dialog">View User</DialogTitle>
-      {user.map( user =>
-      <DialogContent>
+      
+      <DialogContent key={user.id}>
       <Button className={classes.editBtn} size="small" variant="contained" onClick={this.editBtn}>Edit</Button>
 
           <InputLabel>First Name:</InputLabel>
@@ -131,8 +124,8 @@ removeAccess = () => {
           <InputLabel>Email:</InputLabel>
           <Typography className={classes.userInfo} variant="subheading">{user.email}</Typography>
           <br />
-          <InputLabel>Level:</InputLabel>
-          <Typography className={classes.userInfo} variant="subheading">{user.level}</Typography>
+          <InputLabel>access_id:</InputLabel>
+          <Typography className={classes.userInfo} variant="subheading">{user.access_id}</Typography>
           <br />
           <InputLabel>360 Access:</InputLabel>
           <br />
@@ -144,13 +137,12 @@ removeAccess = () => {
           <InputLabel>Notes:</InputLabel>
           <Typography variant="subheading">{user.notes}</Typography>
           <br />
-      </DialogContent>)}
+      </DialogContent>
     </React.Fragment>
     ) : (
     <React.Fragment>
       <DialogTitle className={classes.dialogTitle} id="goal-assessment-edit-dialog">Edit User</DialogTitle>
-      {user.map( user =>
-      <DialogContent>
+      <DialogContent key={user.id}>
           <InputLabel>First Name:</InputLabel>
           <Input 
             className={classes.userInfoEdit} 
@@ -175,12 +167,12 @@ removeAccess = () => {
             name="email"
           />
           <br />
-          <InputLabel>Level:</InputLabel>
+          <InputLabel>Access Level:</InputLabel>
           <Input 
             className={classes.userInfoEdit} 
-            placeholder={user.level}
+            placeholder={user.access_id.toString()}
             onChange={this.handleChange}
-            name="level"
+            name="access_id"
           />
           <br />
           <InputLabel>360 Access:</InputLabel>
@@ -207,9 +199,9 @@ removeAccess = () => {
             margin="normal"
           />
           <br />
-        <Button size="small" variant="contained" onClick={this.cancelEdit}>Cancel</Button>
-        <Button size="small" variant="contained">Save Changes</Button>
-      </DialogContent>)}
+        <Button size="small" variant="contained" onClick={this.endEdit}>Cancel</Button>
+        <Button size="small" variant="contained" onClick={this.saveChanges}>Save Changes</Button>
+      </DialogContent>
       {JSON.stringify(this.state)}
     </React.Fragment>
     )}

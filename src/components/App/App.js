@@ -67,7 +67,7 @@ class App extends Component {
             {/* The following pages are protected. The user's access level will be checked.
               The user will be directed to the login page if they are not logged in, and to 
               the home page if they are logged in without the appropriate authorization level */}
-            <Route
+            <ProtectedRoute
               exact
               path="/profile"
               component={UserProfile}

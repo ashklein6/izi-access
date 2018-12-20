@@ -7,6 +7,7 @@ import all360s from './all360sReducer';
 import allUsers from './allUsersReducer';
 import userControls from './userControlsReducer';
 import iziCategories from './iziCategoriesReducer';
+import userAccessLevel from './userAccessLevelReducer';
 
 
 
@@ -25,6 +26,7 @@ const rootReducer = combineReducers({
   allUsers, // stores user info for all users to be displayed on the user tables
   userControls, // stores user information to be able to control user information (REVIEW)
   iziCategories, //stores izi category types to be used throughout the application
+  userAccessLevel, // stores the various access levels for selection when filtering users
 });
 
 export default rootReducer;

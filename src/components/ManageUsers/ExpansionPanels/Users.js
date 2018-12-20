@@ -43,7 +43,8 @@ class Users extends Component {
   };
 
   componentDidMount() {
-    this.props.dispatch({type: 'FETCH_ALL_USERS'});
+    this.viewAllUsers();
+    this.props.dispatch({type: 'FETCH_ACCESS_LEVELS'});
   };
 
   // handles change for inputs
@@ -56,23 +57,28 @@ class Users extends Component {
   };
 
   // handle click of searchIcon button from 'Search by Name or Email' input
-  submitSearch = () => {
-    console.log('Submit Search');
+  submitSearch = (event) => {
+    console.log('state to send', this.state);
+    event.preventDefault();
+    this.props.dispatch({type: 'FETCH_USERS_SEARCH', payload: this.state});
+  };
+
+  viewAllUsers = () => {
+    this.props.dispatch({type: 'FETCH_ALL_USERS'});
   };
 
 render() {
   const { classes } = this.props;
+  const level = this.props.reduxState.userAccessLevel;
 
   return (
     <div className={classes.root}>
-    {JSON.stringify(this.state)}
       <ExpansionPanel defaultExpanded>
       <div >
         <span>
-          {/* <p>Search By</p> */}
-          <form className={classes.form} onSubmit={this.searchUnpublished}>
+          <form className={classes.form} onSubmit={this.submitSearch}>
           
-            <TextField className={classes.searchField} placeholder="Search by Name or Email" type="search" onChange={this.handleChange}
+            <TextField className={classes.searchField} placeholder="Search by Lastname or Email" type="search" onChange={this.handleChange}
               name="searchBy" value={this.state.searchBy}
               // InputProps={{
               //   endAdornment: 
@@ -94,9 +100,9 @@ render() {
                 startAdornment: <InputAdornment position="start">Level</InputAdornment>,
               }}
             >
-              {ranges.map(option => (
-                <MenuItem key={option.value} value={option.value}>
-                  {option.label}
+              {level.map(option => (
+                <MenuItem key={option.id} value={option.access_level}>
+                  {option.access_type}
                 </MenuItem>
               ))}
             </TextField>
@@ -115,7 +121,7 @@ render() {
               }}
             >
               {ranges.map(option => (
-                <MenuItem key={option.value} value={option.value}>
+                <MenuItem key={option.id} value={option.id}>
                   {option.label}
                 </MenuItem>
               ))}

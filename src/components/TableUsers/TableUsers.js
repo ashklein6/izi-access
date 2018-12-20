@@ -65,7 +65,7 @@ class TableUsers extends Component {
                 </CustomTableCell>
                 <CustomTableCell className={classes.centerText}>{row.lastname}</CustomTableCell>
                 <CustomTableCell className={classes.centerText}>{row.email}</CustomTableCell>
-                <CustomTableCell className={classes.centerText}>{row.access_id}</CustomTableCell>
+                <CustomTableCell className={classes.centerText}>{row.access_type}</CustomTableCell>
                 <CustomTableCell className={classes.centerText} component="th" scope="row">
                   <ViewUser user={row}/>
                 </CustomTableCell>

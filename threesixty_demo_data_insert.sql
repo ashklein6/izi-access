@@ -5,6 +5,89 @@ VALUES
 	(30, 'Employee'),
 	(40, 'Admin');
 
+INSERT INTO person ("email", "username", "password", "firstname", "lastname", "access_id", "notes", "date_added")
+VALUES (
+	'janedoe@marnitaconnect.com',
+	'janedoe',
+	'password',
+	'Jane',
+	'Doe',
+	2,
+	'Very interested in public health',
+	'12-18-2018'
+);
+
+INSERT INTO person ("email", "username", "password", "firstname", "lastname", "access_id", "notes", "date_added")
+VALUES (
+	'adminn@marnitaconnect.com',
+	'adamdouglasminn',
+	'secret',
+	'Adam',
+	'Minn',
+	4,
+	'Admin priveleges required',
+	'12-17-2018'
+);
+
+INSERT INTO person ("email", "username", "password", "firstname", "lastname", "access_id", "notes", "date_added")
+VALUES (
+	'cian1234@email.com',
+	'marnitafan1234',
+	'1234',
+	'Cybill',
+	'Ian',
+	1,
+	'Community is my priority',
+	'12-19-2018'
+);
+
+INSERT INTO client_request (person_id, name, date)
+VALUES (
+	3,
+	'Cybill',
+	'12-19-2018'
+);
+
+INSERT INTO izi_categories ("category")
+VALUES 
+    ('Public Health'),
+    ('Mental Health'), 
+    ('Community'), 
+    ('Education');
+
+INSERT INTO threesixty ("name", "date", "location", "category_id", "client", "description", "published_status")
+VALUES (
+	'Catalyst Initiative of The Minneapolis Foundation - Building Initiative: Preventing Diseases of Despair', 
+	'9-18-2018', 
+	'Minneapolis', 
+	2, 
+	'MTI',
+	'121 community members and representatives of organizations and programs with a vested interest in preventing diseases of despair engaged in a conversation and collaborative planning session on primary prevention and holistic and integrative strategies for preventing diseases of despair including suicide, alcoholism and other chemical dependency disorders.', 
+	false
+);
+
+INSERT INTO threesixty ("name", "date", "location", "category_id", "client", "description", "published_status")
+VALUES (
+	'Carver County Public Health - A Healthy Welcome', 
+	'10-4-2018', 
+	'Chaska', 
+	1, 
+	'MTI',
+	'86 community members gathered to discuss healthcare and community health needs.',
+	false
+);
+
+INSERT INTO threesixty ("name", "date", "location", "category_id", "client", "description", "published_status")
+VALUES (
+	'Health Matters!', 
+	'10-24-2017', 
+	'Shakopee', 
+	3, 
+	'Scott County Health Care System Collaborative',
+	'140 community members gathered together to discuss healthcare.',
+	false
+);
+
 INSERT INTO analysis_recommendation (threesixty_id, findings, recommendations)
 VALUES (
 	1, 
@@ -139,60 +222,6 @@ now experienced the process with first-hand knowledge and understanding of the t
 methodology we use to engage community for meaningful, sustainable impact.'
 	)
 ;
-
-INSERT INTO circle_share (threesixty_reports_id, question, responses)
-VALUES 
-	('1', 
-	'What is one word summarizing your experience here today (bolded in the transcript below) and one action you have been inspired to commit to as a result of today’s unConference?', 
-	'
-	INSPIRED: I’m planning to follow through with people in this room to see how we can shift systems.
-	ENERGIZED: I will connect with people I met here today who are outside of my world.
-	REJUVENATION: I’ve had to take a break from working in Human Services, but today has inspired me to pick up where I left off.
-	INSPIRED: Give people space to tell their story.
-	PLAYFUL: Inspired to keep showing up as a vulnerable and playful leader.
-	GRATEFUL/OVERWHELMED: Continue working for change.
-	ABUNDANT: I want to take this example of abundance to a group I work with in NW MN on reducing alcohol and substance abuse.
-	REMINDED: Start by following up on all of the business cards I got today.
-	EXPANDED: Work with a mindfulness practitioner to bring that practice to the homeless community.
-	INSPIRED: Do what is good and what is life-affirming.
-	EDUCATED (ABOUT BEYONCE): It was good to get out of my own little world to see other perspectives on what I do. I’ll take this back to my students and share with them what I learned today, as well as to my research.
-	INSPIRED: Take what happened to my workplace and see what we can do.
-	INSPIRED: More peer support!
-	GROUNDED: I’m going to reflect and notice how I’m feeling, continue to take that energy forward.
-	CONNECTED: Build on community connections that exist and take new action.
-	INSPYRED (WITH A Y): If I could just inspire myself, well that’s the action I need.
-	APPRECIATION: I will be responsive to the people who asked to talk more to me or get stuff from me and continue to work to advanced systems change.
-	LIFTED: Make more connections.
-	EMPOWERED: I’ll go back to my community and continue to work to promote lifestyle medicine education and self-care.
-	EXCITED: To get going with lobbying season
-	ENLIGHTENED: Walk out with more friends than I walked in.
-	INSPIRED AND HOPEFUL: Everyone in this room is adding to humanity, we need more actions to build on our humanity.
-	WHOLE: I feel like I’ve been spoken to in many different realms, I’m going to follow up with all you folks to increase wellness in school.
-	CHALLENGED: My opinions have been challenged about nine medical ways people can be happier and healthier.
-	"GRUNTLED": I often think the opposite of hopelessness isn’t hope, it’s certainty. I need to take the action of doing nothing as a form of self-care, just being and having a calm way of connecting to get to the work I do in the 12-step arena and medical marijuana.
-	HOPEFUL: I came in not knowing what to expect being military myself, I am familiar with resilience and I love social justice – so thank you to everyone here.
-	CONTEMPLATIVE: Still thinking about self-care and how I can best listen to the voices I connect with in my job and provide advocacy or others who can provide needed resources.
-	EMOTIONAL: I want to be better at acknowledging the pain of the people I work with.
-	CONNECTED: Feeling a sense of momentum.
-	OPTIMISTIC: Know that there’s an undercurrent of change going on.
-	ENLIGHTENED THROUGH CONVERSATIONS WITH PEOPLE OF DIFFERENT CULTURES AND BACKGROUNDS: Encouraged to make connections with people who can help with our work.
-	POSITIVE: Knowing that we’re all working toward a positive outcome, I feel positive.
-	SAFE: I feel safe to take the time to hear stories, to take time for self-care, to acknowledge the trauma that until today I didn’t realize brought me here; safe because I found a community – every person I talked to, their hearts are so much bigger than I could have guessed; safe, moving into the future, knowing that you’re there.
-	GRATEFUL: My heart is so full, I escaped the stress in the office today.
-	GRATEFUL: It’s unique to have everyone show up authentically and speak your truth – it doesn’t often happen in a professional context. Also contemplate about how to embed this in my work.
-	CONTEMPLATIVE: To think about how to embed this work in the opportunities I have to influence things.
-	CONNECTEDNESS: When community shows up, cares for one another and maximizes that connection – that’s healthy power.
-	COMMUNITY: I haven’t been feeling very connected, but this is a space where I’ve been feeling connected to community.
-	POTENT: There’s so much potency here in this room, it’s juicy; there’s this amazing potential that we are on the cusp of change, and this must change. We are all making this change together – I’m going to take all the things we’re collecting here today, turn it into a beautiful report and send that information back to you.
-	')
-;
-
-INSERT INTO client_request (person_id, name, date)
-VALUES (
-	3,
-	'Cybill',
-	'12-19-2018'
-);
 
 INSERT INTO dashboard (threesixty_id, row_title, row_info, private)
 VALUES 
@@ -466,6 +495,416 @@ Feast appropriate from vegan to carnivore including dairy, wheat and soy intoler
 	'Tools',
 	'MindStorm',
 	false
+	)
+;
+
+INSERT INTO goals (threesixty_id, description, desired, delivered, difference, percent, comments)
+VALUES (
+	1, 
+	'Total Number', 
+	125, 
+	140, 
+	15, 
+	112, 
+	'Based on in-room count, taken 3 to 6 times per account by at least two different people.'
+	),
+	(
+	1,
+	'Number of People of Color/Indigenous',
+	71,
+	70,
+	-1,
+	99,
+	'We generally set this goal at 51% in communities with at least 15% POC/Immigrant/Indigenous. Based on an in-room count.'
+	),
+	(
+	1,
+	'Number of People Under 24',
+	35,
+	33,
+	-2,
+	94,
+	'We generally set this goal at 25-33% unless the project/event does not warrant. Based on both in-room and sign-in sheet counts.'
+	),
+	(
+	1,
+	'Measurable Indicators of Success 1: 80% of participants met 1 new person across race, class, culture or other means of self-identity',
+	112,
+	126,
+	14,
+	113,
+	'80% of the room is our target goal for this MIS.'
+	),
+	(
+	1,
+	'Measurable Indicators of Success 2: 80% of participants met 2 new people across race, class, culture or other means of self-identity',
+	112,
+	112,
+	0,
+	100,
+	'80% of the room is our target goal for this MIS.'
+	),
+	(
+	1,
+	'Measurable Indicators of Success 3: 80% of participants say that they met someone across self-identity with whom they planned to stay in touch or collaborate',
+	112,
+	126,
+	14,
+	113,
+	'80% of the room is our target goal for this MIS.'
+	),
+	(
+	1,
+	'Measurable Indicators of Success 4: 40% of participants plan to tell someone about their experience',
+	37,
+	67,
+	30,
+	181,
+	'40% is our target goal. This is taken only from sign-in sheets.'
+	),
+	(
+	1,
+	'Measurable Indicators of Success 5: first time at the table',
+	75,
+	83,
+	8,
+	111,
+	'80% is our target goal for this MIS.'
+	),
+	(
+	1,
+	'Interested in future conversations about preventing child abuse and neglect',
+	null,
+	41,
+	null,
+	null,
+	'44% of the respondents expressed interest in a future conversation centered on neglect and child abuse.'
+	),
+	(
+	1,
+	'Interested in future conversations about housing',
+	null,
+	35,
+	null,
+	null,
+	'37% of the respondents expressed interest in future conversations centered on housing.'
+	),
+	(
+	1,
+	'Interested in future conversations about transportation',
+	null,
+	35,
+	null,
+	null,
+	'37% of the respondents expressed interest in future conversations centered on transportation.'
+	),
+	(
+	1,
+	'Interested in future conversations about education',
+	null,
+	57,
+	null,
+	null,
+	'61% of the respondents expressed interest in future conversations centered on education.'
+	),
+	(
+	1,
+	'Measurable Indicators of Success 6: total number of sign-in sheets',
+	28,
+	94,
+	66,
+	336,
+	'Typical sign-in rate is 10%. We doubled our goal to 20% to identify how resonant and sticky the event was.'
+	)
+;
+
+INSERT INTO threesixty_reports (threesixty_id, demographic, summary, methodology)
+VALUES (
+	'1', 
+	'TOTAL PARTICIPANTS: approx. 121 INDIGENOUS/PEOPLE OF COLOR: approx. 58 (48%) Participants included community members and organizational representatives from a variety of fields, including community corrections, healthcare, foundations and nonprofits, academic research human services, politics and public policy, journalism, business, library services and the arts.', 
+	
+	'On Tuesday, September 18th 2018, approximately 121 community members and representatives of organizations and programs with a vested interest in preventing diseases of despair were brought together at the Lake Calhoun Event Center (St. Mary’s Greek Orthodox Church) in Minneapolis for a feast and engaged conversation and collaborative planning session on primary prevention and holistic and integrative strategies for preventing diseases of despair including suicide, alcoholism and other chemical dependency disorders. The all-day unConference was divided into morning sessions, focusing on “Naming the Issue,” an afternoon luncheon Mindstorm (focused discussion) section designed to support participants in “Making the Connections” necessary to produce systemic and intra-systemic change, and afternoon strategic planning activities geared toward “Catalyzing Action.”
+
+The event featured pop-up testimonial presentations providing a wide range of lenses highlighting community impacts of despair and its associated diseases, including perspectives from Assistant Commissioner of the Minnesota Department of Health, Jeanne Ayers, Paul Riedner of the Veteran Resilience Project, Dr. Helen Kim of the Hennepin County Medical Center, Senior Vice President of Community Impact for the Minnesota Foundation, Chanda Smith Baker, and Donna LaChapelle of the Indian Women’s Resource Center and the Center for Mind-Body Medicine. Participants who wished to weigh in with their own brief observations and relevant stories and data were invited and encouraged to participate in open-mic style pop up sharing opportunities interwoven throughout the day. Facilitator Marnita Schroedl led several “mindful moment break-ins” including a minute of gratitude and a physical activity for releasing tension, in addition to guiding participants through the afternoon’s collaborative planning session.
+
+Breakfast, desserts and a luncheon feast appropriate for all dietary needs from vegan to carnivore were prepared by Fabulous Catering. In addition, a Quiet Room staffed by local practitioners Ayo Clemons, Rowan Fakhoury, and Awana Moye was also made available to all guests.', 
+
+	'This luncheon Mindstorm was undertaken on Tuesday, September 18th by guests of the 2018 unConference Building Resilience: Preventing Diseases of Despair. For this set of small group discussions, we asked participants to focus their conversations on the questions from the Mindstorm discussion guide (see facsimile on page 3) that their luncheon discussion group thought most important to address. Nine groups of participants submitted notes from the Mindstorm discussions. Identical instructions were given to each group on how to conduct their discussions and submit notes after the session. 
+
+Although participants were given the option to rank the discussion topic questions in descending order of their estimation of each topic’s importance, only two groups elected to rank questions, one of which submitted incomplete ranking information. This limits the interpretability and utility of a rankings analysis in this report, however, we have included the submitted ranking votes in the instructions sheet facsimile for your information (see page 3).
+
+The following is an overview and analysis of the emergent themes resulting from these conversations, as recorded by participant scribes on the notes sheet included with the questions. The handwritten responses have been transcribed, aggregated and de-identified in a document following this analysis. 
+
+Central themes emerging from the discussion notes include the importance of being able to meet basic needs, the centrality of social connections as a preventative measure and safety net for those suffering in silence, and a variety of proposed approaches to combatting the issue from the perspectives of the individual, the family, the community, public policy and public and private systems or agencies.' 
+);
+
+INSERT INTO oral_report (threesixty_reports_id, group_num, response)
+VALUES 
+	(
+	'1', 
+	'1', 
+	'We only got to question number one and decided not to rank them. The last five minutes we didn’t know if we would have the answer, but what we came up with is looking at the root – how do we get to the root? You can’t prevent something if you don’t know what it is. We looked up what primary prevention is, and building awareness, naming it, coming up with a plan and then prescribing – which follows the four noble truths of Buddhism. Instead of getting overwhelmed, we focused on the framework.'
+	),
+	(
+	'1', 
+	'2', 
+	'We didn’t rank them either. So, we were talking about keeping kids safe and supporting parents. We talked a bit about pre-soul connection, to be heard, to be heartstrong – that’s what it looks like for me. Creating those resources for families, insurance versus non-insurance, who is sheltered? Housing and healthcare are very important, and it’s important not to be intrusive when people are telling their stories. I am what you call Am. Indian, but I call myself Anishinaabe and Lakota. It’s important to listen to stories and realize that everyone is in some kind of pain. We talked about that cultural connection. I also talked to Paul and thanked him for his service. My niece was also in Iraq, so I know how important it is to listen to those stories. Choose kindness versus being strong. I heard someone say humility. You have to be fully human. I think that’s what we forget sometimes when we’re developing programs – it’s stopping long enough to really hear those stories.'
+	),
+	(
+	'1', 
+	'3', 
+	'Our table talked about what it means to be resilient as individuals. We were fortunate to have Umo at our table to drop some knowledge. She said resilience is the flipside to trauma; she talked about the earthworm and how it consumes what it is its path, transforms it and then eliminate it.'
+	),
+	(
+	'1', 
+	'4', 
+	'So, we talked about all the many different things – I really liked how diverse our group is in backgrounds and beliefs and what we do for a living. I’ve been working in health and wellness and suicide prevention for a decade, we’ve been trying to cure heart disease and thinking about mental health and wellness and suicide prevention. How do people get to this place of despair? We think prevention is about creating community and preventing social isolation. Every teen I’ve talked to about suicide has talked about isolation, saying I just wish someone were there, I wish someone cared, with no shame or blame. As a community, I think we lack that – safe places where people can say I’m struggling with alcohol and I need help. It’s about creating community and a sense of belonging. We live in the Wright County, in a town called Casado – and in the last year, in this small town, it [suicide] has occurred eight times. These weren’t people with a history of mental health issues, nobody in our community knew – one of these people was a member of my family. My mission today is to say, you know, if you need someone to talk to who won’t look at you like a weirdo, just listen – creating that environment.'
+	),
+	(
+	'1', 
+	'5', 
+	'We practiced a little bit of self-care, took time to eat and breath and just connect. We also discussed the issues on a broader scale – there’s so many different things going on when you’re talking about diseases of despair. We get caught up in systems and perpetuate behaviors and policies without taking the time to step back and see what’s working, which leads to families and individuals suffering from the same things over and over because systems haven’t taken a step back to look at what people actually need. Housing is another one – we’re having an affordable housing crisis in Minneapolis. I’m sure many of you know about the encampment here in Minneapolis. The systems are going in and talking to those folks to find out what they need, so that’s something we can do to better meet the needs of individuals and clients we serve.'
+	),
+	(
+	'1', 
+	'6', 
+	'We focused on question two about resources and broadened out to talk about including access to social support to be considered a resource like housing and food. Having an understanding of the cortisol effects of stress. We also talked about widening our perspectives as to why disparities in access to resources exist – what’s creating the unevenness in the first place? Instead of just making sure everyone has food, let’s ask why they don’t have food in the first place. We talked too about social constructs like gender assignment and the role that plays in inequitable access to resources.'
+	),
+	(
+	'1', 
+	'7', 
+	'I learned by writing as I listened, which means I ended up with notes that only I can read. We started with the question on resilience and acknowledged that this term is challenging for people of color and from other marginalized communities, because you have to be resilient just to survive. We talked about increasing capacity to learn how to find ways to survive and thrive through means of healing that are more appropriate. A power shift is essential; US culture needs healing from trauma. Everyone has work to do in our own communities and across communities as well. Camille made a distinction between changing behavior and changing hearts and minds. Changing behaviors is the way to go, but you have to want to change. Willingness to be vulnerable and uncomfortable. Recognizing physical signs when something triggers trauma for you and having a way to say, I’ll continue this conversation when I’ve had time to heal myself.'
+	),
+	(
+	'1', 
+	'8', 
+	'We addressed issues around self-care and resilience. We didn’t get to strategy, but we shared with each other. As professionals we are asked to become our highest selves and the various things that come up with that from physical to mental health. The idea that some of us expressed significant chronic and mental health issues, so self-care comes in. I find that in times of stress or trauma my self-care gets better. I had the privilege of safety and support and love from such an early age that those self-care practices were already engrained, so it makes you grateful, since not everyone has access to that care, to housing and food security. A lot of us shared that because of our empathy, it also creates a challenge, like how do I most effectively use my skillset to be a practitioner who contributes something of value.'
+	),
+	(
+	'1', 
+	'9', 
+	'We have some good resources here at our table – some of what we do for a living informed our discussion. S. talked about the work he’s doing at Hennepin Health Center (trauma informed health practice), particular needs of ER staff. There’s a stereotype that the adrenaline runs high and they don’t necessarily take care of themselves, so can be full of trauma. Doctors don’t make the best patients or necessarily engage in self-care even though there is a lot of exposure to trauma.  Someone mentioned that historical trauma exists in the bodies and minds of the oppressed, but also within the oppressor. Tanya from Owatonna said that her community really wants to do a project to build resilience in their community. She said one of the biggest barriers is a lack of connection. Sil is a playwright, so he said, how about a community play using theater to connect the community?'
+	),
+	(
+	'1', 
+	'10', 
+	'We mostly ate and got to know each other, so we just took the first question about primary prevention. We related it to primary care for mental health. I think about a universal approach that would provide a wider net rather than boxing people into a particular illness. Thinking about Diseases of despair, I think about social and cultural isolation and the need for belonging. Similarly, we talked about primary prevention getting to the root (we shared personal experiences).'
+	),
+	(
+	'1', 
+	'11', 
+	'My name is April, I’m an addict…oops, wrong meeting! Just kidding! Listening to all of you, I’ve been thinking about what to share. I really appreciate everything you’ve said – I really like that earthworm [analogy] because we gotta take in a lot of garbage and let go of the waste to create room for new growth. When we saw the power point and the statistics being discussed and how its symptomatic of the increase in these illnesses in our community it’s humbling, really striking. Everyone at this table works in helping professions, five of us are in corrections in Faribault working on mental health and suicide prevention and it really is just the tip of the ice burg. It starts with us realizing what our own traumas and experiences have been and do some self-care, so we heal instead of passing sickness on. Heather had a nice example about a petri dish. What if you have a petri dish that’s full of toxicity? How do you be healthy in an unhealthy environment? It’s not easy to answer, and we didn’t come up with the solution, but creating that question was a good starting point for us.'
+	),
+	(
+	'1', 
+	'12', 
+	'We spoke about primary prevention and how prevention has to happen in a more holistic environment. We liked the analogy from earlier about symptoms/illnesses being leaves on a tree and how you can’t handle things in isolation. That social connection that people need to feel cared about and healthy – it’s important to make sure we’re not neglecting our own families and those in our social circles to support them. This work happens in community. Systems need to reflect what communities need.'
+	),
+	(
+	'1', 
+	'13', 
+	'We talked about the image of the tree, about some things that are roots of despair, some things that are like the trunk, and we talked about what are like the branches or ways to reach out? It’s so important to be in when you’re talking with a person to be respectful, have a human-to-human connection and just listen. It’s shared humanity that allows us to navigate this together, conveying through your presence and the natural way that you love that you care. That you’re seeking understanding, seeking to get underneath the surface (but also respecting when people don’t want to go there). When there’s an opening, speak truth to people – perhaps about the gifts they bring to life.'
+	),
+	(
+	'1', 
+	'14', 
+	'We’ve said a lot of things that you have already mentioned, but we focused on resilience and collaboration. We connected over what resilience means to us, but also how many of us in here gravitate toward positions where we want to help people with THEIR trauma without identifying what our own traumas are and attempting to collaborate on that. That issue where we feel like we’re in one place, because we work in systems and provide services, but we are dealing with so much trauma that spills out in so many ways. So, one thing we can do is to start unpacking and addressing our own trauma, so that we can clear those things out of the way to focus on the work we want to do and the way we want to collaborate.'
+	),
+	(
+	'1', 
+	'15', 
+	'We were talking about workplace wellness – what kind of message would it send in the workplace of people who do this kind of work to have a dedicated mental health professional so that you don’t have to deal with primary and secondary trauma without the support necessary to process that.'
+	),
+	(
+	'1', 
+	'16', 
+	'We talked about rehabilitation as an industry here. It’s a huge industry for profit in MN. The programs that are setup are not really for long-term help (because there are so many jobs depending upon their failure) – it’s not for care or long-term sustainability. As a system, that is corrupt and heartbreaking to understand. What can we do as a community to provide long term supports and to help people seeking to grasp their sobriety?'
+	),
+	(
+	'1', 
+	'17', 
+	'In my profession, prevention is so important and we’re all frustrated about how healthcare right now is really sick-care. There are healthcare providers though who believe in promoting lifestyle medicine. There’s someone here who was diagnosed with cancer and who felt insecure about being treated here, so she went back to her home town in Kenya for treatment and to be around family and community, homecooked meals – then she was able to fight it when we came home. So, food, culture, connection. We talked about how we have different ethnicities, local food, spices – like lemongrass in SE Asian cuisine. It can be both food and tea – education is important to empower every individual to get well and to improve health disparities regardless of wealth. I’ll add about spirituality and the traditional practices of spirituality in community, specifically the Hmong community’s practice of Shamanism. After war and displacement all over the world there has been a break in the traditional practice of shamanism and cultural healing – there’s a generational gap there. So, we talked about what it would take to rebuild those connections to fight addiction, despair, what we’re seeing here today.'
+	),
+	(
+	'1', 
+	'18', 
+	'Hello and thank you to MTI for this opportunity. For me, prevention is better than a cure. I’m very spiritual, my life is based around karmic theory. That you are where you are at this present moment because of your actions in the past. Which empowers you to be responsible for your actions. That’s why as Hindus we accept suffering in our lives, but also know that by making different choices we can make a difference in the future. So, I bring that aspect to my work with inner city children and in the workshops I teach. So today might be a blank page you have and you can design it according to what future you want – knowing that our present life is determined by our past – what choices we make today will be the past of tomorrow. Start creating a new past that you have power over (unlike the belief system and experiences you had in the first eight years of life or so). Self-awareness, yoga and meditation is part of our lifestyle. It’s not something you keep separate. It’s your values, who you are, your family unit. It’s very common to have joint families (in my culture). It’s happening now slowly in this country because of economics – so that’s the other way around. But with self-awareness, once we know where we are coming from, we know that your internal words become the world of the kids coming behind us, the future. The future is a promissory note, but the present is a gift. Knowing that this moment too shall pass, anything in the moment you can handle. Take back the power and you can make your life what you want.'
+	)
+;
+
+INSERT INTO response_category (description)
+VALUES 
+	('uncategorized');
+
+INSERT INTO question_set ("threesixty_id", "set_title", "breakdown")
+VALUES 
+	(
+	1,
+	'QUESTION 1: Primary Prevention of Diseases of Despair',
+	'Five discussion groups submitted a total of 33 comments addressing this question, making this the highest-traction question of this Mindstorm. In the notes, participants explored a range of definitions and approaches to addressing despair and working towards primary prevention, with a special eye toward issues of equity and trauma-informed responses (“recognizing the role of white supremacy and capitalism”), public education and norms development (“educate adults and children at [the] same time,” and “normalize the symptoms and the response to dysfunctional situations”), the implementation of holistic care policies by doctors and systems (such as narrative medicine, recommended by one group urging medical providers to “train doctors to listen for human stories, not just symptoms”), and emphasizing the “human-to-human” connection and extra-clinical preventative measures. Participants also highlighted a need for secondary trauma resources for those who work with issues of despair, trauma and trauma-related care and spoke to the idea that “prevention might not happen in a clinical setting,” again drawing attention to social connections and inter-systemic models of preventative care, ultimately a standout theme in this Mindstorm.'
+	),
+	(
+	1,
+	'QUESTION 2: Basic Needs & Social Determinants of Health',
+	'Three groups submitted notes on this question, for a total of fourteen responses. Comments in this section focus on the role access to the material requirements for meeting basic needs and the barriers inequities of access create for those who may be suffering and unable to connect with existing resources and programs. Housing and transportation are the main areas of concern in the notes submitted by participants, however, the importance of social connectedness, a theme that spans the whole of the discussion notes across topic areas, also emerges strongly here. Guests opined that “people need to feel welcome where they live…not isolated,” and urged those interested in resilience and primary prevention of suicide, alcoholism and other diseases of despair to “listen to stories ➔ everyone is in pain,” highlighting the hidden-in-plain-sight nature of isolation, alienation, and despair, alongside possibilities for increasing and deepening social connections as a critical strategy for addressing these issues.'
+	),
+	(
+	1,
+	'QUESTION 3: Resilience & Collaboration',
+	'One group addressed this question, submitting seven comments and questions largely concerned with creating social and interpersonal mechanisms for acknowledging vulnerability, pain and personal struggles while remaining (or becoming incorporated into) a warm, welcoming and supportive community capable of accepting such vulnerabilities without judgment and offering inclusion, comfort, and resources to “help a person survive.” Social connectedness emerges here a central piece of providing and catalyzing supportive networks to help prevent community members from “falling through the cracks” or suffering in silence and isolation.'
+	),
+	(
+	1,
+	'QUESTION 4: Resources & Impact',
+	'No groups elected to submit notes in response to this question, likely because of a variety of alternative means for engaging the themes contained in this section. For example, guests recorded a variety of relevant community resources and programs to support resilience and primary prevention of diseases of despair on notes sheets located on each table. The full transcribed list of resources is available on page fifteen of this report.'
+	),
+	(
+	1,
+	'QUESTION 5: What else should we know?',
+	'Three groups responded to this question, submitting thirty total responses between them. Responses in this section vary thematically, due to the freeform quality of this section, but largely fall into three categories: individual techniques for promoting resilience, workplace policies for wellness, and mental health in public policy. Community “belonging,” developing workplaces that support needs for self-care and preventative wellness (such as liberal vacation policies, trust, and workplace cultures supportive of mental health needs), and addressing barriers and systemic challenges to mental health issues figure prominently in the responses, across these categories.'
+	)
+;
+
+INSERT INTO questions (set_id, question)
+VALUES 
+	(
+	1,
+	'How do you define “primary prevention”? What does (or would) primary prevention look like in practice? Who should be involved in these efforts? Does anything come to mind when you think of “diseases of despair”? How might we productively broaden the scope of prevention efforts so that they include appropriate attention to non-opioid drug use disorders, alcohol and liver disease, suicide, depression and other mental illnesses? What might the benefits of broadening this lens be? Is there a role here for consumer education about alternatives like non-narcotic pain management therapies?'
+	),
+	(
+	2,
+	'Does the ability to meet basic needs and access crucial resources (like affordable housing, healthcare, and food security) play a role in how chronic pain, depression, addiction, suicide and similar afflictions of despair are experienced? What is the role of social factors like poverty, discrimination, poor education, dirty/dangerous environments, family instability and social exclusion? Are there resources, system or policy changes that could mitigate some of these effects? If so, who should be responsible for providing or overseeing them? What can you as an individual do? Do belonging and community ties play a role in establishing a baseline of secure wellbeing?'
+	),
+	(
+	3,
+	'What does it mean to be resilient as individuals? As a community? Is there anything we as a society should be doing to support resilience and healing from addiction, depression and other mental health issues? Is there anything we as individuals and community members can do to better support resilience? Are there organizations or individuals not here today who you believe should be a part of efforts to strengthen resilience and support healing from addiction and despair? Who are they? What do they do?'
+	),
+	(
+	4,
+	'Are you currently facing any challenges related to diseases of despair in your work or personal life? Is there anything someone else could do to assist you? Do you know of any resources, programs or opportunities for supporting resilience and primary prevention of suicide and addiction that everyone here should know about? Do you know of any resources for non-narcotic management of physical, mental and/or emotional pain?'
+	),
+	(
+	5,
+	'Is there anything we didn’t ask, that we should have? If so, please share both the question(s) you have identified and your group’s response(s).'
+	)
+;
+
+INSERT INTO response (question_id, response, category_id)
+VALUES 
+	(
+	1,
+	'
+	➢	Primary prevention includes access
+	➢	Provide [sic] and resources before it becomes a problem – proactive 
+	➢	Diseases of despair ➔ gloomy 
+	➢	Educate adults and children at [the] same time 
+	➢	Change social norms around school 
+
+	➢	Noticing symptoms of diabetes and chronic pain to treat the entire body (the leaves analogy)
+	➢	Look at the patient holistically
+	➢	Normalize the symptoms and the response to dysfunctional situations
+	➢	Prevention: surrounding people with people, making sure there is a support system for folks (having there [sic] back)
+	➢	Prevention might not happen in a clinical setting (make sure people have peace of mind)
+	➢	Make systems reflect what community needs. This work happens in community and we need systems that reflect what community needs. Reach out to social connections and do a check-in. Tell people you love them.
+
+	➢	How to meet despair?
+		o	Respect
+		o	Human-to-human connection
+		o	You care
+		o	Speak truth, ID “their gifts” 
+
+	➢	Recognizing role of white privilege and capitalism
+	➢	Historical trauma – of the oppressed and oppressors
+	➢	Trauma-based or trauma-informed model of care 
+	➢	Narrative medicine 
+		o	Teaching doctors to listen to human stories rather than just listening for symptoms 
+	➢	Mind-Body-Spirit skills for teachers, for restaurant workers, for ER staff  
+	➢	Using art as safe space
+	➢	Figuring out ways to connect people in their own communities
+
+	➢	Keeping kids safe ➔ supporting parents 
+	➢	Suicide
+	➢	Disease [unclear handwriting] connection to be heard ➔ heart story
+	➢	Bringing resources to family ➔ workers who treat
+	➢	Insurance versus non-insurance
+	➢	Food/shelter – housing is healthcare 
+	➢	Leadership / modeling 
+	➢	Find ways to identify people are discounted and provide connectors 
+	➢	Important not to be in the [illegible] ➔ give time for storytelling
+	', 
+	1
+	),
+	(
+	2,
+	'
+	➢	Affects transportation, access to resources
+	➢	Amplifies
+	➢	Impacts access to resources
+	➢	Inability to seek resources
+	➢	Housing First models
+	➢	Penny a Pill
+	➢	Coding and zoning laws for housing
+	➢	Social connectedness is critical!
+
+	➢	Yes!!!
+	➢	People need to feel welcomed in the place they live
+	➢	Feel connected / not isolated 
+
+	➢	Listen to stories ➔ everyone is in pain
+	➢	Choose kindness ➔ versus be [sic] strong
+	➢	Kindness, humility
+	',
+	1
+	),
+	(
+	3,
+	'
+	➢	Ability to be / stay connected with community
+	➢	Q: Are there things to help a person survive?
+		o	People / community – sense of belonging / social connectedness
+	➢	Ability to BE a part of the communities we work / help
+	➢	Sense of being accepting, comforting (comfort level)
+	➢	How did / do people get to that state (of suicide?)
+		o	Social connectedness
+	➢	Acknowledging that people are in pain, trusting and building relationships
+	➢	Personal vulnerability – are we willing to be vulnerable?
+	',
+	1
+	),
+	(
+	4,
+	'n/a',
+	1
+	),
+	(
+	5,
+	'
+	➢	MH + Well 
+	➢	How do people [sic]
+
+	➢	Positive Thriving 
+		o	Talk about what takes to be MH
+		o	Define mental health 
+		o	MH is more than absence of illness
+		o	Community and sense of belonging
+	➢	Bring self-care conversations to a policy convo [conversation]
+		o	What are the barriers and systemic challenges 
+		o	Know but need to hold space for [this]
+	➢	Minneapolis [is] facing housing crisis!
+
+	➢	Belonging 
+		o	Relationships	
+	➢	Build in peer opposition 
+		o	Consumers 
+		o	 Provides facing vicarious trauma 
+	➢	Workplace Policies 
+		o	11 floating vacation days
+		o	Quiet room
+		o	Change culture / understanding MH [mental health] is valuable 
+		o	Being able to leave a meeting
+			▪	Trusting employees
+	',
+	1
 	)
 ;
 
@@ -1403,593 +1842,52 @@ VALUES
 	)
 ;
 
-INSERT INTO goals (threesixty_id, description, desired, delivered, difference, percent, comments)
-VALUES (
-	1, 
-	'Total Number', 
-	125, 
-	140, 
-	15, 
-	112, 
-	'Based on in-room count, taken 3 to 6 times per account by at least two different people.'
-	),
-	(
-	1,
-	'Number of People of Color/Indigenous',
-	71,
-	70,
-	-1,
-	99,
-	'We generally set this goal at 51% in communities with at least 15% POC/Immigrant/Indigenous. Based on an in-room count.'
-	),
-	(
-	1,
-	'Number of People Under 24',
-	35,
-	33,
-	-2,
-	94,
-	'We generally set this goal at 25-33% unless the project/event does not warrant. Based on both in-room and sign-in sheet counts.'
-	),
-	(
-	1,
-	'Measurable Indicators of Success 1: 80% of participants met 1 new person across race, class, culture or other means of self-identity',
-	112,
-	126,
-	14,
-	113,
-	'80% of the room is our target goal for this MIS.'
-	),
-	(
-	1,
-	'Measurable Indicators of Success 2: 80% of participants met 2 new people across race, class, culture or other means of self-identity',
-	112,
-	112,
-	0,
-	100,
-	'80% of the room is our target goal for this MIS.'
-	),
-	(
-	1,
-	'Measurable Indicators of Success 3: 80% of participants say that they met someone across self-identity with whom they planned to stay in touch or collaborate',
-	112,
-	126,
-	14,
-	113,
-	'80% of the room is our target goal for this MIS.'
-	),
-	(
-	1,
-	'Measurable Indicators of Success 4: 40% of participants plan to tell someone about their experience',
-	37,
-	67,
-	30,
-	181,
-	'40% is our target goal. This is taken only from sign-in sheets.'
-	),
-	(
-	1,
-	'Measurable Indicators of Success 5: first time at the table',
-	75,
-	83,
-	8,
-	111,
-	'80% is our target goal for this MIS.'
-	),
-	(
-	1,
-	'Interested in future conversations about preventing child abuse and neglect',
-	null,
-	41,
-	null,
-	null,
-	'44% of the respondents expressed interest in a future conversation centered on neglect and child abuse.'
-	),
-	(
-	1,
-	'Interested in future conversations about housing',
-	null,
-	35,
-	null,
-	null,
-	'37% of the respondents expressed interest in future conversations centered on housing.'
-	),
-	(
-	1,
-	'Interested in future conversations about transportation',
-	null,
-	35,
-	null,
-	null,
-	'37% of the respondents expressed interest in future conversations centered on transportation.'
-	),
-	(
-	1,
-	'Interested in future conversations about education',
-	null,
-	57,
-	null,
-	null,
-	'61% of the respondents expressed interest in future conversations centered on education.'
-	),
-	(
-	1,
-	'Measurable Indicators of Success 6: total number of sign-in sheets',
-	28,
-	94,
-	66,
-	336,
-	'Typical sign-in rate is 10%. We doubled our goal to 20% to identify how resonant and sticky the event was.'
-	)
-;
-
-INSERT INTO izi_categories ("category")
+INSERT INTO circle_share (threesixty_reports_id, question, responses)
 VALUES 
-    ('Public Health'),
-    ('Mental Health'), 
-    ('Community'), 
-    ('Education');
-
-INSERT INTO oral_report (threesixty_reports_id, group_num, response)
-VALUES 
-	(
-	'1', 
-	'1', 
-	'We only got to question number one and decided not to rank them. The last five minutes we didn’t know if we would have the answer, but what we came up with is looking at the root – how do we get to the root? You can’t prevent something if you don’t know what it is. We looked up what primary prevention is, and building awareness, naming it, coming up with a plan and then prescribing – which follows the four noble truths of Buddhism. Instead of getting overwhelmed, we focused on the framework.'
-	),
-	(
-	'1', 
-	'2', 
-	'We didn’t rank them either. So, we were talking about keeping kids safe and supporting parents. We talked a bit about pre-soul connection, to be heard, to be heartstrong – that’s what it looks like for me. Creating those resources for families, insurance versus non-insurance, who is sheltered? Housing and healthcare are very important, and it’s important not to be intrusive when people are telling their stories. I am what you call Am. Indian, but I call myself Anishinaabe and Lakota. It’s important to listen to stories and realize that everyone is in some kind of pain. We talked about that cultural connection. I also talked to Paul and thanked him for his service. My niece was also in Iraq, so I know how important it is to listen to those stories. Choose kindness versus being strong. I heard someone say humility. You have to be fully human. I think that’s what we forget sometimes when we’re developing programs – it’s stopping long enough to really hear those stories.'
-	),
-	(
-	'1', 
-	'3', 
-	'Our table talked about what it means to be resilient as individuals. We were fortunate to have Umo at our table to drop some knowledge. She said resilience is the flipside to trauma; she talked about the earthworm and how it consumes what it is its path, transforms it and then eliminate it.'
-	),
-	(
-	'1', 
-	'4', 
-	'So, we talked about all the many different things – I really liked how diverse our group is in backgrounds and beliefs and what we do for a living. I’ve been working in health and wellness and suicide prevention for a decade, we’ve been trying to cure heart disease and thinking about mental health and wellness and suicide prevention. How do people get to this place of despair? We think prevention is about creating community and preventing social isolation. Every teen I’ve talked to about suicide has talked about isolation, saying I just wish someone were there, I wish someone cared, with no shame or blame. As a community, I think we lack that – safe places where people can say I’m struggling with alcohol and I need help. It’s about creating community and a sense of belonging. We live in the Wright County, in a town called Casado – and in the last year, in this small town, it [suicide] has occurred eight times. These weren’t people with a history of mental health issues, nobody in our community knew – one of these people was a member of my family. My mission today is to say, you know, if you need someone to talk to who won’t look at you like a weirdo, just listen – creating that environment.'
-	),
-	(
-	'1', 
-	'5', 
-	'We practiced a little bit of self-care, took time to eat and breath and just connect. We also discussed the issues on a broader scale – there’s so many different things going on when you’re talking about diseases of despair. We get caught up in systems and perpetuate behaviors and policies without taking the time to step back and see what’s working, which leads to families and individuals suffering from the same things over and over because systems haven’t taken a step back to look at what people actually need. Housing is another one – we’re having an affordable housing crisis in Minneapolis. I’m sure many of you know about the encampment here in Minneapolis. The systems are going in and talking to those folks to find out what they need, so that’s something we can do to better meet the needs of individuals and clients we serve.'
-	),
-	(
-	'1', 
-	'6', 
-	'We focused on question two about resources and broadened out to talk about including access to social support to be considered a resource like housing and food. Having an understanding of the cortisol effects of stress. We also talked about widening our perspectives as to why disparities in access to resources exist – what’s creating the unevenness in the first place? Instead of just making sure everyone has food, let’s ask why they don’t have food in the first place. We talked too about social constructs like gender assignment and the role that plays in inequitable access to resources.'
-	),
-	(
-	'1', 
-	'7', 
-	'I learned by writing as I listened, which means I ended up with notes that only I can read. We started with the question on resilience and acknowledged that this term is challenging for people of color and from other marginalized communities, because you have to be resilient just to survive. We talked about increasing capacity to learn how to find ways to survive and thrive through means of healing that are more appropriate. A power shift is essential; US culture needs healing from trauma. Everyone has work to do in our own communities and across communities as well. Camille made a distinction between changing behavior and changing hearts and minds. Changing behaviors is the way to go, but you have to want to change. Willingness to be vulnerable and uncomfortable. Recognizing physical signs when something triggers trauma for you and having a way to say, I’ll continue this conversation when I’ve had time to heal myself.'
-	),
-	(
-	'1', 
-	'8', 
-	'We addressed issues around self-care and resilience. We didn’t get to strategy, but we shared with each other. As professionals we are asked to become our highest selves and the various things that come up with that from physical to mental health. The idea that some of us expressed significant chronic and mental health issues, so self-care comes in. I find that in times of stress or trauma my self-care gets better. I had the privilege of safety and support and love from such an early age that those self-care practices were already engrained, so it makes you grateful, since not everyone has access to that care, to housing and food security. A lot of us shared that because of our empathy, it also creates a challenge, like how do I most effectively use my skillset to be a practitioner who contributes something of value.'
-	),
-	(
-	'1', 
-	'9', 
-	'We have some good resources here at our table – some of what we do for a living informed our discussion. S. talked about the work he’s doing at Hennepin Health Center (trauma informed health practice), particular needs of ER staff. There’s a stereotype that the adrenaline runs high and they don’t necessarily take care of themselves, so can be full of trauma. Doctors don’t make the best patients or necessarily engage in self-care even though there is a lot of exposure to trauma.  Someone mentioned that historical trauma exists in the bodies and minds of the oppressed, but also within the oppressor. Tanya from Owatonna said that her community really wants to do a project to build resilience in their community. She said one of the biggest barriers is a lack of connection. Sil is a playwright, so he said, how about a community play using theater to connect the community?'
-	),
-	(
-	'1', 
-	'10', 
-	'We mostly ate and got to know each other, so we just took the first question about primary prevention. We related it to primary care for mental health. I think about a universal approach that would provide a wider net rather than boxing people into a particular illness. Thinking about Diseases of despair, I think about social and cultural isolation and the need for belonging. Similarly, we talked about primary prevention getting to the root (we shared personal experiences).'
-	),
-	(
-	'1', 
-	'11', 
-	'My name is April, I’m an addict…oops, wrong meeting! Just kidding! Listening to all of you, I’ve been thinking about what to share. I really appreciate everything you’ve said – I really like that earthworm [analogy] because we gotta take in a lot of garbage and let go of the waste to create room for new growth. When we saw the power point and the statistics being discussed and how its symptomatic of the increase in these illnesses in our community it’s humbling, really striking. Everyone at this table works in helping professions, five of us are in corrections in Faribault working on mental health and suicide prevention and it really is just the tip of the ice burg. It starts with us realizing what our own traumas and experiences have been and do some self-care, so we heal instead of passing sickness on. Heather had a nice example about a petri dish. What if you have a petri dish that’s full of toxicity? How do you be healthy in an unhealthy environment? It’s not easy to answer, and we didn’t come up with the solution, but creating that question was a good starting point for us.'
-	),
-	(
-	'1', 
-	'12', 
-	'We spoke about primary prevention and how prevention has to happen in a more holistic environment. We liked the analogy from earlier about symptoms/illnesses being leaves on a tree and how you can’t handle things in isolation. That social connection that people need to feel cared about and healthy – it’s important to make sure we’re not neglecting our own families and those in our social circles to support them. This work happens in community. Systems need to reflect what communities need.'
-	),
-	(
-	'1', 
-	'13', 
-	'We talked about the image of the tree, about some things that are roots of despair, some things that are like the trunk, and we talked about what are like the branches or ways to reach out? It’s so important to be in when you’re talking with a person to be respectful, have a human-to-human connection and just listen. It’s shared humanity that allows us to navigate this together, conveying through your presence and the natural way that you love that you care. That you’re seeking understanding, seeking to get underneath the surface (but also respecting when people don’t want to go there). When there’s an opening, speak truth to people – perhaps about the gifts they bring to life.'
-	),
-	(
-	'1', 
-	'14', 
-	'We’ve said a lot of things that you have already mentioned, but we focused on resilience and collaboration. We connected over what resilience means to us, but also how many of us in here gravitate toward positions where we want to help people with THEIR trauma without identifying what our own traumas are and attempting to collaborate on that. That issue where we feel like we’re in one place, because we work in systems and provide services, but we are dealing with so much trauma that spills out in so many ways. So, one thing we can do is to start unpacking and addressing our own trauma, so that we can clear those things out of the way to focus on the work we want to do and the way we want to collaborate.'
-	),
-	(
-	'1', 
-	'15', 
-	'We were talking about workplace wellness – what kind of message would it send in the workplace of people who do this kind of work to have a dedicated mental health professional so that you don’t have to deal with primary and secondary trauma without the support necessary to process that.'
-	),
-	(
-	'1', 
-	'16', 
-	'We talked about rehabilitation as an industry here. It’s a huge industry for profit in MN. The programs that are setup are not really for long-term help (because there are so many jobs depending upon their failure) – it’s not for care or long-term sustainability. As a system, that is corrupt and heartbreaking to understand. What can we do as a community to provide long term supports and to help people seeking to grasp their sobriety?'
-	),
-	(
-	'1', 
-	'17', 
-	'In my profession, prevention is so important and we’re all frustrated about how healthcare right now is really sick-care. There are healthcare providers though who believe in promoting lifestyle medicine. There’s someone here who was diagnosed with cancer and who felt insecure about being treated here, so she went back to her home town in Kenya for treatment and to be around family and community, homecooked meals – then she was able to fight it when we came home. So, food, culture, connection. We talked about how we have different ethnicities, local food, spices – like lemongrass in SE Asian cuisine. It can be both food and tea – education is important to empower every individual to get well and to improve health disparities regardless of wealth. I’ll add about spirituality and the traditional practices of spirituality in community, specifically the Hmong community’s practice of Shamanism. After war and displacement all over the world there has been a break in the traditional practice of shamanism and cultural healing – there’s a generational gap there. So, we talked about what it would take to rebuild those connections to fight addiction, despair, what we’re seeing here today.'
-	),
-	(
-	'1', 
-	'18', 
-	'Hello and thank you to MTI for this opportunity. For me, prevention is better than a cure. I’m very spiritual, my life is based around karmic theory. That you are where you are at this present moment because of your actions in the past. Which empowers you to be responsible for your actions. That’s why as Hindus we accept suffering in our lives, but also know that by making different choices we can make a difference in the future. So, I bring that aspect to my work with inner city children and in the workshops I teach. So today might be a blank page you have and you can design it according to what future you want – knowing that our present life is determined by our past – what choices we make today will be the past of tomorrow. Start creating a new past that you have power over (unlike the belief system and experiences you had in the first eight years of life or so). Self-awareness, yoga and meditation is part of our lifestyle. It’s not something you keep separate. It’s your values, who you are, your family unit. It’s very common to have joint families (in my culture). It’s happening now slowly in this country because of economics – so that’s the other way around. But with self-awareness, once we know where we are coming from, we know that your internal words become the world of the kids coming behind us, the future. The future is a promissory note, but the present is a gift. Knowing that this moment too shall pass, anything in the moment you can handle. Take back the power and you can make your life what you want.'
-	)
-;
-
-INSERT INTO person ("email", "username", "password", "firstname", "lastname", "access_id", "notes", "date_added")
-VALUES (
-	'janedoe@marnitaconnect.com',
-	'janedoe',
-	'password',
-	'Jane',
-	'Doe',
-	2,
-	'Very interested in public health',
-	'12-18-2018'
-);
-
-INSERT INTO person ("email", "username", "password", "firstname", "lastname", "access_id", "notes", "date_added")
-VALUES (
-	'adminn@marnitaconnect.com',
-	'adamdouglasminn',
-	'secret',
-	'Adam',
-	'Minn',
-	4,
-	'Admin priveleges required',
-	'12-17-2018'
-);
-
-INSERT INTO person ("email", "username", "password", "firstname", "lastname", "access_id", "notes", "date_added")
-VALUES (
-	'cian1234@email.com',
-	'marnitafan1234',
-	'1234',
-	'Cybill',
-	'Ian',
-	1,
-	'Community is my priority',
-	'12-19-2018'
-);
-
-INSERT INTO questions (set_id, threesixty_reports_id, question, blurb, breakdown)
-VALUES 
-	(
-	1,
-	1,
-	'How do you define "primary prevention"?',
-	'Primary Prevention of Diseases of Dispair:',
-	'Five discussion groups submitted a total of 33 comments addressing this question, making this the highest-traction question of this Mindstorm. In the notes, participants explored a range of definitions and approaches to addressing despair and working towards primary prevention, with a special eye toward issues of equity and trauma-informed responses (“recognizing the role of white supremacy and capitalism”), public education and norms development (“educate adults and children at [the] same time,” and “normalize the symptoms and the response to dysfunctional situations”), the implementation of holistic care policies by doctors and systems (such as narrative medicine, recommended by one group urging medical providers to “train doctors to listen for human stories, not just symptoms”), and emphasizing the “human-to-human” connection and extra-clinical preventative measures. Participants also highlighted a need for secondary trauma resources for those who work with issues of despair, trauma and trauma-related care and spoke to the idea that “prevention might not happen in a clinical setting,” again drawing attention to social connections and inter-systemic models of preventative care, ultimately a standout theme in this Mindstorm.'
-	),
-	(
-	1, 
-	1, 
-	'What does (or would) primary prevention look like in practice?', 
-	'Primary Prevention of Diseases of Dispair:', 
-	'Five discussion groups submitted a total of 33 comments addressing this question, making this the highest-traction question of this Mindstorm. In the notes, participants explored a range of definitions and approaches to addressing despair and working towards primary prevention, with a special eye toward issues of equity and trauma-informed responses (“recognizing the role of white supremacy and capitalism”), public education and norms development (“educate adults and children at [the] same time,” and “normalize the symptoms and the response to dysfunctional situations”), the implementation of holistic care policies by doctors and systems (such as narrative medicine, recommended by one group urging medical providers to “train doctors to listen for human stories, not just symptoms”), and emphasizing the “human-to-human” connection and extra-clinical preventative measures. Participants also highlighted a need for secondary trauma resources for those who work with issues of despair, trauma and trauma-related care and spoke to the idea that “prevention might not happen in a clinical setting,” again drawing attention to social connections and inter-systemic models of preventative care, ultimately a standout theme in this Mindstorm.'
-	),
-	(
-	1, 
-	1, 
-	'Who should be involved in these efforts?', 
-	'Primary Prevention of Diseases of Dispair:', 
-	'Five discussion groups submitted a total of 33 comments addressing this question, making this the highest-traction question of this Mindstorm. In the notes, participants explored a range of definitions and approaches to addressing despair and working towards primary prevention, with a special eye toward issues of equity and trauma-informed responses (“recognizing the role of white supremacy and capitalism”), public education and norms development (“educate adults and children at [the] same time,” and “normalize the symptoms and the response to dysfunctional situations”), the implementation of holistic care policies by doctors and systems (such as narrative medicine, recommended by one group urging medical providers to “train doctors to listen for human stories, not just symptoms”), and emphasizing the “human-to-human” connection and extra-clinical preventative measures. Participants also highlighted a need for secondary trauma resources for those who work with issues of despair, trauma and trauma-related care and spoke to the idea that “prevention might not happen in a clinical setting,” again drawing attention to social connections and inter-systemic models of preventative care, ultimately a standout theme in this Mindstorm.'
-	),
-	(
-	1, 
-	1, 
-	'Does anything come to mind when you think of “diseases of despair”?', 
-	'Primary Prevention of Diseases of Dispair:', 
-	'Five discussion groups submitted a total of 33 comments addressing this question, making this the highest-traction question of this Mindstorm. In the notes, participants explored a range of definitions and approaches to addressing despair and working towards primary prevention, with a special eye toward issues of equity and trauma-informed responses (“recognizing the role of white supremacy and capitalism”), public education and norms development (“educate adults and children at [the] same time,” and “normalize the symptoms and the response to dysfunctional situations”), the implementation of holistic care policies by doctors and systems (such as narrative medicine, recommended by one group urging medical providers to “train doctors to listen for human stories, not just symptoms”), and emphasizing the “human-to-human” connection and extra-clinical preventative measures. Participants also highlighted a need for secondary trauma resources for those who work with issues of despair, trauma and trauma-related care and spoke to the idea that “prevention might not happen in a clinical setting,” again drawing attention to social connections and inter-systemic models of preventative care, ultimately a standout theme in this Mindstorm.'
-	),
-	(
-	1, 
-	1, 
-	'How might we productively broaden the scope of prevention efforts so that they include appropriate attention to non-opioid drug use disorders, alcohol and liver disease, suicide, depression and other mental illnesses?', 
-	'Primary Prevention of Diseases of Dispair:', 
-	'Five discussion groups submitted a total of 33 comments addressing this question, making this the highest-traction question of this Mindstorm. In the notes, participants explored a range of definitions and approaches to addressing despair and working towards primary prevention, with a special eye toward issues of equity and trauma-informed responses (“recognizing the role of white supremacy and capitalism”), public education and norms development (“educate adults and children at [the] same time,” and “normalize the symptoms and the response to dysfunctional situations”), the implementation of holistic care policies by doctors and systems (such as narrative medicine, recommended by one group urging medical providers to “train doctors to listen for human stories, not just symptoms”), and emphasizing the “human-to-human” connection and extra-clinical preventative measures. Participants also highlighted a need for secondary trauma resources for those who work with issues of despair, trauma and trauma-related care and spoke to the idea that “prevention might not happen in a clinical setting,” again drawing attention to social connections and inter-systemic models of preventative care, ultimately a standout theme in this Mindstorm.'
-	),
-	(
-	1, 
-	1, 
-	'What might the benefits of broadening this lens be?', 
-	'Primary Prevention of Diseases of Dispair:', 
-	'Five discussion groups submitted a total of 33 comments addressing this question, making this the highest-traction question of this Mindstorm. In the notes, participants explored a range of definitions and approaches to addressing despair and working towards primary prevention, with a special eye toward issues of equity and trauma-informed responses (“recognizing the role of white supremacy and capitalism”), public education and norms development (“educate adults and children at [the] same time,” and “normalize the symptoms and the response to dysfunctional situations”), the implementation of holistic care policies by doctors and systems (such as narrative medicine, recommended by one group urging medical providers to “train doctors to listen for human stories, not just symptoms”), and emphasizing the “human-to-human” connection and extra-clinical preventative measures. Participants also highlighted a need for secondary trauma resources for those who work with issues of despair, trauma and trauma-related care and spoke to the idea that “prevention might not happen in a clinical setting,” again drawing attention to social connections and inter-systemic models of preventative care, ultimately a standout theme in this Mindstorm.'
-	),
-	(
-	1, 
-	1, 
-	'Is there a role here for consumer education about alternatives like non-narcotic pain management therapies?', 
-	'Primary Prevention of Diseases of Dispair:', 
-	'Five discussion groups submitted a total of 33 comments addressing this question, making this the highest-traction question of this Mindstorm. In the notes, participants explored a range of definitions and approaches to addressing despair and working towards primary prevention, with a special eye toward issues of equity and trauma-informed responses (“recognizing the role of white supremacy and capitalism”), public education and norms development (“educate adults and children at [the] same time,” and “normalize the symptoms and the response to dysfunctional situations”), the implementation of holistic care policies by doctors and systems (such as narrative medicine, recommended by one group urging medical providers to “train doctors to listen for human stories, not just symptoms”), and emphasizing the “human-to-human” connection and extra-clinical preventative measures. Participants also highlighted a need for secondary trauma resources for those who work with issues of despair, trauma and trauma-related care and spoke to the idea that “prevention might not happen in a clinical setting,” again drawing attention to social connections and inter-systemic models of preventative care, ultimately a standout theme in this Mindstorm.'
-	),
-	(
-	2,
-	1,
-	'Does the ability to meet basic needs and access crucial resources (like affordable housing, healthcare, and food security) play a role in how chronic pain, depression, addiction, suicide and similar afflictions of despair are experienced?',
-	'Basic Needs & Social Determinants of Health:',
-	'Three groups submitted notes on this question, for a total of fourteen responses. Comments in this section focus on the role access to the material requirements for meeting basic needs and the barriers inequities of access create for those who may be suffering and unable to connect with existing resources and programs. Housing and transportation are the main areas of concern in the notes submitted by participants, however, the importance of social connectedness, a theme that spans the whole of the discussion notes across topic areas, also emerges strongly here. Guests opined that “people need to feel welcome where they live…not isolated,” and urged those interested in resilience and primary prevention of suicide, alcoholism and other diseases of despair to “listen to stories ➔ everyone is in pain,” highlighting the hidden-in-plain-sight nature of isolation, alienation, and despair, alongside possibilities for increasing and deepening social connections as a critical strategy for addressing these issues.'
-	),
-	(
-	2,
-	1,
-	'What is the role of social factors like poverty, discrimination, poor education, dirty/dangerous environments, family instability and social exclusion?',
-	'Basic Needs & Social Determinants of Health:',
-	'Three groups submitted notes on this question, for a total of fourteen responses. Comments in this section focus on the role access to the material requirements for meeting basic needs and the barriers inequities of access create for those who may be suffering and unable to connect with existing resources and programs. Housing and transportation are the main areas of concern in the notes submitted by participants, however, the importance of social connectedness, a theme that spans the whole of the discussion notes across topic areas, also emerges strongly here. Guests opined that “people need to feel welcome where they live…not isolated,” and urged those interested in resilience and primary prevention of suicide, alcoholism and other diseases of despair to “listen to stories ➔ everyone is in pain,” highlighting the hidden-in-plain-sight nature of isolation, alienation, and despair, alongside possibilities for increasing and deepening social connections as a critical strategy for addressing these issues.'
-	),
-	(
-	2,
-	1,
-	'Are there resources, system or policy changes that could mitigate some of these effects? If so, who should be responsible for providing or overseeing them?',
-	'Basic Needs & Social Determinants of Health:',
-	'Three groups submitted notes on this question, for a total of fourteen responses. Comments in this section focus on the role access to the material requirements for meeting basic needs and the barriers inequities of access create for those who may be suffering and unable to connect with existing resources and programs. Housing and transportation are the main areas of concern in the notes submitted by participants, however, the importance of social connectedness, a theme that spans the whole of the discussion notes across topic areas, also emerges strongly here. Guests opined that “people need to feel welcome where they live…not isolated,” and urged those interested in resilience and primary prevention of suicide, alcoholism and other diseases of despair to “listen to stories ➔ everyone is in pain,” highlighting the hidden-in-plain-sight nature of isolation, alienation, and despair, alongside possibilities for increasing and deepening social connections as a critical strategy for addressing these issues.'
-	),
-	(
-	2,
-	1,
-	'What can you as an individual do?',
-	'Basic Needs & Social Determinants of Health:',
-	'Three groups submitted notes on this question, for a total of fourteen responses. Comments in this section focus on the role access to the material requirements for meeting basic needs and the barriers inequities of access create for those who may be suffering and unable to connect with existing resources and programs. Housing and transportation are the main areas of concern in the notes submitted by participants, however, the importance of social connectedness, a theme that spans the whole of the discussion notes across topic areas, also emerges strongly here. Guests opined that “people need to feel welcome where they live…not isolated,” and urged those interested in resilience and primary prevention of suicide, alcoholism and other diseases of despair to “listen to stories ➔ everyone is in pain,” highlighting the hidden-in-plain-sight nature of isolation, alienation, and despair, alongside possibilities for increasing and deepening social connections as a critical strategy for addressing these issues.'
-	),
-	(
-	2,
-	1,
-	'Do belonging and community ties play a role in establishing a baseline of secure wellbeing?',
-	'Basic Needs & Social Determinants of Health:',
-	'Three groups submitted notes on this question, for a total of fourteen responses. Comments in this section focus on the role access to the material requirements for meeting basic needs and the barriers inequities of access create for those who may be suffering and unable to connect with existing resources and programs. Housing and transportation are the main areas of concern in the notes submitted by participants, however, the importance of social connectedness, a theme that spans the whole of the discussion notes across topic areas, also emerges strongly here. Guests opined that “people need to feel welcome where they live…not isolated,” and urged those interested in resilience and primary prevention of suicide, alcoholism and other diseases of despair to “listen to stories ➔ everyone is in pain,” highlighting the hidden-in-plain-sight nature of isolation, alienation, and despair, alongside possibilities for increasing and deepening social connections as a critical strategy for addressing these issues.'
-	),
-	(
-	3,
-	1,
-	'What does it mean to be resilient as individuals?',
-	'Resilience & Collaboration:',
-	'One group addressed this question, submitting seven comments and questions largely concerned with creating social and interpersonal mechanisms for acknowledging vulnerability, pain and personal struggles while remaining (or becoming incorporated into) a warm, welcoming and supportive community capable of accepting such vulnerabilities without judgment and offering inclusion, comfort, and resources to “help a person survive.” Social connectedness emerges here a central piece of providing and catalyzing supportive networks to help prevent community members from “falling through the cracks” or suffering in silence and isolation.'
-	),
-	(
-	3,
-	1,
-	'What does it mean to be resilient as a community?',
-	'Resilience & Collaboration:',
-	'One group addressed this question, submitting seven comments and questions largely concerned with creating social and interpersonal mechanisms for acknowledging vulnerability, pain and personal struggles while remaining (or becoming incorporated into) a warm, welcoming and supportive community capable of accepting such vulnerabilities without judgment and offering inclusion, comfort, and resources to “help a person survive.” Social connectedness emerges here a central piece of providing and catalyzing supportive networks to help prevent community members from “falling through the cracks” or suffering in silence and isolation.'
-	),
-	(
-	3,
-	1,
-	'Is there anything we as a society should be doing to support resilience and healing from addiction, depression and other mental health issues?',
-	'Resilience & Collaboration:',
-	'One group addressed this question, submitting seven comments and questions largely concerned with creating social and interpersonal mechanisms for acknowledging vulnerability, pain and personal struggles while remaining (or becoming incorporated into) a warm, welcoming and supportive community capable of accepting such vulnerabilities without judgment and offering inclusion, comfort, and resources to “help a person survive.” Social connectedness emerges here a central piece of providing and catalyzing supportive networks to help prevent community members from “falling through the cracks” or suffering in silence and isolation.'
-	),
-	(
-	3,
-	1,
-	'Is there anything we as individuals and community members can do to better support resilience?',
-	'Resilience & Collaboration:',
-	'One group addressed this question, submitting seven comments and questions largely concerned with creating social and interpersonal mechanisms for acknowledging vulnerability, pain and personal struggles while remaining (or becoming incorporated into) a warm, welcoming and supportive community capable of accepting such vulnerabilities without judgment and offering inclusion, comfort, and resources to “help a person survive.” Social connectedness emerges here a central piece of providing and catalyzing supportive networks to help prevent community members from “falling through the cracks” or suffering in silence and isolation.'
-	),
-	(
-	3,
-	1,
-	'Are there organizations or individuals not here today who you believe should be a part of efforts to strengthen resilience and support healing from addiction and despair? Who are they? What do they do?',
-	'Resilience & Collaboration:',
-	'One group addressed this question, submitting seven comments and questions largely concerned with creating social and interpersonal mechanisms for acknowledging vulnerability, pain and personal struggles while remaining (or becoming incorporated into) a warm, welcoming and supportive community capable of accepting such vulnerabilities without judgment and offering inclusion, comfort, and resources to “help a person survive.” Social connectedness emerges here a central piece of providing and catalyzing supportive networks to help prevent community members from “falling through the cracks” or suffering in silence and isolation.'
-	),
-	(
-	4,
-	1,
-	'Are you currently facing any challenges related to diseases of despair in your work or personal life?',
-	'Resources & Impact:',
-	'No groups elected to submit notes in response to this question, likely because of a variety of alternative means for engaging the themes contained in this section. For example, guests recorded a variety of relevant community resources and programs to support resilience and primary prevention of diseases of despair on notes sheets located on each table. The full transcribed list of resources is available on page fifteen of this report.'
-	),
-	(
-	4,
-	1,
-	'Is there anything someone else could do to assist you?',
-	'Resources & Impact:',
-	'No groups elected to submit notes in response to this question, likely because of a variety of alternative means for engaging the themes contained in this section. For example, guests recorded a variety of relevant community resources and programs to support resilience and primary prevention of diseases of despair on notes sheets located on each table. The full transcribed list of resources is available on page fifteen of this report.'
-	),
-	(
-	4,
-	1,
-	'Do you know of any resources, programs or opportunities for supporting resilience and primary prevention of suicide and addiction that everyone here should know about?',
-	'Resources & Impact:',
-	'No groups elected to submit notes in response to this question, likely because of a variety of alternative means for engaging the themes contained in this section. For example, guests recorded a variety of relevant community resources and programs to support resilience and primary prevention of diseases of despair on notes sheets located on each table. The full transcribed list of resources is available on page fifteen of this report.'
-	),
-	(
-	4,
-	1,
-	'Do you know of any resources for non-narcotic management of physical, mental and/or emotional pain?',
-	'Resources & Impact:',
-	'No groups elected to submit notes in response to this question, likely because of a variety of alternative means for engaging the themes contained in this section. For example, guests recorded a variety of relevant community resources and programs to support resilience and primary prevention of diseases of despair on notes sheets located on each table. The full transcribed list of resources is available on page fifteen of this report.'
-	),
-	(
-	5,
-	1,
-	'Is there anything we didn’t ask, that we should have? If so, please share both the question(s) you have identified and your group’s response(s).',
-	'What else should we know?',
-	'Three groups responded to this question, submitting thirty total responses between them. Responses in this section vary thematically, due to the freeform quality of this section, but largely fall into three categories: individual techniques for promoting resilience, workplace policies for wellness, and mental health in public policy. Community “belonging,” developing workplaces that support needs for self-care and preventative wellness (such as liberal vacation policies, trust, and workplace cultures supportive of mental health needs), and addressing barriers and systemic challenges to mental health issues figure prominently in the responses, across these categories.'
-	)
-;
-
-INSERT INTO response (question_id, response, category_id)
-VALUES 
-	(
-	1, 
+	('1', 
+	'What is one word summarizing your experience here today (bolded in the transcript below) and one action you have been inspired to commit to as a result of today’s unConference?', 
 	'
-	➢	Primary prevention includes access
-	➢	Provide [sic] and resources before it becomes a problem – proactive 
-	➢	Diseases of despair ➔ gloomy 
-	➢	Educate adults and children at [the] same time 
-	➢	Change social norms around school 
-
-	➢	Noticing symptoms of diabetes and chronic pain to treat the entire body (the leaves analogy)
-	➢	Look at the patient holistically
-	➢	Normalize the symptoms and the response to dysfunctional situations
-	➢	Prevention: surrounding people with people, making sure there is a support system for folks (having there [sic] back)
-	➢	Prevention might not happen in a clinical setting (make sure people have peace of mind)
-	➢	Make systems reflect what community needs. This work happens in community and we need systems that reflect what community needs. Reach out to social connections and do a check-in. Tell people you love them.
-
-	➢	How to meet despair?
-		o	Respect
-		o	Human-to-human connection
-		o	You care
-		o	Speak truth, ID “their gifts” 
-
-	➢	Recognizing role of white privilege and capitalism
-	➢	Historical trauma – of the oppressed and oppressors
-	➢	Trauma-based or trauma-informed model of care 
-	➢	Narrative medicine 
-		o	Teaching doctors to listen to human stories rather than just listening for symptoms 
-	➢	Mind-Body-Spirit skills for teachers, for restaurant workers, for ER staff  
-	➢	Using art as safe space
-	➢	Figuring out ways to connect people in their own communities
-
-	➢	Keeping kids safe ➔ supporting parents 
-	➢	Suicide
-	➢	Disease [unclear handwriting] connection to be heard ➔ heart story
-	➢	Bringing resources to family ➔ workers who treat
-	➢	Insurance versus non-insurance
-	➢	Food/shelter – housing is healthcare 
-	➢	Leadership / modeling 
-	➢	Find ways to identify people are discounted and provide connectors 
-	➢	Important not to be in the [illegible] ➔ give time for storytelling
-	', 
-	1
-	),
-	(
-	8,
-	'
-	➢	Affects transportation, access to resources
-	➢	Amplifies
-	➢	Impacts access to resources
-	➢	Inability to seek resources
-	➢	Housing First models
-	➢	Penny a Pill
-	➢	Coding and zoning laws for housing
-	➢	Social connectedness is critical!
-
-	➢	Yes!!!
-	➢	People need to feel welcomed in the place they live
-	➢	Feel connected / not isolated 
-
-	➢	Listen to stories ➔ everyone is in pain
-	➢	Choose kindness ➔ versus be [sic] strong
-	➢	Kindness, humility
-	',
-	1
-	),
-	(
-	13,
-	'
-	➢	Ability to be / stay connected with community
-	➢	Q: Are there things to help a person survive?
-		o	People / community – sense of belonging / social connectedness
-	➢	Ability to BE a part of the communities we work / help
-	➢	Sense of being accepting, comforting (comfort level)
-	➢	How did / do people get to that state (of suicide?)
-		o	Social connectedness
-	➢	Acknowledging that people are in pain, trusting and building relationships
-	➢	Personal vulnerability – are we willing to be vulnerable?
-	',
-	1
-	),
-	(
-	18,
-	'n/a',
-	1
-	),
-	(
-	22,
-	'
-	➢	MH + Well 
-	➢	How do people [sic]
-
-	➢	Positive Thriving 
-		o	Talk about what takes to be MH
-		o	Define mental health 
-		o	MH is more than absence of illness
-		o	Community and sense of belonging
-	➢	Bring self-care conversations to a policy convo [conversation]
-		o	What are the barriers and systemic challenges 
-		o	Know but need to hold space for [this]
-	➢	Minneapolis [is] facing housing crisis!
-
-	➢	Belonging 
-		o	Relationships	
-	➢	Build in peer opposition 
-		o	Consumers 
-		o	 Provides facing vicarious trauma 
-	➢	Workplace Policies 
-		o	11 floating vacation days
-		o	Quiet room
-		o	Change culture / understanding MH [mental health] is valuable 
-		o	Being able to leave a meeting
-			▪	Trusting employees
-	',
-	1
-	)
+	INSPIRED: I’m planning to follow through with people in this room to see how we can shift systems.
+	ENERGIZED: I will connect with people I met here today who are outside of my world.
+	REJUVENATION: I’ve had to take a break from working in Human Services, but today has inspired me to pick up where I left off.
+	INSPIRED: Give people space to tell their story.
+	PLAYFUL: Inspired to keep showing up as a vulnerable and playful leader.
+	GRATEFUL/OVERWHELMED: Continue working for change.
+	ABUNDANT: I want to take this example of abundance to a group I work with in NW MN on reducing alcohol and substance abuse.
+	REMINDED: Start by following up on all of the business cards I got today.
+	EXPANDED: Work with a mindfulness practitioner to bring that practice to the homeless community.
+	INSPIRED: Do what is good and what is life-affirming.
+	EDUCATED (ABOUT BEYONCE): It was good to get out of my own little world to see other perspectives on what I do. I’ll take this back to my students and share with them what I learned today, as well as to my research.
+	INSPIRED: Take what happened to my workplace and see what we can do.
+	INSPIRED: More peer support!
+	GROUNDED: I’m going to reflect and notice how I’m feeling, continue to take that energy forward.
+	CONNECTED: Build on community connections that exist and take new action.
+	INSPYRED (WITH A Y): If I could just inspire myself, well that’s the action I need.
+	APPRECIATION: I will be responsive to the people who asked to talk more to me or get stuff from me and continue to work to advanced systems change.
+	LIFTED: Make more connections.
+	EMPOWERED: I’ll go back to my community and continue to work to promote lifestyle medicine education and self-care.
+	EXCITED: To get going with lobbying season
+	ENLIGHTENED: Walk out with more friends than I walked in.
+	INSPIRED AND HOPEFUL: Everyone in this room is adding to humanity, we need more actions to build on our humanity.
+	WHOLE: I feel like I’ve been spoken to in many different realms, I’m going to follow up with all you folks to increase wellness in school.
+	CHALLENGED: My opinions have been challenged about nine medical ways people can be happier and healthier.
+	"GRUNTLED": I often think the opposite of hopelessness isn’t hope, it’s certainty. I need to take the action of doing nothing as a form of self-care, just being and having a calm way of connecting to get to the work I do in the 12-step arena and medical marijuana.
+	HOPEFUL: I came in not knowing what to expect being military myself, I am familiar with resilience and I love social justice – so thank you to everyone here.
+	CONTEMPLATIVE: Still thinking about self-care and how I can best listen to the voices I connect with in my job and provide advocacy or others who can provide needed resources.
+	EMOTIONAL: I want to be better at acknowledging the pain of the people I work with.
+	CONNECTED: Feeling a sense of momentum.
+	OPTIMISTIC: Know that there’s an undercurrent of change going on.
+	ENLIGHTENED THROUGH CONVERSATIONS WITH PEOPLE OF DIFFERENT CULTURES AND BACKGROUNDS: Encouraged to make connections with people who can help with our work.
+	POSITIVE: Knowing that we’re all working toward a positive outcome, I feel positive.
+	SAFE: I feel safe to take the time to hear stories, to take time for self-care, to acknowledge the trauma that until today I didn’t realize brought me here; safe because I found a community – every person I talked to, their hearts are so much bigger than I could have guessed; safe, moving into the future, knowing that you’re there.
+	GRATEFUL: My heart is so full, I escaped the stress in the office today.
+	GRATEFUL: It’s unique to have everyone show up authentically and speak your truth – it doesn’t often happen in a professional context. Also contemplate about how to embed this in my work.
+	CONTEMPLATIVE: To think about how to embed this work in the opportunities I have to influence things.
+	CONNECTEDNESS: When community shows up, cares for one another and maximizes that connection – that’s healthy power.
+	COMMUNITY: I haven’t been feeling very connected, but this is a space where I’ve been feeling connected to community.
+	POTENT: There’s so much potency here in this room, it’s juicy; there’s this amazing potential that we are on the cusp of change, and this must change. We are all making this change together – I’m going to take all the things we’re collecting here today, turn it into a beautiful report and send that information back to you.
+	')
 ;
-
-INSERT INTO response_category (description)
-VALUES 
-	('uncategorized');
-
-INSERT INTO threesixty ("name", "date", "location", "category_id", "client", "published_status")
-VALUES (
-	'Catalyst Initiative of The Minneapolis Foundation - Building Initiative: Preventing Diseases of Despair', 
-	'9-18-2018', 
-	'Minneapolis', 
-	2, 
-	'MTI', 
-	false
-);
-
-INSERT INTO threesixty ("name", "date", "location", "category_id", "client", "published_status")
-VALUES (
-	'Carver County Public Health - A Healthy Welcome', 
-	'10-4-2018', 
-	'Chaska', 
-	1, 
-	'MTI', 
-	false
-);
-
-INSERT INTO threesixty ("name", "date", "location", "category_id", "client", "published_status")
-VALUES (
-	'Health Matters!', 
-	'10-24-2017', 
-	'Shakopee', 
-	3, 
-	'Scott County Health Care System Collaborative', 
-	false
-);
-
-INSERT INTO threesixty_reports (threesixty_id, demographic, summary, methodology)
-VALUES (
-	'1', 
-	'TOTAL PARTICIPANTS: approx. 121 INDIGENOUS/PEOPLE OF COLOR: approx. 58 (48%) Participants included community members and organizational representatives from a variety of fields, including community corrections, healthcare, foundations and nonprofits, academic research human services, politics and public policy, journalism, business, library services and the arts.', 
-	
-	'On Tuesday, September 18th 2018, approximately 121 community members and representatives of organizations and programs with a vested interest in preventing diseases of despair were brought together at the Lake Calhoun Event Center (St. Mary’s Greek Orthodox Church) in Minneapolis for a feast and engaged conversation and collaborative planning session on primary prevention and holistic and integrative strategies for preventing diseases of despair including suicide, alcoholism and other chemical dependency disorders. The all-day unConference was divided into morning sessions, focusing on “Naming the Issue,” an afternoon luncheon Mindstorm (focused discussion) section designed to support participants in “Making the Connections” necessary to produce systemic and intra-systemic change, and afternoon strategic planning activities geared toward “Catalyzing Action.”
-
-The event featured pop-up testimonial presentations providing a wide range of lenses highlighting community impacts of despair and its associated diseases, including perspectives from Assistant Commissioner of the Minnesota Department of Health, Jeanne Ayers, Paul Riedner of the Veteran Resilience Project, Dr. Helen Kim of the Hennepin County Medical Center, Senior Vice President of Community Impact for the Minnesota Foundation, Chanda Smith Baker, and Donna LaChapelle of the Indian Women’s Resource Center and the Center for Mind-Body Medicine. Participants who wished to weigh in with their own brief observations and relevant stories and data were invited and encouraged to participate in open-mic style pop up sharing opportunities interwoven throughout the day. Facilitator Marnita Schroedl led several “mindful moment break-ins” including a minute of gratitude and a physical activity for releasing tension, in addition to guiding participants through the afternoon’s collaborative planning session.
-
-Breakfast, desserts and a luncheon feast appropriate for all dietary needs from vegan to carnivore were prepared by Fabulous Catering. In addition, a Quiet Room staffed by local practitioners Ayo Clemons, Rowan Fakhoury, and Awana Moye was also made available to all guests.', 
-
-	'This luncheon Mindstorm was undertaken on Tuesday, September 18th by guests of the 2018 unConference Building Resilience: Preventing Diseases of Despair. For this set of small group discussions, we asked participants to focus their conversations on the questions from the Mindstorm discussion guide (see facsimile on page 3) that their luncheon discussion group thought most important to address. Nine groups of participants submitted notes from the Mindstorm discussions. Identical instructions were given to each group on how to conduct their discussions and submit notes after the session. 
-
-Although participants were given the option to rank the discussion topic questions in descending order of their estimation of each topic’s importance, only two groups elected to rank questions, one of which submitted incomplete ranking information. This limits the interpretability and utility of a rankings analysis in this report, however, we have included the submitted ranking votes in the instructions sheet facsimile for your information (see page 3).
-
-The following is an overview and analysis of the emergent themes resulting from these conversations, as recorded by participant scribes on the notes sheet included with the questions. The handwritten responses have been transcribed, aggregated and de-identified in a document following this analysis. 
-
-Central themes emerging from the discussion notes include the importance of being able to meet basic needs, the centrality of social connections as a preventative measure and safety net for those suffering in silence, and a variety of proposed approaches to combatting the issue from the perspectives of the individual, the family, the community, public policy and public and private systems or agencies.', 
-);
 
 INSERT INTO threesixty_user ("user_id", "threesixty_id")
 VALUES

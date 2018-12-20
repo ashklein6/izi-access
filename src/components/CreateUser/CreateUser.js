@@ -42,6 +42,7 @@ class CreateUser extends Component {
     firstname: '',
     lastname: '',
     username: '',
+    email: '',
     password: '',
     iziName: '',
     date: ''

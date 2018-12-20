@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import colors from '../colors';
+import colors from '../../App/colors';
 
 // Material-UI
 import { withStyles } from '@material-ui/core/styles';
@@ -12,7 +12,6 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import { keys } from '@material-ui/core/styles/createBreakpoints';
 
 class GoalsAssessmentEditDialog extends Component {
 
@@ -33,44 +32,6 @@ class GoalsAssessmentEditDialog extends Component {
       [event.target.name]: event.target.value 
     }
   })
-
-  // this.setState({
-  //   rows: {
-  //     ...this.state.rows, 
-  //     [id]: {
-  //       ...this.state.rows[id], 
-  //       [event.target.name]: event.target.value 
-  //     }
-  //   }
-  // })
-  
-  // this.setState({
-  //   ...this.state,
-  //   rows: this.state.rows.map((row,i) => {
-  //     if (i !== index) return row;
-  //     return {...row, [event.target.name]: event.target.value}
-  //   })
-  // });
-
-  // // Pull the current values
-  // let rows = this.state.rows;
-  // // Isolate the object that contains the updated text
-  // let objectToChange = rows[index];
-
-  // // Update the text within the object
-  // objectToChange = {
-  //   ...objectToChange,
-  //   [event.target.name]: event.target.value
-  // }
-  // // Redefine the object
-  // rows[index]=objectToChange;
-
-  // // Set state to the new values
-  // this.setState({
-  //   ...this.state,
-  //   rows: rows
-  // })
-
  } // end handleChangeFor
 
  // handles clicking of the "edit" button. Opens a dialog window.
@@ -80,7 +41,6 @@ class GoalsAssessmentEditDialog extends Component {
     ...this.state,
     open: true,
     updating: true
-    // rows: this.props.reduxState.current360.goalsAssessment
   })
  } // end handleClickOpen
 
@@ -104,11 +64,6 @@ class GoalsAssessmentEditDialog extends Component {
  // called when this.props.reduxState.current360.updateNeeded.[section] is true (set true
  // after the section is updated), this runs to copy the section into local state.
  loadCurrentData = () => {
-  // this.setState({
-  //    ...this.state,
-  //    rows: this.props.reduxState.current360.goalsAssessment,
-  //    updating: false
-  // })
 
   let newState = {};
 

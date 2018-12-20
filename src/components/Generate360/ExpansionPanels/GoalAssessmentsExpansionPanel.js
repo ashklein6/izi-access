@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import colors from '../colors';
+import colors from '../../App/colors';
 
 // import edit dialog component
 import GoalsAssessmentEditDialog from '../EditDialogs/GoalAssessmentsEditDialog';

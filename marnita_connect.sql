@@ -20,7 +20,7 @@ CREATE TABLE "client_request" (
     "id" SERIAL PRIMARY KEY,
     "person_id" INT REFERENCES "person",
     "name" VARCHAR (256),
-    "date" TIMESTAMP,
+    "date" DATE DEFAULT ('1900-01-01 00:00:00.000'),
     "date_added" TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 

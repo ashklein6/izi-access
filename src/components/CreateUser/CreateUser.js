@@ -45,7 +45,7 @@ class CreateUser extends Component {
     email: '',
     password: '',
     iziName: '',
-    date: ''
+    date: null
   };
 
   registerUser = (event) => {
@@ -187,7 +187,7 @@ class CreateUser extends Component {
               margin="dense"
               variant="outlined"
               onChange={this.handleInputChangeFor('date')}
-              value={this.state.date}
+              // value={this.state.date}
               name ="date"
                 />
               <br />

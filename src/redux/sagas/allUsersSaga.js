@@ -3,7 +3,8 @@ import { put, call, takeLatest } from 'redux-saga/effects';
 
 function* fetchAllUsers() {
   try {
-    
+    const response = yield call(axios.get, '/allUsers');
+    yield put({type: 'SET_ALL_USERS', payload: response.data});
   } 
   catch (error) {
     console.log('error', error);

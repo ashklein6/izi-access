@@ -12,6 +12,8 @@ const passport = require('./strategies/user.strategy');
 const userRouter = require('./routes/user.router');
 const all360Router = require('./routes/all360.router');
 const iziCategoriesRouter = require('./routes/iziCategories.router');
+const allUsersRouter = require('./routes/allUsers.router');
+const userControlsRouter = require('./routes/UserControls.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -28,6 +30,8 @@ app.use(passport.session());
 app.use('/api/user', userRouter);
 app.use('/all360', all360Router);
 app.use('/iziCategories', iziCategoriesRouter);
+app.use('/allUsers', allUsersRouter);
+app.use('/userControls', userControlsRouter);
 
 // Serve static files
 app.use(express.static('build'));

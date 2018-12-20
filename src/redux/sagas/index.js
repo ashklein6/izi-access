@@ -6,6 +6,8 @@ import all360sSaga from './all360sSaga';
 import current360Saga from './current360Saga';
 import allUsersSaga from './allUsersSaga';
 import userControlsSaga from './userControlsSaga';
+import iziCategoriesSaga from './iziCategoriesSaga';
+import userAccessLevelSaga from './userAccessLevelSaga';
 
 
 // rootSaga is the primary saga.
@@ -24,5 +26,7 @@ export default function* rootSaga() {
     current360Saga(),
     allUsersSaga(),
     userControlsSaga(),
+    iziCategoriesSaga(),
+    userAccessLevelSaga(),
   ]);
 }

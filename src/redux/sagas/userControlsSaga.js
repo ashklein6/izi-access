@@ -37,9 +37,10 @@ function* request360Access() {
   }
 };
 
-function* editUserInfo() {
+function* editUserInfo(action) {
   try {
-    
+    yield call(axios.put, '/userControls', {data: action.payload});
+    yield put({type: 'FETCH_ALL_USERS'});
   } 
   catch (error) {
     console.log('error', error);

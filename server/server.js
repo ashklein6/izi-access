@@ -12,6 +12,11 @@ const passport = require('./strategies/user.strategy');
 const userRouter = require('./routes/user.router');
 const testRouter = require('./routes/test.router');
 const current360Router = require('./routes/current360.router');
+const all360Router = require('./routes/all360.router');
+const iziCategoriesRouter = require('./routes/iziCategories.router');
+const allUsersRouter = require('./routes/allUsers.router');
+const userControlsRouter = require('./routes/UserControls.router');
+const userAccessLevelRouter = require('./routes/userAccessLevel.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -28,6 +33,11 @@ app.use(passport.session());
 app.use('/api/user', userRouter);
 app.use('/test', testRouter);
 app.use('/current360', current360Router);
+app.use('/all360', all360Router);
+app.use('/iziCategories', iziCategoriesRouter);
+app.use('/allUsers', allUsersRouter);
+app.use('/userControls', userControlsRouter);
+app.use('/userAccessLevel', userAccessLevelRouter);
 
 // Serve static files
 app.use(express.static('build'));

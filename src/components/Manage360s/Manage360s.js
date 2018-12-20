@@ -1,70 +1,34 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Table360s from '../Table360s/Table360s';
+import Search360s from '../Search360s/Search360s';
 
 // Material-UI
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import MenuItem from '@material-ui/core/MenuItem';
-import TextField from '@material-ui/core/TextField';
-import classNames from 'classnames';
 
-// temporary data
-const ranges = [
-  {
-    value: 'health',
-    label: 'health',
-  },
-  {
-    value: 'transportation',
-    label: 'transportation',
-  },
-  {
-    value: 'other',
-    label: 'other',
-  },
-];
 
 //this page has all sorts of weird problems, but the general idea is there...
 //ashley, if you're reading this, you should probs go get a hot apple blahst
 class Manage360s extends Component {
 
-  state = {
-      unpublishedName: '',
-      unpublishedLocation: '',
-      unpublishedDate: '',
-      unpublishedCategory: '',
-      publishedName: '',
-      publishedLocation: '',
-      publishedDate: '',
-      publishedCategory: '',
-  };
+  // dispatches action to get both published and unpublished 360s
+  // to populate the tables
+  componentDidMount() {
+    this.props.dispatch({type: 'FETCH_PUBLISHED'});
+    this.props.dispatch({type: 'FETCH_UNPUBLISHED'});
+  }; // end componentDidMount
 
-  handleChange = (event) => {
-    this.setState({
-      [event.target.name]: event.target.value,
-    })
-  };
-
-  searchPublished = (event) => {
-    event.preventDefault();
-    console.log('payload', this.state.publishedCategory, this.state.publishedDate, this.state.publishedLocation, this.state.publishedName);
-  };
-
-  searchUnpublished = (event) => {
-    event.preventDefault();
-    console.log('payload', this.state.unpublishedCategory, this.state.unpublishedDate, this.state.unpublishedLocation, this.state.unpublishedName);
-  };
-
+  // operates the button that returns users to the admin dashboard
   returnToDash = () => {
     this.props.history.push('/dashboard');
   };
 
+  // operates button that takes users to the 360 generator
   goToGenerator = () => {
     this.props.history.push('/generate360');
-  }
+  };
 
  render() {
    const { classes } = this.props;
@@ -77,64 +41,16 @@ class Manage360s extends Component {
           <Button variant="contained" onClick={this.goToGenerator}>Create New 360</Button>
         </span>
         <span>
-          <p>Search By</p>
-          <form onSubmit={this.searchUnpublished}>
-            <TextField placeholder="Name or Client" type="search" onChange={this.handleChange}
-              name="unpublishedName" value={this.state.unpublishedName}/>
-            <TextField placeholder="Location" type="search" onChange={this.handleChange}
-              name="unpublishedLocation" value={this.state.unpublishedLocation}/>
-            <TextField placeholder="Date" type="date" onChange={this.handleChange}
-              name="unpublishedDate" value={this.state.unpublishedDate}/>
-            <TextField
-              select
-              className={classNames(classes.margin, classes.textField)}
-              value={this.state.unpublishedCategory}
-              onChange={this.handleChange}
-              name="unpublishedCategory"
-              InputProps={{
-                startAdornment: <InputAdornment position="start">Category</InputAdornment>,
-              }}
-            >
-              {ranges.map(option => (
-                <MenuItem key={option.value} value={option.value}>
-                  {option.label}
-                </MenuItem>
-              ))}
-            </TextField>
-            <Button type="submit">Search</Button>
-          </form>
+          <Typography>Search By</Typography>
+          <Search360s status="false"/> 
         </span>
-        <Table360s/>
+        <Table360s rows={this.props.reduxState.all360s.unpublished} />
         <span>
           <Typography variant="h4" className={classes.header}>Published 360s</Typography>
-          <p>Search By</p>
-          <form onSubmit={this.searchPublished}>
-            <TextField placeholder="Name or Client" type="search" onChange={this.handleChange}
-              name="publishedName" value={this.state.publishedName}/>
-            <TextField placeholder="Location" type="search" onChange={this.handleChange}
-              name="publishedLocation" value={this.state.publishedLocation} />
-            <TextField placeholder="Date" type="date" onChange={this.handleChange}
-              name="publishedDate" value={this.state.publishedDate}/>
-            <TextField
-              select
-              className={classNames(classes.margin, classes.textField)}
-              value={this.state.publishedCategory}
-              onChange={this.handleChange}
-              name="publishedCategory"
-              InputProps={{
-                startAdornment: <InputAdornment position="start">Category</InputAdornment>,
-              }}
-            >
-              {ranges.map(option => (
-                <MenuItem key={option.value} value={option.value}>
-                  {option.label}
-                </MenuItem>
-              ))}
-            </TextField>
-            <Button type="submit">Search</Button>
-          </form>
+          <Typography>Search By</Typography>
+          <Search360s status="true"/>
         </span>
-        <Table360s/>
+        <Table360s rows={this.props.reduxState.all360s.published} />
       </div>
    );
  }

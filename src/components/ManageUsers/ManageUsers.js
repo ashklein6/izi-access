@@ -1,35 +1,48 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PendingClientRequests from './ExpansionPanels/PendingClientRequests';
+import Users from './ExpansionPanels/Users';
+import DeactivatedUsers from './ExpansionPanels/DeactivatedUsers';
 
 // Material-UI
 import { withStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
+import PropTypes from 'prop-types';
+import Button from '@material-ui/core/Button';
 
 class ManageUsers extends Component {
 
- state = {
+  state = {
+  };
 
- };
+  returnToDash = () => {
+    this.props.history.push('/dashboard');
+  };
 
- render() {
-   const { classes } = this.props;
-
-   return (
-     <div>
-       <Typography variant="h2" className={classes.header}>Manage Users</Typography>
-     </div>
-   );
- }
+  render() {
+    const { classes } = this.props;
+  return (
+    <div className={classes.root}>
+      <Button variant="contained" onClick={this.returnToDash}>Return to Dashboard</Button>
+      <PendingClientRequests />
+      <Users />
+      <DeactivatedUsers />
+    </div>
+    );
+  }
 };
 
 const styles = {
- header: {
-
- }
+  root: {
+    width: '100%',
+  },
 };
 
 const mapReduxStateToProps = (reduxState) => ({
- reduxState
+  reduxState
 });
+
+ManageUsers.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
 
 export default connect(mapReduxStateToProps)(withStyles(styles)(ManageUsers));

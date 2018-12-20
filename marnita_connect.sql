@@ -85,7 +85,7 @@ CREATE TABLE "response_category" (
     "id" SERIAL PRIMARY KEY,
     "description" VARCHAR(255)
 );
-    
+    
 CREATE TABLE "question_set" (
     "id" SERIAL PRIMARY KEY,
     "threesixty_id" INT REFERENCES "threesixty_reports",

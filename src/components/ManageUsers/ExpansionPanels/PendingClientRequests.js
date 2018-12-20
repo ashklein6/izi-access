@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import TableUsers from '../../TableUsers/TableUsers';
 
 // Material-UI
 import { withStyles } from '@material-ui/core/styles';
@@ -9,13 +10,7 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import Button from '@material-ui/core/Button';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
+
 
 let root = document.querySelector(':root');
 const colors = {
@@ -29,57 +24,11 @@ const colors = {
   orangeHover: window.getComputedStyle(root).getPropertyValue('--main-orange-hover'),
 };
 
-// Hard coded data
-let id = 0;
-function createData( first_name, last_name, email, level ) {
-  id += 1;
-  return { first_name, last_name, email, level };
-}
-
-const rows = [
-  createData('John', 'Doe', 'john_doe@email.com', 'Level'),
-  createData('John', 'Doe', 'john_doe@email.com', 'Level'),
-  createData('John', 'Doe', 'john_doe@email.com', 'Level'),
-];
-
-// Cleanly style table cells within Material-UI
-const CustomTableCell = withStyles(theme => ({
-  head: {
-    fontSize: '1rem',
-    backgroundColor: colors.orange,
-    color: 'white',
-    padding: 10,
-    textAlign: 'center'
-  },
-  body: {
-    padding: 5,
-  },
-}))(TableCell);
-
 class PendingClientRequests extends Component {
 
-  state = {
-    open: false,
-    rows: rows
+  componentDidMount() {
+    this.props.dispatch({type: 'FETCH_PENDING_REQUESTS'})
   };
-
-
-  // handles clicking of the "edit" button. Opens a dialog window.
-  handleClickOpen = () => {
-    this.setState({
-      ...this.state,
-      open: true
-    })
-  } // end handleClickOpen
-
-  // handles clicking of the "save" or "cancel" button from the dailog window 
-  // and closes the dialog window.
-  handleClickClose = () => {
-    this.setState({
-      ...this.state,
-      open: false
-    })
-  } // end handleClickClose
 
   render() {
     const { classes } = this.props;
@@ -97,36 +46,7 @@ class PendingClientRequests extends Component {
 
         {/* Content that is within the expansion panel (shows when panel is expanded) */}
         <ExpansionPanelDetails className={classes.details}>
-          <Paper className={classes.rootTable}>
-            <Table className={classes.table}>
-              <TableHead>
-                <TableRow>
-                  <CustomTableCell>First Name</CustomTableCell>
-                  <CustomTableCell>Last Name</CustomTableCell>
-                  <CustomTableCell>Email</CustomTableCell>
-                  <CustomTableCell>Level</CustomTableCell>
-                  <CustomTableCell>Actions</CustomTableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {this.state.rows.map(row => {
-                return (
-                  <TableRow key={row.id}>
-                    <CustomTableCell className={classes.centerText} component="th" scope="row">
-                    {row.first_name}
-                    </CustomTableCell>
-                    <CustomTableCell className={classes.centerText}>{row.last_name}</CustomTableCell>
-                    <CustomTableCell className={classes.centerText}>{row.email}</CustomTableCell>
-                    <CustomTableCell className={classes.centerText}>{row.level}</CustomTableCell>
-                    <CustomTableCell className={classes.centerText} component="th" scope="row">
-                      <Button variant="contained">View</Button>
-                    </CustomTableCell>
-                  </TableRow>
-                );
-                })}
-              </TableBody>
-            </Table>
-          </Paper>
+          <TableUsers users={this.props.reduxState.allUsers.pendingRequests}/>
         </ExpansionPanelDetails>
       </ExpansionPanel>
     </div>

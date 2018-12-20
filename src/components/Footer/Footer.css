@@ -5,4 +5,7 @@
     text-align: center;
     background-color: var(--main-purple);
     color: #fff;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
 }

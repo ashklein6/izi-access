@@ -63,8 +63,10 @@ class CreateUser extends Component {
           date: this.state.date
         },
       });
+      alert('Success creating profile!')
     } else {
       this.props.dispatch({type: 'REGISTRATION_INPUT_ERROR'});
+      alert('Error creating profile!')
     }
     this.setState({
       ...this.state,

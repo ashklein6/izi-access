@@ -17,11 +17,11 @@ CREATE TABLE "person" (
 );
 
 CREATE TABLE "client_request" (
-	"id" SERIAL PRIMARY KEY,
-	"person_id" INT REFERENCES "person",
-	"name" VARCHAR (256),
-	"date" TIMESTAMP,
-	"date_added" TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    "id" SERIAL PRIMARY KEY,
+    "person_id" INT REFERENCES "person",
+    "name" VARCHAR (256),
+    "date" TIMESTAMP,
+    "date_added" TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE "izi_categories" (
@@ -85,7 +85,7 @@ CREATE TABLE "response_category" (
     "id" SERIAL PRIMARY KEY,
     "description" VARCHAR(255)
 );
-	
+    
 CREATE TABLE "question_set" (
     "id" SERIAL PRIMARY KEY,
     "threesixty_id" INT REFERENCES "threesixty_reports",

@@ -42,9 +42,10 @@ class CreateUser extends Component {
     firstname: '',
     lastname: '',
     username: '',
+    email: '',
     password: '',
     iziName: '',
-    date: ''
+    date: null
   };
 
   registerUser = (event) => {
@@ -63,8 +64,10 @@ class CreateUser extends Component {
           date: this.state.date
         },
       });
+      alert('Success creating profile!')
     } else {
       this.props.dispatch({type: 'REGISTRATION_INPUT_ERROR'});
+      alert('Error creating profile!')
     }
     this.setState({
       ...this.state,
@@ -184,7 +187,7 @@ class CreateUser extends Component {
               margin="dense"
               variant="outlined"
               onChange={this.handleInputChangeFor('date')}
-              value={this.state.date}
+              // value={this.state.date}
               name ="date"
                 />
               <br />

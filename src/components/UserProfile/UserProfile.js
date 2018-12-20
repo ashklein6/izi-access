@@ -34,7 +34,7 @@ const styles = {
   div: {
     textAlign: 'left',
     width: 400,
-    margin: 'auto',
+    margin: '25px auto',
     padding: 20,
     fontSize: 18,
     background: '#eceff0',
@@ -46,30 +46,41 @@ class UserProfile extends Component {
 
  render() {
    const { classes } = this.props;
+   const user = this.props.reduxState.user;
 
    return (
-     <div>
-       <Typography 
-        variant="h2" 
-        className={classes.header}
-        >User Profile</Typography>
-      <div className={classes.div}>
-         <EditUser />
+      <section>
+       {JSON.stringify(this.props.reduxState.user)}
+
+        <Typography 
+          variant="h2" 
+          className={classes.header}
+        >
+          User Profile
+        </Typography>
+        <div className={classes.div}>
+          <EditUser />
             <Typography 
               variant="body1" 
               className={classes.text}
-              >First Name: Jane</Typography>
-          <Typography 
-            variant="body1" 
-            className={classes.text}
-            >Last Name: Doe</Typography>
-          <Typography 
-            variant="body1" 
-            className={classes.text}
-            >Email: janedoe@mail.com</Typography>
+            >
+              First Name: {user.firstname}
+            </Typography>
+            <Typography 
+              variant="body1" 
+              className={classes.text}
+            >
+              Last Name: {user.lastname}
+            </Typography>
+            <Typography 
+              variant="body1" 
+              className={classes.text}
+            >
+              Email: {user.email}
+            </Typography>
           <EditPassword />
         </div>
-        <br />
+
         <div className={classes.div}>
           <Typography 
             className={classes.text}>
@@ -87,7 +98,8 @@ class UserProfile extends Component {
           </Typography>
           <RequestAccess />
           </div>
-     </div>
+          
+     </section>
    );
  }
 };

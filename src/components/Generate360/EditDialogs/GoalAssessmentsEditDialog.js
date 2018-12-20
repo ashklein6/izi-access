@@ -12,13 +12,13 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import { keys } from '@material-ui/core/styles/createBreakpoints';
 
 class GoalsAssessmentEditDialog extends Component {
 
  state = {
    open: false,
    updating: false,
-   rows: {}
  };
 
  // Update the rows array when a textbox is typed in.
@@ -28,14 +28,21 @@ class GoalsAssessmentEditDialog extends Component {
   console.log('event:', event, 'id:', id);
 
   this.setState({
-    rows: {
-      ...this.state.rows, 
-      [id]: {
-        ...this.state.rows[id], 
-        [event.target.name]: event.target.value 
-      }
+    [id]: {
+      ...this.state[id],
+      [event.target.name]: event.target.value 
     }
   })
+
+  // this.setState({
+  //   rows: {
+  //     ...this.state.rows, 
+  //     [id]: {
+  //       ...this.state.rows[id], 
+  //       [event.target.name]: event.target.value 
+  //     }
+  //   }
+  // })
   
   // this.setState({
   //   ...this.state,
@@ -105,19 +112,22 @@ class GoalsAssessmentEditDialog extends Component {
 
   let newState = {};
 
+  Object.keys(this.state).map( (key) => {
+    if (isNaN(key) && key !== 'newState') {
+      newState[key]=this.state[key]
+    };
+  });
+
   this.props.reduxState.current360.goalsAssessment.map((row,index) => {
     newState[row.id]=row
   });
 
-  this.setState({ 
-    ...this.state,
-    updating: false,
-    rows: newState 
-  });
+  newState.updating = false;
 
-  console.log('state from loadCurrentData', newState);
+  this.setState( newState );
 
   this.props.dispatch({ type: 'CURRENT_360_SECTION_UPDATE_COMPLETE', payload: {section: 'goalsAssessment'} });
+
  } // end loadCurrentData
 
  render() {
@@ -157,10 +167,10 @@ class GoalsAssessmentEditDialog extends Component {
             <DialogContentText>
               Remember to save changes before closing this edit dialog.
             </DialogContentText>
-            {Object.keys(this.state.rows).map( (key,index) => {
-              if (key !== ('open' || 'updating')) {
+            {Object.keys(this.state).map( (key,index) => {
+              if (!isNaN(key)) {
                 return (
-                <div key={this.state.rows[key].id} className={classes.inputGroup}>
+                <div key={this.state[key].id} className={classes.inputGroup}>
                   <Typography variant="subtitle1">Row {index + 1}</Typography>
                   <TextField
                     // Create focus on the first text box of the page:
@@ -171,8 +181,8 @@ class GoalsAssessmentEditDialog extends Component {
                     label="Description"
                     type="text"
                     variant="outlined"
-                    value={this.state.rows[key].description}
-                    onChange={(event) => this.handleChangeFor(event,this.state.rows[key].id)}
+                    value={this.state[key].description}
+                    onChange={(event) => this.handleChangeFor(event,this.state[key].id)}
                     className={classes.input}
                     fullWidth
                     multiline
@@ -185,7 +195,7 @@ class GoalsAssessmentEditDialog extends Component {
                       label="Desired"
                       type="number"
                       variant="outlined"
-                      value={this.state.rows[key].desired}
+                      value={this.state[key].desired}
                       onChange={(event) => this.handleChangeFor(event,key.id)}
                       className={classes.input}
                     />
@@ -196,7 +206,7 @@ class GoalsAssessmentEditDialog extends Component {
                       label="Delivered"
                       type="number"
                       variant="outlined"
-                      value={this.state.rows[key].delivered}
+                      value={this.state[key].delivered}
                       onChange={(event) => this.handleChangeFor(event,key.id)}
                       className={classes.input}
                     />
@@ -207,7 +217,7 @@ class GoalsAssessmentEditDialog extends Component {
                       label="Difference"
                       type="number"
                       variant="outlined"
-                      value={this.state.rows[key].difference}
+                      value={this.state[key].difference}
                       onChange={(event) => this.handleChangeFor(event,key.id)}
                       className={classes.input}
                     />
@@ -218,7 +228,7 @@ class GoalsAssessmentEditDialog extends Component {
                       label="Percent"
                       type="number"
                       variant="outlined"
-                      value={this.state.rows[key].percent}
+                      value={this.state[key].percent}
                       onChange={(event) => this.handleChangeFor(event,key.id)}
                       className={classes.input}
                     />
@@ -230,7 +240,7 @@ class GoalsAssessmentEditDialog extends Component {
                     label="Comments"
                     type="text"
                     variant="outlined"
-                    value={this.state.rows[key].comments}
+                    value={this.state[key].comments}
                     onChange={(event) => this.handleChangeFor(event,key.d)}
                     className={classes.input}
                     fullWidth

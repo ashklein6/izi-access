@@ -92,7 +92,7 @@ class App extends Component {
               path="/manageUsers"
               component={ManageUsers}
             />
-            <ProtectedRoute
+            <Route
               exact
               path="/generate360"
               component={Generate360}

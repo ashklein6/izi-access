@@ -39,8 +39,10 @@ function* delete360(action) {
 };
 
 function* edit360(action) {
+  console.log('inside edit360. action.payload:', action.payload);
+  console.log('url:','current360/edit/'+action.payload.section);
   try {
-    yield call(axios.put, `/${action.payload.table}`, {data: action.payload.data} );
+    yield call(axios.put, `/current360/edit/${action.payload.section}`, {data: action.payload.data} );
   } 
   catch (error) {
     console.log('error', error);
@@ -62,7 +64,7 @@ function* fetch360Section(action) {
   try {
     const response = yield call(axios.get, `/current360/section`, {params: action.payload});
     yield put({ type: 'SET_360_SECTION', payload: {section: action.payload.section, content: response.data} });
-    yield put({ type: 'CURRENT_360_SECTION_NEEDS_UPDATE' })
+    yield put({ type: 'CURRENT_360_SECTION_NEEDS_UPDATE', payload: {section: action.payload.section} });
   } 
   catch (error) {
     console.log('error', error);

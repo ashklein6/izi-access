@@ -30,4 +30,29 @@ router.post('/', (req, res) => {
 
 });
 
+router.post('/edit/goalsAssessment', (async (req, res) => {
+    console.log('in current360.router.js PUT for /current360/edit/goalsAssessment');
+    let newData = req.body.data;
+    console.log('to update goals to:', newData);
+
+    const client = await pool.connect();
+
+    try {
+        await client.query('BEGIN');
+        await client.query(`INSERT INTO goals (threesixty_id, description, desired, delivered, difference, percent, comments)
+        VALUES (1, 'Total Number', 125, 140, 15, 112, 'Based on in-room count. In room count is taken 3 to 6 times per account by at least two different people.');
+        `)
+        await client.query(`INSERT INTO goals (threesixty_id, description, desired, delivered, difference, percent, comments)
+        VALUES (1, 'Number of people of color/Indigenous', 71, 70, -1, 99, 'We generally set this goal at 51% in communities with at least 15% POC/Immigrant/Indigenous. Based on an in-room count.'),(1, 'Number of people under 24', 35, 33, -2, 94, 'We generally set this goal at 25 - 33% unless the [project/event] does not warrant. Based on both in room and sign-in sheet counts.'), (1, 'Measurable Indicators of Success 1: 80% of participants met 1 new person across race, class, culture or other means of self-identity', 112, 126, 14, 113, '80% of the room is our target goal for this MIS.');
+        `)
+        await client.query('COMMIT');
+    } catch (error) {
+        await client.query('ROLLBACK');
+        return res.status(500).send(error);
+    } finally {
+        client.release();
+        return res.sendStatus(201)
+    }
+}))
+
 module.exports = router;

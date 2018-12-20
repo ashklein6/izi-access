@@ -68,10 +68,12 @@ class GoalsAssessmentEditDialog extends Component {
  // dispatches an action to update the database with the new values and 
  // calls handleClickClose.
  handleSave = () => {
+  console.log('in handleSave');
+  this.props.dispatch({ type: 'EDIT_360', payload: {section: 'goalsAssessment', data: this.state.rows} })
   this.handleClickClose();
  } // end handleSave
 
- // called when this.props.reduxState.current360.updateNeeded[this section] is true (set true
+ // called when this.props.reduxState.current360.updateNeeded.[section] is true (set true
  // after the section is updated), this runs to copy the section into local state.
  loadCurrentData = () => {
   this.setState({
@@ -79,7 +81,7 @@ class GoalsAssessmentEditDialog extends Component {
      rows: this.props.reduxState.current360.goalsAssessment,
      updating: false
   })
-  this.props.dispatch({ type: 'CURRENT_360_SECTION_UPDATE_COMPLETE' });
+  this.props.dispatch({ type: 'CURRENT_360_SECTION_UPDATE_COMPLETE', payload: {section: 'goalsAssessment'} });
  } // end loadCurrentData
 
  render() {
@@ -87,131 +89,131 @@ class GoalsAssessmentEditDialog extends Component {
 
    // Check if the section information updated since this site was last loaded.
    // A section is re-downloaded each time the edit dialog is opened.
-   if (this.props.reduxState.current360.updateNeeded === true) {
+   if (this.props.reduxState.current360.updateNeeded.goalsAssessment === true) {
      this.loadCurrentData();
    }
 
    return (
      <React.Fragment>
-    <Button size="small" color="primary" onClick={this.handleClickOpen}>Edit</Button>
-    <Dialog
-      open={this.state.open}
-      onClose={this.handleClickClose}
-      aria-labelledby="goal-assessment-edit-dialog"
-      scroll="paper"
-      fullWidth
-      maxWidth="lg"
-      classes={{paper: classes.paper}}
-    >
-    {(this.state.updating === true) ? 
-    <React.Fragment>
-      <DialogTitle id="goal-assessment-edit-dialog">Edit Goals Assessment</DialogTitle>
-      <DialogContent>
-        <DialogContentText>
-          New information is currently loading...
-        </DialogContentText>
-      </DialogContent>
-    </React.Fragment>
-      :
+      <Button size="small" color="primary" onClick={this.handleClickOpen}>Edit</Button>
+      <Dialog
+        open={this.state.open}
+        onClose={this.handleClickClose}
+        aria-labelledby="goal-assessment-edit-dialog"
+        scroll="paper"
+        fullWidth
+        maxWidth="lg"
+        classes={{paper: classes.paper}}
+      >
+      {(this.state.updating === true) ? 
       <React.Fragment>
         <DialogTitle id="goal-assessment-edit-dialog">Edit Goals Assessment</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Remember to save changes before closing this edit dialog.
+            New information is currently loading...
           </DialogContentText>
-          {this.state.rows.map( (row,index) => {
-            return (
-              <div key={row.id} className={classes.inputGroup}>
-                <Typography variant="subtitle">Row {index + 1}</Typography>
-                <TextField
-                  // Create focus on the first text box of the page:
-                  {...(index === 0) ? {autoFocus: true} : null}
-                  margin="dense"
-                  id="description"
-                  name="description"
-                  label="Description"
-                  type="text"
-                  variant="outlined"
-                  value={this.state.rows[index].description}
-                  onChange={(event) => this.handleChangeFor(event,index)}
-                  className={classes.input}
-                  fullWidth
-                  multiline
-                />
-                <div className={classes.spaceBetween}>
+        </DialogContent>
+      </React.Fragment>
+        :
+        <React.Fragment>
+          <DialogTitle id="goal-assessment-edit-dialog">Edit Goals Assessment</DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              Remember to save changes before closing this edit dialog.
+            </DialogContentText>
+            {this.state.rows.map( (row,index) => {
+              return (
+                <div key={row.id} className={classes.inputGroup}>
+                  <Typography variant="subtitle">Row {index + 1}</Typography>
                   <TextField
+                    // Create focus on the first text box of the page:
+                    {...(index === 0) ? {autoFocus: true} : null}
                     margin="dense"
-                    id="desired"
-                    name="desired"
-                    label="Desired"
-                    type="number"
+                    id="description"
+                    name="description"
+                    label="Description"
+                    type="text"
                     variant="outlined"
-                    value={this.state.rows[index].desired}
+                    value={this.state.rows[index].description}
                     onChange={(event) => this.handleChangeFor(event,index)}
                     className={classes.input}
+                    fullWidth
+                    multiline
                   />
+                  <div className={classes.spaceBetween}>
+                    <TextField
+                      margin="dense"
+                      id="desired"
+                      name="desired"
+                      label="Desired"
+                      type="number"
+                      variant="outlined"
+                      value={this.state.rows[index].desired}
+                      onChange={(event) => this.handleChangeFor(event,index)}
+                      className={classes.input}
+                    />
+                    <TextField
+                      margin="dense"
+                      id="delivered"
+                      name="delivered"
+                      label="Delivered"
+                      type="number"
+                      variant="outlined"
+                      value={this.state.rows[index].delivered}
+                      onChange={(event) => this.handleChangeFor(event,index)}
+                      className={classes.input}
+                    />
+                    <TextField
+                      margin="dense"
+                      id="difference"
+                      name="difference"
+                      label="Difference"
+                      type="number"
+                      variant="outlined"
+                      value={this.state.rows[index].difference}
+                      onChange={(event) => this.handleChangeFor(event,index)}
+                      className={classes.input}
+                    />
+                    <TextField
+                      margin="dense"
+                      id="percent"
+                      name="percent"
+                      label="Percent"
+                      type="number"
+                      variant="outlined"
+                      value={this.state.rows[index].percent}
+                      onChange={(event) => this.handleChangeFor(event,index)}
+                      className={classes.input}
+                    />
+                  </div>
                   <TextField
                     margin="dense"
-                    id="delivered"
-                    name="delivered"
-                    label="Delivered"
-                    type="number"
+                    id="comments"
+                    name="comments"
+                    label="Comments"
+                    type="text"
                     variant="outlined"
-                    value={this.state.rows[index].delivered}
+                    value={this.state.rows[index].comments}
                     onChange={(event) => this.handleChangeFor(event,index)}
                     className={classes.input}
-                  />
-                  <TextField
-                    margin="dense"
-                    id="difference"
-                    name="difference"
-                    label="Difference"
-                    type="number"
-                    variant="outlined"
-                    value={this.state.rows[index].difference}
-                    onChange={(event) => this.handleChangeFor(event,index)}
-                    className={classes.input}
-                  />
-                  <TextField
-                    margin="dense"
-                    id="percent"
-                    name="percent"
-                    label="Percent"
-                    type="number"
-                    variant="outlined"
-                    value={this.state.rows[index].percent}
-                    onChange={(event) => this.handleChangeFor(event,index)}
-                    className={classes.input}
+                    fullWidth
+                    multiline
                   />
                 </div>
-                <TextField
-                  margin="dense"
-                  id="comments"
-                  name="comments"
-                  label="Comments"
-                  type="text"
-                  variant="outlined"
-                  value={this.state.rows[index].comments}
-                  onChange={(event) => this.handleChangeFor(event,index)}
-                  className={classes.input}
-                  fullWidth
-                  multiline
-                />
-              </div>
-            );
-          })}
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={this.handleClickClose} color="primary">
-            Cancel
-          </Button>
-          <Button onClick={this.handleSave} color="primary">
-            Save Changes
-          </Button>
-        </DialogActions>
-      </React.Fragment>
-    }
-    </Dialog>
+              );
+            })}
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={this.handleClickClose} color="primary">
+              Cancel
+            </Button>
+            <Button onClick={this.handleSave} color="primary">
+              Save Changes
+            </Button>
+          </DialogActions>
+        </React.Fragment>
+      }
+      </Dialog>
     </React.Fragment>
    );
  }

@@ -34,6 +34,18 @@ router.put('/', (req,res) => {
   })
 });
 
+router.delete('/threesixty/:id', (req,res) => {
+  const sqlText = `DELETE FROM threesixty_user WHERE id = $1;`;
+  const threesixtyId = req.params.id;
+  pool.query(sqlText, [threesixtyId])
+  .then(() => {
+    res.sendStatus(200);
+  })
+  .catch(() => {
+    res.sendStatus(500);
+  })
+})
+
 router.delete('/:id', (req,res) => {
   const sqlText = `DELETE FROM client_request WHERE id = $1;`;
   const requestId = req.params.id;

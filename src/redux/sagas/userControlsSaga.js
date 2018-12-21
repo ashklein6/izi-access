@@ -19,9 +19,11 @@ function* add360Access() {
   }
 };
 
-function* remove360Access() {
+function* remove360Access(action) {
   try {
-    
+    yield call(axios.delete, `/userControls/threesixty/${action.payload}`);
+    yield put({type: 'FETCH_ALL_USERS'});
+
   } 
   catch (error) {
     console.log('error', error);
@@ -43,6 +45,8 @@ function* editUserInfo(action) {
     yield put({type: 'FETCH_ALL_USERS'});
     yield put({type: 'FETCH_DEACTIVATED_USERS'});
     yield put({type: 'FETCH_PENDING_REQUESTS'});
+    // it's worth looking into a better/more efficient way to handle this,
+    // but that seems like an after-the-break sort of thing
   } 
   catch (error) {
     console.log('error', error);
@@ -60,7 +64,7 @@ function* changeUserStatus() {
 
 function* deletePendingRequest(action) {
   try {
-    yield call(axios.delete, `/userControls/${action.payload}`)
+    yield call(axios.delete, `/userControls/${action.payload}`);
   } 
   catch (error) {
     console.log('error', error);

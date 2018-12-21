@@ -72,8 +72,9 @@ class ViewUser extends Component {
     })
   };
 
-  removeAccess = () => {
-    console.log('Remove Access');
+  removeAccess = (id) => {
+    this.props.dispatch({type: 'REMOVE_360_ACCESS', payload: id});
+    
   };
 
   endEdit = () => {
@@ -92,10 +93,6 @@ class ViewUser extends Component {
   saveChanges = () => {
     this.props.dispatch({ type: 'EDIT_USER_INFO', payload: this.state });
     this.endEdit();
-  };
-
-  clearRequest = () => {
-    this.props.dispatch({type: 'DELETE_PENDING_REQUEST', payload: this.props.user.request_id});
   };
 
   render() {
@@ -118,13 +115,9 @@ class ViewUser extends Component {
     {!this.state.edit ? (    
     <React.Fragment>
       <DialogTitle className={classes.dialogTitle} id="goal-assessment-edit-dialog">View User</DialogTitle>
-      
-      <DialogContent key={user.id}>
+      <DialogContent>
       <Button className={classes.editBtn} size="small" variant="contained" onClick={this.editBtn}>Edit</Button>
-      {user.request_id &&
-      <Button className={classes.editBtn} size="small" variant="contained" onClick={this.clearRequest}>Clear Pending Request</Button>}
           <InputLabel>First Name:</InputLabel>
-          
           <Typography className={classes.userInfo} variant="subheading">{user.firstname}</Typography>
           <br />
           <InputLabel>Last Name:</InputLabel>
@@ -140,7 +133,11 @@ class ViewUser extends Component {
           <br />
             <ul>
               <li>
-                <Typography className={classes.userInfo} variant="subheading">360 They Have access to</Typography>
+                {user.threesixty ? (
+                <Typography className={classes.userInfo} variant="subheading">{user.threesixty}</Typography>
+                ) : (
+                <Typography className={classes.userInfo} variant="subheading">None</Typography>
+                )}
               </li>
             </ul>
           <InputLabel>Notes:</InputLabel>
@@ -151,7 +148,7 @@ class ViewUser extends Component {
     ) : (
     <React.Fragment>
       <DialogTitle className={classes.dialogTitle} id="goal-assessment-edit-dialog">Edit User</DialogTitle>
-      <DialogContent key={user.id}>
+      <DialogContent>
           <InputLabel>First Name:</InputLabel>
           <Input 
             className={classes.userInfoEdit} 
@@ -198,12 +195,18 @@ class ViewUser extends Component {
           <br />
             <ul>
               <li>
-                <Typography className={classes.userInfo} variant="subheading">360 They Have access to</Typography>
-                <Tooltip title="Remove Access" placement="right">
-                  <IconButton className={classes.removeAccess} onClick={this.removeAccess}>
-                    <Cancel/>
-                  </IconButton>
-                </Tooltip>
+                {user.threesixty ? (
+                <div>
+                  <Typography className={classes.userInfo} variant="subheading">{user.threesixty}</Typography>
+                  <Tooltip title="Remove Access" placement="right">
+                    <IconButton className={classes.removeAccess} onClick={() => this.removeAccess(user.connected_360_id)}>
+                      <Cancel/>
+                    </IconButton>
+                  </Tooltip>
+                </div>
+                ) : (
+                <Typography className={classes.userInfo} variant="subheading">None</Typography>
+                )}
               </li>
             </ul>
           <InputLabel>Notes:</InputLabel>

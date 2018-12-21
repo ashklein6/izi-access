@@ -11,6 +11,8 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import ViewUser from '../ManageUsers/ViewUserDialog/ViewUser';
+import Button from '@material-ui/core/Button';
+
 
 let root = document.querySelector(':root');
 const colors = {
@@ -40,6 +42,10 @@ const CustomTableCell = withStyles(theme => ({
 
 class TableUsers extends Component {
 
+  clearRequest = () => {
+    this.props.dispatch({type: 'DELETE_PENDING_REQUEST', payload: this.props.user.request_id});
+  };
+
   render() {
     const { classes } = this.props;
 
@@ -68,6 +74,8 @@ class TableUsers extends Component {
                 <CustomTableCell className={classes.centerText}>{row.access_type}</CustomTableCell>
                 <CustomTableCell className={classes.centerText} component="th" scope="row">
                   <ViewUser user={row}/>
+                  {row.request_id &&
+                  <Button className={classes.editBtn} size="small" variant="contained" onClick={this.clearRequest}>DELETE</Button>}
                 </CustomTableCell>
               </TableRow>
             );
@@ -111,6 +119,9 @@ const styles = {
  heading: {
   fontSize: "1.5rem",
  },
+//  editBtn: {
+//   float: 'right'
+//  },
  icon: {
   verticalAlign: 'bottom',
   height: 20,

@@ -48,16 +48,17 @@ class Search360s extends Component {
     const { classes } = this.props;
 
     return (
-      <form onSubmit={this.handleSearch}>
-        <TextField placeholder="Name or Client" type="search" onChange={this.handleChange}
+      <form className={classes.form} onSubmit={this.handleSearch}>
+        <TextField className={classes.textField} placeholder="Name or Client" type="search" onChange={this.handleChange}
           name="name" value={this.state.name}/>
-        <TextField placeholder="Location" type="search" onChange={this.handleChange}
+        <TextField className={classes.textField} placeholder="Location" type="search" onChange={this.handleChange}
           name="location" value={this.state.location}/>
-        <TextField placeholder="Date" type="date" onChange={this.handleChange}
+        <TextField className={classes.textField} placeholder="Date" type="date" onChange={this.handleChange}
           name="date" value={this.state.date}/>
         <TextField
           select
-          className={classNames(classes.margin, classes.textField)}
+          // className={classNames(classes.margin, classes.textField)}
+          className={classes.textField}
           value={this.state.category}
           onChange={this.handleChange}
           name="category"
@@ -71,27 +72,32 @@ class Search360s extends Component {
             </MenuItem>
           ))}
         </TextField>
-        <Button type="submit">Search</Button>
+        <Button className={classes.button} variant="contained" type="submit">Search</Button>
       </form>
     );
   }
 };
 
-const styles = theme => ({
-  root: {
+const styles = {
+  form: {
     display: 'flex',
-    flexWrap: 'wrap',
+    justifyContent: 'center',
+    marginBottom: 50
   },
   margin: {
-    margin: theme.spacing.unit,
+    // margin: theme.spacing.unit,
   },
   withoutLabel: {
-    marginTop: theme.spacing.unit * 3,
+    // marginTop: theme.spacing.unit * 3,
   },
   textField: {
-    flexBasis: 200,
+    // flexBasis: 200,
+    padding: 25
   },
-});
+  button: {
+    margin: 25
+  }
+}
 
 const mapReduxStateToProps = (reduxState) => ({
   reduxState

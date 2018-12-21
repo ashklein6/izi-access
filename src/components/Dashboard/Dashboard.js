@@ -35,7 +35,7 @@ class Dashboard extends Component {
 
    return (
      <div className={classes.div}>
-      <Typography variant="h2" className={classes.header}>Admin Dashboard</Typography>
+      <Typography variant="h3" className={classes.header}>Admin Dashboard</Typography>
       <ButtonBase className={classes.button} onClick={this.handleCreate}>
         <Paper className={classes.paper}>
           <Grid container spacing={0}>

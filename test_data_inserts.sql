@@ -15,7 +15,7 @@ VALUES
 	(20, 'Client'),
 	(30, 'Employee'),
 	(40, 'Admin'),
-	(0, 'Deactivated');
+	(0, 'deactivated');
 
 INSERT INTO threesixty ("name", "date", "location", "category_id", "client", "published_status")
 VALUES (

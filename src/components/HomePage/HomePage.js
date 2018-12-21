@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Table360s from '../Table360s/Table360s';
 import Search360s from '../Search360s/Search360s';
-import moment from 'moment';
+import moment, { max } from 'moment';
 
 import MarnitaLogo from './marnita_logo.png';
 
@@ -40,53 +40,53 @@ class Home extends Component {
 
    return (
      <div>
-        <Typography variant="h3" className={classes.header}>Check out some recent IZI 360 Reports</Typography>
-        <Grid container>
+       {/* {JSON.stringify(this.props.reduxState.all360s.recent)} */}
+        <Typography variant="h3" className={classes.header}>
+          Check out some recent IZI 360 Reports
+        </Typography>
+
+        <Grid className={classes.container} container spacing={0}>
         {/* the line below maps through the first 3 items in the array */}
         {/* and uses that information to display the cards. */}
         {/* the unaltered version of the array is sent to the table */}
         {this.props.reduxState.all360s.recent.map( izi => (
           <Grid item xs={4} key={izi.id}>
-            <Card className={classes.card}>
+            <Card className={classes.card} elevation={5}>
             {/* TO DO: add a number of card classes, color formatting based on IZI category? */}
 
-              <CardActionArea>
-                <CardContent>
-
+              <CardContent className={classes.card}>
+                <div className={classes.image}>
                   <img src={MarnitaLogo} alt="Marnita's Table Placeholder" className={classes.image}/>
-
-                  <Typography gutterBottom variant="h4" component="h4">
+                </div>
+                <div className={classes.body}>
+                  <Typography variant="h6">
                     {izi.name}
                   </Typography>
 
-                  <Typography component="p">
-                    A brief description of the IZI will be here ... if the text is longer
+                  <Typography className={classes.iziInfo} component="p">
+                    {izi.description}
                   </Typography>
-                  <br></br>
-                  <Typography component="p">
+                  <Typography className={classes.iziInfo} component="p">
                     {moment(izi.date).format('LL')}
                   </Typography>
-                  <Typography component="p">
+                  <Typography className={classes.iziInfo} component="p">
                     {izi.location}
                   </Typography>
-
-                </CardContent>
-              </CardActionArea>
-
+                </div>
+              </CardContent>
               <CardActions className={classes.cardActions}>
-                <Button size="small" color="primary" onClick={() => this.handleClick(izi.id)}>
+                <Button className={classes.button} variant="contained" fullWidth={true} onClick={() => this.handleClick(izi.id)}>
                   View 360 Report
                 </Button>
               </CardActions>
-
             </Card>
           </Grid>
         ))}
         </Grid>
-        <span>
-          <Typography>Search By</Typography>
-          <Search360s status="true"/>
-        </span>
+        <div>
+          {/* <Typography>Search By</Typography> */}
+          <Search360s  status="true"/>
+        </div>
         {/* this sends the array of published 360s to the table, */}
         {/* and specificies that this table is for the home page,  */}
         {/* and will not render the edit button. */}
@@ -98,18 +98,39 @@ class Home extends Component {
 };
 
 const styles = {
+  container: {
+    display: 'flex',
+    marginBottom: 50
+  },
   card: {
+    minWidth: 250,
     textAlign: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    padding: '0px',
+    margin: 25
   },
-
   image: {
-    width: 150,
+    margin: 'auto',
+    padding: 10,
   },
-
+  body: {
+    padding: 15,
+    backgroundColor: '#f2f2f2',
+    borderRadius: 5
+  },
   cardActions: {
     display: 'flex',
     justifyContent: 'center'
+  },
+  header: {
+    padding: 20,
+    textAlign: 'center'
+  },
+  button: {
+    marginBottom: 20
+  },
+  iziInfo: {
+    marginTop: 5
   }
 };
 

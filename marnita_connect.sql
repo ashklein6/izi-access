@@ -37,7 +37,12 @@ CREATE TABLE "threesixty" (
     "category_id" INT REFERENCES "izi_categories",
     "client" VARCHAR(255),
     "description" VARCHAR(25600),
-    "published_status" BOOLEAN DEFAULT FALSE
+    "published_status" BOOLEAN DEFAULT FALSE,
+    "goals_public" BOOLEAN DEFAULT FALSE NOT NULL,
+    "dashboard_public" BOOLEAN DEFAULT FALSE NOT NULL,
+    "threesixty_reports_public" BOOLEAN DEFAULT TRUE NOT NULL,
+    "analysis_recommendation_public" BOOLEAN DEFAULT FALSE NOT NULL,
+    "demographics_public" BOOLEAN DEFAULT FALSE NOT NULL
 );
 
 CREATE TABLE "analysis_recommendation" (
@@ -88,7 +93,7 @@ CREATE TABLE "response_category" (
     
 CREATE TABLE "question_set" (
     "id" SERIAL PRIMARY KEY,
-    "threesixty_id" INT REFERENCES "threesixty_reports",
+    "threesixty_reports_id" INT REFERENCES "threesixty_reports",
     "set_title" VARCHAR(25600),
     "breakdown" VARCHAR(25600)
 );

@@ -1,8 +1,8 @@
 /* the only line you likely need to change is
 
- database: 'prime_app',
+ database: 'marnita_connect',
 
- change `prime_app` to the name of your database, and you should be all set!
+ change `marnita_connect` to the name of your database, and you should be all set!
 */
 
 const pg = require('pg');

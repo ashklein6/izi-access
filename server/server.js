@@ -10,6 +10,7 @@ const passport = require('./strategies/user.strategy');
 
 // Route includes
 const userRouter = require('./routes/user.router');
+const current360Router = require('./routes/current360.router');
 const all360Router = require('./routes/all360.router');
 const iziCategoriesRouter = require('./routes/iziCategories.router');
 const allUsersRouter = require('./routes/allUsers.router');
@@ -29,6 +30,7 @@ app.use(passport.session());
 
 /* Routes */
 app.use('/api/user', userRouter);
+app.use('/current360', current360Router);
 app.use('/all360', all360Router);
 app.use('/iziCategories', iziCategoriesRouter);
 app.use('/allUsers', allUsersRouter);

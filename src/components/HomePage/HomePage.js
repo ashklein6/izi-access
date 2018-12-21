@@ -83,10 +83,10 @@ class Home extends Component {
           </Grid>
         ))}
         </Grid>
-        <span>
-          <Typography>Search By</Typography>
-          <Search360s status="true"/>
-        </span>
+        <div>
+          {/* <Typography>Search By</Typography> */}
+          <Search360s  status="true"/>
+        </div>
         {/* this sends the array of published 360s to the table, */}
         {/* and specificies that this table is for the home page,  */}
         {/* and will not render the edit button. */}
@@ -100,6 +100,7 @@ class Home extends Component {
 const styles = {
   container: {
     display: 'flex',
+    marginBottom: 50
   },
   card: {
     minWidth: 250,

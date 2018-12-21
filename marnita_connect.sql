@@ -93,7 +93,7 @@ CREATE TABLE "response_category" (
     
 CREATE TABLE "question_set" (
     "id" SERIAL PRIMARY KEY,
-    "threesixty_id" INT REFERENCES "threesixty_reports",
+    "threesixty_reports_id" INT REFERENCES "threesixty_reports",
     "set_title" VARCHAR(25600),
     "breakdown" VARCHAR(25600)
 );

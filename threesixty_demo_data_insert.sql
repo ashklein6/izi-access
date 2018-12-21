@@ -4,7 +4,7 @@ VALUES
 	(20, 'Client'),
 	(30, 'Employee'),
 	(40, 'Admin'),
-	(0, 'Deactivated');
+	(0, 'deactivated');
 
 INSERT INTO person ("email", "username", "password", "firstname", "lastname", "access_id", "notes", "date_added")
 VALUES (

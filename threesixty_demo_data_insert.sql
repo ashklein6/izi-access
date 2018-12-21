@@ -3,7 +3,8 @@ VALUES
 	(10, 'User'),
 	(20, 'Client'),
 	(30, 'Employee'),
-	(40, 'Admin');
+	(40, 'Admin'),
+	(0, 'Deactivated');
 
 INSERT INTO person ("email", "username", "password", "firstname", "lastname", "access_id", "notes", "date_added")
 VALUES (
@@ -63,6 +64,11 @@ VALUES (
 	2, 
 	'MTI',
 	'121 community members and representatives of organizations and programs with a vested interest in preventing diseases of despair engaged in a conversation and collaborative planning session on primary prevention and holistic and integrative strategies for preventing diseases of despair including suicide, alcoholism and other chemical dependency disorders.', 
+	false,
+	false,
+	false,
+	true,
+	true,
 	false
 );
 
@@ -74,6 +80,11 @@ VALUES (
 	1, 
 	'MTI',
 	'86 community members gathered to discuss healthcare and community health needs.',
+	false,
+	false,
+	false,
+	true,
+	true,
 	false
 );
 
@@ -85,6 +96,11 @@ VALUES (
 	3, 
 	'Scott County Health Care System Collaborative',
 	'140 community members gathered together to discuss healthcare.',
+	false,
+	false,
+	false,
+	true,
+	true,
 	false
 );
 

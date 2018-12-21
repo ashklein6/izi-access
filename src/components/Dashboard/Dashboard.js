@@ -52,6 +52,24 @@ class Dashboard extends Component {
         style={{width: 400, height: 50, margin: 12, fontSize: 20}} 
         onClick={this.handleUsers}>Manage Users</Button>
 
+      <ButtonBase className={classes.button}>
+        <Paper className={classes.paper}>
+          <Grid container spacing={0}>
+            <Grid className={classes.btnText} item xs={8}>
+              <Typography variant="h6">360 MANAGER</Typography>
+            </Grid>
+            <Grid className={classes.btnGrid} item xs={4}>
+              <Avatar className={classes.icon}>
+                <PriorityHigh />
+              </Avatar>
+              <Avatar className={classes.icon}>
+                <Forward />
+              </Avatar>
+            </Grid>
+          </Grid>
+        </Paper>
+      </ButtonBase>
+
       <ButtonBase>
         <Paper className={classes.paper}>
           <Grid container spacing={0}>
@@ -62,9 +80,9 @@ class Dashboard extends Component {
               <Avatar className={classes.icon}>
                 <PriorityHigh />
               </Avatar>
-              <Avatar className={classes.icon}>
+              {/* <Avatar className={classes.icon}>
                 <Forward />
-              </Avatar>
+              </Avatar> */}
             </Grid>
           </Grid>
         </Paper>
@@ -87,6 +105,9 @@ const styles = {
     width: 380,
     padding: 5,
     backgroundColor: '#ddd',
+  },
+  button: {
+    margin: 25
   },
   btnText: {
     textAlign: 'left',

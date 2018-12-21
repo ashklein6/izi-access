@@ -3,7 +3,8 @@ VALUES
 	(10, 'User'),
 	(20, 'Client'),
 	(30, 'Employee'),
-	(40, 'Admin');
+	(40, 'Admin'),
+	(0, 'deactivated');
 
 INSERT INTO person ("email", "username", "password", "firstname", "lastname", "access_id", "notes", "date_added")
 VALUES (
@@ -55,7 +56,7 @@ VALUES
     ('Community'), 
     ('Education');
 
-INSERT INTO threesixty ("name", "date", "location", "category_id", "client", "description", "published_status")
+INSERT INTO threesixty ("name", "date", "location", "category_id", "client", "description", "published_status", "goals_public", "dashboard_public", "threesixty_reports_public", "analysis_recommendation_public", "demographics_public")
 VALUES (
 	'Catalyst Initiative of The Minneapolis Foundation - Building Initiative: Preventing Diseases of Despair', 
 	'9-18-2018', 
@@ -63,10 +64,15 @@ VALUES (
 	2, 
 	'MTI',
 	'121 community members and representatives of organizations and programs with a vested interest in preventing diseases of despair engaged in a conversation and collaborative planning session on primary prevention and holistic and integrative strategies for preventing diseases of despair including suicide, alcoholism and other chemical dependency disorders.', 
+	false,
+	false,
+	false,
+	true,
+	true,
 	false
 );
 
-INSERT INTO threesixty ("name", "date", "location", "category_id", "client", "description", "published_status")
+INSERT INTO threesixty ("name", "date", "location", "category_id", "client", "description", "published_status", "goals_public", "dashboard_public", "threesixty_reports_public", "analysis_recommendation_public", "demographics_public")
 VALUES (
 	'Carver County Public Health - A Healthy Welcome', 
 	'10-4-2018', 
@@ -74,10 +80,15 @@ VALUES (
 	1, 
 	'MTI',
 	'86 community members gathered to discuss healthcare and community health needs.',
+	false,
+	false,
+	false,
+	true,
+	true,
 	false
 );
 
-INSERT INTO threesixty ("name", "date", "location", "category_id", "client", "description", "published_status")
+INSERT INTO threesixty ("name", "date", "location", "category_id", "client", "description", "published_status", "goals_public", "dashboard_public", "threesixty_reports_public", "analysis_recommendation_public", "demographics_public")
 VALUES (
 	'Health Matters!', 
 	'10-24-2017', 
@@ -85,6 +96,11 @@ VALUES (
 	3, 
 	'Scott County Health Care System Collaborative',
 	'140 community members gathered together to discuss healthcare.',
+	false,
+	false,
+	false,
+	true,
+	true,
 	false
 );
 

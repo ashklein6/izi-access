@@ -16,6 +16,9 @@ import IconButton from '@material-ui/core/IconButton';
 import Cancel from '@material-ui/icons/Cancel';
 import Tooltip from '@material-ui/core/Tooltip';
 import TextField from '@material-ui/core/TextField';
+import MenuItem from '@material-ui/core/MenuItem';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import classNames from 'classnames';
 
 class ViewUser extends Component {
 
@@ -25,7 +28,7 @@ class ViewUser extends Component {
     firstname: '',
     lastname: '',
     email: '',
-    access_id: 0, // access_id???
+    access_id: 0, 
     notes: '',
     id: 0
   };
@@ -69,8 +72,9 @@ class ViewUser extends Component {
     })
   };
 
-  removeAccess = () => {
-    console.log('Remove Access');
+  removeAccess = (id) => {
+    this.props.dispatch({type: 'REMOVE_360_ACCESS', payload: id});
+    
   };
 
   endEdit = () => {
@@ -94,6 +98,7 @@ class ViewUser extends Component {
   render() {
    const { classes } = this.props;
    const user = this.props.user;
+   const level = this.props.reduxState.userAccessLevel;
 
    return (
     <React.Fragment>
@@ -110,12 +115,9 @@ class ViewUser extends Component {
     {!this.state.edit ? (    
     <React.Fragment>
       <DialogTitle className={classes.dialogTitle} id="goal-assessment-edit-dialog">View User</DialogTitle>
-      
-      <DialogContent key={user.id}>
+      <DialogContent>
       <Button className={classes.editBtn} size="small" variant="contained" onClick={this.editBtn}>Edit</Button>
-
           <InputLabel>First Name:</InputLabel>
-          
           <Typography className={classes.userInfo} variant="subheading">{user.firstname}</Typography>
           <br />
           <InputLabel>Last Name:</InputLabel>
@@ -124,14 +126,18 @@ class ViewUser extends Component {
           <InputLabel>Email:</InputLabel>
           <Typography className={classes.userInfo} variant="subheading">{user.email}</Typography>
           <br />
-          <InputLabel>access_id:</InputLabel>
-          <Typography className={classes.userInfo} variant="subheading">{user.access_id}</Typography>
+          <InputLabel>Access Level:</InputLabel>
+          <Typography className={classes.userInfo} variant="subheading">{user.access_type}</Typography>
           <br />
           <InputLabel>360 Access:</InputLabel>
           <br />
             <ul>
               <li>
-                <Typography className={classes.userInfo} variant="subheading">360 They Have access to</Typography>
+                {user.threesixty ? (
+                <Typography className={classes.userInfo} variant="subheading">{user.threesixty}</Typography>
+                ) : (
+                <Typography className={classes.userInfo} variant="subheading">None</Typography>
+                )}
               </li>
             </ul>
           <InputLabel>Notes:</InputLabel>
@@ -142,7 +148,7 @@ class ViewUser extends Component {
     ) : (
     <React.Fragment>
       <DialogTitle className={classes.dialogTitle} id="goal-assessment-edit-dialog">Edit User</DialogTitle>
-      <DialogContent key={user.id}>
+      <DialogContent>
           <InputLabel>First Name:</InputLabel>
           <Input 
             className={classes.userInfoEdit} 
@@ -168,23 +174,39 @@ class ViewUser extends Component {
           />
           <br />
           <InputLabel>Access Level:</InputLabel>
-          <Input 
-            className={classes.userInfoEdit} 
-            placeholder={user.access_id.toString()}
-            onChange={this.handleChange}
-            name="access_id"
-          />
+          <TextField
+              select
+              className={classNames(classes.margin, classes.textField)}
+              value={this.state.access_id}
+              onChange={this.handleChange}
+              name="access_id"
+              InputProps={{
+                startAdornment: <InputAdornment position="start">Level</InputAdornment>,
+              }}
+            >
+              {level.map(option => (
+                <MenuItem key={option.id} value={option.id}>
+                  {option.access_type}
+                </MenuItem>
+              ))}
+          </TextField>
           <br />
           <InputLabel>360 Access:</InputLabel>
           <br />
             <ul>
               <li>
-                <Typography className={classes.userInfo} variant="subheading">360 They Have access to</Typography>
-                <Tooltip title="Remove Access" placement="right">
-                  <IconButton className={classes.removeAccess} onClick={this.removeAccess}>
-                    <Cancel/>
-                  </IconButton>
-                </Tooltip>
+                {user.threesixty ? (
+                <div>
+                  <Typography className={classes.userInfo} variant="subheading">{user.threesixty}</Typography>
+                  <Tooltip title="Remove Access" placement="right">
+                    <IconButton className={classes.removeAccess} onClick={() => this.removeAccess(user.connected_360_id)}>
+                      <Cancel/>
+                    </IconButton>
+                  </Tooltip>
+                </div>
+                ) : (
+                <Typography className={classes.userInfo} variant="subheading">None</Typography>
+                )}
               </li>
             </ul>
           <InputLabel>Notes:</InputLabel>
@@ -202,7 +224,6 @@ class ViewUser extends Component {
         <Button size="small" variant="contained" onClick={this.endEdit}>Cancel</Button>
         <Button size="small" variant="contained" onClick={this.saveChanges}>Save Changes</Button>
       </DialogContent>
-      {JSON.stringify(this.state)}
     </React.Fragment>
     )}
     </Dialog>

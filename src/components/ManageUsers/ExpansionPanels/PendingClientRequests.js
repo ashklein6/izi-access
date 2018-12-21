@@ -27,7 +27,7 @@ const colors = {
 class PendingClientRequests extends Component {
 
   componentDidMount() {
-    this.props.dispatch({type: 'FETCH_PENDING_REQUESTS'})
+    this.props.dispatch({type: 'FETCH_PENDING_REQUESTS'});
   };
 
   render() {

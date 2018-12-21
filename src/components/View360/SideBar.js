@@ -34,8 +34,6 @@ const sectionInfo = [
   { title: 'Analysis & Recommendations', id: '#analysis' },
   { title: 'Demo Data', id: '#demo-data' },
   { title: 'Sticky Stats & Event Materials', id: '#sticky-stats' },
-  { title: 'Raw Mindstorm Discussions', id: '#mindstorm' },
-  { title: 'Raw Sign-In Sheets', id: '#sign-in-sheets' }
 ]
 
 class SideBar extends Component {
@@ -49,7 +47,7 @@ class SideBar extends Component {
     return (
       <List className={classes.list}>
         {sectionInfo.map( sectionId => 
-        <Link smooth to={sectionId.id}
+        <Link key={sectionId.id} smooth to={sectionId.id}
           scroll={el => scrollWithOffset(el, 150)}
         >
           <ListItem button>

@@ -50,8 +50,9 @@ function* edit360(action) {
 };
 
 function* fetch360(action) {
+  console.log('inside fetch360. action.payload:', action.payload);
   try {
-    const response = yield call(axios.get, `//${action.payload}`);
+    const response = yield call(axios.get, `/current360/${action.payload}`);
     yield put({ type: 'SET_360', payload: response });
   } 
   catch (error) {

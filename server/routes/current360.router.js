@@ -2,6 +2,20 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 
+// Setup a GET route to get current 360
+router.get('/:id', (req, res) => {
+  const current360Id = req.params.id;
+  const queryText = `SELECT * FROM threesixty WHERE id=$1;`;
+    pool.query(queryText, [current360Id])
+      .then( (response) => {
+        res.send(response.rows);
+      })
+      .catch( (error) => {
+        console.log('error on get:', error);
+        res.sendStatus(500);
+      })
+})
+
 // Setup a GET route to get a 360 section
 router.get('/section', (req, res) => {
   let section = req.query.section;

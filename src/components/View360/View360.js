@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
-import { HashLink as Link } from 'react-router-hash-link';
+import SideBar from './SideBar';
 
 // Material-UI
 import { withStyles } from '@material-ui/core/styles';
@@ -9,11 +8,6 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItem';
-import { element } from 'prop-types';
-
 
 const styles = {
   sideBar: {
@@ -34,12 +28,9 @@ const styles = {
   subHeader: {
     marginBottom: '15px'
   },
-  dashboardBtn: {
+  manage360Btn: {
     margin: '15px 0px',
     justifyContent: 'center',
-  },
-  list: {
-    paddingTop: '0px'
   },
   middleDivider: {
     margin: '25px auto',
@@ -58,26 +49,17 @@ const styles = {
   }
 };
 
-const scrollWithOffset = (element, offset) => {
-  const elementPosition = element.offsetTop - offset;
-  console.log('element:', element, 'offset:', offset)
-  element.scrollIntoView({
-    block: 'start',
-    behavior: 'smooth'
-  });
-}
-
 class View360 extends Component {
 
   state = {
-
   };
 
-  // will navigate to /manage360s
+  // navigates to /manage360s
   toManage360s = (event) => {
     event.preventDefault();
     this.props.history.push('/manage360s');
   }
+
   render() {
     const { classes } = this.props;
 
@@ -85,100 +67,17 @@ class View360 extends Component {
       <Grid container spacing={0}>
         <Grid className={classes.sideBar} item xs={2}>
           <Button
-            className={classes.dashboardBtn} 
+            className={classes.manage360Btn} 
             variant="contained"
             onClick={this.toManage360s}
           >
-            Return to Dashboard
+            Return to 360 Manager
           </Button>
           <Divider />
-
-          <List className={classes.list}>
-            <Link smooth to="#goal-assessment"
-              scroll={el => scrollWithOffset(el, 150)}
-            >
-              <ListItem button>
-                <Typography>Goals Assessment</Typography>
-              </ListItem>
-            </Link>
-            <Divider />
-
-            <Link smooth to="#dashboard"
-              scroll={el => scrollWithOffset(el, 150)}
-            >
-              <ListItem button>
-                <Typography>Dashboard</Typography>
-              </ListItem>
-            </Link>
-            <Divider />
-
-            <Link smooth to="#360report"
-              scroll={el => scrollWithOffset(el, 150)}
-            >
-              <ListItem button>
-                <Typography>360 Report</Typography>
-              </ListItem>
-            </Link>
-            <Divider />
-
-            <Link smooth to="#analysis"
-              scroll={el => scrollWithOffset(el, 150)}
-            >
-              <ListItem button>
-                <Typography>
-                  Analysis &amp; Recommendations
-                </Typography>
-              </ListItem>
-            </Link>
-            <Divider />
-
-            <Link smooth to="#demo-data"
-              scroll={el => scrollWithOffset(el, 150)}
-            >
-              <ListItem button>
-                <Typography>
-                  Demo Data
-                </Typography>
-              </ListItem>
-            </Link>
-            <Divider />
-
-            <Link smooth to="#sticky-stats"
-              scroll={el => scrollWithOffset(el, 150)}
-            >
-              <ListItem button>
-                <Typography>
-                  Sticky Stats &amp; Event Materials
-                </Typography>
-              </ListItem>
-            </Link>
-            <Divider />
-
-            <Link smooth to="#mindstorm"
-              scroll={el => scrollWithOffset(el, 150)}
-            >
-              <ListItem button>
-                <Typography>
-                  Raw Mindstorm Discussions
-                </Typography>
-              </ListItem>
-            </Link>
-            <Divider />
-
-            <Link smooth to="#sign-in-sheets"
-              scroll={el => scrollWithOffset(el, 150)}
-            >
-              <ListItem button>
-                <Typography>
-                  Raw Sign-In Sheets
-                </Typography>
-              </ListItem>
-            </Link>
-            <Divider />
-
-          </List>
+          <SideBar />
         </Grid>
         <Grid className={classes.report} item xs={10}>
+          {JSON.stringify(this.props.reduxState.current360.data)}
           <section className={classes.mainInfo}>
             <Typography variant="h2" className={classes.header}>360 Name</Typography>
             <Typography variant="h5" className={classes.subHeader}>Client</Typography>

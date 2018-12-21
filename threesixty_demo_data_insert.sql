@@ -56,7 +56,7 @@ VALUES
     ('Community'), 
     ('Education');
 
-INSERT INTO threesixty ("name", "date", "location", "category_id", "client", "description", "published_status")
+INSERT INTO threesixty ("name", "date", "location", "category_id", "client", "description", "published_status", "goals_public", "dashboard_public", "threesixty_reports_public", "analysis_recommendation_public", "demographics_public")
 VALUES (
 	'Catalyst Initiative of The Minneapolis Foundation - Building Initiative: Preventing Diseases of Despair', 
 	'9-18-2018', 
@@ -72,7 +72,7 @@ VALUES (
 	false
 );
 
-INSERT INTO threesixty ("name", "date", "location", "category_id", "client", "description", "published_status")
+INSERT INTO threesixty ("name", "date", "location", "category_id", "client", "description", "published_status", "goals_public", "dashboard_public", "threesixty_reports_public", "analysis_recommendation_public", "demographics_public")
 VALUES (
 	'Carver County Public Health - A Healthy Welcome', 
 	'10-4-2018', 
@@ -88,7 +88,7 @@ VALUES (
 	false
 );
 
-INSERT INTO threesixty ("name", "date", "location", "category_id", "client", "description", "published_status")
+INSERT INTO threesixty ("name", "date", "location", "category_id", "client", "description", "published_status", "goals_public", "dashboard_public", "threesixty_reports_public", "analysis_recommendation_public", "demographics_public")
 VALUES (
 	'Health Matters!', 
 	'10-24-2017', 

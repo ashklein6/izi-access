@@ -34,4 +34,16 @@ router.put('/', (req,res) => {
   })
 });
 
+router.delete('/:id', (req,res) => {
+  const sqlText = `DELETE FROM client_request WHERE id = $1;`;
+  const requestId = req.params.id;
+  pool.query(sqlText, [requestId])
+  .then(() => {
+    res.sendStatus(200);
+  })
+  .catch(() => {
+    res.sendStatus(500);
+  })
+});
+
 module.exports = router;

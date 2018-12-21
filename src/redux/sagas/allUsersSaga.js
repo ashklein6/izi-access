@@ -13,7 +13,8 @@ function* fetchAllUsers() {
 
 function* fetchPendingRequests() {
   try {
-    
+    const response = yield call(axios.get, '/allUsers/pendingRequests');
+    yield put({type: 'SET_PENDING_REQUESTS', payload: response.data});
   } 
   catch (error) {
     console.log('error', error);
@@ -22,7 +23,8 @@ function* fetchPendingRequests() {
 
 function* fetchDeactivatedUsers() {
   try {
-    
+    const response = yield call(axios.get, '/allUsers/deactivated');
+    yield put({type: 'SET_DEACTIVATED_USERS', payload: response.data});
   } 
   catch (error) {
     console.log('error', error);

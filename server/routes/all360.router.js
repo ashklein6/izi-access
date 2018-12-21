@@ -10,7 +10,7 @@ router.get('/search', (req, res) => {
     let sqlText = `SELECT threesixty.*, izi_categories.category FROM threesixty
     JOIN izi_categories ON izi_categories.id = threesixty.category_id WHERE `;
     let search = req.query;
-    let searchFields = [search.publishedStatus];
+    let searchFields = [];
     let fieldCounter = 1;
     if(search.name) {
       sqlText += `(name = $${fieldCounter} OR client = $${fieldCounter}) `;
@@ -46,7 +46,7 @@ router.get('/search', (req, res) => {
     };
     sqlText += `AND published_status = $${fieldCounter};`;
     searchFields.push(search.publishedStatus);
-    console.log('text: ', sqlText);
+    console.log('text: ', sqlText, searchFields);
     pool.query(sqlText, searchFields)
     .then((response) => {
       console.log(response.rows);

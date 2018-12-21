@@ -16,6 +16,9 @@ import IconButton from '@material-ui/core/IconButton';
 import Cancel from '@material-ui/icons/Cancel';
 import Tooltip from '@material-ui/core/Tooltip';
 import TextField from '@material-ui/core/TextField';
+import MenuItem from '@material-ui/core/MenuItem';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import classNames from 'classnames';
 
 class ViewUser extends Component {
 
@@ -25,7 +28,7 @@ class ViewUser extends Component {
     firstname: '',
     lastname: '',
     email: '',
-    access_id: 0, // access_id???
+    access_id: 0, 
     notes: '',
     id: 0
   };
@@ -91,9 +94,14 @@ class ViewUser extends Component {
     this.endEdit();
   };
 
+  clearRequest = () => {
+    this.props.dispatch({type: 'DELETE_PENDING_REQUEST', payload: this.props.user.request_id});
+  };
+
   render() {
    const { classes } = this.props;
    const user = this.props.user;
+   const level = this.props.reduxState.userAccessLevel;
 
    return (
     <React.Fragment>
@@ -113,7 +121,8 @@ class ViewUser extends Component {
       
       <DialogContent key={user.id}>
       <Button className={classes.editBtn} size="small" variant="contained" onClick={this.editBtn}>Edit</Button>
-
+      {user.request_id &&
+      <Button className={classes.editBtn} size="small" variant="contained" onClick={this.clearRequest}>Clear Pending Request</Button>}
           <InputLabel>First Name:</InputLabel>
           
           <Typography className={classes.userInfo} variant="subheading">{user.firstname}</Typography>
@@ -124,8 +133,8 @@ class ViewUser extends Component {
           <InputLabel>Email:</InputLabel>
           <Typography className={classes.userInfo} variant="subheading">{user.email}</Typography>
           <br />
-          <InputLabel>access_id:</InputLabel>
-          <Typography className={classes.userInfo} variant="subheading">{user.access_id}</Typography>
+          <InputLabel>Access Level:</InputLabel>
+          <Typography className={classes.userInfo} variant="subheading">{user.access_type}</Typography>
           <br />
           <InputLabel>360 Access:</InputLabel>
           <br />
@@ -168,12 +177,22 @@ class ViewUser extends Component {
           />
           <br />
           <InputLabel>Access Level:</InputLabel>
-          <Input 
-            className={classes.userInfoEdit} 
-            placeholder={user.access_id.toString()}
-            onChange={this.handleChange}
-            name="access_id"
-          />
+          <TextField
+              select
+              className={classNames(classes.margin, classes.textField)}
+              value={this.state.access_id}
+              onChange={this.handleChange}
+              name="access_id"
+              InputProps={{
+                startAdornment: <InputAdornment position="start">Level</InputAdornment>,
+              }}
+            >
+              {level.map(option => (
+                <MenuItem key={option.id} value={option.id}>
+                  {option.access_type}
+                </MenuItem>
+              ))}
+          </TextField>
           <br />
           <InputLabel>360 Access:</InputLabel>
           <br />
@@ -202,7 +221,6 @@ class ViewUser extends Component {
         <Button size="small" variant="contained" onClick={this.endEdit}>Cancel</Button>
         <Button size="small" variant="contained" onClick={this.saveChanges}>Save Changes</Button>
       </DialogContent>
-      {JSON.stringify(this.state)}
     </React.Fragment>
     )}
     </Dialog>

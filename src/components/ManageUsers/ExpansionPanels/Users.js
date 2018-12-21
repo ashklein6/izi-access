@@ -58,7 +58,6 @@ class Users extends Component {
 
   // handle click of searchIcon button from 'Search by Name or Email' input
   submitSearch = (event) => {
-    console.log('state to send', this.state);
     event.preventDefault();
     this.props.dispatch({type: 'FETCH_USERS_SEARCH', payload: this.state});
   };

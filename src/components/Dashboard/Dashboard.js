@@ -12,13 +12,10 @@ import Avatar from '@material-ui/core/Avatar';
 import Forward from '@material-ui/icons/Forward';
 import PriorityHigh from '@material-ui/icons/PriorityHigh';
 
-
-
-
 class Dashboard extends Component {
 
  state = {
-
+  pending: true
  };
 
  handleCreate = () => {
@@ -39,29 +36,13 @@ class Dashboard extends Component {
    return (
      <div className={classes.div}>
       <Typography variant="h2" className={classes.header}>Admin Dashboard</Typography>
-      <Button 
-        variant="contained" 
-        style={{width: 400, height: 50, margin: 12, fontSize: 20}} 
-        onClick={this.handleCreate}>Create New BBE</Button>
-      <Button 
-        variant="contained" 
-        style={{width: 400, height: 50, margin: 12, fontSize: 20}} 
-        onClick={this.handleView}>View and Manage BBE's</Button>
-      <Button 
-        variant="contained" 
-        style={{width: 400, height: 50, margin: 12, fontSize: 20}} 
-        onClick={this.handleUsers}>Manage Users</Button>
-
-      <ButtonBase className={classes.button}>
+      <ButtonBase className={classes.button} onClick={this.handleCreate}>
         <Paper className={classes.paper}>
           <Grid container spacing={0}>
             <Grid className={classes.btnText} item xs={8}>
-              <Typography variant="h6">360 MANAGER</Typography>
+              <Typography variant="h6">CREATE NEW 360</Typography>
             </Grid>
             <Grid className={classes.btnGrid} item xs={4}>
-              {/* <Avatar className={classes.icon}>
-                <PriorityHigh />
-              </Avatar> */}
               <Avatar className={classes.root}>
                 <Forward />
               </Avatar>
@@ -70,16 +51,34 @@ class Dashboard extends Component {
         </Paper>
       </ButtonBase>
 
-      <ButtonBase>
+      <ButtonBase className={classes.button} onClick={this.handleView}>
+        <Paper className={classes.paper}>
+          <Grid container spacing={0}>
+            <Grid className={classes.btnText} item xs={8}>
+              <Typography variant="h6">360 MANAGER</Typography>
+            </Grid>
+            <Grid className={classes.btnGrid} item xs={4}>
+              <Avatar className={classes.root}>
+                <Forward />
+              </Avatar>
+            </Grid>
+          </Grid>
+        </Paper>
+      </ButtonBase>
+
+      <ButtonBase className={classes.button} onClick={this.handleUsers}>
         <Paper className={classes.paper}>
           <Grid container spacing={0}>
             <Grid className={classes.btnText} item xs={8}>
               <Typography variant="h6">MANAGE USERS</Typography>
             </Grid>
-            <Grid className={classes.btnGrid} item xs={4}>
+            <Grid className={classes.btnGrid} item xs={2}>
+            { this.state.pending ?
               <Avatar className={classes.root}>
                 <PriorityHigh />
-              </Avatar>
+              </Avatar> : null}
+            </Grid>
+            <Grid className={classes.btnGrid} item xs={2}>
               <Avatar className={classes.root}>
                 <Forward />
               </Avatar>
@@ -107,7 +106,7 @@ const styles = {
     backgroundColor: '#ddd',
   },
   button: {
-    margin: 25
+    marginBottom: 25
   },
   btnText: {
     textAlign: 'left',
@@ -115,17 +114,15 @@ const styles = {
     margin: 'auto 0px',
   },
   btnGrid: {
-    // display: 'flex',
-    alignContent: 'flex-end',
-    textAlign: 'right',
-    margin: 0
+    margin: 0,
+    paddingRight: 10
   },
   root: {
     marginLeft: 'auto',
-
-    // backgroundColor: 'red',
-    
   },
+  header: {
+    marginBottom: 25
+  }
 };
 
 const mapReduxStateToProps = (reduxState) => ({

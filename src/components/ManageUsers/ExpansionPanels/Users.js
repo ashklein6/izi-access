@@ -16,8 +16,7 @@ import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import classNames from 'classnames';
-import SearchIcon from '@material-ui/icons/Search';
-import IconButton from '@material-ui/core/IconButton';
+
 
 
 let root = document.querySelector(':root');
@@ -32,7 +31,24 @@ const colors = {
   orangeHover: window.getComputedStyle(root).getPropertyValue('--main-orange-hover'),
 };
 
-const ranges = [];
+const ranges = [
+  {
+    value: 'person.firstname',
+    label:  'First Name'
+  },
+  {
+    value: 'person.lastname',
+    label:  'Last Name'
+  },
+  {
+    value: 'person.email',
+    label:  'Email'
+  },
+  {
+    value: 'person.access_id',
+    label:  'Access Level'
+  }
+];
 
 class Users extends Component {
 
@@ -58,7 +74,6 @@ class Users extends Component {
 
   // handle click of searchIcon button from 'Search by Name or Email' input
   submitSearch = (event) => {
-    console.log('state to send', this.state);
     event.preventDefault();
     this.props.dispatch({type: 'FETCH_USERS_SEARCH', payload: this.state});
   };
@@ -70,6 +85,7 @@ class Users extends Component {
 render() {
   const { classes } = this.props;
   const level = this.props.reduxState.userAccessLevel;
+  
 
   return (
     <div className={classes.root}>
@@ -78,7 +94,7 @@ render() {
         <span>
           <form className={classes.form} onSubmit={this.submitSearch}>
           
-            <TextField className={classes.searchField} placeholder="Search by Lastname or Email" type="search" onChange={this.handleChange}
+            <TextField className={classes.searchField} placeholder="Search by Name or Email" type="search" onChange={this.handleChange}
               name="searchBy" value={this.state.searchBy}
               // InputProps={{
               //   endAdornment: 
@@ -101,7 +117,7 @@ render() {
               }}
             >
               {level.map(option => (
-                <MenuItem key={option.id} value={option.access_level}>
+                <MenuItem key={option.id} value={option.id}>
                   {option.access_type}
                 </MenuItem>
               ))}
@@ -121,7 +137,7 @@ render() {
               }}
             >
               {ranges.map(option => (
-                <MenuItem key={option.id} value={option.id}>
+                <MenuItem key={option.value} value={option.value}>
                   {option.label}
                 </MenuItem>
               ))}

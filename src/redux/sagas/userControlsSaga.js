@@ -65,6 +65,7 @@ function* changeUserStatus() {
 function* deletePendingRequest(action) {
   try {
     yield call(axios.delete, `/userControls/${action.payload}`);
+    yield put({type: 'FETCH_PENDING_REQUESTS'});
   } 
   catch (error) {
     console.log('error', error);

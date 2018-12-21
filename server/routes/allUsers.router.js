@@ -39,7 +39,7 @@ router.get('/search', (req,res) => {
     fieldCounter++;
     searchFields.push('%' + search.searchBy + '%');
   };
-  if(search.level && search.searchBy) {
+  if(search.level) {
     sqlText += `AND person.access_id = $${fieldCounter} `;
     fieldCounter++;
     searchFields.push(search.level);

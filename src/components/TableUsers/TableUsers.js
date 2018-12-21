@@ -42,8 +42,8 @@ const CustomTableCell = withStyles(theme => ({
 
 class TableUsers extends Component {
 
-  clearRequest = () => {
-    this.props.dispatch({type: 'DELETE_PENDING_REQUEST', payload: this.props.user.request_id});
+  clearRequest = (id) => {
+    this.props.dispatch({type: 'DELETE_PENDING_REQUEST', payload: id});
   };
 
   render() {
@@ -75,7 +75,7 @@ class TableUsers extends Component {
                 <CustomTableCell className={classes.centerText} component="th" scope="row">
                   <ViewUser user={row}/>
                   {row.request_id &&
-                  <Button className={classes.editBtn} size="small" variant="contained" onClick={this.clearRequest}>DELETE</Button>}
+                  <Button className={classes.editBtn} size="small" variant="contained" onClick={() => this.clearRequest(row.request_id)}>DELETE</Button>}
                 </CustomTableCell>
               </TableRow>
             );

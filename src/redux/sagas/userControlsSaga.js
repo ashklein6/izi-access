@@ -53,6 +53,16 @@ function* editUserInfo(action) {
   }
 };
 
+function* editCurrentUserInfo(action) {
+  try {
+    yield call(axios.put, '/userControls/currentUser', {data: action.payload});
+    yield put({type: 'FETCH_USER'});
+  } 
+  catch (error) {
+    console.log('error', error);
+  }
+};
+
 function* changeUserStatus() {
   try {
     
@@ -80,6 +90,7 @@ function* userControlsSaga() {
   yield takeLatest( 'EDIT_USER_INFO', editUserInfo );
   yield takeLatest( 'CHANGE_USER_STATUS', changeUserStatus );
   yield takeLatest( 'DELETE_PENDING_REQUEST', deletePendingRequest );
+  yield takeLatest( 'EDIT_CURRENT_USER_INFO', editCurrentUserInfo );
 }
 
 export default userControlsSaga;

@@ -77,7 +77,7 @@ class View360 extends Component {
           <SideBar />
         </Grid>
         <Grid className={classes.report} item xs={10}>
-          {JSON.stringify(this.props.reduxState.current360.data)}
+          {JSON.stringify(this.props.reduxState.current360)}
           <section className={classes.mainInfo}>
             <Typography variant="h2" className={classes.header}>360 Name</Typography>
             <Typography variant="h5" className={classes.subHeader}>Client</Typography>

@@ -27,7 +27,7 @@ const scrollWithOffset = (element, offset) => {
 // const sectionTitles = ['Goals Assessment', 'Dashboard', '360report', 'Analysis & Recommendations', 'Demo Data', 'Sticky Stats & Event Materials', 'Raw Mindstorm Discussions', 'Raw Sign-In Sheets'];
 
 // info for sidebar links
-let sectionInfo = [
+const sectionInfo = [
   { title: 'Goals Assessment', id: '#goal-assessment' },
   { title: 'DashBoard', id: '#dashboard' },
   { title: '360 Report', id: '#360report' },

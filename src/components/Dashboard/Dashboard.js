@@ -59,10 +59,10 @@ class Dashboard extends Component {
               <Typography variant="h6">360 MANAGER</Typography>
             </Grid>
             <Grid className={classes.btnGrid} item xs={4}>
-              <Avatar className={classes.icon}>
+              {/* <Avatar className={classes.icon}>
                 <PriorityHigh />
-              </Avatar>
-              <Avatar className={classes.icon}>
+              </Avatar> */}
+              <Avatar className={classes.root}>
                 <Forward />
               </Avatar>
             </Grid>
@@ -77,12 +77,12 @@ class Dashboard extends Component {
               <Typography variant="h6">MANAGE USERS</Typography>
             </Grid>
             <Grid className={classes.btnGrid} item xs={4}>
-              <Avatar className={classes.icon}>
+              <Avatar className={classes.root}>
                 <PriorityHigh />
               </Avatar>
-              {/* <Avatar className={classes.icon}>
+              <Avatar className={classes.root}>
                 <Forward />
-              </Avatar> */}
+              </Avatar>
             </Grid>
           </Grid>
         </Paper>
@@ -101,7 +101,7 @@ const styles = {
     padding: 20,
   },
   paper: {
-    display: 'inline',
+    display: 'flex',
     width: 380,
     padding: 5,
     backgroundColor: '#ddd',
@@ -112,13 +112,19 @@ const styles = {
   btnText: {
     textAlign: 'left',
     paddingLeft: 20,
-    margin: 'auto 0px'
+    margin: 'auto 0px',
   },
   btnGrid: {
-    display: 'flex',
+    // display: 'flex',
+    alignContent: 'flex-end',
+    textAlign: 'right',
+    margin: 0
   },
-  icon: {
-    margin: 'auto',
+  root: {
+    marginLeft: 'auto',
+
+    // backgroundColor: 'red',
+    
   },
 };
 

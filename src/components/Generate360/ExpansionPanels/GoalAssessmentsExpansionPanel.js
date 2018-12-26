@@ -71,7 +71,8 @@ class GoalsAssessmentExpansionPanel extends Component {
 
    return (
     <div className={classes.root}>
-      <ExpansionPanel defaultExpanded>
+      {JSON.stringify(this.props.reduxState.current360.goalsAssessment)}
+      <ExpansionPanel defaultExpanded className={classes.expansionPanel}>
 
         {/* Information on the expansion panel's summary bar (always shows) */}
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />} className={classes.summary}>
@@ -178,6 +179,9 @@ const styles = {
   details: {
     alignItems: 'center',
   },
+  expansionPanel: {
+    backgroundColor: colors.lightGrey
+  },
   heading: {
     fontSize: "1.5rem",
   },
@@ -198,7 +202,7 @@ const styles = {
     fontWeight: 'bold'
   },
   summary: {
-    alignItems: 'center'
+    alignItems: 'center',
   },
   table: {
     minWidth: 700

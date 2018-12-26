@@ -1,4 +1,4 @@
-const current360 = (state = {updateNeeded: {goalsAssessment: false}, goalsAssessment: []}, action) => {
+const current360 = (state = {updateNeeded: {goalsAssessment: false}, goalsAssessment: [], dashboard: [], threesixty_reports: [], analysis_recommendation: [], demographics: [], circle_share: [], question_set: [], oral_report: []}, action) => {
     switch (action.type) {
       case 'SET_360_INFO':
         return {...state, info: action.payload};

@@ -86,43 +86,62 @@ class View360 extends Component {
           <section className={classes.content}>
             <Typography variant="h5" className={classes.subHeader} id="goal-assessment">Goals Assessment</Typography>
             <div className={classes.paragraph}>
-            <Paper className={classes.rootTable}>
-            <Table className={classes.table}>
-              <TableHead>
-                <TableRow>
-                  <CustomTableCell width="25%">Description</CustomTableCell>
-                  <CustomTableCell>Desired</CustomTableCell>
-                  <CustomTableCell>Delivered</CustomTableCell>
-                  <CustomTableCell>Difference</CustomTableCell>
-                  <CustomTableCell>Percent</CustomTableCell>
-                  <CustomTableCell>Comments</CustomTableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {this.props.reduxState.current360.goalsAssessment.map(row => {
-                  return (
-                    <TableRow key={row.id}>
-                      <CustomTableCell component="th" scope="row" width="25%">
-                        {row.description}
-                      </CustomTableCell>
-                      <CustomTableCell className={classes.centerText}>{row.desired}</CustomTableCell>
-                      <CustomTableCell className={classes.centerText}>{row.delivered}</CustomTableCell>
-                      <CustomTableCell className={classes.centerText}>{row.difference}</CustomTableCell>
-                      <CustomTableCell className={classes.centerText}>{row.percent}%</CustomTableCell>
-                      <CustomTableCell>{row.comments}</CustomTableCell>
+              <Paper className={classes.rootTable}>
+                <Table className={classes.table}>
+                  <TableHead>
+                    <TableRow>
+                      <CustomTableCell width="25%">Description</CustomTableCell>
+                      <CustomTableCell>Desired</CustomTableCell>
+                      <CustomTableCell>Delivered</CustomTableCell>
+                      <CustomTableCell>Difference</CustomTableCell>
+                      <CustomTableCell>Percent</CustomTableCell>
+                      <CustomTableCell>Comments</CustomTableCell>
                     </TableRow>
-                  );
-                })}
-              </TableBody>
-            </Table>
-          </Paper>
+                  </TableHead>
+                  <TableBody>
+                    {this.props.reduxState.current360.goalsAssessment.map(row => {
+                      return (
+                        <TableRow key={row.id}>
+                          <CustomTableCell component="th" scope="row" width="25%">
+                            {row.description}
+                          </CustomTableCell>
+                          <CustomTableCell className={classes.centerText}>{row.desired}</CustomTableCell>
+                          <CustomTableCell className={classes.centerText}>{row.delivered}</CustomTableCell>
+                          <CustomTableCell className={classes.centerText}>{row.difference}</CustomTableCell>
+                          <CustomTableCell className={classes.centerText}>{row.percent}%</CustomTableCell>
+                          <CustomTableCell>{row.comments}</CustomTableCell>
+                        </TableRow>
+                      );
+                    })}
+                  </TableBody>
+                </Table>
+              </Paper>
             </div>
 
             <Typography variant="h5" className={classes.subHeader} id="dashboard">Dashboard</Typography>
             <div className={classes.paragraph}>
-              <Typography>
-                {JSON.stringify(this.props.reduxState.current360.dashboard)}
-              </Typography>
+              <Paper className={classes.rootTable}>
+                <Table className={classes.table}>
+                  <TableHead>
+                    <TableRow>
+                      <CustomTableCell width="25%">Description</CustomTableCell>
+                      <CustomTableCell>Details</CustomTableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {this.props.reduxState.current360.dashboard.map(row => {
+                      return (
+                        <TableRow key={row.id}>
+                          <CustomTableCell component="th" scope="row" width="25%">
+                            {row.row_title}
+                          </CustomTableCell>
+                          <CustomTableCell className={classes.centerText}>{row.row_info}</CustomTableCell>
+                        </TableRow>
+                      );
+                    })}
+                  </TableBody>
+                </Table>
+              </Paper>
             </div>
 
             <Typography variant="h5" className={classes.subHeader} id="360report">360 Report</Typography>
@@ -130,76 +149,82 @@ class View360 extends Component {
               <Typography>
               {JSON.stringify(this.props.reduxState.current360.threesixty_reports)}
               </Typography>
-              <Typography>
-              {JSON.stringify(this.props.reduxState.current360.oral_reports)}
-              </Typography>
             </div>
 
             <Typography variant="h5" className={classes.subHeader} id="analysis">Analysis &amp; Recommendations</Typography>
+            
             <div className={classes.paragraph}>
+              <Typography variant="h5">
+                Outreach Findings
+              </Typography>
               <Typography>
-                Ut vel ipsum porttitor, varius nisl eget, suscipit leo. Maecenas mollis orci sagittis, vehicula ante ac, aliquet libero. Vivamus finibus finibus semper. 
-                Praesent convallis arcu sapien, quis porttitor magna dapibus ac. Suspendisse facilisis ut felis et mattis. Duis et sem ante. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. 
-                Maecenas malesuada sem vitae urna pretium, id auctor neque vulputate. Proin sed urna ac tortor volutpat hendrerit sed in massa. Nunc varius neque eget nibh fringilla, a tincidunt nibh mollis. 
-                Aenean condimentum porta felis sed vestibulum. Donec placerat purus urna, vel consectetur libero rutrum sit amet. Vestibulum egestas sapien sed eros pellentesque, at malesuada dolor tempor. 
-                Vestibulum id libero vitae leo vehicula mattis. Etiam ante magna, rutrum at suscipit tempus, efficitur eu turpis. Sed in magna sed leo pretium rutrum eget eleifend risus.
-                <br/>
-                <br/>
-                Nullam sodales leo nec viverra semper. Fusce suscipit porttitor molestie. Phasellus blandit ut diam vel tempor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                Aenean molestie dui quis lectus tempor, a laoreet mi blandit. Curabitur quis elit mauris. Ut sollicitudin cursus volutpat. Donec sodales consectetur tincidunt. 
-                Duis posuere auctor risus. Donec sit amet ante urna.
+                {this.props.reduxState.current360.analysis_recommendation.map(row => {
+                    return (
+                      row.findings
+                    )
+                  }
+                )}
+              </Typography>
+              <Typography variant="h5">
+                Recommendation
+              </Typography>
+              <Typography>
+                {this.props.reduxState.current360.analysis_recommendation.map(row => {
+                    return (
+                      row.recommendations
+                    )
+                  }
+                )}
               </Typography>
             </div>
 
             <Typography variant="h5" className={classes.subHeader} id="demo-data">Demo Data</Typography>
             <div className={classes.paragraph}>
-              <Typography>
-                Ut vel ipsum porttitor, varius nisl eget, suscipit leo. Maecenas mollis orci sagittis, vehicula ante ac, aliquet libero. Vivamus finibus finibus semper. 
-                Praesent convallis arcu sapien, quis porttitor magna dapibus ac. Suspendisse facilisis ut felis et mattis. Duis et sem ante. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. 
-                Maecenas malesuada sem vitae urna pretium, id auctor neque vulputate. Proin sed urna ac tortor volutpat hendrerit sed in massa. Nunc varius neque eget nibh fringilla, a tincidunt nibh mollis. 
-                Aenean condimentum porta felis sed vestibulum. Donec placerat purus urna, vel consectetur libero rutrum sit amet. Vestibulum egestas sapien sed eros pellentesque, at malesuada dolor tempor. 
-                Vestibulum id libero vitae leo vehicula mattis. Etiam ante magna, rutrum at suscipit tempus, efficitur eu turpis. Sed in magna sed leo pretium rutrum eget eleifend risus.
-                <br/>
-                <br/>
-                Nullam sodales leo nec viverra semper. Fusce suscipit porttitor molestie. Phasellus blandit ut diam vel tempor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                Aenean molestie dui quis lectus tempor, a laoreet mi blandit. Curabitur quis elit mauris. Ut sollicitudin cursus volutpat. Donec sodales consectetur tincidunt. 
-                Duis posuere auctor risus. Donec sit amet ante urna.
-              </Typography>
+              <Paper className={classes.rootTable}>
+                <Table className={classes.table}>
+                  <TableHead>
+                    <TableRow>
+                      <CustomTableCell>Ethnic ID</CustomTableCell>
+                      <CustomTableCell>Passion</CustomTableCell>
+                      <CustomTableCell>Profession</CustomTableCell>
+                      <CustomTableCell>Generation</CustomTableCell>
+                      <CustomTableCell>Referral</CustomTableCell>
+                      <CustomTableCell>Comments</CustomTableCell>
+                      <CustomTableCell>Plans to tell someone</CustomTableCell>
+                      <CustomTableCell>First time at the table</CustomTableCell>
+                      <CustomTableCell>Interested in future conversations about preventing child abuse and neglect</CustomTableCell>
+                      <CustomTableCell>Interested in future conversations about housing</CustomTableCell>
+                      <CustomTableCell>Interested in future conversations about transportation</CustomTableCell>
+                      <CustomTableCell>Interested in future conversations about education</CustomTableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {this.props.reduxState.current360.demographics.map(row => {
+                      return (
+                        <TableRow key={row.id}>
+                          <CustomTableCell component="th" scope="row" className={classes.centerText}>
+                            {row.ethnicity}
+                          </CustomTableCell>
+                          <CustomTableCell className={classes.centerText}>{row.passion}</CustomTableCell>
+                          <CustomTableCell className={classes.centerText}>{row.profession}</CustomTableCell>
+                          <CustomTableCell className={classes.centerText}>{row.generation}</CustomTableCell>
+                          <CustomTableCell className={classes.centerText}>{row.referral}</CustomTableCell>
+                          <CustomTableCell className={classes.centerText}>{row.comments}</CustomTableCell>
+                          <CustomTableCell className={classes.centerText}>{row.plans_to_tell}</CustomTableCell>
+                          <CustomTableCell className={classes.centerText}>{row.first_time}</CustomTableCell>
+                          <CustomTableCell className={classes.centerText}>{row.child_abuse}</CustomTableCell>
+                          <CustomTableCell className={classes.centerText}>{row.housing}</CustomTableCell>
+                          <CustomTableCell className={classes.centerText}>{row.transportation}</CustomTableCell>
+                          <CustomTableCell className={classes.centerText}>{row.education}</CustomTableCell>
+                        </TableRow>
+                      );
+                    })}
+                  </TableBody>
+                </Table>
+              </Paper>
             </div>
 
             <Typography variant="h5" className={classes.subHeader} id="sticky-stats">Sticky Stats &amp; Event Materials</Typography>
-            <div className={classes.paragraph}>
-              <Typography>
-                Ut vel ipsum porttitor, varius nisl eget, suscipit leo. Maecenas mollis orci sagittis, vehicula ante ac, aliquet libero. Vivamus finibus finibus semper. 
-                Praesent convallis arcu sapien, quis porttitor magna dapibus ac. Suspendisse facilisis ut felis et mattis. Duis et sem ante. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. 
-                Maecenas malesuada sem vitae urna pretium, id auctor neque vulputate. Proin sed urna ac tortor volutpat hendrerit sed in massa. Nunc varius neque eget nibh fringilla, a tincidunt nibh mollis. 
-                Aenean condimentum porta felis sed vestibulum. Donec placerat purus urna, vel consectetur libero rutrum sit amet. Vestibulum egestas sapien sed eros pellentesque, at malesuada dolor tempor. 
-                Vestibulum id libero vitae leo vehicula mattis. Etiam ante magna, rutrum at suscipit tempus, efficitur eu turpis. Sed in magna sed leo pretium rutrum eget eleifend risus.
-                <br/>
-                <br/>
-                Nullam sodales leo nec viverra semper. Fusce suscipit porttitor molestie. Phasellus blandit ut diam vel tempor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                Aenean molestie dui quis lectus tempor, a laoreet mi blandit. Curabitur quis elit mauris. Ut sollicitudin cursus volutpat. Donec sodales consectetur tincidunt. 
-                Duis posuere auctor risus. Donec sit amet ante urna.
-              </Typography>
-            </div>
-
-            <Typography variant="h5" className={classes.subHeader} id="mindstorm">Raw Mindstorm Discussions</Typography>
-            <div className={classes.paragraph}>
-              <Typography>
-                Ut vel ipsum porttitor, varius nisl eget, suscipit leo. Maecenas mollis orci sagittis, vehicula ante ac, aliquet libero. Vivamus finibus finibus semper. 
-                Praesent convallis arcu sapien, quis porttitor magna dapibus ac. Suspendisse facilisis ut felis et mattis. Duis et sem ante. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. 
-                Maecenas malesuada sem vitae urna pretium, id auctor neque vulputate. Proin sed urna ac tortor volutpat hendrerit sed in massa. Nunc varius neque eget nibh fringilla, a tincidunt nibh mollis. 
-                Aenean condimentum porta felis sed vestibulum. Donec placerat purus urna, vel consectetur libero rutrum sit amet. Vestibulum egestas sapien sed eros pellentesque, at malesuada dolor tempor. 
-                Vestibulum id libero vitae leo vehicula mattis. Etiam ante magna, rutrum at suscipit tempus, efficitur eu turpis. Sed in magna sed leo pretium rutrum eget eleifend risus.
-                <br/>
-                <br/>
-                Nullam sodales leo nec viverra semper. Fusce suscipit porttitor molestie. Phasellus blandit ut diam vel tempor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                Aenean molestie dui quis lectus tempor, a laoreet mi blandit. Curabitur quis elit mauris. Ut sollicitudin cursus volutpat. Donec sodales consectetur tincidunt. 
-                Duis posuere auctor risus. Donec sit amet ante urna.
-              </Typography>
-            </div>
-
-            <Typography variant="h5" className={classes.subHeader} id="sign-in-sheets">Raw Sign-In Sheets</Typography>
             <div className={classes.paragraph}>
               <Typography>
                 Ut vel ipsum porttitor, varius nisl eget, suscipit leo. Maecenas mollis orci sagittis, vehicula ante ac, aliquet libero. Vivamus finibus finibus semper. 
@@ -226,6 +251,9 @@ const styles = {
     height: '100vh',
     backgroundColor: '#ccc',
     textAlign: 'center',
+  },
+  centerText: {
+    textAlign: 'right'
   },
   report: {
     height: '100vh',

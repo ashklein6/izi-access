@@ -24,6 +24,8 @@ import ManageUsers from '../ManageUsers/ManageUsers';
 import UserProfile from '../UserProfile/UserProfile';
 import View360 from '../View360/View360';
 
+import Paper from '@material-ui/core/Paper';
+
 
 import './App.css';
 
@@ -36,72 +38,76 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div>
+        <div style= {{height: '100%'}}>
           <Nav />
-          <Switch>
-            {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
-            <Redirect exact from="/" to="/home" />
+          <Paper className="paper"> 
+            <Switch>
+              {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
+              <Redirect exact from="/" to="/home" />
 
-            {/* For the following pages, no login is necessary. */}
-            <Route
-              exact
-              path="/home"
-              component={Home}
-            />
-            <Route
-              exact
-              path="/view360"
-              component={View360}
-            />
-            <Route
-              exact
-              path="/login"
-              component={Login}
-            />
-            <Route
-              exact
-              path="/register"
-              component={CreateUser}
-            />
+              {/* For the following pages, no login is necessary. */}
+              <Route
+                exact
+                path="/home"
+                component={Home}
+              />
+              <Route
+                exact
+                path="/view360"
+                component={View360}
+              />
+              <Route
+                exact
+                path="/login"
+                component={Login}
+              />
+              <Route
+                exact
+                path="/register"
+                component={CreateUser}
+              />
 
-            {/* The following pages are protected. The user's access level will be checked.
-              The user will be directed to the login page if they are not logged in, and to 
-              the home page if they are logged in without the appropriate authorization level */}
-            <ProtectedRoute
-              exact
-              path="/profile"
-              component={UserProfile}
-            />
-            <ProtectedRoute
-              exact
-              path="/dashboard"
-              component={Dashboard}
-            />
-            <ProtectedRoute
-              exact
-              path="/create360"
-              component={Create360}
-            />
-            <ProtectedRoute
-              exact
-              path="/manage360s"
-              component={Manage360s}
-            />
-            <ProtectedRoute
-              exact
-              path="/manageUsers"
-              component={ManageUsers}
-            />
-            <ProtectedRoute
-              exact
-              path="/generate360"
-              component={Generate360}
-            />
+              {/* The following pages are protected. The user's access level will be checked.
+                The user will be directed to the login page if they are not logged in, and to 
+                the home page if they are logged in without the appropriate authorization level */}
+              <ProtectedRoute
+                exact
+                path="/profile"
+                component={UserProfile}
+              />
+              <ProtectedRoute
+                exact
+                path="/dashboard"
+                component={Dashboard}
+              />
+              <ProtectedRoute
+                exact
+                path="/create360"
+                component={Create360}
+              />
+              <ProtectedRoute
+                exact
+                path="/manage360s"
+                component={Manage360s}
+              />
+              <ProtectedRoute
+                exact
+                path="/manageUsers"
+                component={ManageUsers}
+              />
+              <ProtectedRoute
+                exact
+                path="/generate360"
+                component={Generate360}
+              />
 
-            {/* If none of the other routes matched, we will show a 404. */}
-            <Route render={() => <h1>404</h1>} />
-          </Switch>
+              {/* If none of the other routes matched, we will show a 404. */}
+              <Route render={() => <h1>404</h1>} />
+            </Switch>
+
+          </Paper>
           <Footer />
+
         </div>
       </Router>
   )}

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { StickyContainer, Sticky } from 'react-sticky';
+
 import SideBar from './SideBar';
 
 // Material-UI
@@ -11,19 +13,20 @@ import Divider from '@material-ui/core/Divider';
 
 const styles = {
   sideBar: {
-    height: '100vh',
+    height: 'calc(100vh - 122px)',
     backgroundColor: '#ccc',
     textAlign: 'center',
   },
   report: {
-    height: '100vh',
+    height: 'calc(100vh - 122px)',
+    overflow: 'auto'
   },
-  mainInfo: {
+  mainReportInfo: {
     textAlign: 'center',
-    height: '35vh'
+    // height: '35vh'
   },
   header: {
-    margin: '50px 0px 25px 0px'
+    margin: '50px 0px 25px 0px',
   },
   subHeader: {
     marginBottom: '15px'
@@ -40,7 +43,7 @@ const styles = {
     textAlign: 'left',
     margin: 'auto',
     width: '85%',
-    height: '55vh',
+    // height: '55vh',
     overflow: 'auto'
   },
   paragraph: {
@@ -77,9 +80,11 @@ class View360 extends Component {
           <SideBar />
         </Grid>
         <Grid className={classes.report} item xs={10}>
-          {JSON.stringify(this.props.reduxState.current360)}
-          <section className={classes.mainInfo}>
+          {/* {JSON.stringify(this.props.reduxState.current360)} */}
+          <section className={classes.mainReportInfo}>
+          
             <Typography variant="h2" className={classes.header}>360 Name</Typography>
+          
             <Typography variant="h5" className={classes.subHeader}>Client</Typography>
             <Typography variant="h5" className={classes.subHeader}>Location</Typography>
             <Typography variant="h5" className={classes.subHeader}>Date</Typography>

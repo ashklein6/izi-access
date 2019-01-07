@@ -64,3 +64,8 @@ input {
 a {
     text-decoration: none;
 }
+
+.paper {
+    padding-top: 64px;
+    height: calc(100vh - 122px);
+}

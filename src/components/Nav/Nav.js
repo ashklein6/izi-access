@@ -27,34 +27,6 @@ class Nav extends Component {
     const { classes } = this.props;
 
     return (
-      // <div className={classes.root}>
-      //   <AppBar position="static">
-      //     <Link to="/home">
-      //       <h2 className="nav-title">MarnitaConnect</h2>
-      //     </Link>
-      //     <div className={classes.grow}>
-      //       {this.props.reduxState.user.id && (
-      //         <>
-      //           <Link className={classes.menuButton} to="/dashboard">
-      //             Dashboard
-      //           </Link>
-      //         </>
-      //       )}
-      //       <Link className="nav-link" to="/profile">
-      //         {/* Show this link if they are logged in or not,
-      //         but call this link 'Home' if they are logged in,
-      //         and call this link 'Login / Register' if they are not */}
-      //         {this.props.reduxState.user.id ? 'Profile' : 'Login / Register'}
-      //       </Link>
-      //       {/* Show the link to the info page and the logout button if the user is logged in */}
-      //       {this.props.reduxState.user.id && (
-      //         <>
-      //           <LogOutButton className="nav-link"/>
-      //         </>
-      //       )}
-      //     </div>
-      //   </AppBar>
-      // </div>
       <div className={classes.root}>
         <AppBar className={classes.nav} position="static">
           <Toolbar>
@@ -113,15 +85,6 @@ const styles = {
   }
 };
 
-// Instead of taking everything from state, we just want the user
-// object to determine if they are logged in
-// if they are logged in, we show them a few more links 
-// if you wanted you could write this code like this:
-// const mapStateToProps = ({ user }) => ({ user });
-
-// const mapStateToProps = state => ({
-//   user: state.user,
-// });
 const mapReduxStateToProps = (reduxState) => ({
   reduxState
 });

@@ -68,7 +68,6 @@ class Nav extends Component {
 const styles = {
   root: {
     flexGrow: 1,
-    marginBottom: 100
   },
   grow: {
     flexGrow: 1,

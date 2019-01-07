@@ -6,7 +6,7 @@ import { HashLink as Link } from 'react-router-hash-link';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
+import MenuItem from '@material-ui/core/MenuItem';
 import Divider from '@material-ui/core/Divider';
 
 const styles = {
@@ -41,6 +41,13 @@ const sectionInfo = [
 class SideBar extends Component {
 
   state = {
+    selectedIndex: 0,
+  };
+
+  handleMenuItemClick = (event, index) => {
+    this.setState({ 
+      selectedIndex: index 
+    });
   };
 
   render() {
@@ -48,13 +55,17 @@ class SideBar extends Component {
 
     return (
       <List className={classes.list}>
-        {sectionInfo.map( sectionId => 
+        {sectionInfo.map( (sectionId, index) => 
         <Link smooth to={sectionId.id}
           scroll={el => scrollWithOffset(el, 150)}
         >
-          <ListItem button>
+          <MenuItem
+            key={index}
+            selected={index === this.state.selectedIndex}
+            onClick={event => this.handleMenuItemClick(event, index)}
+          >
             <Typography>{sectionId.title}</Typography>
-          </ListItem>
+          </MenuItem>
           <Divider />
         </Link>
         )}

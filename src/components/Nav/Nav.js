@@ -28,7 +28,7 @@ class Nav extends Component {
 
     return (
       <div className={classes.root}>
-        <AppBar className={classes.nav} position="static">
+        <AppBar className={classes.nav} position="fixed">
           <Toolbar>
             <Link to="/home">
               <Typography className={classes.title} variant="h4">
@@ -68,6 +68,7 @@ class Nav extends Component {
 const styles = {
   root: {
     flexGrow: 1,
+    marginBottom: 100
   },
   grow: {
     flexGrow: 1,

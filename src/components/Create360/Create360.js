@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+// React-confirm-alert
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css' // Import css
+
 // Material-UI
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
@@ -48,7 +52,7 @@ class Create360 extends Component {
   returnToDashboard = (event) => {
     event.preventDefault();
     this.props.history.push('/dashboard');
-  }
+  };
 
   // handles change for inputs
   handleChange = (event) => {
@@ -57,7 +61,7 @@ class Create360 extends Component {
       ...this.state,
       [event.target.name]: event.target.value,
     })
-  }
+  };
 
   // handles change for switch
   handleSwitch = (event) => {
@@ -67,15 +71,60 @@ class Create360 extends Component {
       ...this.state,
       status: newValue
     });
-  }
+  };
 
   // dispatch to current360Saga
   handleSubmit = (event) => {
-    console.log('handleSubmit');
     event.preventDefault();
-    this.props.dispatch({ type: 'CREATE_360)', payload: this.state });
+    if(this.state.name && this.state.client && this.state.date && this.state.location && this.state.category){
+      this.confirmSubmit();
+    } else {
+      this.errorMessage();
+    };
     // this.props.history.push('/generate360');
+  };
+
+  errorMessage = () => {
+    confirmAlert({
+      title: 'Error',
+      message: 'All fields must be completed to proceed.',
+      buttons: [
+        {
+          label: 'Ok',
+        },
+      ]
+    })
+  };
+
+
+  create360 = () => {
+    if(!this.state.status){
+      this.props.dispatch({ type: 'CREATE_360_COMPLETE)', payload: this.state });
+    } else {
+      this.props.dispatch({ type: 'CREATE_360_LOWDOWN)', payload: this.state }); 
+    };
   }
+
+  confirmSubmit = () => {
+    confirmAlert({
+      title: 'Confirm to submit',
+      message: `Are you sure you want to create a 360 with these properties:
+                Name: ${this.state.name},
+                Client: ${this.state.client},
+                Date: ${this.state.date},
+                Location: ${this.state.location},
+                Category: ${this.state.category}`,
+      buttons: [
+        {
+          label: 'Submit',
+          onClick: () => this.create360()
+        },
+        {
+          label: 'Edit',
+        }
+      ]
+    })
+  };
 
   render() {
     const { classes } = this.props;

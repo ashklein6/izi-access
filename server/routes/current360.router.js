@@ -40,7 +40,16 @@ router.get('/section', (req, res) => {
 /**
  * POST route template
  */
-router.post('/', (req, res) => {
+router.post('/complete', (req, res) => {
+    const new360 = req.body.data;
+    const client = await pool.connect();
+    try {
+        await client.query('BEGIN');
+        await client.query('INSERT INTO')
+    }
+});
+
+router.post('/lowdown', (req, res) => {
 
 });
 

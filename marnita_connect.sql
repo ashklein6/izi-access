@@ -11,7 +11,7 @@ CREATE TABLE "person" (
     "password" VARCHAR (1000) NOT NULL,
     "firstname" VARCHAR(255),
     "lastname" VARCHAR(255),
-    "access_id" INT REFERENCES "access",
+    "access_id" INT DEFAULT 1 REFERENCES "access",
     "notes" VARCHAR(2560),
     "date_added" TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -38,11 +38,14 @@ CREATE TABLE "threesixty" (
     "client" VARCHAR(255),
     "description" VARCHAR(25600),
     "published_status" BOOLEAN DEFAULT FALSE,
-    "goals_public" BOOLEAN DEFAULT FALSE NOT NULL,
-    "dashboard_public" BOOLEAN DEFAULT FALSE NOT NULL,
-    "threesixty_reports_public" BOOLEAN DEFAULT TRUE NOT NULL,
     "analysis_recommendation_public" BOOLEAN DEFAULT FALSE NOT NULL,
-    "demographics_public" BOOLEAN DEFAULT FALSE NOT NULL
+    "threesixty_reports_public" BOOLEAN DEFAULT TRUE NOT NULL,
+    "dashboard_public" BOOLEAN DEFAULT FALSE NOT NULL,
+    "goals_public" BOOLEAN DEFAULT FALSE NOT NULL,
+    "demographics_public" BOOLEAN DEFAULT FALSE NOT NULL,
+    "oral_report_public" BOOLEAN DEFAULT TRUE NOT NULL,
+    "question_set_public" BOOLEAN DEFAULT TRUE NOT NULL,
+    "circle_share_public" BOOLEAN DEFAULT TRUE NOT NULL
 );
 
 CREATE TABLE "analysis_recommendation" (
@@ -57,7 +60,7 @@ CREATE TABLE "dashboard" (
     "threesixty_id" INT REFERENCES "threesixty",
     "row_title" VARCHAR(25600),
     "row_info" VARCHAR(25600),
-    "private" BOOLEAN DEFAULT FALSE
+    "row_public" BOOLEAN DEFAULT TRUE
 );
 
 CREATE TABLE "goals" (
@@ -68,7 +71,8 @@ CREATE TABLE "goals" (
     "delivered" INT,
     "difference" INT,
     "percent" INT,
-    "comments" VARCHAR(25600)
+    "comments" VARCHAR(25600),
+    "row_public" BOOLEAN DEFAULT TRUE
 );
 
 CREATE TABLE "threesixty_reports" (

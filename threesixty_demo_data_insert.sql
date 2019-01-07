@@ -56,7 +56,7 @@ VALUES
     ('Community'), 
     ('Education');
 
-INSERT INTO threesixty ("name", "date", "location", "category_id", "client", "description", "published_status", "goals_public", "dashboard_public", "threesixty_reports_public", "analysis_recommendation_public", "demographics_public")
+INSERT INTO threesixty ("name", "date", "location", "category_id", "client", "description", "published_status", "analysis_recommendation_public", "threesixty_reports_public", "dashboard_public", "goals_public", "demographics_public", "oral_report_public", "question_set_public", "circle_share_public")
 VALUES (
 	'Catalyst Initiative of The Minneapolis Foundation - Building Initiative: Preventing Diseases of Despair', 
 	'9-18-2018', 
@@ -65,14 +65,17 @@ VALUES (
 	'MTI',
 	'121 community members and representatives of organizations and programs with a vested interest in preventing diseases of despair engaged in a conversation and collaborative planning session on primary prevention and holistic and integrative strategies for preventing diseases of despair including suicide, alcoholism and other chemical dependency disorders.', 
 	false,
+	true,
+	true,
+	false,
 	false,
 	false,
 	true,
 	true,
-	false
+	true
 );
 
-INSERT INTO threesixty ("name", "date", "location", "category_id", "client", "description", "published_status", "goals_public", "dashboard_public", "threesixty_reports_public", "analysis_recommendation_public", "demographics_public")
+INSERT INTO threesixty ("name", "date", "location", "category_id", "client", "description", "published_status", "analysis_recommendation_public", "threesixty_reports_public", "dashboard_public", "goals_public", "demographics_public", "oral_report_public", "question_set_public", "circle_share_public")
 VALUES (
 	'Carver County Public Health - A Healthy Welcome', 
 	'10-4-2018', 
@@ -81,14 +84,17 @@ VALUES (
 	'MTI',
 	'86 community members gathered to discuss healthcare and community health needs.',
 	false,
+	true,
+	true,
+	false,
 	false,
 	false,
 	true,
 	true,
-	false
+	true
 );
 
-INSERT INTO threesixty ("name", "date", "location", "category_id", "client", "description", "published_status", "goals_public", "dashboard_public", "threesixty_reports_public", "analysis_recommendation_public", "demographics_public")
+INSERT INTO threesixty ("name", "date", "location", "category_id", "client", "description", "published_status", "analysis_recommendation_public", "threesixty_reports_public", "dashboard_public", "goals_public", "demographics_public", "oral_report_public", "question_set_public", "circle_share_public")
 VALUES (
 	'Health Matters!', 
 	'10-24-2017', 
@@ -97,11 +103,14 @@ VALUES (
 	'Scott County Health Care System Collaborative',
 	'140 community members gathered together to discuss healthcare.',
 	false,
+	true,
+	true,
+	false,
 	false,
 	false,
 	true,
 	true,
-	false
+	true
 );
 
 INSERT INTO analysis_recommendation (threesixty_id, findings, recommendations)
@@ -239,79 +248,79 @@ methodology we use to engage community for meaningful, sustainable impact.'
 	)
 ;
 
-INSERT INTO dashboard (threesixty_id, row_title, row_info, private)
+INSERT INTO dashboard (threesixty_id, row_title, row_info, row_public)
 VALUES 
 	(
 	1, 
 	'Date(s)', 
 	'Tuesday, October 24th, 2017', 
-	false
+	true
 	),
 	(
 	1,
 	'Timeline',
 	'(the most important thing you can do is "invite, invite, invite")',
-	false
+	true
 	),
 	(
 	1,
 	'Six Weeks - 1 Month Out',
 	'Create Dashboard, identify date, host, overall theme, create dashboard invitees, create invitation, set concrete goals',
-	false
+	true
 	),
 	(
 	1,
 	'3 Weeks Out',
 	'Identify tools, design event flowverview, recruit volunteers & teen workers, invite more people, check to see who has not rsvpd to ensure you have your demographic mix',
-	false
+	true
 	),
 	(
 	1,
 	'2 Weeks - 1 Week Out',
 	'Confirm menus with caterers, buy table supplies (if needed), create question cards, create pull out of the event to remember your marks for delivery of the event, print sign-in sheets, place on clipboards, make sure your supplies are ready for delivery of the event',
-	false
+	true
 	),
 	(
 	1,
 	'Day of Event',
 	'Deliver event, pick up sign-in sheets, Mindstorm forms, keep track of measurable indicators of success',
-	false
+	true
 	),
 	(
 	1,
 	'1-2 Weeks After',
 	'Download data from sign in sheets and create reportage on outcomes',
-	false
+	true
 	),
 	(
 	1,
 	'1 Month After',
 	'Evaluate effectiveness and debrief, turnover of all reportage',
-	false
+	true
 	),
 	(
 	1,
 	'Times(s)',
 	'6-9 pm',
-	false
+	true
 	),
 	(
 	1,
 	'Location(s)',
 	'Shakopee',
-	false
+	true
 	),
 	(
 	1,
 	'Number Attending',
 	'100+',
-	false
+	true
 	),
 	(
 	1,
 	'Fun Title or Theme',
 	'Health Matters!',
-	false
+	true
 	),
 	(
 	1,
@@ -321,7 +330,7 @@ VALUES
 	➢	25%-33% under 24 
 	➢	Focusing on key growing and underserved Latinx and Somali populations 
 	➢	Also intentionally inviting rural seniors; Nepalese, Hmong, Vietnamese, Sikh; Russian 7th Day Adventists; and POC employees in the hospitals',
-	false
+	true
 	),
 	(
 	1,
@@ -337,7 +346,7 @@ the community to provide translation services
 	➢	Share negative and positive stories of healthcare experiences
 	➢	Identify family needs and/or healthcare priorities
 	',
-	false
+	true
 	),
 	(
 	1,
@@ -348,7 +357,7 @@ the community to provide translation services
 	➢	50% say that they would like to invite someone to another conversation
 	➢	80% of participants say that they met someone across self-identity with whom they planned to stay in touch or collaborate
 	➢	% would come to another event',
-	false),
+	true),
 	(
 	1,
 	'Invite Example Language',
@@ -377,7 +386,7 @@ Thank you for your consideration.
 
 If you would like to learn more about Marnitas Table, go to marnitastable.org.
 	',
-	false
+	true
 	),
 	(
 	1,
@@ -393,7 +402,7 @@ If you would like to learn more about Marnitas Table, go to marnitastable.org.
 7:45 p.m.	Oral Report from MindStorm
 8:15 p.m.	Catalyzing Circle Share-in
 8:50 p.m.	Closing/Thank You',
-	false
+	true
 	),
 	(
 	1,
@@ -408,7 +417,7 @@ If you would like to learn more about Marnitas Table, go to marnitastable.org.
 	➢	How can we increase the capacity of your community to develop community-based solutions?
 	➢	How can we strengthen clinic-community linkages in order to develop options that work?
 	',
-	false
+	true
 	),
 	(
 	1,
@@ -419,7 +428,7 @@ If you would like to learn more about Marnitas Table, go to marnitastable.org.
 	➢	What/who/when has had the greatest impact on your life?
 	➢	If you had to pick 2 things about yourself that you value the most, what would they be?
 	',
-	false
+	true
 	),
 	(
 	1,
@@ -463,7 +472,7 @@ If you would like to learn more about Marnitas Table, go to marnitastable.org.
 	➢	Should an immigrant tradition be honored when served by healthcare provider?
 	➢	Do you currently have any health and wellness needs?
 	',
-	false
+	true
 	),
 	(
 	1,
@@ -514,7 +523,7 @@ Feast appropriate from vegan to carnivore including dairy, wheat and soy intoler
 	)
 ;
 
-INSERT INTO goals (threesixty_id, description, desired, delivered, difference, percent, comments)
+INSERT INTO goals (threesixty_id, description, desired, delivered, difference, percent, comments, row_public)
 VALUES (
 	1, 
 	'Total Number', 
@@ -522,7 +531,8 @@ VALUES (
 	140, 
 	15, 
 	112, 
-	'Based on in-room count, taken 3 to 6 times per account by at least two different people.'
+	'Based on in-room count, taken 3 to 6 times per account by at least two different people.',
+	true
 	),
 	(
 	1,
@@ -531,7 +541,8 @@ VALUES (
 	70,
 	-1,
 	99,
-	'We generally set this goal at 51% in communities with at least 15% POC/Immigrant/Indigenous. Based on an in-room count.'
+	'We generally set this goal at 51% in communities with at least 15% POC/Immigrant/Indigenous. Based on an in-room count.',
+	true
 	),
 	(
 	1,
@@ -540,7 +551,8 @@ VALUES (
 	33,
 	-2,
 	94,
-	'We generally set this goal at 25-33% unless the project/event does not warrant. Based on both in-room and sign-in sheet counts.'
+	'We generally set this goal at 25-33% unless the project/event does not warrant. Based on both in-room and sign-in sheet counts.',
+	true
 	),
 	(
 	1,
@@ -549,7 +561,8 @@ VALUES (
 	126,
 	14,
 	113,
-	'80% of the room is our target goal for this MIS.'
+	'80% of the room is our target goal for this MIS.',
+	true
 	),
 	(
 	1,
@@ -558,7 +571,8 @@ VALUES (
 	112,
 	0,
 	100,
-	'80% of the room is our target goal for this MIS.'
+	'80% of the room is our target goal for this MIS.',
+	true
 	),
 	(
 	1,
@@ -567,7 +581,8 @@ VALUES (
 	126,
 	14,
 	113,
-	'80% of the room is our target goal for this MIS.'
+	'80% of the room is our target goal for this MIS.',
+	false
 	),
 	(
 	1,
@@ -576,7 +591,8 @@ VALUES (
 	67,
 	30,
 	181,
-	'40% is our target goal. This is taken only from sign-in sheets.'
+	'40% is our target goal. This is taken only from sign-in sheets.',
+	true
 	),
 	(
 	1,
@@ -585,7 +601,8 @@ VALUES (
 	83,
 	8,
 	111,
-	'80% is our target goal for this MIS.'
+	'80% is our target goal for this MIS.',
+	true
 	),
 	(
 	1,
@@ -594,7 +611,8 @@ VALUES (
 	41,
 	null,
 	null,
-	'44% of the respondents expressed interest in a future conversation centered on neglect and child abuse.'
+	'44% of the respondents expressed interest in a future conversation centered on neglect and child abuse.',
+	false
 	),
 	(
 	1,
@@ -603,7 +621,8 @@ VALUES (
 	35,
 	null,
 	null,
-	'37% of the respondents expressed interest in future conversations centered on housing.'
+	'37% of the respondents expressed interest in future conversations centered on housing.',
+	false
 	),
 	(
 	1,
@@ -612,7 +631,8 @@ VALUES (
 	35,
 	null,
 	null,
-	'37% of the respondents expressed interest in future conversations centered on transportation.'
+	'37% of the respondents expressed interest in future conversations centered on transportation.',
+	false
 	),
 	(
 	1,
@@ -621,7 +641,8 @@ VALUES (
 	57,
 	null,
 	null,
-	'61% of the respondents expressed interest in future conversations centered on education.'
+	'61% of the respondents expressed interest in future conversations centered on education.',
+	false
 	),
 	(
 	1,
@@ -630,7 +651,8 @@ VALUES (
 	94,
 	66,
 	336,
-	'Typical sign-in rate is 10%. We doubled our goal to 20% to identify how resonant and sticky the event was.'
+	'Typical sign-in rate is 10%. We doubled our goal to 20% to identify how resonant and sticky the event was.',
+	false
 	)
 ;
 
@@ -752,7 +774,7 @@ INSERT INTO response_category (description)
 VALUES 
 	('uncategorized');
 
-INSERT INTO question_set ("threesixty_id", "set_title", "breakdown")
+INSERT INTO question_set ("threesixty_reports_id", "set_title", "breakdown")
 VALUES 
 	(
 	1,

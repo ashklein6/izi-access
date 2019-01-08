@@ -53,9 +53,10 @@ class View360 extends Component {
   }
 
   componentDidMount() {
-    for (let entry of sectionInfo) {
-      this.props.dispatch({ type: entry.actionType, payload: {section: entry.section, current360Id: 1} });
-    }
+    // for (let entry of sectionInfo) {
+    //   this.props.dispatch({ type: entry.actionType, payload: {section: entry.section, current360Id: 1} });
+    // }
+    this.props.dispatch({ type: 'FETCH_360', payload: {current360Id: 1} })
   }
 
   render() {
@@ -117,7 +118,6 @@ class View360 extends Component {
                 </Table>
               </Paper>
             </div>
-
             <Typography variant="h5" className={classes.subHeader} id="dashboard">Dashboard</Typography>
             <div className={classes.paragraph}>
               <Paper className={classes.rootTable}>

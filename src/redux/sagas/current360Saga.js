@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { put, call, takeLatest } from 'redux-saga/effects';
+import { all, put, call, takeLatest } from 'redux-saga/effects';
 
 function* changePrivateStatus(action) {
   try {
@@ -49,17 +49,28 @@ function* edit360(action) {
   }
 };
 
+// dispatches actions to fetch each of the 360 sections. (expects current360Id)
 function* fetch360(action) {
   console.log('inside fetch360. action.payload:', action.payload);
   try {
-    const response = yield call(axios.get, `/current360/${action.payload}`);
-    yield put({ type: 'SET_360_INFO', payload: response });
+    // Get all sections of the 360
+    yield all ([
+      put({ type: 'FETCH_GOALS', payload: action.payload }),
+      put({ type: 'FETCH_DASHBOARD', payload: action.payload }),
+      put({ type: 'FETCH_THREESIXTY_REPORTS', payload: action.payload }),
+      put({ type: 'FETCH_ANALYSIS_RECOMMENDATION', payload: action.payload }),
+      put({ type: 'FETCH_DEMOGRAPHIC', payload: action.payload }),
+      put({ type: 'FETCH_CIRCLE_SHARE', payload: action.payload }),
+      put({ type: 'FETCH_QUESTION_SET', payload: action.payload }),
+      put({ type: 'FETCH_ORAL_REPORT', payload: action.payload }),
+    ]);
   } 
   catch (error) {
     console.log('error', error);
   }
 };
 
+// general worker saga. expect an action.payload with section and current360Id
 function* fetch360Section(action) {
   console.log('inside fetch360Section in saga');
   try {
@@ -76,10 +87,10 @@ function* fetch360Section(action) {
 function* fetchGoals(action) {
   console.log('inside fetchGoals in saga');
   try {
-    const response = yield call(axios.get, `/current360/${action.payload.section}`, {params: action.payload});
-    console.log('response for', action.payload.section, response);
-    yield put({ type: 'SET_GOALS', payload: {section: action.payload.section, content: response.data} });
-    yield put({ type: 'CURRENT_360_SECTION_NEEDS_UPDATE', payload: {section: action.payload.section} });
+    const response = yield call(axios.get, `/current360/goalsAssessment`, {params: action.payload});
+    console.log('response for goalsAssessment', response.data);
+    yield put({ type: 'SET_GOALS', payload: { content: response.data} });
+    yield put({ type: 'CURRENT_360_SECTION_NEEDS_UPDATE', payload: {section: 'goalsAssessment'} });
   } 
   catch (error) {
     console.log('error', error);
@@ -89,10 +100,10 @@ function* fetchGoals(action) {
 function* fetchDashboard(action) {
   console.log('inside fetchDashboard in saga');
   try {
-    const response = yield call(axios.get, `/current360/${action.payload.section}`, {params: action.payload});
-    console.log('response for', action.payload.section, response);
-    yield put({ type: 'SET_DASHBOARD', payload: {section: action.payload.section, content: response.data} });
-    yield put({ type: 'CURRENT_360_SECTION_NEEDS_UPDATE', payload: {section: action.payload.section} });
+    const response = yield call(axios.get, `/current360/dashboard`, {params: action.payload});
+    console.log('response for dashboard', response);
+    yield put({ type: 'SET_DASHBOARD', payload: {section: 'dashboard', content: response.data} });
+    yield put({ type: 'CURRENT_360_SECTION_NEEDS_UPDATE', payload: {section: 'dashboard'} });
   } 
   catch (error) {
     console.log('error', error);
@@ -102,10 +113,10 @@ function* fetchDashboard(action) {
 function* fetchThreeSixtyReports(action) {
   console.log('inside fetchThreeSixtyReports in saga');
   try {
-    const response = yield call(axios.get, `/current360/${action.payload.section}`, {params: action.payload});
-    console.log('response for', action.payload.section, response);
-    yield put({ type: 'SET_THREESIXTY_REPORTS', payload: {section: action.payload.section, content: response.data} });
-    yield put({ type: 'CURRENT_360_SECTION_NEEDS_UPDATE', payload: {section: action.payload.section} });
+    const response = yield call(axios.get, `/current360/threesixty_reports`, {params: action.payload});
+    console.log('response for threesixty_reports', response);
+    yield put({ type: 'SET_THREESIXTY_REPORTS', payload: {section: 'threesixty_reports', content: response.data} });
+    yield put({ type: 'CURRENT_360_SECTION_NEEDS_UPDATE', payload: {section: 'threesixty_reports'} });
   } 
   catch (error) {
     console.log('error', error);
@@ -115,10 +126,10 @@ function* fetchThreeSixtyReports(action) {
 function* fetchAnalysisRecommendation(action) {
   console.log('inside fetchAnalysisRecommendation in saga');
   try {
-    const response = yield call(axios.get, `/current360/${action.payload.section}`, {params: action.payload});
-    console.log('response for', action.payload.section, response);
-    yield put({ type: 'SET_ANALYSIS_RECOMMENDATION', payload: {section: action.payload.section, content: response.data} });
-    yield put({ type: 'CURRENT_360_SECTION_NEEDS_UPDATE', payload: {section: action.payload.section} });
+    const response = yield call(axios.get, `/current360/analysis_recommendation`, {params: action.payload});
+    console.log('response for analysis_recommendation', response);
+    yield put({ type: 'SET_ANALYSIS_RECOMMENDATION', payload: {section: 'analysis_recommendation', content: response.data} });
+    yield put({ type: 'CURRENT_360_SECTION_NEEDS_UPDATE', payload: {section: 'analysis_recommendation'} });
   } 
   catch (error) {
     console.log('error', error);
@@ -128,10 +139,10 @@ function* fetchAnalysisRecommendation(action) {
 function* fetchDemographics(action) {
   console.log('inside fetchDemographics in saga');
   try {
-    const response = yield call(axios.get, `/current360/${action.payload.section}`, {params: action.payload});
-    console.log('response for', action.payload.section, response);
-    yield put({ type: 'SET_DEMOGRAPHICS', payload: {section: action.payload.section, content: response.data} });
-    yield put({ type: 'CURRENT_360_SECTION_NEEDS_UPDATE', payload: {section: action.payload.section} });
+    const response = yield call(axios.get, `/current360/demographics`, {params: action.payload});
+    console.log('response for demographics', response);
+    yield put({ type: 'SET_DEMOGRAPHICS', payload: {section: 'demographics', content: response.data} });
+    yield put({ type: 'CURRENT_360_SECTION_NEEDS_UPDATE', payload: {section: 'demographics'} });
   } 
   catch (error) {
     console.log('error', error);
@@ -141,10 +152,10 @@ function* fetchDemographics(action) {
 function* fetchCircleShare(action) {
   console.log('inside fetchCircleShare in saga');
   try {
-    const response = yield call(axios.get, `/current360/${action.payload.section}`, {params: action.payload});
-    console.log('response for', action.payload.section, response);
-    yield put({ type: 'SET_CIRCLE_SHARE', payload: {section: action.payload.section, content: response.data} });
-    yield put({ type: 'CURRENT_360_SECTION_NEEDS_UPDATE', payload: {section: action.payload.section} });
+    const response = yield call(axios.get, `/current360/circle_share`, {params: action.payload});
+    console.log('response for circle_share', response);
+    yield put({ type: 'SET_CIRCLE_SHARE', payload: {section: 'circle_share', content: response.data} });
+    yield put({ type: 'CURRENT_360_SECTION_NEEDS_UPDATE', payload: {section: 'circle_share'} });
   } 
   catch (error) {
     console.log('error', error);
@@ -155,10 +166,10 @@ function* fetchCircleShare(action) {
 function* fetchQuestionSet(action) {
   console.log('inside fetchQuestionSet in saga');
   try {
-    const response = yield call(axios.get, `/current360/${action.payload.section}`, {params: action.payload});
-    console.log('response for', action.payload.section, response);
-    yield put({ type: 'SET_QUESTION_SET', payload: {section: action.payload.section, content: response.data} });
-    yield put({ type: 'CURRENT_360_SECTION_NEEDS_UPDATE', payload: {section: action.payload.section} });
+    const response = yield call(axios.get, `/current360/question_set`, {params: action.payload});
+    console.log('response for question_set', response);
+    yield put({ type: 'SET_QUESTION_SET', payload: {section: 'question_set', content: response.data} });
+    yield put({ type: 'CURRENT_360_SECTION_NEEDS_UPDATE', payload: {section: 'question_set'} });
   } 
   catch (error) {
     console.log('error', error);
@@ -169,10 +180,10 @@ function* fetchQuestionSet(action) {
 function* fetchOralReport(action) {
   console.log('inside fetchOralReport in saga');
   try {
-    const response = yield call(axios.get, `/current360/${action.payload.section}`, {params: action.payload});
-    console.log('response for', action.payload.section, response);
-    yield put({ type: 'SET_ORAL_REPORT', payload: {section: action.payload.section, content: response.data} });
-    yield put({ type: 'CURRENT_360_SECTION_NEEDS_UPDATE', payload: {section: action.payload.section} });
+    const response = yield call(axios.get, `/current360/$oral_report`, {params: action.payload});
+    console.log('response for oral_report', response);
+    yield put({ type: 'SET_ORAL_REPORT', payload: {section: 'oral_report', content: response.data} });
+    yield put({ type: 'CURRENT_360_SECTION_NEEDS_UPDATE', payload: {section: 'oral_report'} });
   } 
   catch (error) {
     console.log('error', error);

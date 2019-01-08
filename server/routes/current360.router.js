@@ -52,38 +52,34 @@ router.get('/section', (req, res) => {
 
 // Setup a GET route to get 360 section goalsAssessment
 router.get('/goalsAssessment', (req, res) => {
-    let section = 'goalsAssessment';
     let current360Id = req.query.current360Id;
     let queryText = 'SELECT * FROM goals WHERE threesixty_id=$1 ORDER BY id';
     
-    console.log('GET request for 360 section:', section, 'current 360 id:', current360Id);
+    console.log('GET request for 360 section goalsAssessment. current 360 id:', current360Id);
     
-    if (queryText !== '') {
-      pool.query(queryText, [current360Id])
-          .then( (results) => {
-              console.log('successful with section:', section);
-              res.send(results.rows);
-          }).catch( (error) => {
-              console.log('error on get:', error);
-              res.sendStatus(500);
-          })
-    } else {
-        res.sendStatus(400);
+    pool.query(queryText, [current360Id])
+        .then( (results) => {
+            console.log('successful with goalsAssessment');
+            res.send(results.rows);
+        }).catch( (error) => {
+            console.log('error on get:', error);
+            res.sendStatus(500);
+        })
     }
-  })
+);
+
 
 // Setup a GET route to get 360 section dashboard
 router.get('/dashboard', (req, res) => {
-    let section = 'dashboard';
     let current360Id = req.query.current360Id;
     let queryText = `SELECT * FROM dashboard WHERE threesixty_id=$1 ORDER BY id;`;
     
-    console.log('GET request for 360 section:', section, 'current 360 id:', current360Id);
+    console.log('GET request for 360 section dashboard. current 360 id:', current360Id);
     
     if (queryText !== '') {
       pool.query(queryText, [current360Id])
           .then( (results) => {
-              console.log('successful with section:', section);
+              console.log('successful with dashboard');
               res.send(results.rows);
           }).catch( (error) => {
               console.log('error on get:', error);
@@ -96,16 +92,15 @@ router.get('/dashboard', (req, res) => {
 
 // Setup a GET route to get 360 section threesixty_reports
 router.get('/threesixty_reports', (req, res) => {
-    let section = 'threesixty_reports';
     let current360Id = req.query.current360Id;
     let queryText = `SELECT * FROM threesixty_reports WHERE threesixty_id=$1 ORDER BY id;`;
     
-    console.log('GET request for 360 section:', section, 'current 360 id:', current360Id);
+    console.log('GET request for 360 section threesixty_reports. current 360 id:', current360Id);
     
     if (queryText !== '') {
       pool.query(queryText, [current360Id])
           .then( (results) => {
-              console.log('successful with section:', section);
+              console.log('successful with threesixty_reports');
               res.send(results.rows);
           }).catch( (error) => {
               console.log('error on get:', error);
@@ -118,16 +113,15 @@ router.get('/threesixty_reports', (req, res) => {
 
 // Setup a GET route to get 360 section analysis_recommendation
 router.get('/analysis_recommendation', (req, res) => {
-    let section = 'analysis_recommendation';
     let current360Id = req.query.current360Id;
     let queryText = `SELECT * FROM analysis_recommendation WHERE threesixty_id=$1 ORDER BY id;`;
     
-    console.log('GET request for 360 section:', section, 'current 360 id:', current360Id);
+    console.log('GET request for 360 section analysis_recommendation. current 360 id:', current360Id);
     
     if (queryText !== '') {
       pool.query(queryText, [current360Id])
           .then( (results) => {
-              console.log('successful with section:', section);
+              console.log('successful with analysis_recommendation');
               res.send(results.rows);
           }).catch( (error) => {
               console.log('error on get:', error);
@@ -140,16 +134,15 @@ router.get('/analysis_recommendation', (req, res) => {
 
 // Setup a GET route to get 360 section demographics
 router.get('/demographics', (req, res) => {
-    let section = 'demographics';
     let current360Id = req.query.current360Id;
     let queryText = `SELECT * FROM demographic WHERE threesixty_id=$1 ORDER BY id;`;
     
-    console.log('GET request for 360 section:', section, 'current 360 id:', current360Id);
+    console.log('GET request for 360 section demographics. current 360 id:', current360Id);
     
     if (queryText !== '') {
       pool.query(queryText, [current360Id])
           .then( (results) => {
-              console.log('successful with section:', section);
+              console.log('successful with demographics');
               res.send(results.rows);
           }).catch( (error) => {
               console.log('error on get:', error);
@@ -162,16 +155,15 @@ router.get('/demographics', (req, res) => {
 
 // Setup a GET route to get 360 section circle_share
 router.get('/circle_share', (req, res) => {
-    let section = 'circle_share';
     let current360Id = req.query.current360Id;
     let queryText = `SELECT * FROM circle_share WHERE threesixty_reports_id=$1 ORDER BY id;`;
     
-    console.log('GET request for 360 section:', section, 'current 360 id:', current360Id);
+    console.log('GET request for 360 section circle_share. current 360 id:', current360Id);
     
     if (queryText !== '') {
       pool.query(queryText, [current360Id])
           .then( (results) => {
-              console.log('successful with section:', section);
+              console.log('successful with section circle_share');
               res.send(results.rows);
           }).catch( (error) => {
               console.log('error on get:', error);
@@ -184,7 +176,6 @@ router.get('/circle_share', (req, res) => {
 
 // Setup a GET route to get 360 section question_set
 router.get('/question_set', (req, res) => {
-    let section = 'question_set';
     let current360Id = req.query.current360Id;
     let queryText = `SELECT question_set.id AS question_set_id, threesixty_id, set_title, breakdown, questions.id AS question_id, response.id AS response_id, response, response_category.id AS response_category_id, description FROM question_set
     LEFT JOIN questions ON questions.set_id = question_set.id
@@ -192,12 +183,12 @@ router.get('/question_set', (req, res) => {
     LEFT JOIN response_category ON response_category.id = response.category_id
     WHERE threesixty_id=$1 ORDER BY question_set.id;`;
     
-    console.log('GET request for 360 section:', section, 'current 360 id:', current360Id);
+    console.log('GET request for 360 section question_set. current 360 id:', current360Id);
     
     if (queryText !== '') {
       pool.query(queryText, [current360Id])
           .then( (results) => {
-              console.log('successful with section:', section);
+              console.log('successful with section question_set');
               res.send(results.rows);
           }).catch( (error) => {
               console.log('error on get:', error);
@@ -210,16 +201,15 @@ router.get('/question_set', (req, res) => {
 
 // Setup a GET route to get 360 section oral_report
 router.get('/oral_report', (req, res) => {
-    let section = 'oral_report';
     let current360Id = req.query.current360Id;
     let queryText = `SELECT * FROM oral_report WHERE threesixty_reports_id=$1 ORDER BY id`;
     
-    console.log('GET request for 360 section:', section, 'current 360 id:', current360Id);
+    console.log('GET request for 360 section oral_report. current 360 id:', current360Id);
     
     if (queryText !== '') {
       pool.query(queryText, [current360Id])
           .then( (results) => {
-              console.log('successful with section:', section);
+              console.log('successful with section oral_report');
               res.send(results.rows);
           }).catch( (error) => {
               console.log('error on get:', error);
@@ -228,21 +218,6 @@ router.get('/oral_report', (req, res) => {
     } else {
         res.sendStatus(400);
     }
-})
-
-// Setup a GET route to get current 360
-router.get('/:id', (req, res) => {
-    console.log('in this')
-  const current360Id = req.params.id;
-  const queryText = `SELECT * FROM threesixty WHERE id=$1;`;
-    pool.query(queryText, [current360Id])
-      .then( (response) => {
-        res.send(response.rows);
-      })
-      .catch( (error) => {
-        console.log('error on get:', error);
-        res.sendStatus(500);
-      })
 })
 
 /**

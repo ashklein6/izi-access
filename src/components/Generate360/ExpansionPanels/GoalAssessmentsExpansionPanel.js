@@ -42,28 +42,48 @@ class GoalsAssessmentExpansionPanel extends Component {
 
  state = {
   active: true,
-  status: 'Active',
+  activeStatus: 'Active',
+  public: false,
+  publicStatus: 'Private'
  };
 
  // handle the toggle of active/inactive for the section
- handleChange = () => {
+ handleChangeActive = () => {
    if (this.state.active) {
      this.setState({
        ...this.state,
        active: false,
-       status: 'Inactive'
+       activeStatus: 'Inactive'
      })
    } else {
     this.setState({
       ...this.state,
       active: true,
-      status: 'Active'
+      activeStatus: 'Active'
     })
    }
- } // end handleChange
+ } // end handleChangeActive
+
+  // handle the toggle of public/private for the section
+  handleChangePublic = () => {
+    if (this.state.public) {
+      this.setState({
+        ...this.state,
+        public: false,
+        publicStatus: 'Private'
+      })
+    } else {
+     this.setState({
+       ...this.state,
+       public: true,
+       publicStatus: 'Public'
+     })
+    }
+  } // end handleChangePublic
 
  componentDidMount() {
-   this.props.dispatch({ type: 'FETCH_360_SECTION', payload: {section: 'goalsAssessment', current360Id: 1} });
+   // Get section when loaded
+   this.props.dispatch({ type: 'FETCH_GOALS', payload: {section: 'goalsAssessment', current360Id: this.props.current360Id} });
  }
 
  render() {
@@ -71,7 +91,7 @@ class GoalsAssessmentExpansionPanel extends Component {
 
    return (
     <div className={classes.root}>
-      <ExpansionPanel defaultExpanded>
+      <ExpansionPanel defaultExpanded className={classes.expansionPanel}>
 
         {/* Information on the expansion panel's summary bar (always shows) */}
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />} className={classes.summary}>
@@ -79,11 +99,16 @@ class GoalsAssessmentExpansionPanel extends Component {
             <Typography variant="h2" className={classes.heading}>Goals Assessment</Typography>
           </div>
 
-          {/* Conditionally render "Active" on expansion panel summary if the section is active. */}
-          {(this.state.status === 'Active') ? 
           <div className={classes.status}>
-            <Typography variant="h2" className={classes.subheading}>{this.state.status}</Typography>
-          </div> : null }
+            {/* Conditionally render "Active" on expansion panel summary if the section is active. */}
+            {(this.state.activeStatus === 'Active') ? 
+            <Typography variant="h2" className={classes.subheading}>{this.state.activeStatus},&nbsp;</Typography>
+            : null }
+            {/* Render "Public" on expansion panel summary if the section is active. */}
+            <Typography variant="h2" className={classes.subheading}>{this.state.publicStatus}</Typography>
+          </div>
+
+
         </ExpansionPanelSummary>
 
         {/* Content that is within the expansion panel (shows when panel is expanded) */}
@@ -128,7 +153,7 @@ class GoalsAssessmentExpansionPanel extends Component {
             control={
               <Switch
                 checked={this.state.active}
-                onChange={this.handleChange}
+                onChange={this.handleChangeActive}
                 value="active"
                 classes={{
                   switchBase: classes.colorSwitchBase,
@@ -137,10 +162,25 @@ class GoalsAssessmentExpansionPanel extends Component {
                 }}
               />
             }
-            label={this.state.status}
+            label={this.state.activeStatus}
+          />
+          <FormControlLabel
+            control={
+              <Switch
+                checked={this.state.public}
+                onChange={this.handleChangePublic}
+                value="public"
+                classes={{
+                  switchBase: classes.colorSwitchBase,
+                  checked: classes.colorChecked,
+                  bar: classes.colorBar
+                }}
+              />
+            }
+            label={this.state.publicStatus}
           />
           
-          <GoalsAssessmentEditDialog />
+          <GoalsAssessmentEditDialog current360Id={this.props.current360Id}/>
         </ExpansionPanelActions>
 
       </ExpansionPanel>
@@ -150,13 +190,6 @@ class GoalsAssessmentExpansionPanel extends Component {
 };
 
 const styles = {
-  root: {
-    width: '100%',
-  },
-  rootTable: {
-    width: '100%',
-    overflowX: 'scroll'
-  },
   centerText: {
     textAlign: 'center'
   },
@@ -178,6 +211,9 @@ const styles = {
   details: {
     alignItems: 'center',
   },
+  expansionPanel: {
+    backgroundColor: colors.lightGrey
+  },
   heading: {
     fontSize: "1.5rem",
   },
@@ -185,6 +221,13 @@ const styles = {
     verticalAlign: 'bottom',
     height: 20,
     width: 20,
+  },
+  root: {
+    width: '100%',
+  },
+  rootTable: {
+    width: '100%',
+    overflowX: 'scroll'
   },
   status: {
     flexBasis: '25.00%',
@@ -198,7 +241,7 @@ const styles = {
     fontWeight: 'bold'
   },
   summary: {
-    alignItems: 'center'
+    alignItems: 'center',
   },
   table: {
     minWidth: 700

@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import colors from '../../App/colors';
 
+import GoalsAssessmentEditComponent from './Supplements/GoalsAssessmentsEditComponent';
+
 // Material-UI
 import { withStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -19,6 +19,10 @@ class GoalsAssessmentEditDialog extends Component {
    open: false,
    updating: false,
  };
+
+ deleteRow = (id) => {
+   console.log('delete row', id);
+ }
 
  // Update the rows array when a textbox is typed in.
  handleChangeFor= (event, id) => {
@@ -74,7 +78,17 @@ class GoalsAssessmentEditDialog extends Component {
   });
 
   this.props.reduxState.current360.goalsAssessment.map((row,index) => {
-    newState[row.id]=row
+    let rowCheck = row;
+    // if (index==2) {
+      Object.entries(rowCheck).map((entry) => {
+        // console.log('entry example:', entry);
+        if (entry[1] == null) {
+          rowCheck[entry[0]] = '';
+        }
+      })
+    // }
+    newState[row.id]=rowCheck;
+    console.log('rowCheck:', rowCheck);
   });
 
   newState.updating = false;
@@ -125,83 +139,7 @@ class GoalsAssessmentEditDialog extends Component {
             {Object.keys(this.state).map( (key,index) => {
               if (!isNaN(key)) {
                 return (
-                <div key={this.state[key].id} className={classes.inputGroup}>
-                  <Typography variant="subtitle1">Row {index + 1}</Typography>
-                  <TextField
-                    // Create focus on the first text box of the page:
-                    {...(index === 0) ? {autoFocus: true} : null}
-                    margin="dense"
-                    id="description"
-                    name="description"
-                    label="Description"
-                    type="text"
-                    variant="outlined"
-                    value={this.state[key].description}
-                    onChange={(event) => this.handleChangeFor(event,this.state[key].id)}
-                    className={classes.input}
-                    fullWidth
-                    multiline
-                  />
-                  <div className={classes.spaceBetween}>
-                    <TextField
-                      margin="dense"
-                      id="desired"
-                      name="desired"
-                      label="Desired"
-                      type="number"
-                      variant="outlined"
-                      value={this.state[key].desired}
-                      onChange={(event) => this.handleChangeFor(event,key.id)}
-                      className={classes.input}
-                    />
-                    <TextField
-                      margin="dense"
-                      id="delivered"
-                      name="delivered"
-                      label="Delivered"
-                      type="number"
-                      variant="outlined"
-                      value={this.state[key].delivered}
-                      onChange={(event) => this.handleChangeFor(event,key.id)}
-                      className={classes.input}
-                    />
-                    <TextField
-                      margin="dense"
-                      id="difference"
-                      name="difference"
-                      label="Difference"
-                      type="number"
-                      variant="outlined"
-                      value={this.state[key].difference}
-                      onChange={(event) => this.handleChangeFor(event,key.id)}
-                      className={classes.input}
-                    />
-                    <TextField
-                      margin="dense"
-                      id="percent"
-                      name="percent"
-                      label="Percent"
-                      type="number"
-                      variant="outlined"
-                      value={this.state[key].percent}
-                      onChange={(event) => this.handleChangeFor(event,key.id)}
-                      className={classes.input}
-                    />
-                  </div>
-                  <TextField
-                    margin="dense"
-                    id="comments"
-                    name="comments"
-                    label="Comments"
-                    type="text"
-                    variant="outlined"
-                    value={this.state[key].comments}
-                    onChange={(event) => this.handleChangeFor(event,key.d)}
-                    className={classes.input}
-                    fullWidth
-                    multiline
-                  />
-                </div>
+                  <GoalsAssessmentEditComponent key={this.state[key].id} row={this.state[key]} index={index} handleChangeFor={this.handleChangeFor} deleteRow={this.deleteRow} />
               );
                 }
             })}

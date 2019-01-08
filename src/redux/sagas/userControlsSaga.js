@@ -19,9 +19,11 @@ function* add360Access() {
   }
 };
 
-function* remove360Access() {
+function* remove360Access(action) {
   try {
-    
+    yield call(axios.delete, `/userControls/threesixty/${action.payload}`);
+    yield put({type: 'FETCH_ALL_USERS'});
+
   } 
   catch (error) {
     console.log('error', error);
@@ -41,6 +43,20 @@ function* editUserInfo(action) {
   try {
     yield call(axios.put, '/userControls', {data: action.payload});
     yield put({type: 'FETCH_ALL_USERS'});
+    yield put({type: 'FETCH_DEACTIVATED_USERS'});
+    yield put({type: 'FETCH_PENDING_REQUESTS'});
+    // it's worth looking into a better/more efficient way to handle this,
+    // but that seems like an after-the-break sort of thing
+  } 
+  catch (error) {
+    console.log('error', error);
+  }
+};
+
+function* editCurrentUserInfo(action) {
+  try {
+    yield call(axios.put, '/userControls/currentUser', {data: action.payload});
+    yield put({type: 'FETCH_USER'});
   } 
   catch (error) {
     console.log('error', error);
@@ -56,6 +72,16 @@ function* changeUserStatus() {
   }
 };
 
+function* deletePendingRequest(action) {
+  try {
+    yield call(axios.delete, `/userControls/${action.payload}`);
+    yield put({type: 'FETCH_PENDING_REQUESTS'});
+  } 
+  catch (error) {
+    console.log('error', error);
+  }
+};
+
 function* userControlsSaga() {
   yield takeLatest( 'FETCH_USER_INFO', fetchUserInfo );
   yield takeLatest( 'ADD_360_ACCESS', add360Access );
@@ -63,6 +89,8 @@ function* userControlsSaga() {
   yield takeLatest( 'REQUEST_360_ACCESS', request360Access );
   yield takeLatest( 'EDIT_USER_INFO', editUserInfo );
   yield takeLatest( 'CHANGE_USER_STATUS', changeUserStatus );
+  yield takeLatest( 'DELETE_PENDING_REQUEST', deletePendingRequest );
+  yield takeLatest( 'EDIT_CURRENT_USER_INFO', editCurrentUserInfo );
 }
 
 export default userControlsSaga;

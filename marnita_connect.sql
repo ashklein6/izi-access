@@ -9,9 +9,11 @@ CREATE TABLE "person" (
     "email" VARCHAR(255) UNIQUE,
     "username" VARCHAR (255) UNIQUE NOT NULL,
     "password" VARCHAR (1000) NOT NULL,
+    "password_reset_token" VARCHAR (255),
+    "password_reset_expires" INT,
     "firstname" VARCHAR(255),
     "lastname" VARCHAR(255),
-    "access_id" INT REFERENCES "access",
+    "access_id" INT DEFAULT 1 REFERENCES "access",
     "notes" VARCHAR(2560),
     "date_added" TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -38,11 +40,24 @@ CREATE TABLE "threesixty" (
     "client" VARCHAR(255),
     "description" VARCHAR(25600),
     "published_status" BOOLEAN DEFAULT FALSE,
-    "goals_public" BOOLEAN DEFAULT FALSE NOT NULL,
-    "dashboard_public" BOOLEAN DEFAULT FALSE NOT NULL,
-    "threesixty_reports_public" BOOLEAN DEFAULT TRUE NOT NULL,
     "analysis_recommendation_public" BOOLEAN DEFAULT FALSE NOT NULL,
-    "demographics_public" BOOLEAN DEFAULT FALSE NOT NULL
+    "threesixty_reports_public" BOOLEAN DEFAULT TRUE NOT NULL,
+    "dashboard_public" BOOLEAN DEFAULT FALSE NOT NULL,
+    "goals_public" BOOLEAN DEFAULT FALSE NOT NULL,
+    "demographics_public" BOOLEAN DEFAULT FALSE NOT NULL,
+    "oral_report_public" BOOLEAN DEFAULT TRUE NOT NULL,
+    "question_set_public" BOOLEAN DEFAULT TRUE NOT NULL,
+    "circle_share_public" BOOLEAN DEFAULT TRUE NOT NULL,
+    "freeform_public" BOOLEAN DEFAULT TRUE NOT NULL,
+    "analysis_recommendation_published" BOOLEAN DEFAULT FALSE NOT NULL,
+    "threesixty_reports_published" BOOLEAN DEFAULT FALSE NOT NULL,
+    "dashboard_published" BOOLEAN DEFAULT FALSE NOT NULL,
+    "goals_published" BOOLEAN DEFAULT FALSE NOT NULL,
+    "demographics_published" BOOLEAN DEFAULT FALSE NOT NULL,
+    "oral_report_published" BOOLEAN DEFAULT FALSE NOT NULL,
+    "question_set_published" BOOLEAN DEFAULT FALSE NOT NULL,
+    "circle_share_published" BOOLEAN DEFAULT FALSE NOT NULL,
+    "freeform_published" BOOLEAN DEFAULT FALSE NOT NULL
 );
 
 CREATE TABLE "analysis_recommendation" (
@@ -57,7 +72,7 @@ CREATE TABLE "dashboard" (
     "threesixty_id" INT REFERENCES "threesixty",
     "row_title" VARCHAR(25600),
     "row_info" VARCHAR(25600),
-    "private" BOOLEAN DEFAULT FALSE
+    "row_public" BOOLEAN DEFAULT TRUE
 );
 
 CREATE TABLE "goals" (
@@ -68,7 +83,8 @@ CREATE TABLE "goals" (
     "delivered" INT,
     "difference" INT,
     "percent" INT,
-    "comments" VARCHAR(25600)
+    "comments" VARCHAR(25600),
+    "row_public" BOOLEAN DEFAULT TRUE
 );
 
 CREATE TABLE "threesixty_reports" (
@@ -93,7 +109,7 @@ CREATE TABLE "response_category" (
     
 CREATE TABLE "question_set" (
     "id" SERIAL PRIMARY KEY,
-    "threesixty_id" INT REFERENCES "threesixty_reports",
+    "threesixty_reports_id" INT REFERENCES "threesixty_reports",
     "set_title" VARCHAR(25600),
     "breakdown" VARCHAR(25600)
 );
@@ -126,6 +142,14 @@ CREATE TABLE "demographic" (
     "housing" BOOLEAN DEFAULT FALSE,
     "transportation" BOOLEAN DEFAULT FALSE,
     "education" BOOLEAN DEFAULT FALSE
+);
+
+CREATE TABLE "freeform" (
+	"id" SERIAL PRIMARY KEY,
+	"threesixty_id" INT REFERENCES "threesixty",
+	"title" VARCHAR(800),
+	"content" VARCHAR(25600),
+	"row_public" BOOLEAN DEFAULT FALSE
 );
 
 CREATE TABLE "circle_share" (

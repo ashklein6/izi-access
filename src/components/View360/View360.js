@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import colors from '../App/colors';
+import { StickyContainer, Sticky } from 'react-sticky';
+
 import SideBar from './SideBar';
 
 // Material-UI
@@ -30,6 +32,47 @@ const CustomTableCell = withStyles(theme => ({
   },
 }))(TableCell);
 
+const styles = {
+  sideBar: {
+    height: 'calc(100vh - 122px)',
+    backgroundColor: '#ccc',
+    textAlign: 'center',
+  },
+  report: {
+    height: 'calc(100vh - 122px)',
+    overflow: 'auto'
+  },
+  mainReportInfo: {
+    textAlign: 'center',
+    // height: '35vh'
+  },
+  header: {
+    margin: '50px 0px 25px 0px',
+  },
+  subHeader: {
+    marginBottom: '15px'
+  },
+  manage360Btn: {
+    margin: '15px 0px',
+    justifyContent: 'center',
+  },
+  middleDivider: {
+    margin: '25px auto',
+    width: '90%'
+  },
+  content: {
+    textAlign: 'left',
+    margin: 'auto',
+    width: '85%',
+    // height: '55vh',
+    overflow: 'auto'
+  }, 
+  paragraph: {
+    margin: '0px 5px 50px 5px',
+    textIndent: '25px'
+  }
+};
+
 const sectionInfo = [
   { actionType: 'FETCH_GOALS', section: 'goalsAssessment' },
   { actionType: 'FETCH_DASHBOARD', section: 'dashboard' },
@@ -39,7 +82,7 @@ const sectionInfo = [
   { actionType: 'FETCH_CIRCLE_SHARE', section: 'circle_share' },
   { actionType: 'FETCH_QUESTION_SET', section: 'question_set' },
   { actionType: 'FETCH_ORAL_REPORT', section: 'oral_report' },
-]
+];
 
 class View360 extends Component {
 
@@ -76,9 +119,9 @@ class View360 extends Component {
           <SideBar />
         </Grid>
         <Grid className={classes.report} item xs={10}>
-          
-          <section className={classes.mainInfo}>
+          <section className={classes.mainReportInfo}>
             <Typography variant="h2" className={classes.header}>360 Name</Typography>
+          
             <Typography variant="h5" className={classes.subHeader}>Client</Typography>
             <Typography variant="h5" className={classes.subHeader}>Location</Typography>
             <Typography variant="h5" className={classes.subHeader}>Date</Typography>

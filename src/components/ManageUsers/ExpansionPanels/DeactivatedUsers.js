@@ -26,6 +26,10 @@ const colors = {
 
 class DeactivatedUsers extends Component {
 
+  componentDidMount() {
+    this.props.dispatch({type: 'FETCH_DEACTIVATED_USERS'});
+  };
+
   render() {
     const { classes } = this.props;
 

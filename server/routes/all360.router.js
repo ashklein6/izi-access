@@ -10,21 +10,21 @@ router.get('/search', (req, res) => {
     let sqlText = `SELECT threesixty.*, izi_categories.category FROM threesixty
     JOIN izi_categories ON izi_categories.id = threesixty.category_id WHERE `;
     let search = req.query;
-    let searchFields = [search.publishedStatus];
+    let searchFields = [];
     let fieldCounter = 1;
     if(search.name) {
-      sqlText += `(name = $${fieldCounter} OR client = $${fieldCounter}) `;
+      sqlText += `(LOWER(name) ~~ LOWER($${fieldCounter}) OR LOWER(client) ~~ LOWER($${fieldCounter})) `;
       fieldCounter++;
-      searchFields.push(search.name);
+      searchFields.push('%' + search.name + '%');
     };
     if(search.location && search.name) {
-      sqlText += `AND location = $${fieldCounter} `;
+      sqlText += `AND LOWER(location) ~~ LOWER($${fieldCounter}) `;
       fieldCounter++;
-      searchFields.push(search.location);
+      searchFields.push('%' + search.location + '%');
     } else if (search.location) {
-      sqlText += `location = $${fieldCounter} `;
+      sqlText += `LOWER(location) ~~ LOWER($${fieldCounter}) `;
       fieldCounter++;
-      searchFields.push(search.location);
+      searchFields.push('%' + search.location + '%');
     };
     if(search.date && (search.name || search.location)) {
       sqlText += `AND date = $${fieldCounter} `;
@@ -46,10 +46,8 @@ router.get('/search', (req, res) => {
     };
     sqlText += `AND published_status = $${fieldCounter};`;
     searchFields.push(search.publishedStatus);
-    console.log('text: ', sqlText);
     pool.query(sqlText, searchFields)
     .then((response) => {
-      console.log(response.rows);
       res.send(response.rows);
     })
     .catch(() => {

@@ -19,10 +19,21 @@ function* changePublishStatus(action) {
   }
 };
 
-function* create360(action) {
+function* create360Complete(action) {
   try {
-    const response = yield call(axios.post, '/', {data: action.payload} );
-    yield put({ type: 'FETCH_360', payload: response });
+    const response = yield call(axios.post, '/current360/complete', {data: action.payload} );
+    yield console.log('response is! ', response.data.id);
+    yield put({ type: 'FETCH_360', payload: response.data.id });
+  } 
+  catch (error) {
+    console.log('error', error);
+  }
+};
+
+function* create360Lowdown(action) {
+  try {
+    const response = yield call(axios.post, '/current360/lowdown', {data: action.payload} );
+    yield put({ type: 'FETCH_360', payload: response.data.id });
   } 
   catch (error) {
     console.log('error', error);
@@ -194,7 +205,8 @@ function* fetchOralReport(action) {
 function* current360Saga() {
   yield takeLatest( 'CHANGE_PRIVATE_STATUS', changePrivateStatus );
   yield takeLatest( 'CHANGE_PUBLISH_STATUS', changePublishStatus );
-  yield takeLatest( 'CREATE_360', create360 );
+  yield takeLatest( 'CREATE_360_COMPLETE', create360Complete );
+  yield takeLatest( 'CREATE_360_LOWDOWN', create360Lowdown );
   yield takeLatest( 'DELETE_360', delete360 );
   yield takeLatest( 'EDIT_360', edit360 );
   yield takeLatest( 'FETCH_360', fetch360 );

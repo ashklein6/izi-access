@@ -34,4 +34,45 @@ router.put('/', (req,res) => {
   })
 });
 
+router.put('/currentUser', (req,res) => {
+  const sqlText = `UPDATE person SET firstname = $1, lastname = $2, email = $3 WHERE id = $4;`;
+  const update = [
+    req.body.data.firstName,
+    req.body.data.lastName,
+    req.body.data.email,
+    req.body.data.id
+  ];
+  pool.query(sqlText, update)
+  .then(() => {
+    res.sendStatus(200);
+  })
+  .catch(() => {
+    res.sendStatus(500);
+  });
+});
+
+router.delete('/threesixty/:id', (req,res) => {
+  const sqlText = `DELETE FROM threesixty_user WHERE id = $1;`;
+  const threesixtyId = req.params.id;
+  pool.query(sqlText, [threesixtyId])
+  .then(() => {
+    res.sendStatus(200);
+  })
+  .catch(() => {
+    res.sendStatus(500);
+  })
+})
+
+router.delete('/:id', (req,res) => {
+  const sqlText = `DELETE FROM client_request WHERE id = $1;`;
+  const requestId = req.params.id;
+  pool.query(sqlText, [requestId])
+  .then(() => {
+    res.sendStatus(200);
+  })
+  .catch(() => {
+    res.sendStatus(500);
+  })
+});
+
 module.exports = router;

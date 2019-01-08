@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import Table360s from '../Table360s/Table360s';
 import Search360s from '../Search360s/Search360s';
 import moment, { max } from 'moment';
+import LinesEllipsis from 'react-lines-ellipsis';
+import './HomePage.css';
 
 import MarnitaLogo from './marnita_logo.png';
 
@@ -20,7 +22,7 @@ import Typography from '@material-ui/core/Typography';
 class Home extends Component {
 
  state = {
-
+  useEllipsis: true
  };
 
  componentDidMount() {
@@ -49,29 +51,26 @@ class Home extends Component {
         {/* the line below maps through the first 3 items in the array */}
         {/* and uses that information to display the cards. */}
         {/* the unaltered version of the array is sent to the table */}
+        <div className={classes.centerContainer}>
         {this.props.reduxState.all360s.recent.map( izi => (
-          <Grid item xs={4} key={izi.id}>
-            <Card className={classes.card} elevation={5}>
-            {/* TO DO: add a number of card classes, color formatting based on IZI category? */}
-
+            <Card className={classes.card} key={izi.id} elevation={5}>
               <CardContent className={classes.card}>
-                <div className={classes.image}>
                   <img src={MarnitaLogo} alt="Marnita's Table Placeholder" className={classes.image}/>
-                </div>
-                <div className={classes.body}>
+                <div className={classes.cardBody}>
                   <Typography variant="h6">
                     {izi.name}
                   </Typography>
-
                   <Typography className={classes.iziInfo} component="p">
-                    {izi.description}
+                  {izi.location} - {moment(izi.date).format('LL')}
                   </Typography>
-                  <Typography className={classes.iziInfo} component="p">
-                    {moment(izi.date).format('LL')}
-                  </Typography>
-                  <Typography className={classes.iziInfo} component="p">
-                    {izi.location}
-                  </Typography>
+                  <LinesEllipsis
+                    text={izi.description}
+                    className="ellipsis-text"
+                    maxLine='3'
+                    ellipsis='...'
+                    trimRight
+                    basedOn='letters'
+                  />
                 </div>
               </CardContent>
               <CardActions className={classes.cardActions}>
@@ -80,10 +79,10 @@ class Home extends Component {
                 </Button>
               </CardActions>
             </Card>
-          </Grid>
         ))}
+        </div>
         </Grid>
-        <div>
+        <div className={classes.centerContainer}>
           {/* <Typography>Search By</Typography> */}
           <Search360s  status="true"/>
         </div>
@@ -91,7 +90,6 @@ class Home extends Component {
         {/* and specificies that this table is for the home page,  */}
         {/* and will not render the edit button. */}
         <Table360s rows={this.props.reduxState.all360s.published} homeVersion />
-
      </div>
    );
  }
@@ -102,18 +100,25 @@ const styles = {
     display: 'flex',
     marginBottom: 50
   },
-  card: {
-    minWidth: 250,
+  centerContainer: {
+    margin: 'auto',
     textAlign: 'center',
-    justifyContent: 'center',
-    padding: '0px',
+  },
+  card: {
+    display: 'inline-block',
+    maxWidth: 450,
+    textAlign: 'center',
+    padding: 0,
     margin: 25
   },
   image: {
-    margin: 'auto',
-    padding: 10,
+    width: '100%',
+    height: 'auto',
+    marginBottom: 10
   },
-  body: {
+  cardBody: {
+    height: 185,
+    overflow: 'scroll',
     padding: 15,
     backgroundColor: '#f2f2f2',
     borderRadius: 5
@@ -130,7 +135,7 @@ const styles = {
     marginBottom: 20
   },
   iziInfo: {
-    marginTop: 5
+    marginTop: 5,
   }
 };
 

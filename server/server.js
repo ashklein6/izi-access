@@ -16,6 +16,7 @@ const iziCategoriesRouter = require('./routes/iziCategories.router');
 const allUsersRouter = require('./routes/allUsers.router');
 const userControlsRouter = require('./routes/UserControls.router');
 const userAccessLevelRouter = require('./routes/userAccessLevel.router');
+const forgotPasswordRouter = require('./routes/forgotPassword.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -36,6 +37,7 @@ app.use('/iziCategories', iziCategoriesRouter);
 app.use('/allUsers', allUsersRouter);
 app.use('/userControls', userControlsRouter);
 app.use('/userAccessLevel', userAccessLevelRouter);
+app.use('/forgotPassword', forgotPasswordRouter);
 
 // Serve static files
 app.use(express.static('build'));

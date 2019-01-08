@@ -98,13 +98,13 @@ class Create360 extends Component {
   };
 
 
-  create360 = async () => {
+  create360 = () => {
     if(!this.state.status){
-      await this.props.dispatch({ type: 'CREATE_360_COMPLETE', payload: this.state });
+      this.props.dispatch({ type: 'CREATE_360_COMPLETE', payload: this.state });
     } else {
-      await this.props.dispatch({ type: 'CREATE_360_LOWDOWN)', payload: this.state }); 
+      this.props.dispatch({ type: 'CREATE_360_LOWDOWN', payload: this.state }); 
     };
-      await this.props.history.push('/generate360');
+      // this.props.history.push('/generate360');
   }
 
   confirmSubmit = () => {

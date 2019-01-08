@@ -22,7 +22,8 @@ function* changePublishStatus(action) {
 function* create360Complete(action) {
   try {
     const response = yield call(axios.post, '/current360/complete', {data: action.payload} );
-    // yield put({ type: 'SET_360', payload: response });
+    yield console.log('response is! ', response.data.id);
+    yield put({ type: 'FETCH_360', payload: response.data.id });
   } 
   catch (error) {
     console.log('error', error);
@@ -32,7 +33,7 @@ function* create360Complete(action) {
 function* create360Lowdown(action) {
   try {
     const response = yield call(axios.post, '/current360/lowdown', {data: action.payload} );
-    yield put({ type: 'FETCH_360', payload: response });
+    yield put({ type: 'FETCH_360', payload: response.data.id });
   } 
   catch (error) {
     console.log('error', error);

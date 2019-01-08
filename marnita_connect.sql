@@ -9,6 +9,8 @@ CREATE TABLE "person" (
     "email" VARCHAR(255) UNIQUE,
     "username" VARCHAR (255) UNIQUE NOT NULL,
     "password" VARCHAR (1000) NOT NULL,
+    "password_reset_token" VARCHAR (20),
+    "password_reset_expires" DATE,
     "firstname" VARCHAR(255),
     "lastname" VARCHAR(255),
     "access_id" INT DEFAULT 1 REFERENCES "access",

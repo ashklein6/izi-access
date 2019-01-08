@@ -32,57 +32,46 @@ const CustomTableCell = withStyles(theme => ({
   },
 }))(TableCell);
 
-const styles = {
-  sideBar: {
-    height: 'calc(100vh - 122px)',
-    backgroundColor: '#ccc',
-    textAlign: 'center',
-  },
-  report: {
-    height: 'calc(100vh - 122px)',
-    overflow: 'auto'
-  },
-  mainReportInfo: {
-    textAlign: 'center',
-    // height: '35vh'
-  },
-  header: {
-    margin: '50px 0px 25px 0px',
-  },
-  subHeader: {
-    marginBottom: '15px'
-  },
-  manage360Btn: {
-    margin: '15px 0px',
-    justifyContent: 'center',
-  },
-  middleDivider: {
-    margin: '25px auto',
-    width: '90%'
-  },
-  content: {
-    textAlign: 'left',
-    margin: 'auto',
-    width: '85%',
-    // height: '55vh',
-    overflow: 'auto'
-  }, 
-  paragraph: {
-    margin: '0px 5px 50px 5px',
-    textIndent: '25px'
-  }
-};
-
-const sectionInfo = [
-  { actionType: 'FETCH_GOALS', section: 'goalsAssessment' },
-  { actionType: 'FETCH_DASHBOARD', section: 'dashboard' },
-  { actionType: 'FETCH_THREESIXTY_REPORTS', section: 'threesixty_reports' },
-  { actionType: 'FETCH_ANALYSIS_RECOMMENDATION', section: 'analysis_recommendation' },
-  { actionType: 'FETCH_DEMOGRAPHIC', section: 'demographics' },
-  { actionType: 'FETCH_CIRCLE_SHARE', section: 'circle_share' },
-  { actionType: 'FETCH_QUESTION_SET', section: 'question_set' },
-  { actionType: 'FETCH_ORAL_REPORT', section: 'oral_report' },
-];
+// const styles = {
+//   sideBar: {
+//     height: 'calc(100vh - 122px)',
+//     backgroundColor: '#ccc',
+//     textAlign: 'center',
+//   },
+  // report: {
+  //   height: 'calc(100vh - 122px)',
+  //   overflow: 'auto'
+  // },
+//   mainReportInfo: {
+//     textAlign: 'center',
+//     // height: '35vh'
+//   },
+//   header: {
+//     margin: '50px 0px 25px 0px',
+//   },
+//   subHeader: {
+//     marginBottom: '15px'
+//   },
+//   manage360Btn: {
+//     margin: '15px 0px',
+//     justifyContent: 'center',
+//   },
+//   middleDivider: {
+//     margin: '25px auto',
+//     width: '90%'
+//   },
+//   content: {
+//     textAlign: 'left',
+//     margin: 'auto',
+//     width: '85%',
+//     // height: '55vh',
+//     overflow: 'auto'
+//   }, 
+//   paragraph: {
+//     margin: '0px 5px 50px 5px',
+//     textIndent: '25px'
+//   }
+// };
 
 class View360 extends Component {
 
@@ -96,9 +85,6 @@ class View360 extends Component {
   }
 
   componentDidMount() {
-    // for (let entry of sectionInfo) {
-    //   this.props.dispatch({ type: entry.actionType, payload: {section: entry.section, current360Id: 1} });
-    // }
     this.props.dispatch({ type: 'FETCH_360', payload: {current360Id: 1} })
   }
 
@@ -291,19 +277,20 @@ class View360 extends Component {
 
 const styles = {
   sideBar: {
-    height: '100vh',
+    height: 'calc(100vh - 122px)',
     backgroundColor: '#ccc',
     textAlign: 'center',
   },
   centerText: {
-    textAlign: 'right'
+    textAlign: 'center'
   },
   report: {
-    height: '100vh',
+    height: 'calc(100vh - 122px)',
+    overflow: 'auto'
   },
-  mainInfo: {
+  mainReportInfo: {
     textAlign: 'center',
-    height: '35vh'
+    // height: '35vh'
   },
   header: {
     margin: '50px 0px 25px 0px'
@@ -323,7 +310,7 @@ const styles = {
     textAlign: 'left',
     margin: 'auto',
     width: '85%',
-    height: '55vh',
+    // height: '55vh',
     overflow: 'auto'
   },
   paragraph: {

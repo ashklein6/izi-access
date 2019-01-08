@@ -53,7 +53,7 @@ class SideBar extends Component {
 
     return (
       <List className={classes.list}>
-        {sectionInfo.map( sectionId => 
+        {sectionInfo.map( (sectionId, index) => 
         <Link key={sectionId.id} smooth to={sectionId.id}
           scroll={el => scrollWithOffset(el, 150)}
         >

@@ -180,7 +180,7 @@ function* fetchQuestionSet(action) {
 function* fetchOralReport(action) {
   console.log('inside fetchOralReport in saga');
   try {
-    const response = yield call(axios.get, `/current360/$oral_report`, {params: action.payload});
+    const response = yield call(axios.get, `/current360/oral_report`, {params: action.payload});
     console.log('response for oral_report', response);
     yield put({ type: 'SET_ORAL_REPORT', payload: {section: 'oral_report', content: response.data} });
     yield put({ type: 'CURRENT_360_SECTION_NEEDS_UPDATE', payload: {section: 'oral_report'} });

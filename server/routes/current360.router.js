@@ -163,7 +163,7 @@ router.get('/circle_share', (req, res) => {
     if (queryText !== '') {
       pool.query(queryText, [current360Id])
           .then( (results) => {
-              console.log('successful with section circle_share');
+              console.log('successful with circle_share');
               res.send(results.rows);
           }).catch( (error) => {
               console.log('error on get:', error);
@@ -188,7 +188,7 @@ router.get('/question_set', (req, res) => {
     if (queryText !== '') {
       pool.query(queryText, [current360Id])
           .then( (results) => {
-              console.log('successful with section question_set');
+              console.log('successful with question_set');
               res.send(results.rows);
           }).catch( (error) => {
               console.log('error on get:', error);
@@ -209,7 +209,7 @@ router.get('/oral_report', (req, res) => {
     if (queryText !== '') {
       pool.query(queryText, [current360Id])
           .then( (results) => {
-              console.log('successful with section oral_report');
+              console.log('successful with oral_report');
               res.send(results.rows);
           }).catch( (error) => {
               console.log('error on get:', error);

@@ -104,13 +104,13 @@ class View360 extends Component {
                       return (
                         <TableRow key={row.id}>
                           <CustomTableCell component="th" scope="row" width="25%">
-                            {row.description}
+                            {row.description == null ? '' : row.description}
                           </CustomTableCell>
-                          <CustomTableCell className={classes.centerText}>{row.desired}</CustomTableCell>
-                          <CustomTableCell className={classes.centerText}>{row.delivered}</CustomTableCell>
-                          <CustomTableCell className={classes.centerText}>{row.difference}</CustomTableCell>
-                          <CustomTableCell className={classes.centerText}>{row.percent}%</CustomTableCell>
-                          <CustomTableCell>{row.comments}</CustomTableCell>
+                          <CustomTableCell className={classes.centerText}>{row.desired == null ? '' : row.desired}</CustomTableCell>
+                          <CustomTableCell className={classes.centerText}>{row.delivered == null ? '' : row.delivered}</CustomTableCell>
+                          <CustomTableCell className={classes.centerText}>{row.difference == null ? '' : row.difference}</CustomTableCell>
+                          <CustomTableCell className={classes.centerText}>{row.percent == null ? '' : row.percent}%</CustomTableCell>
+                          <CustomTableCell>{row.comments == null ? '' : row.comments}</CustomTableCell>
                         </TableRow>
                       );
                     })}
@@ -205,17 +205,17 @@ class View360 extends Component {
                           <CustomTableCell component="th" scope="row" className={classes.centerText}>
                             {row.ethnicity}
                           </CustomTableCell>
-                          <CustomTableCell className={classes.centerText}>{row.passion}</CustomTableCell>
-                          <CustomTableCell className={classes.centerText}>{row.profession}</CustomTableCell>
-                          <CustomTableCell className={classes.centerText}>{row.generation}</CustomTableCell>
-                          <CustomTableCell className={classes.centerText}>{row.referral}</CustomTableCell>
-                          <CustomTableCell className={classes.centerText}>{row.comments}</CustomTableCell>
-                          <CustomTableCell className={classes.centerText}>{row.plans_to_tell}</CustomTableCell>
-                          <CustomTableCell className={classes.centerText}>{row.first_time}</CustomTableCell>
-                          <CustomTableCell className={classes.centerText}>{row.child_abuse}</CustomTableCell>
-                          <CustomTableCell className={classes.centerText}>{row.housing}</CustomTableCell>
-                          <CustomTableCell className={classes.centerText}>{row.transportation}</CustomTableCell>
-                          <CustomTableCell className={classes.centerText}>{row.education}</CustomTableCell>
+                          <CustomTableCell className={classes.centerText}>{row.passion == null ? '' : row.passion}</CustomTableCell>
+                          <CustomTableCell className={classes.centerText}>{row.profession == null ? '' : row.profession}</CustomTableCell>
+                          <CustomTableCell className={classes.centerText}>{row.generation == null ? '' : row.generation}</CustomTableCell>
+                          <CustomTableCell className={classes.centerText}>{row.referral == null ? '' : row.referral}</CustomTableCell>
+                          <CustomTableCell className={classes.centerText}>{row.comments == null ? '' : row.comments}</CustomTableCell>
+                          <CustomTableCell className={classes.centerText}>{row.plans_to_tell == true ? 'Yes' : 'No'}</CustomTableCell>
+                          <CustomTableCell className={classes.centerText}>{row.first_time == null ? 'Yes' : 'No'}</CustomTableCell>
+                          <CustomTableCell className={classes.centerText}>{row.child_abuse == null ? 'Yes' : 'No'}</CustomTableCell>
+                          <CustomTableCell className={classes.centerText}>{row.housing == null ? 'Yes' : 'No'}</CustomTableCell>
+                          <CustomTableCell className={classes.centerText}>{row.transportation == null ? 'Yes' : 'No'}</CustomTableCell>
+                          <CustomTableCell className={classes.centerText}>{row.education == null ? 'Yes' : 'No'}</CustomTableCell>
                         </TableRow>
                       );
                     })}

@@ -56,7 +56,7 @@ VALUES
     ('Community'), 
     ('Education');
 
-INSERT INTO threesixty ("name", "date", "location", "category_id", "client", "description", "published_status", "analysis_recommendation_public", "threesixty_reports_public", "dashboard_public", "goals_public", "demographics_public", "oral_report_public", "question_set_public", "circle_share_public")
+INSERT INTO threesixty ("name", "date", "location", "category_id", "client", "description", "published_status", "analysis_recommendation_public", "threesixty_reports_public", "dashboard_public", "goals_public", "demographics_public", "oral_report_public", "question_set_public", "circle_share_public", "freeform_public", "analysis_recommendation_published", "threesixty_reports_published", "dashboard_published", "goals_published", "demographics_published", "oral_report_published", "question_set_published", "circle_share_published", "freeform_published")
 VALUES (
 	'Catalyst Initiative of The Minneapolis Foundation - Building Initiative: Preventing Diseases of Despair', 
 	'9-18-2018', 
@@ -72,10 +72,20 @@ VALUES (
 	false,
 	true,
 	true,
-	true
+	true,
+	true,
+	false,
+	false,
+	false,
+	false,
+	false,
+	false,
+	false,
+	false,
+	false
 );
 
-INSERT INTO threesixty ("name", "date", "location", "category_id", "client", "description", "published_status", "analysis_recommendation_public", "threesixty_reports_public", "dashboard_public", "goals_public", "demographics_public", "oral_report_public", "question_set_public", "circle_share_public")
+INSERT INTO threesixty ("name", "date", "location", "category_id", "client", "description", "published_status", "analysis_recommendation_public", "threesixty_reports_public", "dashboard_public", "goals_public", "demographics_public", "oral_report_public", "question_set_public", "circle_share_public", "freeform_public", "analysis_recommendation_published", "threesixty_reports_published", "dashboard_published", "goals_published", "demographics_published", "oral_report_published", "question_set_published", "circle_share_published", "freeform_published")
 VALUES (
 	'Carver County Public Health - A Healthy Welcome', 
 	'10-4-2018', 
@@ -91,10 +101,20 @@ VALUES (
 	false,
 	true,
 	true,
-	true
+	true,
+	true,
+	false,
+	false,
+	false,
+	false,
+	false,
+	false,
+	false,
+	false,
+	false
 );
 
-INSERT INTO threesixty ("name", "date", "location", "category_id", "client", "description", "published_status", "analysis_recommendation_public", "threesixty_reports_public", "dashboard_public", "goals_public", "demographics_public", "oral_report_public", "question_set_public", "circle_share_public")
+INSERT INTO threesixty ("name", "date", "location", "category_id", "client", "description", "published_status", "analysis_recommendation_public", "threesixty_reports_public", "dashboard_public", "goals_public", "demographics_public", "oral_report_public", "question_set_public", "circle_share_public", "freeform_public", "analysis_recommendation_published", "threesixty_reports_published", "dashboard_published", "goals_published", "demographics_published", "oral_report_published", "question_set_published", "circle_share_published", "freeform_published")
 VALUES (
 	'Health Matters!', 
 	'10-24-2017', 
@@ -110,7 +130,17 @@ VALUES (
 	false,
 	true,
 	true,
-	true
+	true,
+	true,
+	false,
+	false,
+	false,
+	false,
+	false,
+	false,
+	false,
+	false,
+	false
 );
 
 INSERT INTO analysis_recommendation (threesixty_id, findings, recommendations)
@@ -1876,6 +1906,59 @@ VALUES
 	true,
 	true,
 	true,
+	true
+	)
+;
+
+INSERT INTO freeform (threesixty_id, title, content, row_public)
+VALUES
+	('1',
+	'"Heard in the Hall"',
+	'Here’s what participants had to say about their experience:
+
+	➢	“Thank you for creating a safe place to engage others who are different than ourselves, and the freedom to be vulnerable and learn from each other.” – Public Health Professional 
+
+	➢	“Thank you! I struggle with feelings of helplessness and hopelessness.” – Trainer for Child Support Workers, MN State Human Services 
+
+	➢	“I enjoyed the space, the conversations and especially the engaging activities.” Hmong Small Business Owner
+	
+		➢	“Loved conversations, ideation, inclusion and removal of power dynamic.” – Community Health & Wellbeing Partnership Specialist  
+
+	➢	“Great experience and networking! Thanks for bringing this group together. Very educational…I will be back.” – YMCA Staff Member
+
+	➢	“This was very needed and specifically on this day when I struggle with if what I do is enough.” – Client Service Representative / Case Manager 
+
+	➢	“I enjoyed the facilitation that brought people the safety to share freely.” – Social Worker
+
+	➢	“It is very interactive and enlightening.” – Healthcare Professional 
+
+	➢	“It was profound and emotional for me.” – Public Health Professional 
+
+	➢	“Uplifting and supportive; [I] made a good connection with someone I will contact after today. Thank you! Great food.” – Retired ESL Teacher
+
+	➢	“Every time I attend a Marnitas Table event, it never ceases to amaze me with all the wonderful conversation and interactions that occur. Events like these are essential to the healing of our communities.” – Community Improvement Coordinator
+
+	➢	“Eye opening - how many people from diverse experiences are noticing the same challenges and barriers and frustrations to achieving wellness and healing that I have seen/noticed.” – EMT/Paramedic
+
+	➢	“I am grateful to be in the room speaking and learning about resources to combat trauma, depression, and mental illness.” – Teacher, Writer & Creative 
+
+	➢	“Exciting and affirming conversations!” – Project Director & Women’s Service Lead for Women, Children & Families, ISUD
+
+	➢	“Really enjoyed the table conversation. Excellent!” – Chaplain 
+
+	➢	“Thank you, what an amazing day! This experience serves to build on personal and professional wellbeing and the ability to serve.” – LADC Therapist 
+
+	➢	“Thank you so much for creating this space. As a therapist, I work to provide the space for change. Just the opportunity to change – really change – is transformative. So many are not given any space for real change. So, I deeply appreciate the work it takes to provide this space for us. Thank you.” – Therapist 
+
+	➢	“[The] cohort of people here willing to interact and present makes this a rich and healing environment. Love the pop-ups. Marnita sets the tone perfectly.” – Twin Cities Public Television Staff 
+
+	➢	“It is encouraging to be with so many people who care about this subject. Discussing the systemic issues and toxic environments was helpful for my work.” – Educator
+	
+		➢	“Reinforced [my] belief[s] about the role of belonging and identity, as well as [the] need to focus on wellbeing at corp.” – Mental Health Promotion Specialist
+
+	➢	“This was one of the first experiences of a safe place for ALL members of community regardless of race, religion, ethnicity, sexual orientation, ability, or even dietary. Truly a shift, a challenge, and a hope to me moving forward.” – Fundraising Professional 
+
+For more participant-submitted comments and feedback, please see the attached Demo Data report.',
 	true
 	)
 ;

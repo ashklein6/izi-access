@@ -45,7 +45,17 @@ CREATE TABLE "threesixty" (
     "demographics_public" BOOLEAN DEFAULT FALSE NOT NULL,
     "oral_report_public" BOOLEAN DEFAULT TRUE NOT NULL,
     "question_set_public" BOOLEAN DEFAULT TRUE NOT NULL,
-    "circle_share_public" BOOLEAN DEFAULT TRUE NOT NULL
+    "circle_share_public" BOOLEAN DEFAULT TRUE NOT NULL,
+    "freeform_public" BOOLEAN DEFAULT TRUE NOT NULL,
+    "analysis_recommendation_published" BOOLEAN DEFAULT FALSE NOT NULL,
+    "threesixty_reports_published" BOOLEAN DEFAULT FALSE NOT NULL,
+    "dashboard_published" BOOLEAN DEFAULT FALSE NOT NULL,
+    "goals_published" BOOLEAN DEFAULT FALSE NOT NULL,
+    "demographics_published" BOOLEAN DEFAULT FALSE NOT NULL,
+    "oral_report_published" BOOLEAN DEFAULT FALSE NOT NULL,
+    "question_set_published" BOOLEAN DEFAULT FALSE NOT NULL,
+    "circle_share_published" BOOLEAN DEFAULT FALSE NOT NULL,
+    "freeform_published" BOOLEAN DEFAULT FALSE NOT NULL
 );
 
 CREATE TABLE "analysis_recommendation" (
@@ -130,6 +140,14 @@ CREATE TABLE "demographic" (
     "housing" BOOLEAN DEFAULT FALSE,
     "transportation" BOOLEAN DEFAULT FALSE,
     "education" BOOLEAN DEFAULT FALSE
+);
+
+CREATE TABLE "freeform" (
+	"id" SERIAL PRIMARY KEY,
+	"threesixty_id" INT REFERENCES "threesixty",
+	"title" VARCHAR(800),
+	"content" VARCHAR(25600),
+	"row_public" BOOLEAN DEFAULT FALSE
 );
 
 CREATE TABLE "circle_share" (

@@ -10,7 +10,7 @@ CREATE TABLE "person" (
     "username" VARCHAR (255) UNIQUE NOT NULL,
     "password" VARCHAR (1000) NOT NULL,
     "password_reset_token" VARCHAR (255),
-    "password_reset_expires" INT,
+    "password_reset_expires" TIMESTAMP WITH TIME ZONE,
     "firstname" VARCHAR(255),
     "lastname" VARCHAR(255),
     "access_id" INT DEFAULT 1 REFERENCES "access",
@@ -20,7 +20,7 @@ CREATE TABLE "person" (
 
 CREATE TABLE "client_request" (
     "id" SERIAL PRIMARY KEY,
-    "person_id" INT REFERENCES "person",
+    "person_id" INT REFERENCES "person" ON DELETE CASCADE,
     "name" VARCHAR (256),
     "date" DATE DEFAULT ('1900-01-01 00:00:00.000'),
     "date_added" TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -62,14 +62,14 @@ CREATE TABLE "threesixty" (
 
 CREATE TABLE "analysis_recommendation" (
     "id" SERIAL PRIMARY KEY,
-    "threesixty_id" INT REFERENCES "threesixty",
+    "threesixty_id" INT REFERENCES "threesixty" ON DELETE CASCADE,
     "findings" VARCHAR(25600),
     "recommendations" VARCHAR(25600)
 );
 
 CREATE TABLE "dashboard" (
     "id" SERIAL PRIMARY KEY,
-    "threesixty_id" INT REFERENCES "threesixty",
+    "threesixty_id" INT REFERENCES "threesixty" ON DELETE CASCADE,
     "row_title" VARCHAR(25600),
     "row_info" VARCHAR(25600),
     "row_public" BOOLEAN DEFAULT TRUE
@@ -77,7 +77,7 @@ CREATE TABLE "dashboard" (
 
 CREATE TABLE "goals" (
     "id" SERIAL PRIMARY KEY,
-    "threesixty_id" INT REFERENCES "threesixty",
+    "threesixty_id" INT REFERENCES "threesixty" ON DELETE CASCADE,
     "description" VARCHAR(25600),
     "desired" INT,
     "delivered" INT,
@@ -89,7 +89,7 @@ CREATE TABLE "goals" (
 
 CREATE TABLE "threesixty_reports" (
     "id" SERIAL PRIMARY KEY,
-    "threesixty_id" INT REFERENCES "threesixty",
+    "threesixty_id" INT REFERENCES "threesixty" ON DELETE CASCADE,
     "demographic" VARCHAR(25600),
     "summary" VARCHAR(25600),
     "methodology" VARCHAR(25600)
@@ -97,7 +97,7 @@ CREATE TABLE "threesixty_reports" (
 
 CREATE TABLE "oral_report" (
     "id" SERIAL PRIMARY KEY,
-    "threesixty_reports_id" INT REFERENCES "threesixty_reports",
+    "threesixty_reports_id" INT REFERENCES "threesixty_reports" ON DELETE CASCADE,
     "group_num" INT,
     "response" VARCHAR(25600)
 );
@@ -109,27 +109,27 @@ CREATE TABLE "response_category" (
     
 CREATE TABLE "question_set" (
     "id" SERIAL PRIMARY KEY,
-    "threesixty_reports_id" INT REFERENCES "threesixty_reports",
+    "threesixty_reports_id" INT REFERENCES "threesixty_reports" ON DELETE CASCADE,
     "set_title" VARCHAR(25600),
     "breakdown" VARCHAR(25600)
 );
 
 CREATE TABLE "questions" (
     "id" SERIAL PRIMARY KEY,
-    "set_id" INT REFERENCES "question_set",
+    "set_id" INT REFERENCES "question_set" ON DELETE CASCADE,
     "question" VARCHAR(25600)
 );
 
 CREATE TABLE "response" (
     "id" SERIAL PRIMARY KEY,
-    "question_id" INT REFERENCES "questions",
+    "question_id" INT REFERENCES "questions" ON DELETE CASCADE,
     "response" VARCHAR(25600),
     "category_id" INT REFERENCES "response_category"
 );
 
 CREATE TABLE "demographic" (
     "id" SERIAL PRIMARY KEY,
-    "threesixty_id" INT REFERENCES "threesixty",
+    "threesixty_id" INT REFERENCES "threesixty" ON DELETE CASCADE,
     "ethnicity" VARCHAR(25600),
     "passion" VARCHAR(25600),
     "profession" VARCHAR(25600),
@@ -146,7 +146,7 @@ CREATE TABLE "demographic" (
 
 CREATE TABLE "freeform" (
 	"id" SERIAL PRIMARY KEY,
-	"threesixty_id" INT REFERENCES "threesixty",
+	"threesixty_id" INT REFERENCES "threesixty" ON DELETE CASCADE,
 	"title" VARCHAR(800),
 	"content" VARCHAR(25600),
 	"row_public" BOOLEAN DEFAULT FALSE
@@ -154,13 +154,13 @@ CREATE TABLE "freeform" (
 
 CREATE TABLE "circle_share" (
     "id" SERIAL PRIMARY KEY,
-    "threesixty_reports_id" INT REFERENCES "threesixty_reports",
+    "threesixty_reports_id" INT REFERENCES "threesixty_reports" ON DELETE CASCADE,
     "question" VARCHAR(25600),
     "responses" VARCHAR(25600)
 );
 
 CREATE TABLE "threesixty_user" (
     "id" SERIAL PRIMARY KEY,
-    "user_id" INT REFERENCES "person",
-    "threesixty_id" INT REFERENCES "threesixty"
+    "user_id" INT REFERENCES "person" ON DELETE CASCADE,
+    "threesixty_id" INT REFERENCES "threesixty" ON DELETE CASCADE
 );

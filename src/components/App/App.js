@@ -45,7 +45,7 @@ class App extends Component {
           <section className="paper"> 
             <Switch>
               {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
-              <Redirect exact from="/" to="/home" />
+              {/* <Redirect exact from="/" to="/home" /> */}
 
               {/* For the following pages, no login is necessary. */}
               <Route
@@ -75,7 +75,7 @@ class App extends Component {
               />
               <Route
                 exact
-                path="/reset"
+                path="/reset/:token"
                 component={ResetPassword}
               />
 

@@ -29,12 +29,12 @@ class ResetPassword extends Component {
     await axios
       .get('/forgotPassword', {
         params: {
-          resetPasswordToken: this.props.match.params.token,
+          passwordResetToken: this.props.match.params.token,
         },
       })
       .then(response => {
         console.log(response);
-        if (response.data.message === 'password reset link a-ok') {
+        if (response.data.message === 'password reset link ok') {
           this.setState({
             username: response.data.username,
             update: false,
@@ -66,6 +66,7 @@ class ResetPassword extends Component {
       .put('/forgotPassword', {
         username: this.state.username,
         password: this.state.password,
+        token: this.props.match.params.token,
       })
       .then(response => {
         console.log(response.data);
@@ -82,7 +83,7 @@ class ResetPassword extends Component {
         }
       })
       .catch(error => {
-        console.log(error.data);
+        console.log(error);
       });
   };
 

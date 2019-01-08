@@ -22,7 +22,7 @@ function* changePublishStatus(action) {
 function* create360Complete(action) {
   try {
     const response = yield call(axios.post, '/current360/complete', {data: action.payload} );
-    yield put({ type: 'FETCH_360', payload: response });
+    // yield put({ type: 'SET_360', payload: response });
   } 
   catch (error) {
     console.log('error', error);

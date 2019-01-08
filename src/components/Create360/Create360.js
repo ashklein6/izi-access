@@ -45,6 +45,7 @@ class Create360 extends Component {
     date: '',
     location: '',
     category: '',
+    description: '',
     status: false,
   };
 
@@ -76,7 +77,7 @@ class Create360 extends Component {
   // dispatch to current360Saga
   handleSubmit = (event) => {
     event.preventDefault();
-    if(this.state.name && this.state.client && this.state.date && this.state.location && this.state.category){
+    if(this.state.name && this.state.client && this.state.date && this.state.location && this.state.category && this.state.description){
       this.confirmSubmit();
     } else {
       this.errorMessage();
@@ -97,12 +98,13 @@ class Create360 extends Component {
   };
 
 
-  create360 = () => {
+  create360 = async () => {
     if(!this.state.status){
-      this.props.dispatch({ type: 'CREATE_360_COMPLETE)', payload: this.state });
+      await this.props.dispatch({ type: 'CREATE_360_COMPLETE', payload: this.state });
     } else {
-      this.props.dispatch({ type: 'CREATE_360_LOWDOWN)', payload: this.state }); 
+      await this.props.dispatch({ type: 'CREATE_360_LOWDOWN)', payload: this.state }); 
     };
+      await this.props.history.push('/generate360');
   }
 
   confirmSubmit = () => {
@@ -113,7 +115,8 @@ class Create360 extends Component {
                 Client: ${this.state.client},
                 Date: ${this.state.date},
                 Location: ${this.state.location},
-                Category: ${this.state.category}`,
+                Category: ${this.state.category},
+                Description: ${this.state.description}`,
       buttons: [
         {
           label: 'Submit',
@@ -213,6 +216,17 @@ class Create360 extends Component {
               <MenuItem value={3}>Category 3</MenuItem>
             </Select>
           </FormControl><br />
+
+          <TextField
+            label="Description"
+            className={classes.textField}
+            margin="dense"
+            variant="outlined"
+            onChange={this.handleChange}
+            value={this.state.description}
+            name ="description"
+            placeholder="Description"
+          /><br />
 
           <span>BBE</span>
           <Switch

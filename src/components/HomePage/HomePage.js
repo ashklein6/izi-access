@@ -117,8 +117,7 @@ const styles = {
     marginBottom: 10
   },
   cardBody: {
-    height: 185,
-    overflow: 'scroll',
+    minHeight: 200,
     padding: 15,
     backgroundColor: '#f2f2f2',
     borderRadius: 5

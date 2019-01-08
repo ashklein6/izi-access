@@ -80,9 +80,9 @@ class Search360s extends Component {
 
 const styles = {
   form: {
-    display: 'flex',
-    justifyContent: 'center',
-    marginBottom: 50
+    display: 'inline-block',
+    // justifyContent: 'center',
+    margin: 'auto'
   },
   margin: {
     // margin: theme.spacing.unit,
@@ -91,6 +91,7 @@ const styles = {
     // marginTop: theme.spacing.unit * 3,
   },
   textField: {
+    
     // flexBasis: 200,
     padding: 25
   },

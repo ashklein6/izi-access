@@ -18,7 +18,7 @@ class GoalsAssessmentEditComponent extends Component {
 
  render() {
    const { classes } = this.props;
-
+  
    return (
     <div key={this.props.index} className={classes.inputGroup}>
       <Grid container>

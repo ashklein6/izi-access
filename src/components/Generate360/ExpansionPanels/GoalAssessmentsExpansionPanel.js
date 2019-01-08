@@ -62,7 +62,7 @@ class GoalsAssessmentExpansionPanel extends Component {
       activeStatus: 'Active'
     })
    }
- } // end handleChange
+ } // end handleChangeActive
 
   // handle the toggle of public/private for the section
   handleChangePublic = () => {
@@ -79,10 +79,11 @@ class GoalsAssessmentExpansionPanel extends Component {
        publicStatus: 'Public'
      })
     }
-  } // end handleChange
+  } // end handleChangePublic
 
  componentDidMount() {
-   this.props.dispatch({ type: 'FETCH_GOALS', payload: {section: 'goalsAssessment', current360Id: 1} });
+   // Get section when loaded
+   this.props.dispatch({ type: 'FETCH_GOALS', payload: {section: 'goalsAssessment', current360Id: this.props.current360Id} });
  }
 
  render() {
@@ -98,16 +99,15 @@ class GoalsAssessmentExpansionPanel extends Component {
             <Typography variant="h2" className={classes.heading}>Goals Assessment</Typography>
           </div>
 
-          {/* Conditionally render "Active" on expansion panel summary if the section is active. */}
-          {(this.state.activeStatus === 'Active') ? 
           <div className={classes.status}>
-            <Typography variant="h2" className={classes.subheading}>{this.state.activeStatus}</Typography>
-          </div> : null }
-
-          {/* Conditionally render "Public" on expansion panel summary if the section is active. */}
-          <div className={classes.status}>
+            {/* Conditionally render "Active" on expansion panel summary if the section is active. */}
+            {(this.state.activeStatus === 'Active') ? 
+            <Typography variant="h2" className={classes.subheading}>{this.state.activeStatus},&nbsp;</Typography>
+            : null }
+            {/* Render "Public" on expansion panel summary if the section is active. */}
             <Typography variant="h2" className={classes.subheading}>{this.state.publicStatus}</Typography>
           </div>
+
 
         </ExpansionPanelSummary>
 
@@ -180,7 +180,7 @@ class GoalsAssessmentExpansionPanel extends Component {
             label={this.state.publicStatus}
           />
           
-          <GoalsAssessmentEditDialog />
+          <GoalsAssessmentEditDialog current360Id={this.props.current360Id}/>
         </ExpansionPanelActions>
 
       </ExpansionPanel>
@@ -190,13 +190,6 @@ class GoalsAssessmentExpansionPanel extends Component {
 };
 
 const styles = {
-  root: {
-    width: '100%',
-  },
-  rootTable: {
-    width: '100%',
-    overflowX: 'scroll'
-  },
   centerText: {
     textAlign: 'center'
   },
@@ -228,6 +221,13 @@ const styles = {
     verticalAlign: 'bottom',
     height: 20,
     width: 20,
+  },
+  root: {
+    width: '100%',
+  },
+  rootTable: {
+    width: '100%',
+    overflowX: 'scroll'
   },
   status: {
     flexBasis: '25.00%',

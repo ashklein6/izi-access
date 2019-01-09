@@ -4,6 +4,7 @@ import colors from '../App/colors';
 import { StickyContainer, Sticky } from 'react-sticky';
 
 import SideBar from './SideBar';
+import MarkDownEditor from '../MarkDownEditor/MarkDownEditor';
 
 // Material-UI
 import { withStyles } from '@material-ui/core/styles';
@@ -268,6 +269,10 @@ class View360 extends Component {
                 Duis posuere auctor risus. Donec sit amet ante urna.
               </Typography>
             </div>
+            <div className={classes.markDownEditorContainer}>
+              <MarkDownEditor />
+            </div>
+
           </section>
         </Grid>
       </Grid>
@@ -316,6 +321,9 @@ const styles = {
   paragraph: {
     margin: '0px 5px 50px 5px',
     textIndent: '25px'
+  },
+  markDownEditorContainer: {
+    width: '100%',
   }
 };
 

@@ -1,0 +1,52 @@
+.editor {
+  background: #f2f2f2;
+  padding: 15px;
+  font-size: 15px;
+  width: calc(100% - 30px);
+  height: 50vh;
+  resize: none;
+  border: none;
+  overflow-wrap: break-word;
+}
+
+.preview-area {
+  background-color: #fff;
+  width: 45vw;
+  height: 85vh;
+  padding: 15px;
+  overflow: auto;
+}
+
+/* styles for markdown preview */
+pre {
+  background-color: #f6f8fa;
+  border-radius: 3px;
+  font-size: 85%;
+  line-height: 1.45;
+  overflow: auto;
+  padding: 16px;
+}
+
+blockquote {
+  margin: 0;
+  padding: 0 1em;
+  color: #6a737d;
+  border-left: 0.5em solid #dfe2e5;
+}
+
+/* table {
+  border-collapse: collapse;
+}
+
+tr {
+  background: #eee;
+}
+
+th, td {
+  padding: 5px 15px;
+  border: 1px solid #aaa;
+}
+
+table tr:nth-child(even) {
+  background: #ccc;
+} */

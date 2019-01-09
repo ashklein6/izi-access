@@ -4,6 +4,7 @@ import "./MarkDownEditor.css";
 
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
 
 // InputCode Component
 class InputCode extends Component {
@@ -57,7 +58,6 @@ class MarkDownEditor extends Component {
     const { input } = this.state;
     const { classes } = this.props;
     return (
-      <div>
         <div className={classes.container}>
 
         {/* Mark Down Editor Section */}
@@ -73,6 +73,8 @@ class MarkDownEditor extends Component {
               />
             </div>
           </section>
+          <Button className={classes.submitButton} variant="contained">Submit</Button>
+
 
           {/* Mark Down Preview Section */}
           {/* <div>
@@ -86,15 +88,15 @@ class MarkDownEditor extends Component {
             </div>
           </div> */}
         </div>
-      </div>
     );
   }
 }
 
 const styles = {
   container: {
+    position: 'relative',
     width: '100%',
-    margin: 'auto'
+    marginBottom: 50
   },
   inputContainer: {
     backgroundColor: '#7d52a1',
@@ -119,6 +121,13 @@ const styles = {
     color: '#fff',
     margin: 0,
     padding: 15,
+  },
+  submitButton: {
+    position: 'absolute',
+    bottom: 0,
+    right: 10,
+    padding: 10,
+    margin: 10,
   }
 }
 export default (withStyles(styles)(MarkDownEditor));

@@ -48,6 +48,7 @@ CREATE TABLE "threesixty" (
     "oral_report_public" BOOLEAN DEFAULT TRUE NOT NULL,
     "question_set_public" BOOLEAN DEFAULT TRUE NOT NULL,
     "circle_share_public" BOOLEAN DEFAULT TRUE NOT NULL,
+    "threesixty_freeform_public" BOOLEAN DEFAULT TRUE NOT NULL,
     "freeform_public" BOOLEAN DEFAULT TRUE NOT NULL,
     "upload_public" BOOLEAN DEFAULT TRUE NOT NULL,
     "analysis_recommendation_published" BOOLEAN DEFAULT TRUE NOT NULL,
@@ -58,6 +59,7 @@ CREATE TABLE "threesixty" (
     "oral_report_published" BOOLEAN DEFAULT TRUE NOT NULL,
     "question_set_published" BOOLEAN DEFAULT TRUE NOT NULL,
     "circle_share_published" BOOLEAN DEFAULT TRUE NOT NULL,
+    "threesixty_freeform_published" BOOLEAN DEFAULT TRUE NOT NULL,
     "freeform_published" BOOLEAN DEFAULT TRUE NOT NULL,
     "upload_published" BOOLEAN DEFAULT TRUE NOT NULL
 );
@@ -166,6 +168,14 @@ CREATE TABLE "circle_share" (
     "threesixty_reports_id" INT REFERENCES "threesixty_reports" ON DELETE CASCADE,
     "question" VARCHAR(25600),
     "responses" VARCHAR(25600)
+);
+
+CREATE TABLE "threesixty_freeform" (
+	"id" SERIAL PRIMARY KEY,
+	"threesixty_reports_id" INT REFERENCES "threesixty_reports" ON DELETE CASCADE,
+	"title" VARCHAR(800),
+	"content" VARCHAR(25600),
+	"row_public" BOOLEAN DEFAULT FALSE
 );
 
 CREATE TABLE "threesixty_user" (

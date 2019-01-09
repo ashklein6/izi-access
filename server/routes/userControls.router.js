@@ -1,17 +1,39 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
+const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
 /**
  * GET route template
  */
-router.get('/', (req, res) => {
-    
+router.get('/', rejectUnauthenticated, (req, res) => {
+  console.log(req.user.id);
+  const sqlText = `SELECT threesixty.name, threesixty.date, threesixty.id FROM threesixty
+                  JOIN threesixty_user ON threesixty_user.threesixty_id = threesixty.id
+                  JOIN person ON threesixty_user.user_id = person.id
+                  WHERE person.id = $1;`
+  const user = req.user.id;
+  pool.query(sqlText, [user])
+  .then((response) => {
+    res.send(response.rows);
+  })
+  .catch(() => {
+    res.sendStatus(500);
+  })
 });
 
 
 router.post('/', (req, res) => {
-
+  console.log(req.body.data);
+  const sqlText = `INSERT INTO client_request (person_id, name, date) VALUES ($1, $2, $3);`
+  const request = [req.body.data.user, req.body.data.iziName, req.body.data.date];
+  pool.query(sqlText, request)
+  .then(() => {
+    res.sendStatus(200);
+  })
+  .catch(() => {
+    res.sendStatus(500);
+  })
 });
 
 router.put('/', (req,res) => {

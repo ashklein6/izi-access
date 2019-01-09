@@ -87,6 +87,7 @@ router.get('/pendingRequests', (req,res) => {
             JOIN access ON access.id = person.access_id
             FULL OUTER JOIN threesixty_user ON threesixty_user.user_id = person.id
             LEFT JOIN threesixty ON threesixty.id = threesixty_user.threesixty_id
+            WHERE person.id IS NOT NULL
             ORDER BY person.date_added DESC;`)
   .then((response) => {
     res.send(response.rows);

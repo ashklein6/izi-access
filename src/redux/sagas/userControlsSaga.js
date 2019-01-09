@@ -3,7 +3,8 @@ import { put, call, takeLatest } from 'redux-saga/effects';
 
 function* fetchUserInfo() {
   try {
-    
+    const response = yield call(axios.get, '/userControls');
+    yield put({type: 'SET_USER_INFO', payload: response.data});
   } 
   catch (error) {
     console.log('error', error);
@@ -30,9 +31,9 @@ function* remove360Access(action) {
   }
 };
 
-function* request360Access() {
+function* request360Access(action) {
   try {
-    
+    yield call(axios.post, '/userControls', {data: action.payload});
   } 
   catch (error) {
     console.log('error', error);

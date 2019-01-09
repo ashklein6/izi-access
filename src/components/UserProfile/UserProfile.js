@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import EditUser from './EditUser/EditUser';
 import EditPassword from './EditUser/EditPassword';
 import RequestAccess from './EditUser/RequestAccess';
+import moment from 'moment';
 
 // Material-UI
 import { withStyles } from '@material-ui/core/styles';
@@ -43,6 +44,10 @@ const styles = {
 };
 
 class UserProfile extends Component {
+
+  componentDidMount(){
+    this.props.dispatch({type: 'FETCH_USER_INFO'});
+  }
 
  render() {
    const { classes } = this.props;
@@ -86,17 +91,13 @@ class UserProfile extends Component {
             className={classes.text}>
             Your Accessable 360s
           </Typography>
-          <Typography 
-            className={classes.text}>360 #1
+          {this.props.reduxState.userControls.user.map(izi => (
+            <Typography key={izi.id} className={classes.text}>
+            {izi.name}, {moment(izi.date).format('LL')}
             <Button className={classes.viewButton} 
             variant="contained">View</Button>
           </Typography>
-          <Typography 
-            className={classes.text}>360 #2
-            <Button className={classes.viewButton} 
-            variant="contained">View</Button>
-          </Typography>
-          
+          ))}   
           <RequestAccess />
           </div>
           

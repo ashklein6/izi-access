@@ -56,7 +56,7 @@ VALUES
     ('Community'), 
     ('Education');
 
-INSERT INTO threesixty ("name", "date", "location", "category_id", "client", "description", "published_status", "analysis_recommendation_public", "threesixty_reports_public", "dashboard_public", "goals_public", "demographics_public", "oral_report_public", "question_set_public", "circle_share_public", "freeform_public", "analysis_recommendation_published", "threesixty_reports_published", "dashboard_published", "goals_published", "demographics_published", "oral_report_published", "question_set_published", "circle_share_published", "freeform_published")
+INSERT INTO threesixty ("name", "date", "location", "category_id", "client", "description", "published_status", "analysis_recommendation_public", "threesixty_reports_public", "dashboard_public", "goals_public", "demographics_public", "oral_report_public", "question_set_public", "circle_share_public", "freeform_public", "upload_public", "analysis_recommendation_published", "threesixty_reports_published", "dashboard_published", "goals_published", "demographics_published", "oral_report_published", "question_set_published", "circle_share_published", "freeform_published", "upload_published")
 VALUES (
 	'Catalyst Initiative of The Minneapolis Foundation - Building Initiative: Preventing Diseases of Despair', 
 	'9-18-2018', 
@@ -74,18 +74,20 @@ VALUES (
 	true,
 	true,
 	true,
-	false,
-	false,
-	false,
-	false,
-	false,
-	false,
-	false,
-	false,
-	false
+	true,
+	true,
+	true,
+	true,
+	true,
+	true,
+	true,
+	true,
+	true,
+	true,
+	true
 );
 
-INSERT INTO threesixty ("name", "date", "location", "category_id", "client", "description", "published_status", "analysis_recommendation_public", "threesixty_reports_public", "dashboard_public", "goals_public", "demographics_public", "oral_report_public", "question_set_public", "circle_share_public", "freeform_public", "analysis_recommendation_published", "threesixty_reports_published", "dashboard_published", "goals_published", "demographics_published", "oral_report_published", "question_set_published", "circle_share_published", "freeform_published")
+INSERT INTO threesixty ("name", "date", "location", "category_id", "client", "description", "published_status", "analysis_recommendation_public", "threesixty_reports_public", "dashboard_public", "goals_public", "demographics_public", "oral_report_public", "question_set_public", "circle_share_public", "freeform_public", "upload_public", "analysis_recommendation_published", "threesixty_reports_published", "dashboard_published", "goals_published", "demographics_published", "oral_report_published", "question_set_published", "circle_share_published", "freeform_published", "upload_published")
 VALUES (
 	'Carver County Public Health - A Healthy Welcome', 
 	'10-4-2018', 
@@ -93,28 +95,30 @@ VALUES (
 	1, 
 	'MTI',
 	'86 community members gathered to discuss healthcare and community health needs.',
-	false,
-	true,
-	true,
-	false,
-	false,
-	false,
-	true,
 	true,
 	true,
 	true,
 	false,
 	false,
 	false,
-	false,
-	false,
-	false,
-	false,
-	false,
-	false
+	true,
+	true,
+	true,
+	true,
+	true,
+	true,
+	true,
+	true,
+	true,
+	true,
+	true,
+	true,
+	true,
+	true,
+	true
 );
 
-INSERT INTO threesixty ("name", "date", "location", "category_id", "client", "description", "published_status", "analysis_recommendation_public", "threesixty_reports_public", "dashboard_public", "goals_public", "demographics_public", "oral_report_public", "question_set_public", "circle_share_public", "freeform_public", "analysis_recommendation_published", "threesixty_reports_published", "dashboard_published", "goals_published", "demographics_published", "oral_report_published", "question_set_published", "circle_share_published", "freeform_published")
+INSERT INTO threesixty ("name", "date", "location", "category_id", "client", "description", "published_status", "analysis_recommendation_public", "threesixty_reports_public", "dashboard_public", "goals_public", "demographics_public", "oral_report_public", "question_set_public", "circle_share_public", "freeform_public", "upload_public", "analysis_recommendation_published", "threesixty_reports_published", "dashboard_published", "goals_published", "demographics_published", "oral_report_published", "question_set_published", "circle_share_published", "freeform_published", "upload_published")
 VALUES (
 	'Health Matters!', 
 	'10-24-2017', 
@@ -122,25 +126,27 @@ VALUES (
 	3, 
 	'Scott County Health Care System Collaborative',
 	'140 community members gathered together to discuss healthcare.',
-	false,
-	true,
-	true,
-	false,
-	false,
-	false,
-	true,
 	true,
 	true,
 	true,
 	false,
 	false,
 	false,
-	false,
-	false,
-	false,
-	false,
-	false,
-	false
+	true,
+	true,
+	true,
+	true,
+	true,
+	true,
+	true,
+	true,
+	true,
+	true,
+	true,
+	true,
+	true,
+	true,
+	true
 );
 
 INSERT INTO analysis_recommendation (threesixty_id, findings, recommendations)
@@ -1960,6 +1966,20 @@ VALUES
 
 For more participant-submitted comments and feedback, please see the attached Demo Data report.',
 	true
+	)
+;
+
+INSERT INTO upload (threesixty_id, title, url)
+VALUES
+	(
+	1,
+	'12 Years of Radical Hospitality',
+	'https://www.marnitastable.org/wp-content/uploads/2018/12/MTI_annual-report_2017.pdf'
+	),
+	(
+	1,
+	'Sustainable Progress',
+	'https://www.marnitastable.org/wp-content/uploads/2017/08/Marnitas-Table-2016-Annual-Report.pdf'
 	)
 ;
 

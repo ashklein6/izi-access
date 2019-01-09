@@ -39,7 +39,6 @@ class Home extends Component {
 
  render() {
    const { classes } = this.props;
-
    return (
      <div>
        {/* {JSON.stringify(this.props.reduxState.all360s.recent)} */}

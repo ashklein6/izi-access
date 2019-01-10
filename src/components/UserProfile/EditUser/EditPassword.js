@@ -12,52 +12,17 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-const styles = {
-    
-    textField: {
-      width: 400,
-      marginBottom: 15
-    },
-    
-    header: {
-      textAlign: 'center',
-      marginBottom: 25,
-    },
-
-    button: {
-      width: 200,
-      marginTop: 15,
-    },
-    
-    div: {
-      textAlign: 'left',
-      width: 400,
-      margin: 'auto',
-      padding: 20,
-      fontSize: 18,
-      background: '#eceff0',
-      borderRadius: 10
-    },
-
-    feedback: {
-      textAlign: 'center',
-      marginBottom: 25,
-      color: 'red',
-    },
-  };
-
-
 class EditPassword extends Component {
 
 state = {
-    open: false,
-    noMatch: false,
-    oldPassword: '',
-    newPassword: '',
-    confirmNewPassword: '',
-    passwordChanged: false,
-    changeError: false,
-    };
+  open: false,
+  noMatch: false,
+  oldPassword: '',
+  newPassword: '',
+  confirmNewPassword: '',
+  passwordChanged: false,
+  changeError: false,
+};
 
 handleClickOpen = () => {
     this.setState({
@@ -200,8 +165,38 @@ render(){
           </Dialog>
         </div>
     )
+  }
 }
-}
+
+const styles = {
+  textField: {
+    width: 400,
+    marginBottom: 15,
+    backgroundColor: '#fff'
+  },
+  header: {
+    textAlign: 'center',
+    marginBottom: 25,
+  },
+  button: {
+    width: 200,
+    marginTop: 15,
+  },
+  div: {
+    textAlign: 'left',
+    width: 400,
+    margin: 'auto',
+    padding: 20,
+    fontSize: 18,
+    background: '#eceff0',
+    borderRadius: 10
+  },
+  feedback: {
+    textAlign: 'center',
+    marginBottom: 25,
+    color: 'red',
+  },
+};
 
 const mapReduxStateToProps = (reduxState) => ({
     reduxState

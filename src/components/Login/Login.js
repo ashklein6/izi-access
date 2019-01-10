@@ -6,7 +6,7 @@ import ForgotPassword from '../ForgotPassword/ForgotPassword';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-
+import TextField from '@material-ui/core/TextField';
 
 class Login extends Component {
   state = {
@@ -40,38 +40,43 @@ class Login extends Component {
     const { classes } = this.props;
     
     return (
-      <div>
+      <div className={classes.container}>
         {this.props.errors.loginMessage && (
-          <h2
+          <Typography
+            variant="h4"
             className="alert"
             role="alert"
           >
             {this.props.errors.loginMessage}
-          </h2>
+          </Typography>
         )}
         <form onSubmit={this.login} className={classes.form}>
-          <h1>Login</h1>
+          <Typography variant="h3" className={classes.header}>Login</Typography>
           <div>
-            <label htmlFor="username">
-              Username:
-              <input
-                type="text"
-                name="username"
-                value={this.state.username}
-                onChange={this.handleInputChangeFor('username')}
-              />
-            </label>
+            <TextField
+              label="Username"
+              className={classes.textField}
+              margin="dense"
+              variant="outlined"
+              type="text"
+              name="username"
+              placeholder="Username"
+              value={this.state.username}
+              onChange={this.handleInputChangeFor('username')}
+            />
           </div>
           <div>
-            <label htmlFor="password">
-              Password:
-              <input
-                type="password"
-                name="password"
-                value={this.state.password}
-                onChange={this.handleInputChangeFor('password')}
-              />
-            </label>
+            <TextField
+              label="Password"
+              className={classes.textField}
+              margin="dense"
+              variant="outlined"
+              type="password"
+              name="password"
+              placeholder="Password"
+              value={this.state.password}
+              onChange={this.handleInputChangeFor('password')}
+            />
           </div>
           <div>
             <input
@@ -82,36 +87,47 @@ class Login extends Component {
             />
           </div>
         </form>
-        <center>
-          <Button
-            type="button"
-            className={classes.button}
-            onClick={() => {this.props.dispatch({type: 'SET_TO_REGISTER_MODE'})}}
-          >
-            Register
-          </Button>
-          <ForgotPassword />
-        </center>
+        <Button
+          type="button"
+          className={classes.button}
+          onClick={() => {this.props.dispatch({type: 'SET_TO_REGISTER_MODE'})}}
+        >
+          Register
+        </Button>
+        <br />
+        <ForgotPassword />
       </div>
     );
   }
 }
 
 const styles = {
+  container: {
+    margin: 'auto',
+    textAlign: 'center',
+  },
   form: {
-    backgroundColor: "var(--main-light-grey)",
-    width: "30%",
-    height: "250px",
-    margin: "20px auto",
-    padding: "25px",
-    borderRadius: "2px",
+    backgroundColor: 'var(--main-light-grey)',
+    width: 380,
+    margin: '25px auto',
+    padding: 17,
+    borderRadius: 2,
+  },
+  header: {
+    textAlign: 'center',
+    marginBottom: 25
   },
   button: {
-    display: 'block',
+    textAlign: 'center',
     width: 200,
     padding: 10,
-    margin: 10,
-  }
+  },
+  textField: {
+    backgroundColor: '#fff',
+    margin: 'auto',
+    minWidth: 350,
+    marginBottom: 15
+  },
 };
 
 const mapReduxStateToProps = (state) => ({

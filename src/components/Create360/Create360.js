@@ -133,7 +133,7 @@ class Create360 extends Component {
     const { classes } = this.props;
     return (
       <div className={classes.container}>
-        {JSON.stringify(this.state)}
+        {/* {JSON.stringify(this.state)} */}
         {/* {JSON.stringify(this.props.mapReduxStateToProps)} */}
         <Button 
           variant="contained"

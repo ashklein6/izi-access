@@ -17,7 +17,8 @@ const styles = {
     },
     textField: {
       width: 400,
-      marginBottom: 15
+      marginBottom: 15,
+      backgroundColor: '#fff'
     },
     text: {
       textAlign: 'left',
@@ -97,27 +98,29 @@ render(){
     const { classes } = this.props;
 
     return(
-        <div>
-            <Button
-            onClick={this.handleClickOpen} 
-            className={classes.button} 
-            variant= "contained"
-            >Request 360 Access</Button>
+      <div>
+        <Button
+        onClick={this.handleClickOpen} 
+        className={classes.button} 
+        variant= "contained"
+        >Request 360 Access</Button>
         <Dialog
-         open={this.state.open}
-         onClose={this.handleClickClose}
-         aria-labelledby="request-access"
-         scroll="paper"
-         width= '400'
-         maxWidth="lg"
-       >
-       <DialogTitle id="edit-password" className={classes.header}>Request IZI Access</DialogTitle>
-         <DialogContent>
-           <DialogContentText className={classes.header}>
-             Remember to save changes before closing this edit dialog.
-           </DialogContentText>
-         <div className={classes.div}>
-            <TextField
+          open={this.state.open}
+          onClose={this.handleClickClose}
+          aria-labelledby="request-access"
+          scroll="paper"
+          width= '400'
+          maxWidth="lg"
+        >
+          <DialogTitle id="edit-password" className={classes.header}>
+            Request IZI Access
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText className={classes.header}>
+              Remember to save changes before closing this edit dialog.
+            </DialogContentText>
+            <div className={classes.div}>
+              <TextField
                 label="IZI Name"
                 className={classes.textField}
                 margin="dense"
@@ -129,32 +132,28 @@ render(){
                 onChange={this.handleChange}
               />
               <Typography variant="h6" className={classes.header}>OR</Typography>
-              {/* <br /> */}
               <TextField
-              label="Date of IZI"
-              className={classes.textField}
-              type="date"
-              margin="dense"
-              variant="outlined"
-              name ="date"
-              value={this.state.date}
-              onChange={this.handleChange}
-                />
-            <br />
-          </div>
+                className={classes.textField}
+                type="date"
+                margin="dense"
+                variant="outlined"
+                name ="date"
+              />
+              <br />
+            </div>
           </DialogContent>
-            <DialogActions>
-                <Button onClick={this.handleClickClose} color="primary">
-                    Cancel
-                </Button>
-                <Button onClick={this.handleSave} color="primary">
-                    Save Changes
-                </Button>
-            </DialogActions>
-          </Dialog>
-        </div>
+          <DialogActions>
+            <Button onClick={this.handleClickClose} color="primary">
+              Cancel
+            </Button>
+            <Button onClick={this.handleSave} color="primary">
+              Save Changes
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </div>
     )
-}
+  }
 }
 
 const mapReduxStateToProps = (reduxState) => ({

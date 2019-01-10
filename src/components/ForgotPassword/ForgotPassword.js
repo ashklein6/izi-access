@@ -111,8 +111,7 @@ class ForgotPassword extends Component {
             {showError && (
               <div>
                 <Typography className={classes.error}>
-                  That email address isn't recognized. Please try again or register
-                  for a new account.
+                  That email address isn't recognized. Please try again or register for a new account.
                 </Typography>
               </div>
             )}
@@ -159,7 +158,9 @@ const styles = {
     backgroundColor: colors.lightGrey
   },
   button: {
-    display: 'block',
+    // display: 'block',
+    textAlign: 'center',
+
     width: 200,
     padding: 10,
     margin: 10,

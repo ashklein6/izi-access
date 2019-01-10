@@ -15,7 +15,8 @@ const styles = {
     
     textField: {
       width: 400,
-      marginBottom: 15
+      marginBottom: 15,
+      backgroundColor: '#fff'
     },
     
     header: {

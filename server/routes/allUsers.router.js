@@ -30,7 +30,7 @@ router.get('/search', (req,res) => {
                 JOIN access ON access.id = person.access_id
                 FULL OUTER JOIN threesixty_user ON threesixty_user.user_id = person.id
                 LEFT JOIN threesixty ON threesixty.id = threesixty_user.threesixty_id 
-                WHERE access.access_level > 0  `;
+                WHERE access.access_level > 0 `;
   let search = req.query;
   let searchFields = [];
   let fieldCounter = 1;
@@ -44,15 +44,15 @@ router.get('/search', (req,res) => {
     fieldCounter++;
     searchFields.push(search.level);
   };
-  if(search.sortBy) {
-    sqlText += `ORDER BY $${fieldCounter};`;
-    searchFields.push(search.sortBy)
+  if(search.sortBy === 'person.firstname' || search.sortBy === 'person.lastname' || search.sortBy === 'person.email' || search.sortBy === 'person.access_id') {
+    sqlText += `ORDER BY ${search.sortBy};`;
   } else {
     sqlText += `ORDER BY person.date_added DESC;`;
   };
   console.log(sqlText, searchFields);
   pool.query(sqlText, searchFields)
   .then((response) => {
+    console.log(response.rows);
     res.send(response.rows);
   })
   .catch(() => {
@@ -89,6 +89,24 @@ router.get('/pendingRequests', (req,res) => {
             LEFT JOIN threesixty ON threesixty.id = threesixty_user.threesixty_id
             WHERE person.id IS NOT NULL
             ORDER BY person.date_added DESC;`)
+  .then((response) => {
+    res.send(response.rows);
+  })
+  .catch(() => {
+    res.sendStatus(500);
+  })
+});
+
+router.get('/threesixty', (req, res) => {
+  let threesixty = req.query.id;
+  pool.query(`SELECT person.firstname, person.lastname, person.email, person.id, 
+            person.access_id, access.access_type, access.access_level, 
+            threesixty.name as threesixty, threesixty_user.id as connected_360_id 
+            FROM person 
+            JOIN access ON access.id = person.access_id
+            FULL OUTER JOIN threesixty_user ON threesixty_user.user_id = person.id
+            LEFT JOIN threesixty ON threesixty.id = threesixty_user.threesixty_id
+            WHERE threesixty.id = $1 ORDER BY person.date_added DESC;`, [threesixty])
   .then((response) => {
     res.send(response.rows);
   })

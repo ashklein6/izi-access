@@ -24,10 +24,23 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 
 
 router.post('/', (req, res) => {
-  console.log(req.body.data);
   const sqlText = `INSERT INTO client_request (person_id, name, date) VALUES ($1, $2, $3);`
   const request = [req.body.data.user, req.body.data.iziName, req.body.data.date];
   pool.query(sqlText, request)
+  .then(() => {
+    res.sendStatus(200);
+  })
+  .catch(() => {
+    res.sendStatus(500);
+  })
+});
+
+router.post('/add', (req,res) => {
+  console.log(req.body.data);
+  const sqlText = `INSERT INTO threesixty_user (user_id, threesixty_id) VALUES ($1, $2);`;
+  const user = req.body.data.user;
+  const threesixty = req.body.data.threesixty;
+  pool.query(sqlText, [user, threesixty])
   .then(() => {
     res.sendStatus(200);
   })

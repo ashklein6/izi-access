@@ -11,7 +11,8 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
-
+import CheckCircleOutline from '@material-ui/icons/CheckCircleOutline';
+import Close from '@material-ui/icons/Close';
 
 let root = document.querySelector(':root');
 const colors = {
@@ -66,9 +67,9 @@ class TableUsers extends Component {
                 {this.props.cellVariables.map(( variable, index ) => 
                   <CustomTableCell width={this.props.width[index]} component="th" scope="row" className={this.props.className[index]}>
                     {/* Check if value is truthie. If true, print 'yes' */}
-                    {row[variable] === true ? 'Yes' : 
+                    {row[variable] === true ? <CheckCircleOutline className={classes.iconColored}/> : 
                     // Next, check if value is falsie. If not, print the value
-                    ((row[variable] === false || row[variable] === null) ? 'No' : row[variable])}
+                    ((row[variable] === false || row[variable] === null) ? <Close /> : row[variable])}
                   </CustomTableCell>
                 )}
               </TableRow>
@@ -124,6 +125,9 @@ const styles = {
   verticalAlign: 'bottom',
   height: 20,
   width: 20,
+ },
+ iconColored: {
+  color: colors.pink
  },
  status: {
   flexBasis: '25.00%',

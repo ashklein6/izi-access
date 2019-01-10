@@ -38,11 +38,11 @@ router.get('/section', (req, res) => {
     case 'circle_share':
       queryText = `SELECT * FROM circle_share WHERE threesixty_reports_id=$1 ORDER BY id;`
     case 'question_set':
-      queryText = `SELECT question_set.id AS question_set_id, threesixty_id, set_title, breakdown, questions.id AS question_id, response.id AS response_id, response, response_category.id AS response_category_id, description FROM question_set
+      queryText = `SELECT question_set.id AS question_set_id, threesixty_reports_id, set_title, breakdown, questions.id AS question_id, response.id AS response_id, response, response_category.id AS response_category_id, description AS response_category_description FROM question_set
       LEFT JOIN questions ON questions.set_id = question_set.id
       LEFT JOIN response ON response.question_id = questions.id
       LEFT JOIN response_category ON response_category.id = response.category_id
-      WHERE threesixty_id=$1 ORDER BY question_set.id;`
+      WHERE threesixty_reports_id=$1 ORDER BY question_set.id;`
     case 'oral_report':
       queryText = `SELECT * FROM oral_report WHERE threesixty_reports_id=$1 ORDER BY id`
   }
@@ -190,11 +190,11 @@ router.get('/circle_share', (req, res) => {
 // Setup a GET route to get 360 section question_set
 router.get('/question_set', (req, res) => {
     let current360Id = req.query.current360Id;
-    let queryText = `SELECT question_set.id AS question_set_id, threesixty_id, set_title, breakdown, questions.id AS question_id, response.id AS response_id, response, response_category.id AS response_category_id, description FROM question_set
+    let queryText = `SELECT question_set.id AS question_set_id, threesixty_reports_id, set_title, breakdown, questions.id AS question_id, response.id AS response_id, response, response_category.id AS response_category_id, description AS response_category_description FROM question_set
     LEFT JOIN questions ON questions.set_id = question_set.id
     LEFT JOIN response ON response.question_id = questions.id
     LEFT JOIN response_category ON response_category.id = response.category_id
-    WHERE threesixty_id=$1 ORDER BY question_set.id;`;
+    WHERE threesixty_reports_id=$1 ORDER BY question_set.id;`;
     
     console.log('GET request for 360 section question_set. current 360 id:', current360Id);
     

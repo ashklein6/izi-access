@@ -5,6 +5,7 @@ import colors from '../App/colors';
 import SideBar from './SideBar';
 import MarkDownEditor from '../MarkDownEditor/MarkDownEditor';
 import TableTemplate from './TableTemplate/TableTemplate';
+import MarkDownOutput from '../MarkDownEditor/MarkdownOutput';
 
 // Material-UI
 import { withStyles } from '@material-ui/core/styles';
@@ -59,7 +60,7 @@ class View360 extends Component {
             </div>            
             {/* sticky header for section */}
             <div className={classes.sticky}>
-              <Typography variant="h5" className={classes.sectionHeader}>Goals Assessment</Typography>
+              <Typography variant="h4" className={classes.sectionHeader}>Goals Assessment</Typography>
             </div>
             {/* section content */}
             <TableTemplate 
@@ -77,7 +78,7 @@ class View360 extends Component {
             </div>
             {/* sticky header for section */}
             <div className={classes.sticky}>
-              <Typography variant="h5" className={classes.sectionHeader}>Dashboard</Typography>
+              <Typography variant="h4" className={classes.sectionHeader}>Dashboard</Typography>
             </div>
             {/* section content */}
             <TableTemplate 
@@ -95,10 +96,36 @@ class View360 extends Component {
             </div>
             {/* sticky header for section */}
             <div className={classes.sticky}>
-              <Typography variant="h5" className={classes.sectionHeader}>360 Report</Typography>
+              <Typography variant="h4" className={classes.sectionHeader}>360 Report</Typography>
             </div>
             {/* section content */}
-            <p className={classes.paragraph}>360 report will go here! ...eventually.</p>
+            <div className={classes.threesixtyReport}>
+              <Typography variant="h5" className={classes.textMargin}>The 360 | Event Overview</Typography>
+                <Typography variant="h6" className={classes.textMargin}>Demographics</Typography>
+                  <div className={classes.paragraph}>
+                    {this.props.reduxState.current360.threesixty_reports.map((row, index) => 
+                      <MarkDownOutput display={row.demographic} key={index}/>)}
+                  </div>
+                <Typography variant="h6" className={classes.textMargin}>The 360 | Summary, Overview</Typography>
+                  <div className={classes.paragraph}>
+                    {this.props.reduxState.current360.threesixty_reports.map((row, index) => 
+                      <MarkDownOutput display={row.summary} key={index}/>)}
+                  </div>
+              <Typography variant="h5" className={classes.textMargin}>Mindstorm Themes &amp; Analysis</Typography>
+                <Typography variant="h6" className={classes.textMargin}>Overview | Methodology</Typography>
+                  <div className={classes.paragraph}>
+                    {this.props.reduxState.current360.threesixty_reports.map((row, index) => 
+                      <MarkDownOutput display={row.demographic} key={index}/>)}
+                  </div>
+                <div className={classes.paragraph}>
+                  {this.props.reduxState.current360.question_set.map((row, index) => 
+                    <React.Fragment>
+                      <Typography variant="h6" className={classes.textMargin}>Question Importance Number {index + 1}</Typography>
+                      <MarkDownOutput display={row.breakdown} key={index}/>
+                    </React.Fragment>
+                  )}
+                </div>
+            </div>
           </section>
           <section className={classes.section}>
             {/* anchor div for sidebar scroll placement */}
@@ -107,19 +134,18 @@ class View360 extends Component {
             </div>
             {/* sticky header for section */}
             <div className={classes.sticky}>
-              <Typography variant="h5" className={classes.sectionHeader}>Analysis and Recommendation</Typography>
+              <Typography variant="h4" className={classes.sectionHeader}>Analysis and Recommendation</Typography>
             </div>
               <Typography variant="h6" className={classes.textMargin}>Outreach Findings</Typography>
-                <p className={classes.paragraph}>
-                  {this.props.reduxState.current360.analysis_recommendation.map(row => row.findings)}
-                </p>
+                <div className={classes.paragraph}>
+                  {this.props.reduxState.current360.analysis_recommendation.map((row, index) => 
+                    <MarkDownOutput display={row.findings} key={index}/>)}
+                </div>
               <Typography variant="h6" className={classes.textMargin}>Recommendation</Typography>
-                <p className={classes.paragraph}>
-                  {this.props.reduxState.current360.analysis_recommendation.map(row => row.recommendations)}
-                </p>
-            <div className={classes.markDownEditorContainer}>
-              <MarkDownEditor />
-            </div>
+                <div className={classes.paragraph}>
+                {this.props.reduxState.current360.analysis_recommendation.map((row, index) => 
+                    <MarkDownOutput display={row.recommendations} key={index}/>)}
+                </div>
           </section>
           <section className={classes.section}>
             {/* anchor div for sidebar scroll placement */}
@@ -128,7 +154,7 @@ class View360 extends Component {
             </div>
             {/* sticky header for section */}
             <div className={classes.sticky}>
-              <Typography variant="h5" className={classes.sectionHeader}>IZI Demographic Data</Typography>
+              <Typography variant="h4" className={classes.sectionHeader}>IZI Demographic Data</Typography>
             </div>
             {/* section content */}
             <p className={classes.paragraph}>
@@ -158,7 +184,7 @@ class View360 extends Component {
             </div>
             {/* sticky header for section */}
             <div className={classes.sticky}>
-              <Typography variant="h5" className={classes.sectionHeader}>Sticky Stats and Event Materials</Typography>
+              <Typography variant="h4" className={classes.sectionHeader}>Sticky Stats and Event Materials</Typography>
             </div>
             {/* section content */}
             <p className={classes.paragraph}>Sticky Stats will go here!</p>

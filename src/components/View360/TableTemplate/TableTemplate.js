@@ -68,7 +68,7 @@ class TableUsers extends Component {
                     {/* Check if value is truthie. If true, print 'yes' */}
                     {row[variable] === true ? 'Yes' : 
                     // Next, check if value is falsie. If not, print the value
-                    ((row[variable] === false || row[variable] === null) ? null : row[variable])}
+                    ((row[variable] === false || row[variable] === null) ? 'No' : row[variable])}
                   </CustomTableCell>
                 )}
               </TableRow>

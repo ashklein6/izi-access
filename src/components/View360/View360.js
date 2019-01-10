@@ -140,7 +140,7 @@ class View360 extends Component {
             <TableTemplate 
               headers={['Ethnic', 'Passion', 'Profession', 'Generation', 'Referral', 'Comments',
                         'A', 'B', 'C', 'D', 'E', 'F']} 
-              width={['30%', '10%', '10%', '10%', null, null, null, null, null, null, null, null]}
+              width={['10%', '10%', '10%', '10%', null, null, null, null, null, null, null, null]}
               data={this.props.reduxState.current360.demographics} 
               className={[null,null]}
               cellVariables={['ethnicity','passion', 'profession','generation','referral','comments','plans_to_tell',
@@ -151,20 +151,14 @@ class View360 extends Component {
           <section className={classes.section}>
             {/* anchor div for sidebar scroll placement */}
             <div style={{position: 'relative'}}>
-              <div id="dashboard" style={{position: 'absolute', top: -80, left: 0}}></div>
+              <div id="sticky-stats" style={{position: 'absolute', top: -80, left: 0}}></div>
             </div>
             {/* sticky header for section */}
             <div className={classes.sticky}>
-              <Typography variant="h5" className={classes.sectionHeader}>Dashboard</Typography>
+              <Typography variant="h5" className={classes.sectionHeader}>Sticky Stats and Event Materials</Typography>
             </div>
             {/* section content */}
-            <TableTemplate 
-              headers={['Description', 'Details']} 
-              width={['25%',null,null,null,null,null]}
-              data={this.props.reduxState.current360.dashboard} 
-              className={[null,null]}
-              cellVariables={['row_title', 'row_info']} 
-            />
+            <p className={classes.paragraph}>Sticky Stats will go here!</p>
           </section>
         </Grid>
       </Grid>

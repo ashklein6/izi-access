@@ -100,27 +100,27 @@ class View360 extends Component {
             </div>
             {/* section content */}
             <div className={classes.threesixtyReport}>
-              <Typography variant="h5" className={classes.textMargin}>The 360 | Event Overview</Typography>
-                <Typography variant="h6" className={classes.textMargin}>Demographics</Typography>
+              <Typography variant="h5" className={classes.header5}>The 360 | Event Overview</Typography>
+                <Typography variant="h6" className={classes.header6}>Demographics</Typography>
                   <div className={classes.paragraph}>
                     {this.props.reduxState.current360.threesixty_reports.map((row, index) => 
                       <MarkDownOutput display={row.demographic} key={index}/>)}
                   </div>
-                <Typography variant="h6" className={classes.textMargin}>The 360 | Summary, Overview</Typography>
+                <Typography variant="h6" className={classes.header6}>The 360 | Summary, Overview</Typography>
                   <div className={classes.paragraph}>
                     {this.props.reduxState.current360.threesixty_reports.map((row, index) => 
                       <MarkDownOutput display={row.summary} key={index}/>)}
                   </div>
-              <Typography variant="h5" className={classes.textMargin}>Mindstorm Themes &amp; Analysis</Typography>
-                <Typography variant="h6" className={classes.textMargin}>Overview | Methodology</Typography>
+              <Typography variant="h5" className={classes.header5}>Mindstorm Themes &amp; Analysis</Typography>
+                <Typography variant="h6" className={classes.header6}>Overview | Methodology</Typography>
                   <div className={classes.paragraph}>
                     {this.props.reduxState.current360.threesixty_reports.map((row, index) => 
                       <MarkDownOutput display={row.demographic} key={index}/>)}
                   </div>
                 <div className={classes.paragraph}>
                   {this.props.reduxState.current360.question_set.map((row, index) => 
-                    <React.Fragment>
-                      <Typography variant="h6" className={classes.textMargin}>Question Importance Number {index + 1}</Typography>
+                    <React.Fragment key={`question-set-${index}`}>
+                      <Typography variant="h6" className={classes.header6}>Question Importance Number {index + 1}</Typography>
                       <MarkDownOutput display={row.breakdown} key={index}/>
                     </React.Fragment>
                   )}
@@ -136,12 +136,12 @@ class View360 extends Component {
             <div className={classes.sticky}>
               <Typography variant="h4" className={classes.sectionHeader}>Analysis and Recommendation</Typography>
             </div>
-              <Typography variant="h6" className={classes.textMargin}>Outreach Findings</Typography>
+              <Typography variant="h5" className={classes.header5}>Outreach Findings</Typography>
                 <div className={classes.paragraph}>
                   {this.props.reduxState.current360.analysis_recommendation.map((row, index) => 
                     <MarkDownOutput display={row.findings} key={index}/>)}
                 </div>
-              <Typography variant="h6" className={classes.textMargin}>Recommendation</Typography>
+              <Typography variant="h5" className={classes.header5}>Recommendation</Typography>
                 <div className={classes.paragraph}>
                 {this.props.reduxState.current360.analysis_recommendation.map((row, index) => 
                     <MarkDownOutput display={row.recommendations} key={index}/>)}
@@ -221,7 +221,20 @@ const styles = {
     backgroundColor: 'white',
     textAlign: 'center',
     padding: '10px',
-    zIndex: '1050'
+    zIndex: '1050',
+    color: colors.purple,
+    fontWeight: 'bold'
+  },
+  header5: {
+    margin: '0px 10px 0px 10px',
+    textAlign: 'right',
+    fontWeight: 'bold'
+  },
+  header6: {
+    margin: '0px 10px 0px 10px',
+    color: colors.red,
+    textAlign: 'right',
+    fontWeight: 'bold'
   },
   subHeader: {
     marginBottom: '15px',
@@ -244,6 +257,7 @@ const styles = {
   },
   paragraph: {
     margin: '0px 10px 0px 10px',
+    fontSize: '0.8125rem'
   },
   markDownEditorContainer: {
     width: '100%',
@@ -253,13 +267,16 @@ const styles = {
   },
   sectionHeader: {
     padding: 10,
-    fontSize: '1.5rem'
+    fontSize: '1.5rem',
+    fontWeight: 'bold',
+    color: colors.purple
   },
   sticky: {
     position: '-webkit-sticky',
     position: 'sticky',
     top: 80,
     backgroundColor: 'white',
+    boxShadow: 'box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);'
   },
   textMargin: {
     margin: '0px 10px 0px 10px'

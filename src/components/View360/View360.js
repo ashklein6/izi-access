@@ -115,7 +115,7 @@ class View360 extends Component {
             <Divider className={classes.middleDivider} />
           </section>
           <section className={classes.content}>
-            {/* <Typography variant="h5" className={classes.subHeader} id="goal-assessment">Goals Assessment</Typography>
+            <Typography variant="h5" className={classes.subHeader} id="goal-assessment">Goals Assessment</Typography>
             <div className={classes.paragraph}>
               <Paper className={classes.rootTable}>
                 <Table className={classes.table}>
@@ -268,7 +268,7 @@ class View360 extends Component {
                 Aenean molestie dui quis lectus tempor, a laoreet mi blandit. Curabitur quis elit mauris. Ut sollicitudin cursus volutpat. Donec sodales consectetur tincidunt. 
                 Duis posuere auctor risus. Donec sit amet ante urna.
               </Typography>
-            </div> */}
+            </div>
             <div className={classes.markDownEditorContainer}>
               <MarkDownEditor />
             </div>

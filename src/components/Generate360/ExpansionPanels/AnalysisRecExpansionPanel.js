@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import colors from '../../App/colors';
-import TableTemplate from '../TableTemplate/TableTemplate';
+import MarkDownOutput from '../../MarkDownEditor/MarkdownOutput';
 
 // import edit dialog component
-import DashboardEditDialog from '../EditDialogs/DashboardEditDialog';
+import AnalysisRecEditDialog from '../EditDialogs/AnalysisRecEditDialog';
 
 // Material-UI
 import { withStyles } from '@material-ui/core/styles';
@@ -39,7 +39,7 @@ const CustomTableCell = withStyles(theme => ({
   },
 }))(TableCell);
 
-class DashboardExpansionPanel extends Component {
+class AnalysisRecExpansionPanel extends Component {
 
  state = {
   active: true,
@@ -84,12 +84,12 @@ class DashboardExpansionPanel extends Component {
 
  componentDidMount() {
    // Get section when loaded
-   this.props.dispatch({ type: 'FETCH_DASHBOARD', payload: {section: 'dashboard', current360Id: this.props.current360Id} });
+   this.props.dispatch({ type: 'FETCH_ANALYSIS_RECOMMENDATION', payload: {section: 'analysis_recommendation', current360Id: this.props.current360Id} });
  }
 
  render() {
    const { classes } = this.props;
-
+   console.log('analysis rec 360 id', this.props.current360Id);
    return (
     <div className={classes.root}>
       <ExpansionPanel className={classes.expansionPanel}>
@@ -97,7 +97,7 @@ class DashboardExpansionPanel extends Component {
         {/* Information on the expansion panel's summary bar (always shows) */}
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />} className={classes.summary}>
           <div className={classes.title}>
-            <Typography variant="h2" className={classes.heading}>Dashboard</Typography>
+            <Typography variant="h2" className={classes.heading}>Analysis &amp; Recommendation</Typography>
           </div>
 
           <div className={classes.status}>
@@ -115,13 +115,16 @@ class DashboardExpansionPanel extends Component {
         {/* Content that is within the expansion panel (shows when panel is expanded) */}
         <ExpansionPanelDetails className={classes.details}>
           <Paper className={classes.rootTable}>
-            <TableTemplate 
-              headers={['Description', 'Details']} 
-              width={['15%',null]}
-              data={this.props.reduxState.current360.dashboard} 
-              className={[null,null]}
-              cellVariables={['row_title', 'row_info']} 
-            />
+            <Typography variant="h5" className={classes.header5}>Outreach Findings</Typography>
+              <div className={classes.paragraph}>
+                {this.props.reduxState.current360.analysis_recommendation.map((row, index) => 
+                  <MarkDownOutput display={row.findings} key={index}/>)}
+              </div>
+            <Typography variant="h5" className={classes.header5}>Recommendation</Typography>
+              <div className={classes.paragraph}>
+              {this.props.reduxState.current360.analysis_recommendation.map((row, index) => 
+                  <MarkDownOutput display={row.recommendations} key={index}/>)}
+              </div>
           </Paper>
         </ExpansionPanelDetails>
 
@@ -160,7 +163,7 @@ class DashboardExpansionPanel extends Component {
             label={this.state.publicStatus}
           />
           
-          <DashboardEditDialog current360Id={this.props.current360Id}/>
+          <AnalysisRecEditDialog current360Id={this.props.current360Id}/>
         </ExpansionPanelActions>
 
       </ExpansionPanel>
@@ -207,7 +210,8 @@ const styles = {
   },
   rootTable: {
     width: '100%',
-    overflowX: 'scroll'
+    overflowX: 'scroll',
+    padding: 20
   },
   status: {
     flexBasis: '25.00%',
@@ -235,8 +239,8 @@ const mapReduxStateToProps = (reduxState) => ({
  reduxState
 });
 
-DashboardExpansionPanel.propTypes = {
+AnalysisRecExpansionPanel.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default connect(mapReduxStateToProps)(withStyles(styles)(DashboardExpansionPanel));
+export default connect(mapReduxStateToProps)(withStyles(styles)(AnalysisRecExpansionPanel));

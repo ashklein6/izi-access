@@ -55,8 +55,7 @@ class UserProfile extends Component {
 
    return (
       <section>
-       {JSON.stringify(this.props.reduxState.user)}
-
+       {/* {JSON.stringify(this.props.reduxState.user)} */}
         <Typography 
           variant="h2" 
           className={classes.header}

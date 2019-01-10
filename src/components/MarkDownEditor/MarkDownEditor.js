@@ -1,43 +1,14 @@
 import React, { Component } from "react";
 import ReactMarkdown from "react-markdown";
+import MarkDownOutput from './MarkdownOutput';
+import InputCode from './InputCode';
+import colors from '../App/colors';
 import "./MarkDownEditor.css";
 
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 
-// InputCode Component
-class InputCode extends Component {
-
-  handleChange = (event) => {
-    const { onInputChange } = this.props;
-    onInputChange(event.target.value);
-  }
-
-  render() {
-    const { value } = this.props;
-    return (
-      <textarea
-        className={"editor"}
-        id="editor"
-        value={value}
-        onChange={this.handleChange}
-        spellCheck="false"
-      />
-    );
-  }
-}
-
-function MarkDownOutput(props) {
-  const { display } = props;
-  return (
-    <ReactMarkdown
-      source={display}
-      skipHtml={false}
-      escapeHtml={false}
-    />
-  );
-}
 
 const defaultInput = "\n# Header 1\n## Header 2\n### Header 3\n ![marnita's table logo](https://carepharmaceuticals.com.au/wp-content/uploads/sites/19/2018/02/placeholder-600x400.png)\n \n**Blockquotes:**\n>This is a blockquote \n\n**List Items**\n * Item 1\n * Item 2\n * Item 3\n\n** Tables: ** \n\n| Table Header  | Table Header |\n| ------- | ------- |\n| Table Cell | ✔ |\n| Table Cell | ✔ |\n| Table Cell | ✔ |";
 
@@ -61,7 +32,7 @@ class MarkDownEditor extends Component {
         <div className={classes.container}>
 
         {/* Mark Down Editor Section */}
-          <section>
+          {/* <section>
             <div className={classes.headerDiv}>
               <Typography className={classes.header} variant="h5">Editor</Typography>
             </div>
@@ -72,21 +43,21 @@ class MarkDownEditor extends Component {
                 onInputChange={this.handleChangeTextInput}
               />
             </div>
-          </section>
-          <Button className={classes.submitButton} variant="contained">Submit</Button>
+          </section> */}
+          {/* <Button className={classes.submitButton} variant="contained">Submit</Button> */}
 
 
           {/* Mark Down Preview Section */}
-          {/* <div>
-            <div className="titles">
-              <h2>Previewer</h2>
+          <div>
+            <div className={classes.headerDiv}>
+              <Typography className={classes.header} variant="h5">Previewer</Typography>
             </div>
-            <div className="preview-area">
+            <div className={classes.inputContainer}>
               <MarkDownOutput 
                 display={input} 
               />
             </div>
-          </div> */}
+          </div>
         </div>
     );
   }
@@ -99,8 +70,9 @@ const styles = {
     marginBottom: 50
   },
   inputContainer: {
-    backgroundColor: '#7d52a1',
-    width: '100%',
+    padding: 15,
+    backgroundColor: colors.lightGrey,
+    width: 'calc(100% - 30px)',
     overflow: 'auto',
   },
   // editor: {

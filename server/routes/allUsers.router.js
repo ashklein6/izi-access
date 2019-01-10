@@ -4,7 +4,7 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
   pool.query(`SELECT person.firstname, person.lastname, person.email, person.id, 
-            person.access_id, access.access_type, access.access_level, 
+            person.access_id, person.notes, access.access_type, access.access_level, 
             threesixty.name as threesixty, threesixty_user.id as connected_360_id 
             FROM person 
             JOIN access ON access.id = person.access_id
@@ -24,7 +24,7 @@ router.get('/', (req, res) => {
 // and can sort them responses by a preselected category
 router.get('/search', (req,res) => {
   let sqlText = `SELECT person.firstname, person.lastname, person.email, person.id,
-                person.access_id, access.access_type, access.access_level, 
+                person.access_id, person.notes, access.access_type, access.access_level, 
                 threesixty.name as threesixty, threesixty_user.id as connected_360_id
                 FROM person 
                 JOIN access ON access.id = person.access_id
@@ -62,7 +62,7 @@ router.get('/search', (req,res) => {
 
 router.get('/deactivated', (req,res) => {
   pool.query(`SELECT person.firstname, person.lastname, person.email, 
-            person.id, person.access_id, access.access_type, access.access_level, 
+            person.id, person.access_id, person.notes, access.access_type, access.access_level, 
             threesixty.name as threesixty, threesixty_user.id as connected_360_id
             FROM person 
             JOIN access ON access.id = person.access_id
@@ -79,7 +79,7 @@ router.get('/deactivated', (req,res) => {
 
 router.get('/pendingRequests', (req,res) => {
   pool.query(`SELECT person.firstname, person.lastname, person.email, person.id, 
-            person.access_id, access.access_type, access.access_level, 
+            person.access_id, person.notes, access.access_type, access.access_level, 
             client_request.id as request_id, threesixty.name as threesixty,
             threesixty_user.id as connected_360_id
             FROM client_request 
@@ -100,7 +100,7 @@ router.get('/pendingRequests', (req,res) => {
 router.get('/threesixty', (req, res) => {
   let threesixty = req.query.id;
   pool.query(`SELECT person.firstname, person.lastname, person.email, person.id, 
-            person.access_id, access.access_type, access.access_level, 
+            person.access_id, person.notes, access.access_type, access.access_level, 
             threesixty.name as threesixty, threesixty_user.id as connected_360_id 
             FROM person 
             JOIN access ON access.id = person.access_id

@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import colors from '../../App/colors';
+import TableTemplate from '../TableTemplate/TableTemplate';
 
 // import edit dialog component
-import GoalsAssessmentEditDialog from '../EditDialogs/GoalAssessmentsEditDialog';
+import DashboardEditDialog from '../EditDialogs/DashboardEditDialog';
 
 // Material-UI
 import { withStyles } from '@material-ui/core/styles';
@@ -83,7 +84,7 @@ class GoalsAssessmentExpansionPanel extends Component {
 
  componentDidMount() {
    // Get section when loaded
-   this.props.dispatch({ type: 'FETCH_GOALS', payload: {section: 'goalsAssessment', current360Id: this.props.current360Id} });
+   this.props.dispatch({ type: 'FETCH_DASHBOARD', payload: {section: 'dashboard', current360Id: this.props.current360Id} });
  }
 
  render() {
@@ -91,12 +92,12 @@ class GoalsAssessmentExpansionPanel extends Component {
 
    return (
     <div className={classes.root}>
-      <ExpansionPanel className={classes.expansionPanel}>
+      <ExpansionPanel defaultExpanded className={classes.expansionPanel}>
 
         {/* Information on the expansion panel's summary bar (always shows) */}
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />} className={classes.summary}>
           <div className={classes.title}>
-            <Typography variant="h2" className={classes.heading}>Goals Assessment</Typography>
+            <Typography variant="h2" className={classes.heading}>Dashboard</Typography>
           </div>
 
           <div className={classes.status}>
@@ -114,34 +115,13 @@ class GoalsAssessmentExpansionPanel extends Component {
         {/* Content that is within the expansion panel (shows when panel is expanded) */}
         <ExpansionPanelDetails className={classes.details}>
           <Paper className={classes.rootTable}>
-            <Table className={classes.table}>
-              <TableHead>
-                <TableRow>
-                  <CustomTableCell width="25%">Description</CustomTableCell>
-                  <CustomTableCell>Desired</CustomTableCell>
-                  <CustomTableCell>Delivered</CustomTableCell>
-                  <CustomTableCell>Difference</CustomTableCell>
-                  <CustomTableCell>Percent</CustomTableCell>
-                  <CustomTableCell>Comments</CustomTableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {this.props.reduxState.current360.goalsAssessment.map(row => {
-                  return (
-                    <TableRow key={row.id}>
-                      <CustomTableCell component="th" scope="row" width="25%">
-                        {row.description}
-                      </CustomTableCell>
-                      <CustomTableCell className={classes.centerText}>{row.desired}</CustomTableCell>
-                      <CustomTableCell className={classes.centerText}>{row.delivered}</CustomTableCell>
-                      <CustomTableCell className={classes.centerText}>{row.difference}</CustomTableCell>
-                      <CustomTableCell className={classes.centerText}>{row.percent}%</CustomTableCell>
-                      <CustomTableCell>{row.comments}</CustomTableCell>
-                    </TableRow>
-                  );
-                })}
-              </TableBody>
-            </Table>
+            <TableTemplate 
+              headers={['Description', 'Details']} 
+              width={['15%',null]}
+              data={this.props.reduxState.current360.dashboard} 
+              className={[null,null]}
+              cellVariables={['row_title', 'row_info']} 
+            />
           </Paper>
         </ExpansionPanelDetails>
 
@@ -180,7 +160,7 @@ class GoalsAssessmentExpansionPanel extends Component {
             label={this.state.publicStatus}
           />
           
-          <GoalsAssessmentEditDialog current360Id={this.props.current360Id}/>
+          <DashboardEditDialog current360Id={this.props.current360Id}/>
         </ExpansionPanelActions>
 
       </ExpansionPanel>

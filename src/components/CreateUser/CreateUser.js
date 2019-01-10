@@ -179,30 +179,11 @@ class CreateUser extends Component {
               >Cancel</Button>
           </div>
         </form>
-        <center>
-          {/* <button
-            type="button"
-            className="link-button"
-            onClick={() => {this.props.dispatch({type: 'SET_TO_LOGIN_MODE'})}}
-          >
-            Login
-          </button> */}
-        </center>
       </div>
     );
   }
 }
 
-// const styles = {
-//   form: {
-//     backgroundColor: "var(--main-light-grey)",
-//     width: "30%",
-//     height: "250px",
-//     margin: "20px auto",
-//     padding: "25px",
-//     borderRadius: "2px",
-//   }
-// };
 const styles = {
   container: {
     margin: 25

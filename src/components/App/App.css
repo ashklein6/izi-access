@@ -16,7 +16,9 @@ body {
 }
 
 .alert {
-    background-color: #ff4545;
+    text-align: center;
+    color: #fff;
+    background-color: #d71f2e;
     margin: 50px;
 }
 
@@ -65,7 +67,12 @@ a {
     text-decoration: none;
 }
 
-.paper {
+/* .paper {
     padding-top: 64px;
     height: calc(100vh - 122px);
+} */
+
+.paper {
+    padding: 65px 0px 58px 0px;
+    /* height: calc(100vh - 122px); */
 }

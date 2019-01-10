@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import colors from '../App/colors';
 
 import SideBar from './SideBar';
+import MarkDownEditor from '../MarkDownEditor/MarkDownEditor';
 import TableTemplate from './TableTemplate/TableTemplate';
 
 // Material-UI
@@ -108,7 +109,6 @@ class View360 extends Component {
             <div className={classes.sticky}>
               <Typography variant="h5" className={classes.sectionHeader}>Analysis and Recommendation</Typography>
             </div>
-            {/* section content */}
               <Typography variant="h6" className={classes.textMargin}>Outreach Findings</Typography>
                 <p className={classes.paragraph}>
                   {this.props.reduxState.current360.analysis_recommendation.map(row => row.findings)}
@@ -117,6 +117,9 @@ class View360 extends Component {
                 <p className={classes.paragraph}>
                   {this.props.reduxState.current360.analysis_recommendation.map(row => row.recommendations)}
                 </p>
+            <div className={classes.markDownEditorContainer}>
+              <MarkDownEditor />
+            </div>
           </section>
           <section className={classes.section}>
             {/* anchor div for sidebar scroll placement */}
@@ -215,6 +218,9 @@ const styles = {
   },
   paragraph: {
     margin: '0px 10px 0px 10px',
+  },
+  markDownEditorContainer: {
+    width: '100%',
   },
   section: {
     paddingBottom: 20

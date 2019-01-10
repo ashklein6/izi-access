@@ -7,36 +7,6 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 
-const styles = {
-  container: {
-    margin: 25
-  },
-  textField: {
-    width: 400,
-    marginBottom: 15
-  },
-  text: {
-    textAlign: 'center',
-    width: 330,
-    margin: 'auto',
-    paddingTop: 100,
-    paddingBottom: 10,
-    fontSize: 18
-  },
-  form: {
-    textAlign: 'center',
-    padding: 50
-  },
-  header: {
-    textAlign: 'center',
-    marginBottom: 25
-  },
-  button: {
-    width: 200,
-    marginTop: 15
-  }
-};
-
 class CreateUser extends Component {
   state = {
     firstname: '',
@@ -101,7 +71,7 @@ class CreateUser extends Component {
           </h2>
         )}
         <form onSubmit={this.registerUser} className={classes.form}>
-        <Typography variant="h2" className={classes.header}>Create Account</Typography>
+        <Typography variant="h3" className={classes.header}>Create Account</Typography>
             <TextField
                 label="First Name"
                 className={classes.textField}
@@ -209,30 +179,40 @@ class CreateUser extends Component {
               >Cancel</Button>
           </div>
         </form>
-        <center>
-          {/* <button
-            type="button"
-            className="link-button"
-            onClick={() => {this.props.dispatch({type: 'SET_TO_LOGIN_MODE'})}}
-          >
-            Login
-          </button> */}
-        </center>
       </div>
     );
   }
 }
 
-// const styles = {
-//   form: {
-//     backgroundColor: "var(--main-light-grey)",
-//     width: "30%",
-//     height: "250px",
-//     margin: "20px auto",
-//     padding: "25px",
-//     borderRadius: "2px",
-//   }
-// };
+const styles = {
+  container: {
+    margin: 25
+  },
+  textField: {
+    width: 400,
+    marginBottom: 15
+  },
+  text: {
+    textAlign: 'center',
+    width: 330,
+    margin: 'auto',
+    paddingTop: 100,
+    paddingBottom: 10,
+    fontSize: 18
+  },
+  form: {
+    textAlign: 'center',
+    padding: 50
+  },
+  header: {
+    textAlign: 'center',
+    marginBottom: 25
+  },
+  button: {
+    width: 200,
+    marginTop: 15
+  }
+};
 
 const mapReduxStateToProps = (state) => ({
  errors: state.errors

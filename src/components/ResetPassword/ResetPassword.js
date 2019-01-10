@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import TextField from '@material-ui/core/TextField';
+import colors from '../App/colors';
 
+import { withStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
 
 const loading = {
   margin: '1em',
@@ -88,39 +92,27 @@ class ResetPassword extends Component {
   };
 
   render() {
+    const { classes } = this.props;
     const { password, error, isLoading, updated } = this.state;
-
     if (error) {
       return (
-        <div>
-          {/* <HeaderBar title={title} /> */}
+        <div className={classes.container}>
           <div style={loading}>
-            <h4>Problem resetting password. Please send another reset link.</h4>
-            {/* <LinkButtons
-              buttonText={`Go Home`}
-              buttonStyle={homeButton}
-              link={'/'}
-            />
-            <LinkButtons
-              buttonStyle={forgotButton}
-              buttonText={'Forgot Password?'}
-              link={'/forgotPassword'}
-            /> */}
+            <Typography className={classes.error} variant="h6">Problem resetting password. Please send another reset link.</Typography>
           </div>
         </div>
       );
     } else if (isLoading) {
       return (
-        <div>
-          {/* <HeaderBar title={title} /> */}
+        <div className={classes.container}>
           <div style={loading}>Loading User Data...</div>
         </div>
       );
     } else {
       return (
-        <div>
-          {/* <HeaderBar title={title} /> */}
-          <form className="password-form" onSubmit={this.updatePassword}>
+        <div className={classes.container}>
+          <form onSubmit={this.updatePassword}>
+          <Typography className={classes.header} variant="h6">Enter New Password</Typography>
             <TextField
               // style={inputStyle}
               id="password"
@@ -129,34 +121,40 @@ class ResetPassword extends Component {
               value={password}
               type="password"
             />
-            {/* <SubmitButtons
-              buttonStyle={updateButton}
-              buttonText={'Update Password'}
-            /> */}
+            <Button className={classes.submitButton} variant="contained" onClick={this.updatePassword}>Submit</Button>
           </form>
-
           {updated && (
             <div>
-              <p>
-                Your password has been successfully reset, please try logging in
-                again.
-              </p>
-              {/* <LinkButtons
-                buttonStyle={loginButton}
-                buttonText={'Login'}
-                link={`/login`}
-              /> */}
+              <Typography variant="h6">
+                Your password has been successfully reset, please try <a href="/login#/profile">logging in</a> again.
+              </Typography>
             </div>
           )}
-          {/* <LinkButtons
-            buttonText={`Go Home`}
-            buttonStyle={homeButton}
-            link={'/'}
-          /> */}
         </div>
       )
     }
   }
 }
 
-export default ResetPassword;
+const styles = {
+  container: {
+    margin: 'auto',
+    textAlign: 'center',
+    padding: 20,
+  },
+  header: {
+    margin: '25px auto',
+  },
+  error: {
+    marginBottom: 50,
+    padding: 10,
+    color: '#fff',
+    backgroundColor: colors.red
+  },
+  submitButton:{
+    display: 'block',
+    margin: '25px auto'
+  },
+}
+
+export default (withStyles(styles)(ResetPassword));

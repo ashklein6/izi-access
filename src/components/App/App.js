@@ -23,11 +23,8 @@ import Manage360s from '../Manage360s/Manage360s';
 import ManageUsers from '../ManageUsers/ManageUsers';
 import UserProfile from '../UserProfile/UserProfile';
 import View360 from '../View360/View360';
-import ForgotPassword from '../ForgotPassword/ForgotPassword';
+// import ForgotPassword from '../ForgotPassword/ForgotPassword';
 import ResetPassword from '../ResetPassword/ResetPassword';
-
-import Paper from '@material-ui/core/Paper';
-
 
 import './App.css';
 
@@ -68,11 +65,11 @@ class App extends Component {
                 path="/register"
                 component={CreateUser}
               />
-              <Route
+              {/* <Route
                 exact
                 path="/forgotpassword"
                 component={ForgotPassword}
-              />
+              /> */}
               <Route
                 exact
                 path="/reset/:token"

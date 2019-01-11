@@ -82,7 +82,6 @@ class Create360 extends Component {
     } else {
       this.errorMessage();
     };
-    // this.props.history.push('/generate360');
   };
 
   errorMessage = () => {
@@ -101,10 +100,10 @@ class Create360 extends Component {
   create360 = () => {
     if(!this.state.status){
       this.props.dispatch({ type: 'CREATE_360_COMPLETE', payload: this.state });
-      this.props.history.push('/generate360');
+      this.props.history.push('/manage360s');
     } else {
       this.props.dispatch({ type: 'CREATE_360_LOWDOWN', payload: this.state }); 
-      this.props.history.push('/generate360');
+      this.props.history.push('/manage360s');
     };
   }
 

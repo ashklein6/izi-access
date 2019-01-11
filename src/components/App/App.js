@@ -4,6 +4,7 @@ import {
   Route,
   Redirect,
   Switch,
+  withRouter
 } from 'react-router-dom';
 
 import {connect} from 'react-redux';

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import colors from '../App/colors';
-import TrueFalse from '../Charts/TrueFalse';
 import { Pie } from 'react-chartjs-2';
 
 import SideBar from './SideBar';

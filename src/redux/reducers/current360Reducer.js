@@ -1,6 +1,6 @@
 const current360 = (state = { goalsAssessment: [], dashboard: [], threesixty_reports: [], 
-  analysis_recommendation: [], demographics: [], circle_share: [], question_set: [], oral_report: [], 
-  updateNeeded: { goalsAssessment: false, dashboard: false, threesixty_reports: false, 
+  analysis_recommendation: [], demographics: [], circle_share: [], question_set: [], oral_report: [],
+  chart_data: [], updateNeeded: { goalsAssessment: false, dashboard: false, threesixty_reports: false, 
   analysis_recommendation: false, demographics: false, circle_share: false, question_set: false, 
   oral_report: false, updateNeeded: false} }, action) => {
     switch (action.type) {
@@ -32,6 +32,8 @@ const current360 = (state = { goalsAssessment: [], dashboard: [], threesixty_rep
         return {...state, question_set: action.payload.content};
       case 'SET_ORAL_REPORT':
         return {...state, oral_report: action.payload.content};
+      case 'SET_CHART_DATA':
+        return {...state, chart_data: action.payload};
       default:
         return state;
     }

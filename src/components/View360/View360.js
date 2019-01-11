@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import colors from '../App/colors';
+import TrueFalse from '../Charts/TrueFalse';
+import { Pie } from 'react-chartjs-2';
 
 import SideBar from './SideBar';
 import MarkDownEditor from '../MarkDownEditor/MarkDownEditor';
@@ -26,7 +28,8 @@ class View360 extends Component {
   }
 
   componentDidMount() {
-    this.props.dispatch({ type: 'FETCH_360', payload: {current360Id: 1} })
+    this.props.dispatch({ type: 'FETCH_360', payload: {current360Id: 1} });
+    console.log('DATADTADTADTADT ', this.props.reduxState.current360);
   }
 
   render() {
@@ -176,6 +179,38 @@ class View360 extends Component {
                         'first_time','child_abuse','housing','transportation','education']}
               interpretBoolean={true}
             />
+            {/* <TrueFalse data={this.props.reduxState.current360.chart_data}/> */}
+            {this.props.reduxState.current360.chart_data.map(data => (
+              <div id="trueFalse" key={data.title}>
+                <Pie
+                  data={{
+                    labels: ['Yes', 'No'],
+                    datasets: [
+                      {
+                        data: 
+                        data.data,
+                        backgroundColor: [
+                          'purple',
+                          'red',
+                        ]
+                      }
+                    ]
+                  }}
+                  height={50}
+                  options={{
+                    title:{
+                      display:false,
+                      text: 'Are you even good?',
+                      fontSize:25
+                    },
+                    legend:{
+                      display: data.legend,
+                      position: 'left'
+                    }
+                  }}
+                />
+              </div>
+            ))}
           </section>
           <section className={classes.section}>
             {/* anchor div for sidebar scroll placement */}

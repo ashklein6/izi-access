@@ -231,7 +231,41 @@ router.get('/oral_report', (req, res) => {
     } else {
         res.sendStatus(400);
     }
-})
+});
+
+router.get('/chart_data', (req, res) => {
+    let data = [];
+    let current360Id = req.query.current360Id;
+    let queryText = `SELECT COUNT(*) - SUM(plans_to_tell::int) as plans_to_tell_no, SUM(plans_to_tell::int) as plans_to_tell_yes, 
+                    COUNT(*) - SUM(first_time::int) as first_time_no, SUM(first_time::int) as first_time_yes, 
+                    COUNT(*) - SUM(child_abuse::int) as child_abuse_no, SUM(child_abuse::int) as child_abuse_yes, 
+                    COUNT(*) - SUM(housing::int) as housing_no, SUM(housing::int) as housing_yes, 
+                    COUNT(*) - SUM(transportation::int) as transportation_no, SUM(transportation::int) as transportation_yes,
+                    COUNT(*) - SUM(education::int) as education_no, SUM(education::int) as education_yes  
+                    FROM demographic WHERE threesixty_id = $1;`;
+    pool.query(queryText, [current360Id])
+    .then((response) => {
+        data = [
+            {title: 'plans_to_tell', 
+            data: [response.rows[0].plans_to_tell_yes, response.rows[0].plans_to_tell_no],
+            legend: true},
+            {title: 'first_time', 
+            data: [response.rows[0].first_time_yes, response.rows[0].first_time_no]},
+            {title: 'child_abuse', 
+            data: [response.rows[0].child_abuse_yes, response.rows[0].child_abuse_no]},
+            {title: 'housing',
+            data: [response.rows[0].housing_yes, response.rows[0].housing_no]},
+            {title: 'transportation', 
+            data: [response.rows[0].transportation_yes, response.rows[0].transportation_no]},
+            {title: 'education', 
+            data: [response.rows[0].education_yes, response.rows[0].education_no]},
+        ];
+        res.send(data);
+    })
+    .catch(() => {
+        res.sendStatus(500);
+    })
+});
 
 /**
  * POST route template

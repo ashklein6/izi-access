@@ -43,15 +43,28 @@ const styles = {
 class EditUser extends Component {
 
 state = {
-    open: false
+    open: false,
+    firstName: '',
+    lastName: '',
+    email: '',
+    id: 0
+    };
+
+    handleChange = (event) => {
+        this.setState({
+            [event.target.name]: event.target.value
+        })
     };
 
 handleClickOpen = () => {
     this.setState({
-        ...this.state,
-        open: true
+        open: true,
+        firstName: this.props.reduxState.user.firstname,
+        lastName: this.props.reduxState.user.lastname,
+        email: this.props.reduxState.user.email,
+        id: this.props.reduxState.user.id
     })
-}
+};
 
 handleClickClose = () => {
     this.setState({
@@ -62,6 +75,7 @@ handleClickClose = () => {
 
 handleSave = () => {
     this.handleClickClose();
+    this.props.dispatch({type: 'EDIT_CURRENT_USER_INFO', payload: this.state});
 }
 
 render () {
@@ -87,31 +101,34 @@ render () {
             <TextField
                 label="First Name"
                 className={classes.textField}
+                onChange={this.handleChange}
                 margin="dense"
                 variant="outlined"
                 type="text"
                 name="firstName"
-                placeholder="First Name"
+                value={this.state.firstName}
               />
               <br />
               <TextField
                 label="Last Name"
                 className={classes.textField}
+                onChange={this.handleChange}
                 margin="dense"
                 variant="outlined"
                 type="text"
                 name="lastName"
-                placeholder="Last Name"
+                value={this.state.lastName}
               />
             <br />
             <TextField
                 label="Email"
                 className={classes.textField}
+                onChange={this.handleChange}
                 margin="dense"
                 variant="outlined"
                 type="text"
                 name="email"
-                placeholder="Email"
+                value={this.state.email}
               />
             <br />
           </div>

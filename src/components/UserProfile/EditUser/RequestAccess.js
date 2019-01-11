@@ -53,7 +53,9 @@ const styles = {
 class RequestAccess extends Component {
 
 state = {
-    open: false
+    open: false,
+    iziName: '',
+    date: '',
     };
 
 handleClickOpen = () => {
@@ -72,6 +74,23 @@ handleClickClose = () => {
 
 handleSave = () => {
     this.handleClickClose();
+    this.props.dispatch({
+      type: 'REQUEST_360_ACCESS', 
+      payload: {
+        iziName: this.state.iziName, 
+        date: this.state.date,
+        user: this.props.reduxState.user.id,
+      }});
+    this.setState({
+      iziName: '',
+      date: '',
+    })
+}
+
+handleChange = event => {
+  this.setState({
+    [event.target.name]: event.target.value
+  })
 }
 
 render(){
@@ -106,6 +125,8 @@ render(){
                 type="text"
                 name="iziName"
                 placeholder="IZI Name"
+                value={this.state.iziName}
+                onChange={this.handleChange}
               />
               <Typography variant="h6" className={classes.header}>OR</Typography>
               {/* <br /> */}
@@ -116,6 +137,8 @@ render(){
               margin="dense"
               variant="outlined"
               name ="date"
+              value={this.state.date}
+              onChange={this.handleChange}
                 />
             <br />
           </div>

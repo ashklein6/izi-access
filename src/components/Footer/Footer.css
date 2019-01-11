@@ -1,11 +1,19 @@
 @import '../App/App.css';
 
 .footer {
-    /* padding: 40px; */
+    padding: 20px;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
     text-align: center;
     background-color: var(--main-purple);
     color: #fff;
     position: fixed;
     bottom: 0;
+<<<<<<< HEAD
+=======
+    /* left: 0; */
+>>>>>>> 54a10a8a25929839aa7a28812b6b3815d3c7c17b
     width: 100%;
 }

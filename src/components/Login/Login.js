@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import ForgotPassword from '../ForgotPassword/ForgotPassword';
 
 // Material-UI
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+
 
 class Login extends Component {
   state = {
@@ -80,13 +83,14 @@ class Login extends Component {
           </div>
         </form>
         <center>
-          <button
+          <Button
             type="button"
-            className="link-button"
+            className={classes.button}
             onClick={() => {this.props.dispatch({type: 'SET_TO_REGISTER_MODE'})}}
           >
             Register
-          </button>
+          </Button>
+          <ForgotPassword />
         </center>
       </div>
     );
@@ -101,6 +105,12 @@ const styles = {
     margin: "20px auto",
     padding: "25px",
     borderRadius: "2px",
+  },
+  button: {
+    display: 'block',
+    width: 200,
+    padding: 10,
+    margin: 10,
   }
 };
 

@@ -11,7 +11,7 @@ import GoalsAssessmentExpansionPanel from './ExpansionPanels/GoalAssessmentsExpa
 class Generate360 extends Component {
 
  state = {
-
+  current360Id: 1
  };
 
  render() {
@@ -20,7 +20,7 @@ class Generate360 extends Component {
    return (
      <div className={classes.div}>
        <Typography variant="h2" className={classes.header}>Generate360</Typography>
-       <GoalsAssessmentExpansionPanel />
+       <GoalsAssessmentExpansionPanel current360Id={this.state.current360Id}/>
      </div>
    );
  }

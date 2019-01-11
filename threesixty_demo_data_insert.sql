@@ -56,7 +56,7 @@ VALUES
     ('Community'), 
     ('Education');
 
-INSERT INTO threesixty ("name", "date", "location", "category_id", "client", "description", "published_status", "goals_public", "dashboard_public", "threesixty_reports_public", "analysis_recommendation_public", "demographics_public")
+INSERT INTO threesixty ("name", "date", "location", "category_id", "client", "description", "published_status", "analysis_recommendation_public", "threesixty_reports_public", "dashboard_public", "goals_public", "demographics_public", "oral_report_public", "question_set_public", "circle_share_public", "threesixty_freeform_public", "freeform_public", "upload_public", "analysis_recommendation_published", "threesixty_reports_published", "dashboard_published", "goals_published", "demographics_published", "oral_report_published", "question_set_published", "circle_share_published", "threesixty_freeform_published", "freeform_published", "upload_published")
 VALUES (
 	'Catalyst Initiative of The Minneapolis Foundation - Building Initiative: Preventing Diseases of Despair', 
 	'9-18-2018', 
@@ -65,14 +65,31 @@ VALUES (
 	'MTI',
 	'121 community members and representatives of organizations and programs with a vested interest in preventing diseases of despair engaged in a conversation and collaborative planning session on primary prevention and holistic and integrative strategies for preventing diseases of despair including suicide, alcoholism and other chemical dependency disorders.', 
 	false,
+	true,
+	true,
+	false,
 	false,
 	false,
 	true,
 	true,
-	false
+	true,
+	true,
+	true,
+	true,
+	true,
+	true,
+	true,
+	true,
+	true,
+	true,
+	true,
+	true,
+	true,
+	true,
+	true
 );
 
-INSERT INTO threesixty ("name", "date", "location", "category_id", "client", "description", "published_status", "goals_public", "dashboard_public", "threesixty_reports_public", "analysis_recommendation_public", "demographics_public")
+INSERT INTO threesixty ("name", "date", "location", "category_id", "client", "description", "published_status", "analysis_recommendation_public", "threesixty_reports_public", "dashboard_public", "goals_public", "demographics_public", "oral_report_public", "question_set_public", "circle_share_public", "threesixty_freeform_public", "freeform_public", "upload_public", "analysis_recommendation_published", "threesixty_reports_published", "dashboard_published", "goals_published", "demographics_published", "oral_report_published", "question_set_published", "circle_share_published", "threesixty_freeform_published", "freeform_published", "upload_published")
 VALUES (
 	'Carver County Public Health - A Healthy Welcome', 
 	'10-4-2018', 
@@ -80,15 +97,32 @@ VALUES (
 	1, 
 	'MTI',
 	'86 community members gathered to discuss healthcare and community health needs.',
+	true,
+	true,
+	true,
 	false,
 	false,
 	false,
 	true,
 	true,
-	false
+	true,
+	true,
+	true,
+	true,
+	true,
+	true,
+	true,
+	true,
+	true,
+	true,
+	true,
+	true,
+	true,
+	true,
+	true
 );
 
-INSERT INTO threesixty ("name", "date", "location", "category_id", "client", "description", "published_status", "goals_public", "dashboard_public", "threesixty_reports_public", "analysis_recommendation_public", "demographics_public")
+INSERT INTO threesixty ("name", "date", "location", "category_id", "client", "description", "published_status", "analysis_recommendation_public", "threesixty_reports_public", "dashboard_public", "goals_public", "demographics_public", "oral_report_public", "question_set_public", "circle_share_public", "threesixty_freeform_public", "freeform_public", "upload_public", "analysis_recommendation_published", "threesixty_reports_published", "dashboard_published", "goals_published", "demographics_published", "oral_report_published", "question_set_published", "circle_share_published", "threesixty_freeform_published", "freeform_published", "upload_published")
 VALUES (
 	'Health Matters!', 
 	'10-24-2017', 
@@ -96,12 +130,29 @@ VALUES (
 	3, 
 	'Scott County Health Care System Collaborative',
 	'140 community members gathered together to discuss healthcare.',
+	true,
+	true,
+	true,
 	false,
 	false,
 	false,
 	true,
 	true,
-	false
+	true,
+	true,
+	true,
+	true,
+	true,
+	true,
+	true,
+	true,
+	true,
+	true,
+	true,
+	true,
+	true,
+	true,
+	true
 );
 
 INSERT INTO analysis_recommendation (threesixty_id, findings, recommendations)
@@ -239,79 +290,79 @@ methodology we use to engage community for meaningful, sustainable impact.'
 	)
 ;
 
-INSERT INTO dashboard (threesixty_id, row_title, row_info, private)
+INSERT INTO dashboard (threesixty_id, row_title, row_info, row_public)
 VALUES 
 	(
 	1, 
 	'Date(s)', 
 	'Tuesday, October 24th, 2017', 
-	false
+	true
 	),
 	(
 	1,
 	'Timeline',
 	'(the most important thing you can do is "invite, invite, invite")',
-	false
+	true
 	),
 	(
 	1,
 	'Six Weeks - 1 Month Out',
 	'Create Dashboard, identify date, host, overall theme, create dashboard invitees, create invitation, set concrete goals',
-	false
+	true
 	),
 	(
 	1,
 	'3 Weeks Out',
 	'Identify tools, design event flowverview, recruit volunteers & teen workers, invite more people, check to see who has not rsvpd to ensure you have your demographic mix',
-	false
+	true
 	),
 	(
 	1,
 	'2 Weeks - 1 Week Out',
 	'Confirm menus with caterers, buy table supplies (if needed), create question cards, create pull out of the event to remember your marks for delivery of the event, print sign-in sheets, place on clipboards, make sure your supplies are ready for delivery of the event',
-	false
+	true
 	),
 	(
 	1,
 	'Day of Event',
 	'Deliver event, pick up sign-in sheets, Mindstorm forms, keep track of measurable indicators of success',
-	false
+	true
 	),
 	(
 	1,
 	'1-2 Weeks After',
 	'Download data from sign in sheets and create reportage on outcomes',
-	false
+	true
 	),
 	(
 	1,
 	'1 Month After',
 	'Evaluate effectiveness and debrief, turnover of all reportage',
-	false
+	true
 	),
 	(
 	1,
 	'Times(s)',
 	'6-9 pm',
-	false
+	true
 	),
 	(
 	1,
 	'Location(s)',
 	'Shakopee',
-	false
+	true
 	),
 	(
 	1,
 	'Number Attending',
 	'100+',
-	false
+	true
 	),
 	(
 	1,
 	'Fun Title or Theme',
 	'Health Matters!',
-	false
+	true
 	),
 	(
 	1,
@@ -321,7 +372,7 @@ VALUES
 	➢	25%-33% under 24 
 	➢	Focusing on key growing and underserved Latinx and Somali populations 
 	➢	Also intentionally inviting rural seniors; Nepalese, Hmong, Vietnamese, Sikh; Russian 7th Day Adventists; and POC employees in the hospitals',
-	false
+	true
 	),
 	(
 	1,
@@ -337,7 +388,7 @@ the community to provide translation services
 	➢	Share negative and positive stories of healthcare experiences
 	➢	Identify family needs and/or healthcare priorities
 	',
-	false
+	true
 	),
 	(
 	1,
@@ -348,7 +399,7 @@ the community to provide translation services
 	➢	50% say that they would like to invite someone to another conversation
 	➢	80% of participants say that they met someone across self-identity with whom they planned to stay in touch or collaborate
 	➢	% would come to another event',
-	false),
+	true),
 	(
 	1,
 	'Invite Example Language',
@@ -377,7 +428,7 @@ Thank you for your consideration.
 
 If you would like to learn more about Marnitas Table, go to marnitastable.org.
 	',
-	false
+	true
 	),
 	(
 	1,
@@ -393,7 +444,7 @@ If you would like to learn more about Marnitas Table, go to marnitastable.org.
 7:45 p.m.	Oral Report from MindStorm
 8:15 p.m.	Catalyzing Circle Share-in
 8:50 p.m.	Closing/Thank You',
-	false
+	true
 	),
 	(
 	1,
@@ -408,7 +459,7 @@ If you would like to learn more about Marnitas Table, go to marnitastable.org.
 	➢	How can we increase the capacity of your community to develop community-based solutions?
 	➢	How can we strengthen clinic-community linkages in order to develop options that work?
 	',
-	false
+	true
 	),
 	(
 	1,
@@ -419,7 +470,7 @@ If you would like to learn more about Marnitas Table, go to marnitastable.org.
 	➢	What/who/when has had the greatest impact on your life?
 	➢	If you had to pick 2 things about yourself that you value the most, what would they be?
 	',
-	false
+	true
 	),
 	(
 	1,
@@ -463,7 +514,7 @@ If you would like to learn more about Marnitas Table, go to marnitastable.org.
 	➢	Should an immigrant tradition be honored when served by healthcare provider?
 	➢	Do you currently have any health and wellness needs?
 	',
-	false
+	true
 	),
 	(
 	1,
@@ -514,7 +565,7 @@ Feast appropriate from vegan to carnivore including dairy, wheat and soy intoler
 	)
 ;
 
-INSERT INTO goals (threesixty_id, description, desired, delivered, difference, percent, comments)
+INSERT INTO goals (threesixty_id, description, desired, delivered, difference, percent, comments, row_public)
 VALUES (
 	1, 
 	'Total Number', 
@@ -522,7 +573,8 @@ VALUES (
 	140, 
 	15, 
 	112, 
-	'Based on in-room count, taken 3 to 6 times per account by at least two different people.'
+	'Based on in-room count, taken 3 to 6 times per account by at least two different people.',
+	true
 	),
 	(
 	1,
@@ -531,7 +583,8 @@ VALUES (
 	70,
 	-1,
 	99,
-	'We generally set this goal at 51% in communities with at least 15% POC/Immigrant/Indigenous. Based on an in-room count.'
+	'We generally set this goal at 51% in communities with at least 15% POC/Immigrant/Indigenous. Based on an in-room count.',
+	true
 	),
 	(
 	1,
@@ -540,7 +593,8 @@ VALUES (
 	33,
 	-2,
 	94,
-	'We generally set this goal at 25-33% unless the project/event does not warrant. Based on both in-room and sign-in sheet counts.'
+	'We generally set this goal at 25-33% unless the project/event does not warrant. Based on both in-room and sign-in sheet counts.',
+	true
 	),
 	(
 	1,
@@ -549,7 +603,8 @@ VALUES (
 	126,
 	14,
 	113,
-	'80% of the room is our target goal for this MIS.'
+	'80% of the room is our target goal for this MIS.',
+	true
 	),
 	(
 	1,
@@ -558,7 +613,8 @@ VALUES (
 	112,
 	0,
 	100,
-	'80% of the room is our target goal for this MIS.'
+	'80% of the room is our target goal for this MIS.',
+	true
 	),
 	(
 	1,
@@ -567,7 +623,8 @@ VALUES (
 	126,
 	14,
 	113,
-	'80% of the room is our target goal for this MIS.'
+	'80% of the room is our target goal for this MIS.',
+	false
 	),
 	(
 	1,
@@ -576,7 +633,8 @@ VALUES (
 	67,
 	30,
 	181,
-	'40% is our target goal. This is taken only from sign-in sheets.'
+	'40% is our target goal. This is taken only from sign-in sheets.',
+	true
 	),
 	(
 	1,
@@ -585,7 +643,8 @@ VALUES (
 	83,
 	8,
 	111,
-	'80% is our target goal for this MIS.'
+	'80% is our target goal for this MIS.',
+	true
 	),
 	(
 	1,
@@ -594,7 +653,8 @@ VALUES (
 	41,
 	null,
 	null,
-	'44% of the respondents expressed interest in a future conversation centered on neglect and child abuse.'
+	'44% of the respondents expressed interest in a future conversation centered on neglect and child abuse.',
+	false
 	),
 	(
 	1,
@@ -603,7 +663,8 @@ VALUES (
 	35,
 	null,
 	null,
-	'37% of the respondents expressed interest in future conversations centered on housing.'
+	'37% of the respondents expressed interest in future conversations centered on housing.',
+	false
 	),
 	(
 	1,
@@ -612,7 +673,8 @@ VALUES (
 	35,
 	null,
 	null,
-	'37% of the respondents expressed interest in future conversations centered on transportation.'
+	'37% of the respondents expressed interest in future conversations centered on transportation.',
+	false
 	),
 	(
 	1,
@@ -621,7 +683,8 @@ VALUES (
 	57,
 	null,
 	null,
-	'61% of the respondents expressed interest in future conversations centered on education.'
+	'61% of the respondents expressed interest in future conversations centered on education.',
+	false
 	),
 	(
 	1,
@@ -630,7 +693,8 @@ VALUES (
 	94,
 	66,
 	336,
-	'Typical sign-in rate is 10%. We doubled our goal to 20% to identify how resonant and sticky the event was.'
+	'Typical sign-in rate is 10%. We doubled our goal to 20% to identify how resonant and sticky the event was.',
+	false
 	)
 ;
 
@@ -752,7 +816,7 @@ INSERT INTO response_category (description)
 VALUES 
 	('uncategorized');
 
-INSERT INTO question_set ("threesixty_id", "set_title", "breakdown")
+INSERT INTO question_set ("threesixty_reports_id", "set_title", "breakdown")
 VALUES 
 	(
 	1,
@@ -1858,6 +1922,73 @@ VALUES
 	)
 ;
 
+INSERT INTO freeform (threesixty_id, title, content, row_public)
+VALUES
+	('1',
+	'"Heard in the Hall"',
+	'Here’s what participants had to say about their experience:
+
+	➢	“Thank you for creating a safe place to engage others who are different than ourselves, and the freedom to be vulnerable and learn from each other.” – Public Health Professional 
+
+	➢	“Thank you! I struggle with feelings of helplessness and hopelessness.” – Trainer for Child Support Workers, MN State Human Services 
+
+	➢	“I enjoyed the space, the conversations and especially the engaging activities.” Hmong Small Business Owner
+	
+		➢	“Loved conversations, ideation, inclusion and removal of power dynamic.” – Community Health & Wellbeing Partnership Specialist  
+
+	➢	“Great experience and networking! Thanks for bringing this group together. Very educational…I will be back.” – YMCA Staff Member
+
+	➢	“This was very needed and specifically on this day when I struggle with if what I do is enough.” – Client Service Representative / Case Manager 
+
+	➢	“I enjoyed the facilitation that brought people the safety to share freely.” – Social Worker
+
+	➢	“It is very interactive and enlightening.” – Healthcare Professional 
+
+	➢	“It was profound and emotional for me.” – Public Health Professional 
+
+	➢	“Uplifting and supportive; [I] made a good connection with someone I will contact after today. Thank you! Great food.” – Retired ESL Teacher
+
+	➢	“Every time I attend a Marnitas Table event, it never ceases to amaze me with all the wonderful conversation and interactions that occur. Events like these are essential to the healing of our communities.” – Community Improvement Coordinator
+
+	➢	“Eye opening - how many people from diverse experiences are noticing the same challenges and barriers and frustrations to achieving wellness and healing that I have seen/noticed.” – EMT/Paramedic
+
+	➢	“I am grateful to be in the room speaking and learning about resources to combat trauma, depression, and mental illness.” – Teacher, Writer & Creative 
+
+	➢	“Exciting and affirming conversations!” – Project Director & Women’s Service Lead for Women, Children & Families, ISUD
+
+	➢	“Really enjoyed the table conversation. Excellent!” – Chaplain 
+
+	➢	“Thank you, what an amazing day! This experience serves to build on personal and professional wellbeing and the ability to serve.” – LADC Therapist 
+
+	➢	“Thank you so much for creating this space. As a therapist, I work to provide the space for change. Just the opportunity to change – really change – is transformative. So many are not given any space for real change. So, I deeply appreciate the work it takes to provide this space for us. Thank you.” – Therapist 
+
+	➢	“[The] cohort of people here willing to interact and present makes this a rich and healing environment. Love the pop-ups. Marnita sets the tone perfectly.” – Twin Cities Public Television Staff 
+
+	➢	“It is encouraging to be with so many people who care about this subject. Discussing the systemic issues and toxic environments was helpful for my work.” – Educator
+	
+		➢	“Reinforced [my] belief[s] about the role of belonging and identity, as well as [the] need to focus on wellbeing at corp.” – Mental Health Promotion Specialist
+
+	➢	“This was one of the first experiences of a safe place for ALL members of community regardless of race, religion, ethnicity, sexual orientation, ability, or even dietary. Truly a shift, a challenge, and a hope to me moving forward.” – Fundraising Professional 
+
+For more participant-submitted comments and feedback, please see the attached Demo Data report.',
+	true
+	)
+;
+
+INSERT INTO upload (threesixty_id, title, url)
+VALUES
+	(
+	1,
+	'12 Years of Radical Hospitality',
+	'https://www.marnitastable.org/wp-content/uploads/2018/12/MTI_annual-report_2017.pdf'
+	),
+	(
+	1,
+	'Sustainable Progress',
+	'https://www.marnitastable.org/wp-content/uploads/2017/08/Marnitas-Table-2016-Annual-Report.pdf'
+	)
+;
+
 INSERT INTO circle_share (threesixty_reports_id, question, responses)
 VALUES 
 	('1', 
@@ -1903,6 +2034,139 @@ VALUES
 	COMMUNITY: I haven’t been feeling very connected, but this is a space where I’ve been feeling connected to community.
 	POTENT: There’s so much potency here in this room, it’s juicy; there’s this amazing potential that we are on the cusp of change, and this must change. We are all making this change together – I’m going to take all the things we’re collecting here today, turn it into a beautiful report and send that information back to you.
 	')
+;
+
+INSERT INTO threesixty_freeform (threesixty_reports_id, title, content, row_public)
+VALUES
+	(1,
+	'Resources for Prevention',
+	'1. LevelUpFargo.org 
+
+2. Start with Why (book)
+
+3. Dr. Neil Nedely, MD
+[Mentioned twice: Dr. Neil Nedley, MD – uses lifestyle medicine to improve mental wellness such as anxiety and depression.]
+
+4. Living Deeply by Noetic Sciences (book) 
+
+5. Lotus Health Foundation & Rochester Clinic – 2019 Community of Wellness promoting lifestyle medicine to empower people for self-care.
+
+6. Healthy work place pieces
+a) Staff-led yoga
+b) Nutrition information in break areas
+c) Healthy food potlucks 
+
+7. Dialectic Behavior Therapy (DBT) in elementary high schools 
+
+8.  Center for Mind Body Medicine | www.cmbm.org Self-care resources. 
+
+9. CBITS with adaption to culture
+
+10. 7 Ways of Knowing, Being, Seeing | idownwind1@gmail.com | And medicine wheel teaching. 
+
+11. White Earth Treatment
+
+12. Youthprise | www.youthprise.org 
+
+13. NACC Native American Community Clinic | 1213 E. Franklin – medical, dental, behavioral health, spiritual care.
+
+14. Renewing Life at Pathways 
+
+15. “Facing the Sun Campus” Healing Center, Grand Rapids, MN | Community building and healing. 
+
+16. Listening House 
+
+17. Resmaa Manakem, My Grandmother’s Hands  
+[Mentioned thrice: “My Grandmother’s Hands – Resmaa Manekam;” “My Grandmother’s Hands, R. Menachem.”]
+
+18. STAR – Strategies for Trauma Awareness and Resilience | www.mnpeace.org 
+
+19. Your Body Keeps the Score (book)
+
+20. Story Circles ➔ root causes ➔ solutions
+
+21. Centered Spaces (healing and DEI) | www.centered-spaces.com  (Healer in Residence)
+[Mentioned twice: “Centered Spaces’ Healer in Residence (centered-spaces.com) for workplace wellness.”]
+
+22. MN Transgender Health Coalition 
+
+23. www.LivingWorks.com | suicide awareness + intervention training
+
+24. 1-800-273-8255 (National) | (612) 379-6363 (Metro/Suicide)
+
+25. Henry Emmons, M.D. The Chemistry of Calm, The Chemistry of Joy 
+
+26. Penny George Institute, consulting psychiatrist
+
+27. Minnesota Personalized Medicine 
+
+28. Enhanced Central Nervous System Technology – www.voxxlife.com / 111126105
+
+29. Collective Action Lab – Mill City Kids 
+
+30. Evenpulse – Stephen & Elizabeth Robinson | Trauma, resiliency, and tools (military and high-stress settings).
+
+31. The Cultural Wellness Center | Great resource for African/African American
+
+32. Becoming Mrs. Burton by Susan Benton
+
+33. BI Cities T.V. (Dec. 17 Year) 
+
+34. Pride Institute 
+
+35. World Pratt Association (transgender health) 
+
+36. Bounce Back – Allina program in Buffalo and expanding to other communities
+
+37. Kente Circle (Mental Health Services)
+
+38. Oasis of Love (Domestic violence intervention / prevention)
+
+39. Free Yoga for People of Color in South Minneapolis for people with mental health issues
+
+40. Coalition for People of Color providers, specifically racial-ethnic communities 
+
+41. New journey at Hennepin Health – Syl Jones
+
+42. GONIA (Gathering of Native Americans)
+
+43. Homeless Youth : Finding Home (documentary, www.TPT.org)
+
+44. Everyday Trauma (www.TPT.org documentary)
+
+45. Beloved Child, Diane Wilson 
+
+46. Rescuing Littleroundhead: A Childhood in Stories by Syl Jones 
+
+47. Reclaiming Sacred Tobacco (www.TPT.org) 
+
+48. Lawyers Concerned for Lawyers 
+
+49. Prema Yoga – Northfield 
+
+50. Workplace wellness: modeling from leadership that family is first and supporting staff in a variety of ways with caring, loving-kindnesses 
+
+51. Boneshaker – Grand Rapids, MN
+
+52. Face It Together – Sioux Falls 
+
+53. North Market – North Minneapolis
+
+54. A Mind of Your Own, Kelly Brogan (book)
+
+55. The Wellness Alchemist, Jean Nelson (612.508.4758) 
+
+56. Certifying young people as meditation and yoga instructors
+ 
+57. Qoya – through movement we remember our essence is wise, wild and free.
+
+58. St. Paul Community Acupuncture
+
+59. Meditation 
+
+60. Bravo New Choices Therapy',
+	true
+	)
 ;
 
 INSERT INTO threesixty_user ("user_id", "threesixty_id")

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import axios from 'axios';
 
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
@@ -20,7 +21,7 @@ const styles = {
     
     header: {
       textAlign: 'center',
-      marginBottom: 25
+      marginBottom: 25,
     },
 
     button: {
@@ -36,14 +37,26 @@ const styles = {
       fontSize: 18,
       background: '#eceff0',
       borderRadius: 10
-    }
+    },
+
+    feedback: {
+      textAlign: 'center',
+      marginBottom: 25,
+      color: 'red',
+    },
   };
 
 
 class EditPassword extends Component {
 
 state = {
-    open: false
+    open: false,
+    noMatch: false,
+    oldPassword: '',
+    newPassword: '',
+    confirmNewPassword: '',
+    passwordChanged: false,
+    changeError: false,
     };
 
 handleClickOpen = () => {
@@ -61,7 +74,42 @@ handleClickClose = () => {
 }
 
 handleSave = () => {
-  this.handleClickClose();
+  if(this.state.newPassword !== this.state.confirmNewPassword){
+    this.setState({
+      ...this.state,
+      noMatch: true
+    })
+  } else {
+    axios.put('/resetPassword', {
+      oldPassword: this.state.oldPassword,
+      newPassword: this.state.newPassword,
+      username: this.props.reduxState.user.username,
+    }).then(response => {
+      if(response.data.message === 'Password change confirmed') {
+        this.setState({
+          ...this.state,
+          changeError: false,
+          passwordChanged: true,
+          noMatch: false,
+        })
+      } else if(response.data.message === 'Cannot verify credentials') {
+        this.setState({
+          ...this.state,
+          changeError: true,
+          passwordChanged: false,
+          noMatch: false,
+        })
+      }
+    }).catch((error) => {
+      console.log(error);
+    })
+  }
+}
+
+handleChange = event => {
+  this.setState({
+    [event.target.name]: event.target.value
+  })
 }
 
 render(){
@@ -93,9 +141,11 @@ render(){
                 className={classes.textField}
                 margin="dense"
                 variant="outlined"
-                type="text"
+                type="password"
                 name="oldPassword"
                 placeholder="Old Password"
+                value={this.state.oldPassword}
+                onChange={this.handleChange}
               />
               <br />
               <TextField
@@ -103,9 +153,11 @@ render(){
                 className={classes.textField}
                 margin="dense"
                 variant="outlined"
-                type="text"
+                type="password"
                 name="newPassword"
                 placeholder="New Password"
+                value={this.state.newPassword}
+                onChange={this.handleChange}
               />
             <br />
             <TextField
@@ -113,16 +165,33 @@ render(){
                 className={classes.textField}
                 margin="dense"
                 variant="outlined"
-                type="text"
+                type="password"
                 name="confirmNewPassword"
                 placeholder="Confirm New Password"
+                value={this.state.confirmNewPassword}
+                onChange={this.handleChange}
               />
             <br />
           </div>
+          {this.state.noMatch &&
+           <DialogContentText className={classes.feedback}>
+             New password does not match.
+           </DialogContentText>
+           }
+           {this.state.changeError &&
+           <DialogContentText className={classes.feedback}>
+             Old password unable to be confirmed, please try again.
+           </DialogContentText>
+           }
+           {this.state.passwordChanged &&
+           <DialogContentText className={classes.feedback}>
+             Password has successfully been changed.
+           </DialogContentText>
+           }
           </DialogContent>
             <DialogActions>
               <Button onClick={this.handleClickClose} color="primary">
-                Cancel
+                Close
               </Button>
               <Button onClick={this.handleSave} color="primary">
                 Save Changes

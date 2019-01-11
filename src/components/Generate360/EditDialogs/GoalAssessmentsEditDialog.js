@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import colors from '../../App/colors';
+
+import GoalsAssessmentEditComponent from './Supplements/GoalsAssessmentsEditComponent';
 
 // Material-UI
 import { withStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -16,9 +15,44 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 class GoalsAssessmentEditDialog extends Component {
 
  state = {
-   open: false,
+   // DO NOT create integer-only parameters as they are reserved for data rows
+   open: true,
+   addRowId: 0,
    updating: false,
  };
+
+ // Create a new row
+ addRow = () => {
+   // create new row with the current row count
+  let newRowName = this.state.addRowId;
+  this.setState({
+    ...this.state,
+    [newRowName]: {
+      id: newRowName,
+      description: '',
+      desired: '',
+      delivered: '',
+      difference: '',
+      percent: '',
+      comments: '',
+      // set flag that this row is new so that it can be added to database upon submittal
+      new: true
+    },
+    // update the row count id
+    addRowId: this.state.addRowId + 1
+  })
+
+  this.scrollToBottom();
+ } // end addRow
+
+ // Delete a row
+ deleteRow = (id) => {
+   this.setState({
+     ...this.state,
+     // replace row's content with 'deleted' string so the row is deleted from database upon submittal
+     [id]: 'deleted'
+   })
+ } // end deleteRow
 
  // Update the rows array when a textbox is typed in.
  handleChangeFor= (event, id) => {
@@ -29,7 +63,9 @@ class GoalsAssessmentEditDialog extends Component {
   this.setState({
     [id]: {
       ...this.state[id],
-      [event.target.name]: event.target.value 
+      [event.target.name]: event.target.value,
+      // set flag that this row has been updated so that it can be updated in database upon submittal 
+      updated: true
     }
   })
  } // end handleChangeFor
@@ -65,28 +101,62 @@ class GoalsAssessmentEditDialog extends Component {
  // after the section is updated), this runs to copy the section into local state.
  loadCurrentData = () => {
 
+  // Create blank object to hold information
   let newState = {};
 
+  // Map through current this.state and save parameters that are not integers (row data)
   Object.keys(this.state).map( (key) => {
     if (isNaN(key) && key !== 'newState') {
       newState[key]=this.state[key]
     };
   });
 
+  // Initialize addRowId to be 1 
+  // (if all rows are accidentally deleted, this will allow the user to still create a row)
+  let addRowId = 1;
+
+  // map through results from database pull
   this.props.reduxState.current360.goalsAssessment.map((row,index) => {
-    newState[row.id]=row
+    let rowCheck = row;
+
+    // Check if any entries in the row are null and set to empty strings (for happy inputs)
+    Object.entries(rowCheck).map((entry) => {
+        if (entry[1] == null) {
+          rowCheck[entry[0]] = '';
+        }
+      })
+    
+    // increment addRowId to keep row count up to date
+    addRowId++;
+    // add updated row (with any converted null values) to the newState object
+    newState[row.id]=rowCheck;
   });
 
+  // Fix updating status and set addRowId in newState
   newState.updating = false;
+  newState.addRowId = addRowId;
 
+  // Set state to newState object
   this.setState( newState );
 
+  // Dispatch action to indicate the update has been completed
   this.props.dispatch({ type: 'CURRENT_360_SECTION_UPDATE_COMPLETE', payload: {section: 'goalsAssessment'} });
 
  } // end loadCurrentData
 
+ // Scrolls to the bottom (this.bottom is an empty div at the bottom of the dialog content)
+ // when a new row is created to reveal the row
+ scrollToBottom = () => {
+   // The timeout is in place to make sure the new row has appended before the scroll begins
+   setTimeout(() => {
+    this.bottom.scrollIntoView({ behavior: "smooth", block: "start" });
+   }, 250);
+ } // scrollToBottom
+
  render() {
    const { classes } = this.props;
+
+   console.log(this.state);
 
    // Check if the section information updated since this site was last loaded.
    // A section is re-downloaded each time the edit dialog is opened.
@@ -106,6 +176,7 @@ class GoalsAssessmentEditDialog extends Component {
         maxWidth="lg"
         classes={{paper: classes.paper}}
       >
+      {/* Conditionally render a loading message until data is loaded into local state */}
       {(this.state.updating === true) ? 
       <React.Fragment>
         <DialogTitle id="goal-assessment-edit-dialog">Edit Goals Assessment</DialogTitle>
@@ -118,101 +189,34 @@ class GoalsAssessmentEditDialog extends Component {
         :
         <React.Fragment>
           <DialogTitle id="goal-assessment-edit-dialog">Edit Goals Assessment</DialogTitle>
-          <DialogContent>
+          <DialogContent id="goal-assessment-edit-dialog-content" ref={(el) => { this.scroll = el; }}>
             <DialogContentText>
               Remember to save changes before closing this edit dialog.
             </DialogContentText>
+            {/* Map through keys of this.state. Only render the edit component for integers (which are 
+            reserved for row data) */}
             {Object.keys(this.state).map( (key,index) => {
-              if (!isNaN(key)) {
+              if (!isNaN(key) && this.state[key] !== 'deleted') {
                 return (
-                <div key={this.state[key].id} className={classes.inputGroup}>
-                  <Typography variant="subtitle1">Row {index + 1}</Typography>
-                  <TextField
-                    // Create focus on the first text box of the page:
-                    {...(index === 0) ? {autoFocus: true} : null}
-                    margin="dense"
-                    id="description"
-                    name="description"
-                    label="Description"
-                    type="text"
-                    variant="outlined"
-                    value={this.state[key].description}
-                    onChange={(event) => this.handleChangeFor(event,this.state[key].id)}
-                    className={classes.input}
-                    fullWidth
-                    multiline
-                  />
-                  <div className={classes.spaceBetween}>
-                    <TextField
-                      margin="dense"
-                      id="desired"
-                      name="desired"
-                      label="Desired"
-                      type="number"
-                      variant="outlined"
-                      value={this.state[key].desired}
-                      onChange={(event) => this.handleChangeFor(event,key.id)}
-                      className={classes.input}
-                    />
-                    <TextField
-                      margin="dense"
-                      id="delivered"
-                      name="delivered"
-                      label="Delivered"
-                      type="number"
-                      variant="outlined"
-                      value={this.state[key].delivered}
-                      onChange={(event) => this.handleChangeFor(event,key.id)}
-                      className={classes.input}
-                    />
-                    <TextField
-                      margin="dense"
-                      id="difference"
-                      name="difference"
-                      label="Difference"
-                      type="number"
-                      variant="outlined"
-                      value={this.state[key].difference}
-                      onChange={(event) => this.handleChangeFor(event,key.id)}
-                      className={classes.input}
-                    />
-                    <TextField
-                      margin="dense"
-                      id="percent"
-                      name="percent"
-                      label="Percent"
-                      type="number"
-                      variant="outlined"
-                      value={this.state[key].percent}
-                      onChange={(event) => this.handleChangeFor(event,key.id)}
-                      className={classes.input}
-                    />
-                  </div>
-                  <TextField
-                    margin="dense"
-                    id="comments"
-                    name="comments"
-                    label="Comments"
-                    type="text"
-                    variant="outlined"
-                    value={this.state[key].comments}
-                    onChange={(event) => this.handleChangeFor(event,key.d)}
-                    className={classes.input}
-                    fullWidth
-                    multiline
-                  />
-                </div>
-              );
-                }
+                  <GoalsAssessmentEditComponent key={this.state[key].id} row={this.state[key]} index={index} handleChangeFor={this.handleChangeFor} deleteRow={this.deleteRow} />
+                );
+              } 
             })}
+            <div style={{ float:"left", clear: "both" }} ref={(el) => { this.bottom = el; }}>
+            </div>
           </DialogContent>
-          <DialogActions>
-            <Button onClick={this.handleClickClose} color="primary">
-              Cancel
-            </Button>
-            <Button onClick={this.handleSave} color="primary">
-              Save Changes
-            </Button>
+          <DialogActions className={classes.spaceBetween}>
+            <div>
+              <Button onClick={this.addRow}>Add Row</Button>
+            </div>
+            <div>
+              <Button onClick={this.handleClickClose} color="primary">
+                Cancel
+              </Button>
+              <Button variant="contained" onClick={this.handleSave} color="primary">
+                Save Changes
+              </Button>
+            </div>
           </DialogActions>
         </React.Fragment>
       }
@@ -223,23 +227,6 @@ class GoalsAssessmentEditDialog extends Component {
 };
 
 const styles = {
-  div: {
-    padding: 50
-  },
-  header: {
-    textAlign: 'center',
-    marginBottom: 25
-  },
-  input: {
-    backgroundColor: 'white',
-    borderRadius: 5,
-  },
-  inputGroup: {
-    marginBottom: 20,
-    padding: 10,
-    backgroundColor: colors.lightGrey,
-    borderRadius: 5
-  },
   paper: {
     height: 'calc(100% - 96px)'
   },

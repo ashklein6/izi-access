@@ -101,16 +101,17 @@ class Create360 extends Component {
   create360 = () => {
     if(!this.state.status){
       this.props.dispatch({ type: 'CREATE_360_COMPLETE', payload: this.state });
+      this.props.history.push('/generate360');
     } else {
       this.props.dispatch({ type: 'CREATE_360_LOWDOWN', payload: this.state }); 
+      this.props.history.push('/generate360');
     };
-      // this.props.history.push('/generate360');
   }
 
   confirmSubmit = () => {
     confirmAlert({
       title: 'Confirm to submit',
-      message: `Are you sure you want to create a 360 with these properties:
+      message: `Are you sure you want to create a 360 with these properties?
                 Name: ${this.state.name},
                 Client: ${this.state.client},
                 Date: ${this.state.date},
@@ -211,9 +212,9 @@ class Create360 extends Component {
               <MenuItem value="">
                 <em>None</em>
               </MenuItem>
-              <MenuItem value={1}>Category 1</MenuItem>
-              <MenuItem value={2}>Category 2</MenuItem>
-              <MenuItem value={3}>Category 3</MenuItem>
+              {this.props.reduxState.iziCategories.map(category => (
+                <MenuItem key={category.id} value={category.id}>{category.category}</MenuItem>
+              ))}
             </Select>
           </FormControl><br />
 
@@ -228,13 +229,13 @@ class Create360 extends Component {
             placeholder="Description"
           /><br />
 
-          <span>BBE</span>
+          <span>Longform</span>
           <Switch
             checked={this.state.status}
             onChange={this.handleSwitch}
             color="default"
           />
-          <span>SBS</span>
+          <span>Shortform</span>
 
           <br />
 

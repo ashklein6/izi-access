@@ -27,7 +27,7 @@ class Manage360s extends Component {
 
   // operates button that takes users to the 360 generator
   goToGenerator = () => {
-    this.props.history.push('/generate360');
+    this.props.history.push('/create360');
   };
 
  render() {

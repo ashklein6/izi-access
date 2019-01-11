@@ -19,7 +19,7 @@ class Dashboard extends Component {
  };
 
  handleCreate = () => {
-  this.props.history.push('/generate360')
+  this.props.history.push('/create360')
  }
 
  handleView = () => {

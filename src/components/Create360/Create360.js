@@ -82,7 +82,6 @@ class Create360 extends Component {
     } else {
       this.errorMessage();
     };
-    // this.props.history.push('/generate360');
   };
 
   errorMessage = () => {
@@ -101,16 +100,28 @@ class Create360 extends Component {
   create360 = () => {
     if(!this.state.status){
       this.props.dispatch({ type: 'CREATE_360_COMPLETE', payload: this.state });
+      this.props.history.push('/manage360s');
     } else {
       this.props.dispatch({ type: 'CREATE_360_LOWDOWN', payload: this.state }); 
+      this.props.history.push('/manage360s');
     };
-      // this.props.history.push('/generate360');
+  }
+
+  handleDemo = () => {
+    this.setState({
+        name: 'A study of community factors for emotional distress.',
+        client: 'Best Buy',
+        location: 'Richfield',
+        category: '2',
+        description: 'Studying factors that cause employees to feel emotional and mental distress.',
+        status: false,
+    })
   }
 
   confirmSubmit = () => {
     confirmAlert({
       title: 'Confirm to submit',
-      message: `Are you sure you want to create a 360 with these properties:
+      message: `Are you sure you want to create a 360 with these properties?
                 Name: ${this.state.name},
                 Client: ${this.state.client},
                 Date: ${this.state.date},
@@ -133,13 +144,19 @@ class Create360 extends Component {
     const { classes } = this.props;
     return (
       <div className={classes.container}>
-        {JSON.stringify(this.state)}
+        {/* {JSON.stringify(this.state)} */}
         {/* {JSON.stringify(this.props.mapReduxStateToProps)} */}
         <Button 
           variant="contained"
           onClick={this.returnToDashboard}
         >
           Return to Dashboard
+        </Button>
+        <Button 
+          variant="contained"
+          onClick={this.handleDemo}
+        >
+          Demo Fill
         </Button>
         <form className={classes.form} onSubmit={this.handleSubmit}>
           <Typography variant="h2" className={classes.header}>Create 360</Typography>
@@ -211,9 +228,9 @@ class Create360 extends Component {
               <MenuItem value="">
                 <em>None</em>
               </MenuItem>
-              <MenuItem value={1}>Category 1</MenuItem>
-              <MenuItem value={2}>Category 2</MenuItem>
-              <MenuItem value={3}>Category 3</MenuItem>
+              {this.props.reduxState.iziCategories.map(category => (
+                <MenuItem key={category.id} value={category.id}>{category.category}</MenuItem>
+              ))}
             </Select>
           </FormControl><br />
 
@@ -228,13 +245,13 @@ class Create360 extends Component {
             placeholder="Description"
           /><br />
 
-          <span>BBE</span>
+          <span>Longform</span>
           <Switch
             checked={this.state.status}
             onChange={this.handleSwitch}
             color="default"
           />
-          <span>SBS</span>
+          <span>Shortform</span>
 
           <br />
 

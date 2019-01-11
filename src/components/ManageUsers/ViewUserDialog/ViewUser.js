@@ -141,7 +141,7 @@ class ViewUser extends Component {
               </li>
             </ul>
           <InputLabel>Notes:</InputLabel>
-          <Typography variant="subheading">{user.notes}</Typography>
+          <Typography className={classes.userInfo} variant="subheading">{user.notes}</Typography>
           <br />
       </DialogContent>
     </React.Fragment>

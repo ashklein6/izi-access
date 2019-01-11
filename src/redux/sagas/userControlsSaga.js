@@ -11,9 +11,9 @@ function* fetchUserInfo() {
   }
 };
 
-function* add360Access() {
+function* add360Access(action) {
   try {
-    
+    yield call(axios.post, '/userControls/add', {data: action.payload});
   } 
   catch (error) {
     console.log('error', error);

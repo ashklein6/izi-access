@@ -38,11 +38,11 @@ router.get('/section', (req, res) => {
     case 'circle_share':
       queryText = `SELECT * FROM circle_share WHERE threesixty_reports_id=$1 ORDER BY id;`
     case 'question_set':
-      queryText = `SELECT question_set.id AS question_set_id, threesixty_id, set_title, breakdown, questions.id AS question_id, response.id AS response_id, response, response_category.id AS response_category_id, description FROM question_set
+      queryText = `SELECT question_set.id AS question_set_id, threesixty_reports_id, set_title, breakdown, questions.id AS question_id, response.id AS response_id, response, response_category.id AS response_category_id, description AS response_category_description FROM question_set
       LEFT JOIN questions ON questions.set_id = question_set.id
       LEFT JOIN response ON response.question_id = questions.id
       LEFT JOIN response_category ON response_category.id = response.category_id
-      WHERE threesixty_id=$1 ORDER BY question_set.id;`
+      WHERE threesixty_reports_id=$1 ORDER BY question_set.id;`
     case 'oral_report':
       queryText = `SELECT * FROM oral_report WHERE threesixty_reports_id=$1 ORDER BY id`
   }
@@ -190,11 +190,11 @@ router.get('/circle_share', (req, res) => {
 // Setup a GET route to get 360 section question_set
 router.get('/question_set', (req, res) => {
     let current360Id = req.query.current360Id;
-    let queryText = `SELECT question_set.id AS question_set_id, threesixty_id, set_title, breakdown, questions.id AS question_id, response.id AS response_id, response, response_category.id AS response_category_id, description FROM question_set
+    let queryText = `SELECT question_set.id AS question_set_id, threesixty_reports_id, set_title, breakdown, questions.id AS question_id, response.id AS response_id, response, response_category.id AS response_category_id, description AS response_category_description FROM question_set
     LEFT JOIN questions ON questions.set_id = question_set.id
     LEFT JOIN response ON response.question_id = questions.id
     LEFT JOIN response_category ON response_category.id = response.category_id
-    WHERE threesixty_id=$1 ORDER BY question_set.id;`;
+    WHERE threesixty_reports_id=$1 ORDER BY question_set.id;`;
     
     console.log('GET request for 360 section question_set. current 360 id:', current360Id);
     
@@ -231,7 +231,41 @@ router.get('/oral_report', (req, res) => {
     } else {
         res.sendStatus(400);
     }
-})
+});
+
+router.get('/chart_data', (req, res) => {
+    let data = [];
+    let current360Id = req.query.current360Id;
+    let queryText = `SELECT COUNT(*) - SUM(plans_to_tell::int) as plans_to_tell_no, SUM(plans_to_tell::int) as plans_to_tell_yes, 
+                    COUNT(*) - SUM(first_time::int) as first_time_no, SUM(first_time::int) as first_time_yes, 
+                    COUNT(*) - SUM(child_abuse::int) as child_abuse_no, SUM(child_abuse::int) as child_abuse_yes, 
+                    COUNT(*) - SUM(housing::int) as housing_no, SUM(housing::int) as housing_yes, 
+                    COUNT(*) - SUM(transportation::int) as transportation_no, SUM(transportation::int) as transportation_yes,
+                    COUNT(*) - SUM(education::int) as education_no, SUM(education::int) as education_yes  
+                    FROM demographic WHERE threesixty_id = $1;`;
+    pool.query(queryText, [current360Id])
+    .then((response) => {
+        data = [
+            {title: 'plans_to_tell', 
+            data: [response.rows[0].plans_to_tell_yes, response.rows[0].plans_to_tell_no],
+            legend: true},
+            {title: 'first_time', 
+            data: [response.rows[0].first_time_yes, response.rows[0].first_time_no]},
+            {title: 'child_abuse', 
+            data: [response.rows[0].child_abuse_yes, response.rows[0].child_abuse_no]},
+            {title: 'housing',
+            data: [response.rows[0].housing_yes, response.rows[0].housing_no]},
+            {title: 'transportation', 
+            data: [response.rows[0].transportation_yes, response.rows[0].transportation_no]},
+            {title: 'education', 
+            data: [response.rows[0].education_yes, response.rows[0].education_no]},
+        ];
+        res.send(data);
+    })
+    .catch(() => {
+        res.sendStatus(500);
+    })
+});
 
 /**
  * POST route template
@@ -243,9 +277,9 @@ router.post('/complete', async (req, res) => {
 
     try {
         await client.query('BEGIN');
-        id = await client.query(`INSERT INTO threesixty (name, date, location, category_id, client, description) 
-            VALUES ($1, $2, $3, $4, $5, $6)
-            RETURNING id`, [new360.name, new360.date, new360.location, new360.category, new360.client, new360.description]);
+        id = await client.query(`INSERT INTO threesixty (name, date, location, category_id, client, description, published_status) 
+            VALUES ($1, $2, $3, $4, $5, $6, $7)
+            RETURNING id`, [new360.name, new360.date, new360.location, new360.category, new360.client, new360.description, true]);
         await client.query(`INSERT INTO analysis_recommendation (threesixty_id) VALUES ($1)`, [id.rows[0].id]);
         for(let row of dashboardRows){
             await client.query(`INSERT INTO dashboard (threesixty_id, row_title) VALUES ($1, $2)`, [id.rows[0].id, row]);

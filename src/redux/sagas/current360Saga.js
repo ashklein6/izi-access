@@ -74,6 +74,7 @@ function* fetch360(action) {
       put({ type: 'FETCH_CIRCLE_SHARE', payload: action.payload }),
       put({ type: 'FETCH_QUESTION_SET', payload: action.payload }),
       put({ type: 'FETCH_ORAL_REPORT', payload: action.payload }),
+      put({ type: 'FETCH_CHART_DATA', payload: action.payload }),
     ]);
   } 
   catch (error) {
@@ -201,6 +202,18 @@ function* fetchOralReport(action) {
   }
 }
 
+function* fetchChartData(action) {
+  console.log('inside fetchChartData in saga');
+  try {
+    const response = yield call(axios.get, `/current360/chart_data`, {params: action.payload});
+    console.log('response for chart_data', response.data);
+    yield put({ type: 'SET_CHART_DATA', payload: response.data} );
+  } 
+  catch (error) {
+    console.log('error', error);
+  }
+}
+
 
 function* current360Saga() {
   yield takeLatest( 'CHANGE_PRIVATE_STATUS', changePrivateStatus );
@@ -219,6 +232,7 @@ function* current360Saga() {
   yield takeLatest( 'FETCH_CIRCLE_SHARE', fetchCircleShare );
   yield takeLatest( 'FETCH_QUESTION_SET', fetchQuestionSet );
   yield takeLatest( 'FETCH_ORAL_REPORT', fetchOralReport );
+  yield takeLatest( 'FETCH_CHART_DATA', fetchChartData );
 };
 
 export default current360Saga;

@@ -42,9 +42,10 @@ function* fetchUsersSearch(action) {
   }
 };
 
-function* fetchUsersSort() {
+function* fetchThreesixtyUsers(action) {
   try {
-    
+    const response = yield call(axios.get, '/allUsers/threesixty', { params: action.payload } );
+    yield put({type: 'SET_THREESIXTY_USERS', payload: response.data});
   } 
   catch (error) {
     console.log('error', error);
@@ -56,7 +57,7 @@ function* allUsersSaga() {
   yield takeLatest( 'FETCH_PENDING_REQUESTS', fetchPendingRequests );
   yield takeLatest( 'FETCH_DEACTIVATED_USERS', fetchDeactivatedUsers );
   yield takeLatest( 'FETCH_USERS_SEARCH', fetchUsersSearch );
-  yield takeLatest( 'FETCH_USERS_SORT', fetchUsersSort );
+  yield takeLatest( 'FETCH_THREESIXTY_USERS', fetchThreesixtyUsers );
 };
 
 export default allUsersSaga;

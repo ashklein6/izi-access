@@ -7,12 +7,18 @@ import Typography from '@material-ui/core/Typography';
 
 // Import Expansion Panels for each subsection
 import GoalsAssessmentExpansionPanel from './ExpansionPanels/GoalAssessmentsExpansionPanel';
+import DashboardExpansionPanel from './ExpansionPanels/DashboardExpansionPanel';
+import AnalysisRecExpansionPanel from './ExpansionPanels/AnalysisRecExpansionPanel';
 
 class Generate360 extends Component {
 
  state = {
   current360Id: 1
  };
+
+ componentDidMount() {
+   this.props.dispatch({ type: 'FETCH_360', payload: {current360Id: 1} })
+ }
 
  render() {
    const { classes } = this.props;
@@ -21,6 +27,8 @@ class Generate360 extends Component {
      <div className={classes.div}>
        <Typography variant="h2" className={classes.header}>Generate360</Typography>
        <GoalsAssessmentExpansionPanel current360Id={this.state.current360Id}/>
+       <DashboardExpansionPanel current360Id={this.state.current360Id}/>
+       <AnalysisRecExpansionPanel current360Id={this.state.current360Id}/>
      </div>
    );
  }

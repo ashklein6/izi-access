@@ -108,6 +108,17 @@ class Create360 extends Component {
     };
   }
 
+  handleDemo = () => {
+    this.setState({
+        name: 'A study of community factors for emotional distress.',
+        client: 'Best Buy',
+        location: 'Richfield',
+        category: '2',
+        description: 'Studying factors that cause employees to feel emotional and mental distress.',
+        status: false,
+    })
+  }
+
   confirmSubmit = () => {
     confirmAlert({
       title: 'Confirm to submit',
@@ -141,6 +152,12 @@ class Create360 extends Component {
           onClick={this.returnToDashboard}
         >
           Return to Dashboard
+        </Button>
+        <Button 
+          variant="contained"
+          onClick={this.handleDemo}
+        >
+          Demo Fill
         </Button>
         <form className={classes.form} onSubmit={this.handleSubmit}>
           <Typography variant="h2" className={classes.header}>Create 360</Typography>

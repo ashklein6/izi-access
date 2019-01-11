@@ -53,8 +53,18 @@ class CreateUser extends Component {
 
   handleCancel = () => {
     this.props.dispatch({type: 'SET_TO_LOGIN_MODE'});
-
   }
+
+  handleDemo = () => {
+    this.setState({
+      firstname: 'James',
+      lastname: 'Andersen',
+      email: 'jamesa@gmail.com',
+      username: 'jandersen',
+      password: 'a',
+      iziName: 'Health Matters!'
+    })
+  };
 
   handleInputChangeFor = propertyName => (event) => {
     this.setState({
@@ -183,6 +193,16 @@ class CreateUser extends Component {
               value="cancel"
             >
               Cancel
+            </Button>
+            <br />
+            <Button
+              className={classes.button}
+              variant="contained"
+              onClick={this.handleDemo}
+              name="demo"
+              value="demo"
+            >
+              Demo Fill
             </Button>
           </div>
         </form>

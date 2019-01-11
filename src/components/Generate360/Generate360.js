@@ -16,6 +16,10 @@ class Generate360 extends Component {
   current360Id: 1
  };
 
+ componentDidMount() {
+   this.props.dispatch({ type: 'FETCH_360', payload: {current360Id: 1} })
+ }
+
  render() {
    const { classes } = this.props;
 

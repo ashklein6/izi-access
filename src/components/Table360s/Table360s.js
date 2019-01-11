@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -9,6 +9,10 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import moment from 'moment';
+
+import {
+  withRouter
+} from 'react-router-dom';
 
 let root = document.querySelector(':root');
 const colors = {
@@ -61,8 +65,18 @@ const CustomTableCell = withStyles(theme => ({
   },
 }))(TableCell);
 
-function CustomizedTable(props) {
-  const { classes } = props;
+class CustomizedTable extends Component {
+
+  state = {
+
+  }
+
+  goToGenerate360 = () => {
+    this.props.history.push('/generate360');
+  }
+
+  render() {
+  const { classes } = this.props;
 
   return (
     <Paper className={classes.rootTable}>
@@ -78,13 +92,13 @@ function CustomizedTable(props) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {props.rows.map(row => {
+          {this.props.rows.map(row => {
             return (
               <TableRow key={row.id}>
                 <CustomTableCell className={classes.centerText} component="th" scope="row">
                   <Button variant="contained">View</Button>
 
-                  {!props.homeVersion && <Button variant="contained">Edit</Button>}
+                  {!this.props.homeVersion && <Button onClick={this.goToGenerate360} variant="contained">Edit</Button>}
 
                 </CustomTableCell>
                 <CustomTableCell className={classes.centerText}>{row.name}</CustomTableCell>
@@ -99,6 +113,7 @@ function CustomizedTable(props) {
       </Table>
     </Paper>
   );
+        }
 }
 
 const styles = {
@@ -165,4 +180,4 @@ CustomizedTable.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(CustomizedTable);
+export default withRouter(withStyles(styles)(CustomizedTable));

@@ -1,10 +1,10 @@
 INSERT INTO access ("access_level", "access_type")
 VALUES
+	(0, 'Deactivated'),
 	(10, 'User'),
 	(20, 'Client'),
 	(30, 'Employee'),
-	(40, 'Admin'),
-	(0, 'deactivated');
+	(40, 'Admin');
 
 INSERT INTO person ("email", "username", "password", "firstname", "lastname", "access_id", "notes", "date_added")
 VALUES (
@@ -13,7 +13,7 @@ VALUES (
 	'password',
 	'Jane',
 	'Doe',
-	2,
+	3,
 	'Very interested in public health',
 	'12-18-2018'
 );
@@ -25,7 +25,7 @@ VALUES (
 	'secret',
 	'Adam',
 	'Minn',
-	4,
+	5,
 	'Admin priveleges required',
 	'12-17-2018'
 );
@@ -37,7 +37,7 @@ VALUES (
 	'1234',
 	'Cybill',
 	'Ian',
-	1,
+	2,
 	'Community is my priority',
 	'12-19-2018'
 );

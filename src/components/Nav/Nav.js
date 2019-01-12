@@ -23,6 +23,15 @@ const colors = {
 };
 
 class Nav extends Component {
+
+  employee = (user) => {
+    if(user >= 4) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   render() {
     const { classes } = this.props;
 
@@ -37,7 +46,7 @@ class Nav extends Component {
             </Link>
   
             <div className={classes.grow} />
-              {this.props.reduxState.user.id && (
+              {this.employee(this.props.reduxState.user.access_id) && (
                 <>
                   <Link className="nav-link" to="/dashboard">
                     Dashboard

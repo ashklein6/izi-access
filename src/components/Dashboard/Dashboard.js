@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import axios from 'axios';
 
 // Material-UI
 import { withStyles } from '@material-ui/core/styles';
@@ -15,7 +16,7 @@ import PriorityHigh from '@material-ui/icons/PriorityHigh';
 class Dashboard extends Component {
 
  state = {
-  pending: true
+  pending: false
  };
 
  handleCreate = () => {
@@ -28,6 +29,21 @@ class Dashboard extends Component {
 
  handleUsers = () => {
    this.props.history.push('/manageUsers')
+ }
+
+ componentDidMount() {
+   axios.get('/allUsers/checkRequests')
+   .then((response) => {
+     if(response.data){
+       this.setState({
+         pending: true
+       })
+     } else {
+       this.setState({
+         pending: false
+       })
+     }
+   })
  }
 
  render() {

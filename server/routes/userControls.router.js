@@ -2,12 +2,12 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
+const { employeesOnly } = require('../modules/employeesOnly');
 
 /**
  * GET route template
  */
-router.get('/', rejectUnauthenticated, (req, res) => {
-  console.log(req.user.id);
+router.get('/', employeesOnly, (req, res) => {
   const sqlText = `SELECT threesixty.name, threesixty.date, threesixty.id FROM threesixty
                   JOIN threesixty_user ON threesixty_user.threesixty_id = threesixty.id
                   JOIN person ON threesixty_user.user_id = person.id
@@ -23,7 +23,8 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 });
 
 
-router.post('/', (req, res) => {
+router.post('/', rejectUnauthenticated, (req, res) => {
+  console.log(req.body);
   const sqlText = `INSERT INTO client_request (person_id, name, date) VALUES ($1, $2, $3);`
   const request = [req.body.data.user, req.body.data.iziName, req.body.data.date];
   pool.query(sqlText, request)
@@ -35,8 +36,7 @@ router.post('/', (req, res) => {
   })
 });
 
-router.post('/add', (req,res) => {
-  console.log(req.body.data);
+router.post('/add', employeesOnly, (req,res) => {
   const sqlText = `INSERT INTO threesixty_user (user_id, threesixty_id) VALUES ($1, $2);`;
   const user = req.body.data.user;
   const threesixty = req.body.data.threesixty;
@@ -49,7 +49,7 @@ router.post('/add', (req,res) => {
   })
 });
 
-router.put('/', (req,res) => {
+router.put('/', employeesOnly, (req,res) => {
   const sqlText = `UPDATE person SET firstname = $1, lastname = $2, email = $3, 
                   access_id = $4, notes = $5 WHERE id = $6;`;
   const personUpdate = [
@@ -69,7 +69,7 @@ router.put('/', (req,res) => {
   })
 });
 
-router.put('/currentUser', (req,res) => {
+router.put('/currentUser', rejectUnauthenticated, (req,res) => {
   const sqlText = `UPDATE person SET firstname = $1, lastname = $2, email = $3 WHERE id = $4;`;
   const update = [
     req.body.data.firstName,
@@ -86,7 +86,7 @@ router.put('/currentUser', (req,res) => {
   });
 });
 
-router.delete('/threesixty/:id', (req,res) => {
+router.delete('/threesixty/:id', employeesOnly, (req,res) => {
   const sqlText = `DELETE FROM threesixty_user WHERE id = $1;`;
   const threesixtyId = req.params.id;
   pool.query(sqlText, [threesixtyId])
@@ -98,7 +98,7 @@ router.delete('/threesixty/:id', (req,res) => {
   })
 })
 
-router.delete('/:id', (req,res) => {
+router.delete('/:id', employeesOnly, (req,res) => {
   const sqlText = `DELETE FROM client_request WHERE id = $1;`;
   const requestId = req.params.id;
   pool.query(sqlText, [requestId])

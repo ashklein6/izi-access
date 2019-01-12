@@ -56,11 +56,6 @@ class UserProfile extends Component {
             variant="contained">View</Button>
           </Typography>
           ))}   
-          <Typography 
-            className={classes.text}>360 #2
-            <Button className={classes.viewButton} 
-            variant="contained">View</Button>
-          </Typography>
           <RequestAccess />
           </div>
      </section>

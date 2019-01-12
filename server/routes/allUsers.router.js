@@ -3,6 +3,7 @@ const pool = require('../modules/pool');
 const router = express.Router();
 
 router.get('/', (req, res) => {
+  console.log('req.user', req.user);
   pool.query(`SELECT person.firstname, person.lastname, person.email, person.id, 
             person.access_id, person.notes, access.access_type, access.access_level, 
             threesixty.name as threesixty, threesixty_user.id as connected_360_id 
@@ -114,6 +115,20 @@ router.get('/threesixty', (req, res) => {
     res.sendStatus(500);
   })
 });
+
+router.get('/checkRequests', (req,res) => {
+  pool.query(`SELECT id FROM client_request;`)
+  .then((response) => {
+    if(response.rows[0]){
+      res.send(true);
+    } else {
+      res.send(false);
+    }
+  })
+  .catch(() => {
+    res.sendStatus(500);
+  })
+})
 
 /**
  * POST route template

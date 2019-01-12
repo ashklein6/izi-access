@@ -7,7 +7,6 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
  * GET route template
  */
 router.get('/', rejectUnauthenticated, (req, res) => {
-  console.log(req.user.id);
   const sqlText = `SELECT threesixty.name, threesixty.date, threesixty.id FROM threesixty
                   JOIN threesixty_user ON threesixty_user.threesixty_id = threesixty.id
                   JOIN person ON threesixty_user.user_id = person.id
@@ -24,6 +23,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 
 
 router.post('/', (req, res) => {
+  console.log(req.body);
   const sqlText = `INSERT INTO client_request (person_id, name, date) VALUES ($1, $2, $3);`
   const request = [req.body.data.user, req.body.data.iziName, req.body.data.date];
   pool.query(sqlText, request)

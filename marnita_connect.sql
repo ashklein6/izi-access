@@ -26,41 +26,41 @@ CREATE TABLE "client_request" (
     "date_added" TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE "izi_categories" (
+CREATE TABLE "izi_category" (
     "id" SERIAL PRIMARY KEY,
     "category" VARCHAR(256)
 );
 
 CREATE TABLE "threesixty" (
-    "id" SERIAL PRIMARY KEY,
-    "name" VARCHAR(512),
-    "date" DATE,
-    "location" VARCHAR(255),
-    "category_id" INT REFERENCES "izi_categories",
-    "client" VARCHAR(255),
-    "description" VARCHAR(25600),
-    "published_status" BOOLEAN DEFAULT FALSE,
-    "analysis_recommendation_public" BOOLEAN DEFAULT FALSE NOT NULL,
-    "threesixty_reports_public" BOOLEAN DEFAULT TRUE NOT NULL,
-    "dashboard_public" BOOLEAN DEFAULT FALSE NOT NULL,
-    "goals_public" BOOLEAN DEFAULT FALSE NOT NULL,
-    "demographics_public" BOOLEAN DEFAULT FALSE NOT NULL,
-    "oral_report_public" BOOLEAN DEFAULT TRUE NOT NULL,
-    "question_set_public" BOOLEAN DEFAULT TRUE NOT NULL,
-    "circle_share_public" BOOLEAN DEFAULT TRUE NOT NULL,
-    "threesixty_freeform_public" BOOLEAN DEFAULT TRUE NOT NULL,
-    "freeform_public" BOOLEAN DEFAULT TRUE NOT NULL,
+	"id" SERIAL PRIMARY KEY,
+	"name" VARCHAR(512),
+	"date" DATE,
+	"location" VARCHAR(255),
+	"category_id" INT REFERENCES "izi_category",
+	"client" VARCHAR(255),
+	"description" VARCHAR(25600),
+	"published_status" BOOLEAN DEFAULT FALSE,
+	"analysis_recommendation_public" BOOLEAN DEFAULT TRUE NOT NULL,
+	"threesixty_reports_public" BOOLEAN DEFAULT TRUE NOT NULL,
+	"dashboard_public" BOOLEAN DEFAULT FALSE NOT NULL,
+	"goals_public" BOOLEAN DEFAULT TRUE NOT NULL,
+	"demographics_public" BOOLEAN DEFAULT FALSE NOT NULL,
+	"oral_report_public" BOOLEAN DEFAULT TRUE NOT NULL,
+	"question_set_public" BOOLEAN DEFAULT TRUE NOT NULL,
+	"circle_share_public" BOOLEAN DEFAULT TRUE NOT NULL,
+	"threesixty_freeform_public" BOOLEAN DEFAULT FALSE NOT NULL,
+	"freeform_public" BOOLEAN DEFAULT FALSE NOT NULL,
     "upload_public" BOOLEAN DEFAULT TRUE NOT NULL,
-    "analysis_recommendation_published" BOOLEAN DEFAULT TRUE NOT NULL,
-    "threesixty_reports_published" BOOLEAN DEFAULT TRUE NOT NULL,
-    "dashboard_published" BOOLEAN DEFAULT TRUE NOT NULL,
-    "goals_published" BOOLEAN DEFAULT TRUE NOT NULL,
-    "demographics_published" BOOLEAN DEFAULT TRUE NOT NULL,
-    "oral_report_published" BOOLEAN DEFAULT TRUE NOT NULL,
-    "question_set_published" BOOLEAN DEFAULT TRUE NOT NULL,
-    "circle_share_published" BOOLEAN DEFAULT TRUE NOT NULL,
-    "threesixty_freeform_published" BOOLEAN DEFAULT TRUE NOT NULL,
-    "freeform_published" BOOLEAN DEFAULT TRUE NOT NULL,
+	"analysis_recommendation_published" BOOLEAN DEFAULT TRUE NOT NULL,
+	"threesixty_reports_published" BOOLEAN DEFAULT TRUE NOT NULL,
+	"dashboard_published" BOOLEAN DEFAULT TRUE NOT NULL,
+	"goals_published" BOOLEAN DEFAULT TRUE NOT NULL,
+	"demographics_published" BOOLEAN DEFAULT TRUE NOT NULL,
+	"oral_report_published" BOOLEAN DEFAULT TRUE NOT NULL,
+	"question_set_published" BOOLEAN DEFAULT TRUE NOT NULL,
+	"circle_share_published" BOOLEAN DEFAULT TRUE NOT NULL,
+	"threesixty_freeform_published" BOOLEAN DEFAULT FALSE NOT NULL,
+	"freeform_published" BOOLEAN DEFAULT FALSE NOT NULL,
     "upload_published" BOOLEAN DEFAULT TRUE NOT NULL
 );
 
@@ -131,13 +131,24 @@ CREATE TABLE "response" (
     "category_id" INT REFERENCES "response_category"
 );
 
+CREATE TABLE "ethnic_category" (
+	"id" SERIAL PRIMARY KEY,
+	"ethnicity" VARCHAR(100)
+);
+
+CREATE TABLE "gen_category" (
+	"id" SERIAL PRIMARY KEY,
+	"generation" VARCHAR(100)
+);
+
 CREATE TABLE "demographic" (
     "id" SERIAL PRIMARY KEY,
     "threesixty_id" INT REFERENCES "threesixty" ON DELETE CASCADE,
     "ethnicity" VARCHAR(25600),
+    "ethnic_category" INT DEFAULT 1 REFERENCES "ethnic_category",
     "passion" VARCHAR(25600),
     "profession" VARCHAR(25600),
-    "generation" VARCHAR(25600),
+    "gen_category" INT DEFAULT 1 REFERENCES "gen_category",
     "referral" VARCHAR(25600),
     "comments" VARCHAR(25600),
     "plans_to_tell" BOOLEAN DEFAULT FALSE,

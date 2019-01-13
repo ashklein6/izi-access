@@ -1,10 +1,11 @@
 INSERT INTO access ("access_level", "access_type")
 VALUES
+	(0, 'deactivated'),
 	(10, 'User'),
 	(20, 'Client'),
 	(30, 'Employee'),
-	(40, 'Admin'),
-	(0, 'deactivated');
+	(40, 'Admin')
+;
 
 INSERT INTO person ("email", "username", "password", "firstname", "lastname", "access_id", "notes", "date_added")
 VALUES (
@@ -13,7 +14,7 @@ VALUES (
 	'password',
 	'Jane',
 	'Doe',
-	2,
+	4,
 	'Very interested in public health',
 	'12-18-2018'
 );
@@ -25,7 +26,7 @@ VALUES (
 	'secret',
 	'Adam',
 	'Minn',
-	4,
+	5,
 	'Admin priveleges required',
 	'12-17-2018'
 );
@@ -37,7 +38,7 @@ VALUES (
 	'1234',
 	'Cybill',
 	'Ian',
-	1,
+	3,
 	'Community is my priority',
 	'12-19-2018'
 );
@@ -49,7 +50,7 @@ VALUES (
 	'12-19-2018'
 );
 
-INSERT INTO izi_categories ("category")
+INSERT INTO izi_category ("category")
 VALUES 
     ('Public Health'),
     ('Mental Health'), 
@@ -89,7 +90,7 @@ VALUES (
 	true
 );
 
-INSERT INTO threesixty ("name", "date", "location", "category_id", "client", "description", "published_status", "analysis_recommendation_public", "threesixty_reports_public", "dashboard_public", "goals_public", "demographics_public", "oral_report_public", "question_set_public", "circle_share_public", "threesixty_freeform_public", "freeform_public", "upload_public", "analysis_recommendation_published", "threesixty_reports_published", "dashboard_published", "goals_published", "demographics_published", "oral_report_published", "question_set_published", "circle_share_published", "threesixty_freeform_published", "freeform_published", "upload_published")
+INSERT INTO threesixty ("name", "date", "location", "category_id", "client", "description", "published_status")
 VALUES (
 	'Carver County Public Health - A Healthy Welcome', 
 	'10-4-2018', 
@@ -97,32 +98,10 @@ VALUES (
 	1, 
 	'MTI',
 	'86 community members gathered to discuss healthcare and community health needs.',
-	true,
-	true,
-	true,
-	false,
-	false,
-	false,
-	true,
-	true,
-	true,
-	true,
-	true,
-	true,
-	true,
-	true,
-	true,
-	true,
-	true,
-	true,
-	true,
-	true,
-	true,
-	true,
 	true
 );
 
-INSERT INTO threesixty ("name", "date", "location", "category_id", "client", "description", "published_status", "analysis_recommendation_public", "threesixty_reports_public", "dashboard_public", "goals_public", "demographics_public", "oral_report_public", "question_set_public", "circle_share_public", "threesixty_freeform_public", "freeform_public", "upload_public", "analysis_recommendation_published", "threesixty_reports_published", "dashboard_published", "goals_published", "demographics_published", "oral_report_published", "question_set_published", "circle_share_published", "threesixty_freeform_published", "freeform_published", "upload_published")
+INSERT INTO threesixty ("name", "date", "location", "category_id", "client", "description", "published_status")
 VALUES (
 	'Health Matters!', 
 	'10-24-2017', 
@@ -130,28 +109,6 @@ VALUES (
 	3, 
 	'Scott County Health Care System Collaborative',
 	'140 community members gathered together to discuss healthcare.',
-	true,
-	true,
-	true,
-	false,
-	false,
-	false,
-	true,
-	true,
-	true,
-	true,
-	true,
-	true,
-	true,
-	true,
-	true,
-	true,
-	true,
-	true,
-	true,
-	true,
-	true,
-	true,
 	true
 );
 
@@ -988,14 +945,37 @@ VALUES
 	)
 ;
 
-INSERT INTO demographic (threesixty_id, ethnicity, passion, profession, generation, referral, comments, plans_to_tell, first_time, child_abuse, housing, transportation, education)
+INSERT INTO ethnic_category (ethnicity)
+VALUES
+	('undefined'),
+	('Asian/Pacific Islander'),
+	('Black/African American'),
+	('Indigenous/Native American'),
+	('Latinx'),
+	('White'),
+	('Other')
+;
+
+INSERT INTO gen_category (generation)
+VALUES
+	('undefined'),
+	('Generation Z/Centennial (2000-present)'),
+	('Generation Y/Millennial (1980-1999)'),
+	('Generation X/Thirteener (1965-1979)'),
+	('Baby Boomer (1946-1964)'),
+	('Silent Generation (1925-1945)'),
+	('G.I. Generation (1900-1924)')
+;
+
+INSERT INTO demographic (threesixty_id, ethnicity, ethnic_category, passion, profession, gen_category, referral, comments, plans_to_tell, first_time, child_abuse, housing, transportation, education)
 VALUES 
 	(
 	1, 
-	'Hispanic', 
+	'Hispanic',
+	5, 
 	'God', 
 	'Minister of The Light of the World Church', 
-	'', 
+	1, 
 	'Amy Lueck', 
 	'This community has very nice hopes to make changes. Let us make them happen', 
 	true, 
@@ -1007,10 +987,11 @@ VALUES
 	),
 	(
 	1, 
-	'Caucasian', 
+	'Caucasian',
+	6, 
 	'Life Cycle Housing', 
 	'Architectural Designer', 
-	'Gen X', 
+	4, 
 	'SCALE 50X30', 
 	'Love the engagement', 
 	true, 
@@ -1022,10 +1003,11 @@ VALUES
 	),
 	(
 	1,
-	'Mutt (Caucasian Mutt)', 
+	'Mutt (Caucasian Mutt)',
+	6, 
 	'Autism', 
 	'Retired Registered Professional Engineer', 
-	'Boomer', 
+	5, 
 	'SW Media/Shakopee Newspaper', 
 	'Meeting (talking with) people from other cultures.',
 	true, 
@@ -1038,9 +1020,10 @@ VALUES
 	(
 	1,
 	'Hispanic',
+	5,
 	'Family',
 	'Nurse',
-	'Gen X',
+	4,
 	'Catholic Church',
 	'Many people came and it was great to gather with so many people of other cultures. Everyone treated me as if they knew me.',
 	false,
@@ -1053,9 +1036,10 @@ VALUES
 	(
 	1,
 	'Caucasian',
+	6,
 	'Looking, Baking',
 	'Pastor',
-	'Gen X',
+	4,
 	'Facebook, Luke Hannen',
 	'Like the diversity of people',
 	false,
@@ -1068,9 +1052,10 @@ VALUES
 	(
 	1,
 	'Latino',
+	5,
 	'',
 	'Pastor',
-	'Gen X',
+	4,
 	'Luke Hennen',
 	'I would like to, I believe its interesting.',
 	true,
@@ -1083,9 +1068,10 @@ VALUES
 	(
 	1,
 	'Hispanic',
+	5,
 	'Exercise',
 	'Homemaker',
-	'Gen X',
+	4,
 	'St. Joachim and St. Anne Parish',
 	'I enjoyed it. I learned a lot about health related things which I did not know existed in my community.',
 	false,
@@ -1098,9 +1084,10 @@ VALUES
 	(
 	1,
 	'Hispanic',
+	5,
 	'Learning new things everyday.',
 	'Homemaker',
-	'Gen X',
+	4,
 	'St. Joachim and St. Anne Parish',
 	'It is very important that all of the community members are provided for and understand existing health resources.',
 	false,
@@ -1113,9 +1100,10 @@ VALUES
 	(
 	1,
 	'Caucasian',
+	6,
 	'Helping those in need',
 	'Homemaker',
-	'Boomer',
+	5,
 	'Mailing',
 	'Awareness of the need of those in Jackson Heights. Beautiful woman from Mexico who desires to be healthier in mind and body.',
 	true,
@@ -1128,9 +1116,10 @@ VALUES
 	(
 	1,
 	'Italian/German/Swedish American',
+	6,
 	'Walking, Reading',
 	'Community Benefit and engagement/mission',
-	'Gen X',
+	4,
 	'SCHCSC',
 	'Humbled by the resilience of the Latina women in my community. Great ideas from community members! We will have to figure out translating for our Somali families at our next table.',
 	true,
@@ -1143,9 +1132,10 @@ VALUES
 	(
 	1,
 	'Caucasian',
+	6,
 	'Scuba Diving, Hiking, Biking, Public Health',
 	'Educator for a Medical Sales Company',
-	'Gen X',
+	4,
 	'Scott County Public Health',
 	'I think one thing all cultures have in common is that they face barriers to care. It was wonderful to sit at a multicultural table and discuss health issues.',
 	true,
@@ -1158,9 +1148,10 @@ VALUES
 	(
 	1,
 	'Somali',
+	3,
 	'To be part of our big community',
 	'E.A.',
-	'Gen X',
+	4,
 	'',
 	'It was great conversations with great people. We all have the same concern.',
 	true,
@@ -1173,9 +1164,10 @@ VALUES
 	(
 	1,
 	'Somali',
+	3,
 	'',
 	'',
-	'Gen X',
+	4,
 	'',
 	'',
 	false,
@@ -1188,9 +1180,10 @@ VALUES
 	(
 	1,
 	'Caucasian',
+	6,
 	'Helping people, children, community, volunteering',
 	'Executive Director - River Valley Nursing Center',
-	'Gen X',
+	4,
 	'Health Care Collaborative',
 	'Awesome environment, questions, food. Very engaged people. Fun and educational night.',
 	true,
@@ -1203,9 +1196,10 @@ VALUES
 	(
 	1,
 	'Hispanic',
+	5,
 	'Dancing',
 	'Cook',
-	'',
+	1,
 	'Church',
 	'I liked sharing and learning how to give my opinion to demand change.',
 	false,
@@ -1218,9 +1212,10 @@ VALUES
 	(
 	1,
 	'Caucasian',
+	6,
 	'Serving across cultures - making people of all cultures and origin feel loved and cared for.',
 	'CPA, Accredited Representative (Immigration)',
-	'Boomer',
+	5,
 	'',
 	'The warmth around the table was amazing. I was able to connect with members of the community and community organizations who need to know about our ministry. Thank you!!',
 	false,
@@ -1233,9 +1228,10 @@ VALUES
 	(
 	1,
 	'Caucasian',
+	6,
 	'Being with my family, traveling',
 	'County Government',
-	'Gen X',
+	4,
 	'Work',
 	'Very welcoming; made you feel immediately welcome; great conversation; met new people',
 	true,
@@ -1248,9 +1244,10 @@ VALUES
 	(
 	1,
 	'Hispanic',
+	5,
 	'Learning different cultures',
 	'Accountant',
-	'Millenial',
+	3,
 	'Work',
 	'Learned about different cultures and understood why they would respond in a certain way. Learned the importance of expressing yourself and not judging.',
 	true,
@@ -1263,9 +1260,10 @@ VALUES
 	(
 	1,
 	'Indonesian Dutch',
+	2,
 	'Music and Dance',
 	'Dance Teacher and Barista',
-	'Millenial',
+	3,
 	'My Parents',
 	'Thank you so much for inviting us. This was absolutely wonderful. What a beautiful community. Cannot wait for the next.',
 	true,
@@ -1278,9 +1276,10 @@ VALUES
 	(
 	1,
 	'Latino',
+	5,
 	'',
 	'Homemaker',
-	'Millenial',
+	3,
 	'A portal for the county',
 	'',
 	false,
@@ -1293,9 +1292,10 @@ VALUES
 	(
 	1,
 	'Latino',
+	5,
 	'Taking care of my garden',
 	'Homemaker',
-	'Boomer',
+	5,
 	'',
 	'',
 	true,
@@ -1308,9 +1308,10 @@ VALUES
 	(
 	1,
 	'Caucasian',
+	6,
 	'Nutrition, Fitness',
 	'Nurse Manager',
-	'Boomer',
+	5,
 	'Scott County Public Health',
 	'Very interesting experience discussing various cultures. I am attending as part of a Community Health project for school.',
 	true,
@@ -1323,9 +1324,10 @@ VALUES
 	(
 	1,
 	'Caucasian',
+	6,
 	'Food Systems, Health Equity, Social Justice',
 	'PH Professional',
-	'Millenial',
+	3,
 	'Marnita',
 	'Great execution. Great experience.',
 	true,
@@ -1338,9 +1340,10 @@ VALUES
 	(
 	1,
 	'Carribbean',
+	5,
 	'Children',
 	'Teacher',
-	'Boomer',
+	5,
 	'Community Center',
 	'Most people think the same, although in a different language.',
 	true,
@@ -1353,9 +1356,10 @@ VALUES
 	(
 	1,
 	'Mexican-American',
+	5,
 	'Dance',
 	'Student',
-	'Gen Tech',
+	2,
 	'Church',
 	'It was really nice meeting new people and talking about health problems and solutions in our community.',
 	true,
@@ -1368,9 +1372,10 @@ VALUES
 	(
 	1,
 	'Caucasian',
+	5,
 	'',
 	'PHN',
-	'Boomer',
+	5,
 	'Public Health Director',
 	'It was interesting - in a good way. I had no idea what to expect.',
 	true,
@@ -1383,9 +1388,10 @@ VALUES
 	(
 	1,
 	'Caucasian',
+	6,
 	'Learning',
 	'Public Health',
-	'Boomer',
+	5,
 	'Colleague',
 	'It was fun and energetic',
 	true,
@@ -1398,9 +1404,10 @@ VALUES
 	(
 	1,
 	'Caucasian',
+	6,
 	'Nutrition',
 	'Registered Dietician',
-	'Millenial',
+	3,
 	'Jackie and Tamera',
 	'Fabulous conversations',
 	true,
@@ -1413,9 +1420,10 @@ VALUES
 	(
 	1,
 	'Hispanic',
+	5,
 	'To love God above all things',
 	'',
-	'Gen X',
+	4,
 	'A Friend',
 	'My experience in this dialogue was spending time with people from diverse races in our community.',
 	false,
@@ -1428,9 +1436,10 @@ VALUES
 	(
 	1,
 	'',
+	1,
 	'Cooking',
 	'Homemaker',
-	'',
+	1,
 	'Church',
 	'I would like to share more with my neighbors and friends.',
 	true,
@@ -1443,9 +1452,10 @@ VALUES
 	(
 	1,
 	'Caucasian',
+	6,
 	'Children, Prevention',
 	'Nurse',
-	'Gen X',
+	4,
 	'Work/Email',
 	'Very interesting!',
 	true,
@@ -1458,9 +1468,10 @@ VALUES
 	(
 	1,
 	'Somalian',
+	3,
 	'People',
 	'Interpreter',
-	'Millenial',
+	3,
 	'Ibrahim',
 	'',
 	true,
@@ -1473,9 +1484,10 @@ VALUES
 	(
 	1,
 	'',
+	1,
 	'Kids, Family',
 	'Social Science',
-	'Gen X',
+	4,
 	'Public Health',
 	'Great conversations',
 	true,
@@ -1488,9 +1500,10 @@ VALUES
 	(
 	1,
 	'Swede',
+	6,
 	'History',
 	'Pharmacist',
-	'Boomer',
+	5,
 	'Mike Wilcox',
 	'',
 	false,
@@ -1503,9 +1516,10 @@ VALUES
 	(
 	1,
 	'Caucasian',
+	6,
 	'Health for all!',
 	'Public Health',
-	'Millenial',
+	3,
 	'Richard Scott (My Supervisor)',
 	'I am excited to see how this even informs the work of Scott Countys public health work.',
 	true,
@@ -1518,9 +1532,10 @@ VALUES
 	(
 	1,
 	'Somalian',
+	3,
 	'',
 	'',
-	'',
+	1,
 	'Mohamed',
 	'',
 	false,
@@ -1533,9 +1548,10 @@ VALUES
 	(
 	1,
 	'',
+	1,
 	'',
 	'',
-	'',
+	1,
 	'Mohamed',
 	'',
 	false,
@@ -1548,9 +1564,10 @@ VALUES
 	(
 	1,
 	'US Somali',
+	3,
 	'',
 	'Eedes 65 Years',
-	'Boomer',
+	5,
 	'Mohamed',
 	'To get a good ID card which is working in hospitals which has transportation which has good translation.',
 	false,
@@ -1563,9 +1580,10 @@ VALUES
 	(
 	1,
 	'Hispanic',
+	5,
 	'Swimming',
 	'Army Reserves',
-	'Millenial',
+	3,
 	'Church',
 	'Translating for people in this event helped me appreciate the fact that I am bilingual. I can help people in our community, so they can be heard',
 	true,
@@ -1578,9 +1596,10 @@ VALUES
 	(
 	1,
 	'Caucasian (German and Norwegian)',
+	6,
 	'',
 	'Senior Admin Specialist',
-	'Millenial',
+	3,
 	'50x30',
 	'Great diversity - ethnicity, cultures, ages, etc. Impressed at turnout!',
 	true,
@@ -1593,9 +1612,10 @@ VALUES
 	(
 	1,
 	'German American',
+	6,
 	'Art, Reading, History',
 	'Restaurant Management',
-	'Boomer',
+	5,
 	'Display at Al Franken speech',
 	'Very good discussion with diverse people I would not have otherwise met',
 	true,
@@ -1608,9 +1628,10 @@ VALUES
 	(
 	1,
 	'',
+	1,
 	'Job',
 	'',
-	'Boomer',
+	5,
 	'Church',
 	'It is beautiful to see new faces. I loved this event.',
 	false,
@@ -1623,9 +1644,10 @@ VALUES
 	(
 	1,
 	'Caucasian',
+	6,
 	'Outdoors, Public Health',
 	'Nursing',
-	'Millenial',
+	3,
 	'Scott County',
 	'What a wonderful conversation. Thank you.',
 	true,
@@ -1638,9 +1660,10 @@ VALUES
 	(
 	1,
 	'Hispanic',
+	5,
 	'Sports, Outdoor Activities',
 	'',
-	'Gen Tech',
+	2,
 	'Family',
 	'It was really interesting meeting new people',
 	false,
@@ -1653,9 +1676,10 @@ VALUES
 	(
 	1,
 	'Caucasian',
+	6,
 	'Healthy communities, walking, family/friends',
 	'City Planner',
-	'Millenial',
+	3,
 	'Scott County Public Health',
 	'Fantastic! Great to see so many people attend and hear new voices that may not always be heard.',
 	true,
@@ -1668,9 +1692,10 @@ VALUES
 	(
 	1,
 	'Irish/Welsh',
+	6,
 	'Cat Health',
 	'Vet Med',
-	'Boomer',
+	5,
 	'Facebook',
 	'',
 	true,
@@ -1683,9 +1708,10 @@ VALUES
 	(
 	1,
 	'Caucasian',
+	6,
 	'Exercise',
 	'Physician',
-	'Boomer',
+	5,
 	'Scott County Public Health',
 	'Great opportunity to meet new people',
 	true,
@@ -1698,9 +1724,10 @@ VALUES
 	(
 	1,
 	'Caucasian',
+	6,
 	'Nutrition',
 	'Millwork Sales',
-	'Gen X',
+	4,
 	'Husband',
 	'',
 	true,
@@ -1713,9 +1740,10 @@ VALUES
 	(
 	1,
 	'Mexican',
+	5,
 	'Helping; health; doctor',
 	'Student',
-	'Gen Tech',
+	2,
 	'Church (St. Mary)',
 	'I like/appreciate everybodys opinion and I liked seeing others perspectives and points of view.',
 	true,
@@ -1728,9 +1756,10 @@ VALUES
 	(
 	1,
 	'Indian',
+	2,
 	'Reading, embroidery',
 	'Engineer',
-	'',
+	1,
 	'Community Centre',
 	'',
 	true,
@@ -1743,9 +1772,10 @@ VALUES
 	(
 	1,
 	'Indian',
+	2,
 	'My family, music',
 	'Occupational Therapy',
-	'',
+	1,
 	'',
 	'',
 	false,
@@ -1758,9 +1788,10 @@ VALUES
 	(
 	1,
 	'Caucasian',
+	6,
 	'Equitable access to the outdoors, health in our community',
 	'Camp Director',
-	'Gen X',
+	4,
 	'',
 	'',
 	true,
@@ -1773,9 +1804,10 @@ VALUES
 	(
 	1,
 	'Russian',
+	6,
 	'',
 	'Russian Cultural Liason/C&TC Outreach',
-	'Gen X',
+	4,
 	'Blanca',
 	'Nice to meet new people and talk about differences',
 	false,
@@ -1788,9 +1820,10 @@ VALUES
 	(
 	1,
 	'Latino',
+	5,
 	'',
 	'Homemaker',
-	'Boomer',
+	5,
 	'Friend',
 	'',
 	true,
@@ -1803,9 +1836,10 @@ VALUES
 	(
 	1,
 	'Caucasian',
+	6,
 	'Exercise and healthy living',
 	'Public Health',
-	'Gen X',
+	4,
 	'Scott County Public Health',
 	'Good cross section of people',
 	true,
@@ -1818,9 +1852,10 @@ VALUES
 	(
 	1,
 	'Caucasian',
+	6,
 	'Public Service/Ministry',
 	'County Commissioner/Minister',
-	'Boomer',
+	5,
 	'Scott County',
 	'Authentic conversation, out of my "comfort zone". Thank you for the experience.',
 	true,
@@ -1833,9 +1868,10 @@ VALUES
 	(
 	1,
 	'Pacific Islander',
+	2,
 	'Family; making the world a better place',
 	'Attorney, Administrator',
-	'',
+	1,
 	'Scott County Public Health',
 	'Inspiring; great gathering of amazing people',
 	true,
@@ -1848,9 +1884,10 @@ VALUES
 	(
 	1,
 	'Caucasian',
+	6,
 	'Family, culture, health, helping others',
 	'HR',
-	'Gen X',
+	4,
 	'Shakopee Diversity Alliance',
 	'I am pleased to have the event in Shakopee. I am working with citizens on many levels so to see this group come together tonight is an amazing dream.',
 	true,
@@ -1863,9 +1900,10 @@ VALUES
 	(
 	1,
 	'Norwegian',
+	6,
 	'Health',
 	'Paramedic',
-	'Boomer',
+	5,
 	'',
 	'',
 	false,
@@ -1878,9 +1916,10 @@ VALUES
 	(
 	1,
 	'Caucasian',
+	6,
 	'Being with family, running, being outdoors',
 	'Parks and Recreation Director',
-	'Gen X',
+	4,
 	'Scott County Work Group',
 	'It was great to meet new people and share experiences',
 	true,
@@ -1893,9 +1932,10 @@ VALUES
 	(
 	1,
 	'Somali',
+	3,
 	'Learning',
 	'Nursing Assistant',
-	'Gen X',
+	4,
 	'Friend',
 	'Very good met very educated people. Learned a lot about health',
 	true,
@@ -1908,9 +1948,10 @@ VALUES
 	(
 	1,
 	'Caucasian',
+	6,
 	'My son, being outdoors, learning, cooking',
 	'Physical Therapy, Home Care',
-	'Millenial',
+	3,
 	'Email from Scott County Volunteers',
 	'Very fun',
 	true,

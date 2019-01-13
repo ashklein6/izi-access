@@ -106,6 +106,7 @@ class DashboardEditDialog extends Component {
     if (isNaN(key) && key !== 'newState') {
       newState[key]=this.state[key]
     };
+    return null;
   });
 
   // Initialize addRowId to be 1 
@@ -121,12 +122,14 @@ class DashboardEditDialog extends Component {
         if (entry[1] == null) {
           rowCheck[entry[0]] = '';
         }
+        return null;
       })
     
     // increment addRowId to keep row count up to date
     addRowId++;
     // add updated row (with any converted null values) to the newState object
     newState[row.id]=rowCheck;
+    return null;
   });
 
   // Fix updating status and set addRowId in newState
@@ -198,6 +201,7 @@ class DashboardEditDialog extends Component {
                   <DashboardEditComponent key={this.state[key].id} row={this.state[key]} index={index} handleChangeFor={this.handleChangeFor} deleteRow={this.deleteRow} />
                 );
               } 
+              return null;
             })}
             <div style={{ float:"left", clear: "both" }} ref={(el) => { this.bottom = el; }}>
             </div>

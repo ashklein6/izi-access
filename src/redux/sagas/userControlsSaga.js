@@ -64,15 +64,6 @@ function* editCurrentUserInfo(action) {
   }
 };
 
-function* changeUserStatus() {
-  try {
-    
-  } 
-  catch (error) {
-    console.log('error', error);
-  }
-};
-
 function* deletePendingRequest(action) {
   try {
     yield call(axios.delete, `/userControls/${action.payload}`);
@@ -89,7 +80,6 @@ function* userControlsSaga() {
   yield takeLatest( 'REMOVE_360_ACCESS', remove360Access );
   yield takeLatest( 'REQUEST_360_ACCESS', request360Access );
   yield takeLatest( 'EDIT_USER_INFO', editUserInfo );
-  yield takeLatest( 'CHANGE_USER_STATUS', changeUserStatus );
   yield takeLatest( 'DELETE_PENDING_REQUEST', deletePendingRequest );
   yield takeLatest( 'EDIT_CURRENT_USER_INFO', editCurrentUserInfo );
 }

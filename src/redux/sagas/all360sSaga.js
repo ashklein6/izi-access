@@ -1,15 +1,6 @@
 import axios from 'axios';
 import { put, call, takeLatest } from 'redux-saga/effects';
 
-function* fetchAll360s() {
-  try {
-    
-  } 
-  catch (error) {
-    console.log('error', error);
-  }
-};
-
 // gets all published 360s
 function* fetchPublished() {
   try {
@@ -50,7 +41,6 @@ function* fetch360Search(action) {
 };
 
 function* all360sSaga() {
-  yield takeLatest( 'FETCH_ALL_360s', fetchAll360s );
   yield takeLatest( 'FETCH_PUBLISHED', fetchPublished );
   yield takeLatest( 'FETCH_UNPUBLISHED', fetchUnpublished );
   yield takeLatest( 'FETCH_360_SEARCH', fetch360Search );

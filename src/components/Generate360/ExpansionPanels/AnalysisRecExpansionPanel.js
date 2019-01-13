@@ -16,28 +16,9 @@ import ExpansionPanelActions from '@material-ui/core/ExpansionPanelActions';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Divider from '@material-ui/core/Divider';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
-
-// Cleanly style table cells within Material-UI
-const CustomTableCell = withStyles(theme => ({
-  head: {
-    fontSize: '1rem',
-    backgroundColor: colors.orange,
-    color: 'white',
-    padding: 10,
-    textAlign: 'center'
-  },
-  body: {
-    padding: 5,
-  },
-}))(TableCell);
 
 class AnalysisRecExpansionPanel extends Component {
 

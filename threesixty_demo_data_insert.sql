@@ -49,7 +49,7 @@ VALUES (
 	'12-19-2018'
 );
 
-INSERT INTO izi_category ("category")
+INSERT INTO izi_categories ("category")
 VALUES 
     ('Public Health'),
     ('Mental Health'), 

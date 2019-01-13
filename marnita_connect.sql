@@ -1,6 +1,5 @@
 CREATE TABLE "access" (
     "id" SERIAL PRIMARY KEY,
-    "access_level" INT,
     "access_type" VARCHAR(255)
 );
 

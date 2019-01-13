@@ -4,7 +4,6 @@ import colors from '../App/colors';
 import { Pie } from 'react-chartjs-2';
 
 import SideBar from './SideBar';
-import MarkDownEditor from '../MarkDownEditor/MarkDownEditor';
 import TableTemplate from './TableTemplate/TableTemplate';
 import MarkDownOutput from '../MarkDownEditor/MarkdownOutput';
 
@@ -249,7 +248,7 @@ const styles = {
   },
   header: {
     margin: '50px 0px 25px 0px',
-    position: '-webkit-sticky',
+    // position: '-webkit-sticky',
     position: 'sticky',
     top: 0,
     backgroundColor: 'white',
@@ -306,7 +305,7 @@ const styles = {
     color: colors.purple
   },
   sticky: {
-    position: '-webkit-sticky',
+    // position: '-webkit-sticky',
     position: 'sticky',
     top: 80,
     backgroundColor: 'white',

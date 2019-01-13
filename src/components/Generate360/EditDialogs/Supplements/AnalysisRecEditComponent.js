@@ -6,8 +6,6 @@ import colors from '../../../App/colors';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
-import IconButton from '@material-ui/core/IconButton';
-import DeleteForever from '@material-ui/icons/DeleteForever';
 import Grid from '@material-ui/core/Grid';
 
 class AnalysisRecEditComponent extends Component {

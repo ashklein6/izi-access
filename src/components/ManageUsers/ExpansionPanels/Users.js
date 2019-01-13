@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import TableUsers from '../../TableUsers/TableUsers';
-import ViewUser from '../ViewUserDialog/ViewUser';
 
 // Material-UI
 import { withStyles } from '@material-ui/core/styles';

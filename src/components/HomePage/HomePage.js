@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Table360s from '../Table360s/Table360s';
 import Search360s from '../Search360s/Search360s';
-import moment, { max } from 'moment';
+import moment from 'moment';
 import LinesEllipsis from 'react-lines-ellipsis';
 import './HomePage.css';
 

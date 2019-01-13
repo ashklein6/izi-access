@@ -2,11 +2,11 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 const goalsRows = ['Total Number', 'Number of People of Color/Indigenous', 'Number of People Under 24', 
-    'Measurable Indicators of Success 1: 80% of participants met 1 new person across race, class, culture or other means of self-identity', 
-    'Measurable Indicators of Success 2: 80% of participants met 2 new people across race, class, culture or other means of self-identity',
-    'Measurable Indicators of Success 3: 80% of participants say that they met someone across self-identity with whom they planned to stay in touch or collaborate',
-    'Measurable Indicators of Success 4: 40% of participants plan to tell someone about their experience',
-    'Measurable Indicators of Success 5: first time at the table', 'Interested in future conversations about preventing child abuse and neglect',
+    'Measurable Indicators of Success: 80% of participants met 1 new person across race, class, culture or other means of self-identity', 
+    'Measurable Indicators of Success: 80% of participants met 2 new people across race, class, culture or other means of self-identity',
+    'Measurable Indicators of Success: 80% of participants say that they met someone across self-identity with whom they planned to stay in touch or collaborate',
+    'Measurable Indicators of Success: 40% of participants plan to tell someone about their experience',
+    'Measurable Indicators of Success: first time at the table', 'Interested in future conversations about preventing child abuse and neglect',
     'Interested in future conversations about housing', 'Interested in future conversations about transportation', 
     'Interested in future conversations about education', 'Measurable Indicators of Success 6: total number of sign-in sheets'];
 const dashboardRows = ['Date(s)','Timeline', 'Six Weeks - 1 Month Out', '3 Weeks Out', '2 Weeks - 1 Week Out', 'Day of Event', 

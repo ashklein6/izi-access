@@ -78,7 +78,7 @@ handleSave = () => {
     this.props.dispatch({
       type: 'REQUEST_360_ACCESS', 
       payload: {
-        iziName: this.state.iziName, 
+        name: this.state.iziName, 
         date: this.state.date,
         user: this.props.reduxState.user.id,
       }});
@@ -138,6 +138,8 @@ render(){
                 margin="dense"
                 variant="outlined"
                 name ="date"
+                value={this.state.date}
+                onChange={this.handleChange}
               />
               <br />
             </div>

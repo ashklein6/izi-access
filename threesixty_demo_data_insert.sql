@@ -1,11 +1,19 @@
 INSERT INTO access ("access_level", "access_type")
 VALUES
+<<<<<<< HEAD
 	(0, 'deactivated'),
 	(10, 'User'),
 	(20, 'Client'),
 	(30, 'Employee'),
 	(40, 'Admin')
 ;
+=======
+	(0, 'Deactivated'),
+	(10, 'User'),
+	(20, 'Client'),
+	(30, 'Employee'),
+	(40, 'Admin');
+>>>>>>> 567111515f9fe5c92f72977d213b2a6a79505694
 
 INSERT INTO person ("email", "username", "password", "firstname", "lastname", "access_id", "notes", "date_added")
 VALUES (
@@ -14,7 +22,11 @@ VALUES (
 	'password',
 	'Jane',
 	'Doe',
+<<<<<<< HEAD
 	4,
+=======
+	3,
+>>>>>>> 567111515f9fe5c92f72977d213b2a6a79505694
 	'Very interested in public health',
 	'12-18-2018'
 );
@@ -38,7 +50,11 @@ VALUES (
 	'1234',
 	'Cybill',
 	'Ian',
+<<<<<<< HEAD
 	3,
+=======
+	2,
+>>>>>>> 567111515f9fe5c92f72977d213b2a6a79505694
 	'Community is my priority',
 	'12-19-2018'
 );

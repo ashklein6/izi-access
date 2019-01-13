@@ -11,7 +11,8 @@ import {connect} from 'react-redux';
 import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
 
-import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import EmployeeRoute from '../ProtectedRoute/EmployeeRoute';
 
 import Create360 from '../Create360/Create360';
 import CreateUser from '../CreateUser/CreateUser';
@@ -80,27 +81,27 @@ class App extends Component {
                 path="/profile"
                 component={UserProfile}
               />
-              <ProtectedRoute
+              <EmployeeRoute
                 exact
                 path="/dashboard"
                 component={Dashboard}
               />
-              <ProtectedRoute
+              <EmployeeRoute
                 exact
                 path="/create360"
                 component={Create360}
               />
-              <ProtectedRoute
+              <EmployeeRoute
                 exact
                 path="/manage360s"
                 component={Manage360s}
               />
-              <ProtectedRoute
+              <EmployeeRoute
                 exact
                 path="/manageUsers"
                 component={ManageUsers}
               />
-              <ProtectedRoute
+              <EmployeeRoute
                 exact
                 path="/generate360"
                 component={Generate360}

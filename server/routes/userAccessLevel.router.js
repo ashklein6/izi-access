@@ -1,11 +1,12 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
+const { employeesOnly } = require('../modules/employeesOnly');
 
 /**
  * GET route template
  */
-router.get('/', (req, res) => {
+router.get('/', employeesOnly, (req, res) => {
   pool.query('SELECT * FROM access')
   .then((response) => {
     res.send(response.rows);

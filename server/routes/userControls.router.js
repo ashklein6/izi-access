@@ -7,7 +7,7 @@ const { employeesOnly } = require('../modules/employeesOnly');
 /**
  * GET route template
  */
-router.get('/', employeesOnly, (req, res) => {
+router.get('/', (req, res) => {
   const sqlText = `SELECT threesixty.name, threesixty.date, threesixty.id FROM threesixty
                   JOIN threesixty_user ON threesixty_user.threesixty_id = threesixty.id
                   JOIN person ON threesixty_user.user_id = person.id

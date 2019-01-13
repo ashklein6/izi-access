@@ -47,7 +47,7 @@ class UserProfile extends Component {
         <div className={classes.div}>
           <Typography 
             className={classes.text}>
-            Your Accessable 360s
+            Your Accessible 360s
           </Typography>
           {this.props.reduxState.userControls.user.map(izi => (
             <Typography key={izi.id} className={classes.text}>

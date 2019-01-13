@@ -25,7 +25,7 @@ CREATE TABLE "client_request" (
     "date_added" TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE "izi_category" (
+CREATE TABLE "izi_categories" (
     "id" SERIAL PRIMARY KEY,
     "category" VARCHAR(256)
 );
@@ -35,7 +35,7 @@ CREATE TABLE "threesixty" (
 	"name" VARCHAR(512),
 	"date" DATE,
 	"location" VARCHAR(255),
-	"category_id" INT REFERENCES "izi_category",
+	"category_id" INT REFERENCES "izi_categories",
 	"client" VARCHAR(255),
 	"description" VARCHAR(25600),
 	"published_status" BOOLEAN DEFAULT FALSE,

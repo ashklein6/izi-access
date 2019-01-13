@@ -198,8 +198,8 @@ class View360 extends Component {
                   height={50}
                   options={{
                     title:{
-                      display:false,
-                      text: 'Are you even good?',
+                      display: true,
+                      text: data.title,
                       fontSize:25
                     },
                     legend:{

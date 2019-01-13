@@ -183,7 +183,7 @@ class View360 extends Component {
               <div id="trueFalse" key={data.title}>
                 <Pie
                   data={{
-                    labels: ['Yes', 'No'],
+                    labels: data.labels,
                     datasets: [
                       {
                         data: 

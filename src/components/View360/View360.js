@@ -19,23 +19,21 @@ import Divider from '@material-ui/core/Divider';
 class View360 extends Component {
 
   state = {
-    current360Id: this.props.location.state.current360Id
+    current360Id: this.props.match.params.id
   };
 
-  // navigates to /manage360s
+  // navigates to /
   back = (event) => {
     event.preventDefault();
-    this.props.history.goBack();
+    this.props.history.push('/');
   }
 
   componentDidMount() {
     this.props.dispatch({ type: 'FETCH_360', payload: {current360Id: this.state.current360Id} });
-    console.log('DATADTADTADTADT ', this.props.reduxState.current360);
   }
 
   render() {
     const { classes } = this.props;
-    console.log('this.props.history.location:',this.props.location);
 
     return (
       <Grid container spacing={0}>
@@ -46,7 +44,7 @@ class View360 extends Component {
             variant="contained"
             onClick={this.back}
           >
-            Return
+            Return to Home Page
           </Button>
           <Divider />
           <SideBar />

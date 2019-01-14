@@ -5,6 +5,9 @@ import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 
+// Import loading dialog
+import LoadingDialog from './EditDialogs/LoadingDialog';
+
 // Import Expansion Panels for each subsection
 import ThreesixtyInformationExpansionPanel from './ExpansionPanels/ThreesixtyInformationExpansionPanel';
 import GoalsAssessmentExpansionPanel from './ExpansionPanels/GoalAssessmentsExpansionPanel';
@@ -14,12 +17,8 @@ import AnalysisRecExpansionPanel from './ExpansionPanels/AnalysisRecExpansionPan
 class Generate360 extends Component {
 
  state = {
-  current360Id: 1
+  current360Id: 1,
  };
-
- componentDidMount() {
-   this.props.dispatch({ type: 'FETCH_360', payload: {current360Id: 1} })
- }
 
  render() {
    const { classes } = this.props;
@@ -31,6 +30,7 @@ class Generate360 extends Component {
        <GoalsAssessmentExpansionPanel current360Id={this.state.current360Id}/>
        <DashboardExpansionPanel current360Id={this.state.current360Id}/>
        <AnalysisRecExpansionPanel current360Id={this.state.current360Id}/>
+       <LoadingDialog current360Id={this.state.current360Id}/>
      </div>
    );
  }

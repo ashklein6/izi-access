@@ -1,4 +1,4 @@
-const current360 = (state = { info: [{published_status: false, analysis_recommendation_public: false, threesixty_reports_public: false, 
+const current360 = (state = { loadingDialogOpen: true, info: [{published_status: false, analysis_recommendation_public: false, threesixty_reports_public: false, 
   dashboard_public: false, goals_public: false, demographics_public: false, oral_report_public: false, question_set_public: false, 
   circle_share_public: false, threesixty_freeform_public: false, freeform_public: false, upload_public: false, 
   analysis_recommendation_published: false, threesixty_reports_published: false, dashboard_published: false, goals_published: false,
@@ -10,6 +10,10 @@ const current360 = (state = { info: [{published_status: false, analysis_recommen
   analysis_recommendation: false, demographics: false, circle_share: false, question_set: false, 
   oral_report: false, updateNeeded: false} }, action) => {
     switch (action.type) {
+      case 'GENERATE_360_LOADING': 
+        return {...state, loadingDialogOpen: true}
+      case 'GENERATE_360_LOADED':
+        return {...state, loadingDialogOpen: false}
       case 'CURRENT_360_SECTION_NEEDS_UPDATE':
         return {...state, updateNeeded: {
           ...state.updateNeeded,

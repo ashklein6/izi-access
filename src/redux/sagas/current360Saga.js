@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { all, put, call, takeLatest } from 'redux-saga/effects';
+import { all, put, call, take, takeLatest } from 'redux-saga/effects';
 
 function* changePublicStatus(action) {
   console.log('inside changePublicStatus. action.payload:', action.payload);
@@ -69,6 +69,7 @@ function* edit360(action) {
 function* fetch360(action) {
   console.log('inside fetch360. action.payload:', action.payload);
   try {
+    yield put({ type: 'GENERATE_360_LOADING' })
     // Get all sections of the 360
     yield all ([
       put({ type: 'FETCH_360_INFO', payload: action.payload }),
@@ -82,6 +83,9 @@ function* fetch360(action) {
       put({ type: 'FETCH_ORAL_REPORT', payload: action.payload }),
       put({ type: 'FETCH_CHART_DATA', payload: action.payload }),
     ]);
+    yield take(['SET_GOALS', 'SET_DASHBOARD', 'SET_THREESIXTY_REPORTS', 'SET_ANALYSIS_RECOMMENDATION',
+      'SET_DEMOGRAPHIC', 'SET_CIRCLE_SHARE', 'SET_QUESTION_SET', 'SET_ORAL_REPORT', 'SET_CHART_DATA'])
+    yield put({ type: 'GENERATE_360_LOADED' })
   } 
   catch (error) {
     console.log('error', error);

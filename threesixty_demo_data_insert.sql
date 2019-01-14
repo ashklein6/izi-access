@@ -20,13 +20,13 @@ VALUES (
 
 INSERT INTO person ("email", "username", "password", "firstname", "lastname", "access_id", "notes", "date_added")
 VALUES (
-	'adminn@marnitaconnect.com',
-	'adamdouglasminn',
+	'gjones@bestbuy.com',
+	'gregjones',
 	'secret',
-	'Adam',
-	'Minn',
-	5,
-	'Admin priveleges required',
+	'Gregory',
+	'Jones',
+	3,
+	'Best Buy point of contact',
 	'12-17-2018'
 );
 

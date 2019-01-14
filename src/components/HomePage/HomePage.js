@@ -4,6 +4,8 @@ import Table360s from '../Table360s/Table360s';
 import Search360s from '../Search360s/Search360s';
 import moment from 'moment';
 import LinesEllipsis from 'react-lines-ellipsis';
+import { Textfit } from 'react-textfit';
+import colors from '../App/colors';
 import './HomePage.css';
 
 import MarnitaLogo from './marnita_logo.png';
@@ -43,7 +45,7 @@ class Home extends Component {
      <div>
        {/* {JSON.stringify(this.props.reduxState.all360s.recent)} */}
         <Typography variant="h4" className={classes.header}>
-          Check out some recent IZI 360 Reports
+          Check out some recent 360s!
         </Typography>
 
         <Grid className={classes.container} container spacing={0}>
@@ -52,13 +54,15 @@ class Home extends Component {
         {/* the unaltered version of the array is sent to the table */}
         <div className={classes.centerContainer}>
         {this.props.reduxState.all360s.recent.map( izi => (
-            <Card className={classes.card} key={izi.id} elevation={5}>
+            <Card className={classes.cardSize} key={izi.id} elevation={5}>
               <CardContent className={classes.card}>
                   <img src={MarnitaLogo} alt="Marnita's Table Placeholder" className={classes.image}/>
-                <div className={classes.cardBody}>
-                  <Typography variant="h6">
+                <div className={classes.divHeader}>
+                  <Textfit mode="multi" className={classes.cardHeader}>
                     {izi.name}
-                  </Typography>
+                  </Textfit>
+                </div>
+                <div className={classes.cardBody}>
                   <Typography className={classes.iziInfo} component="p">
                   {izi.location} - {moment(izi.date).format('LL')}
                   </Typography>
@@ -74,13 +78,16 @@ class Home extends Component {
               </CardContent>
               <CardActions className={classes.cardActions}>
                 <Button className={classes.button} variant="contained" fullWidth={true} onClick={() => this.handleClick(izi.id)}>
-                  View 360 Report
+                  View 360
                 </Button>
               </CardActions>
             </Card>
         ))}
         </div>
         </Grid>
+        <Typography variant="h4" className={classes.header}>
+          Or search through our public 360s:
+        </Typography>
         <div className={classes.centerContainer}>
           {/* <Typography>Search By</Typography> */}
           <Search360s  status="true"/>
@@ -97,29 +104,49 @@ class Home extends Component {
 const styles = {
   container: {
     display: 'flex',
-    marginBottom: 50
+    marginBottom: 25
   },
   centerContainer: {
     margin: 'auto',
     textAlign: 'center',
   },
   card: {
-    display: 'inline-block',
-    maxWidth: 440,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    height: 250,
+    alignItems: 'center',
     textAlign: 'center',
     padding: 0,
-    margin: 20
+    margin: 20,
   },
-  image: {
+  cardSize: {
+    maxWidth: 'calc(30vw - 40px)',
+    display: 'inline-block',
+    margin: 20,
+    padding: 0
+  },
+  divHeader: {
+    flexGrow: '1',
     width: '100%',
-    height: 'auto',
-    marginBottom: 10
+    justifyContent: 'center',
+    display: 'flex',
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  cardHeader: {
+    height: '100%',
+    fontWeight: 'bold',
+    // fontSize: '2rem',
+    color: colors.pink
   },
   cardBody: {
-    minHeight: 200,
+    minHeight: 100,
     padding: 15,
     backgroundColor: '#f2f2f2',
-    borderRadius: 5
+    borderRadius: 5,
+    flexGrow: 0,
+    width: 'calc(100% - 20px)',
   },
   cardActions: {
     display: 'flex',
@@ -127,13 +154,18 @@ const styles = {
   },
   header: {
     padding: 20,
-    textAlign: 'center'
+    textAlign: 'center',
+    fontSize: '1.5rem'
   },
   button: {
-    marginBottom: 20
+    marginBottom: 20,
   },
   iziInfo: {
     marginTop: 5,
+  },
+  image: {
+    width: 75,
+    marginBottom: 15
   }
 };
 

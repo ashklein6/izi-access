@@ -189,8 +189,14 @@ class View360 extends Component {
                         data: 
                         data.data,
                         backgroundColor: [
-                          'purple',
-                          'red',
+                          '#7d52a1',
+                          '#d71f2e',
+                          '#ec008c',
+                          '#eb983f',
+                          '#633589',
+                          '#aa0f18',
+                          '#de0082',
+                          '#d17818',
                         ]
                       }
                     ]
@@ -200,7 +206,7 @@ class View360 extends Component {
                     title:{
                       display: true,
                       text: data.title,
-                      fontSize:25
+                      fontSize:15
                     },
                     legend:{
                       display: data.legend,

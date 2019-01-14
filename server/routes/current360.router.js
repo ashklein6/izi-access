@@ -257,15 +257,12 @@ router.get('/chart_data', async (req, res) => {
     try {
         await client.query('BEGIN');
         const response1 = await client.query(queryText1, [current360Id]);
-        console.log('RESPONSE ! ', response1);
         const response2 = await client.query(queryText2, [current360Id]);
-        console.log('RESPONSE @ ', response2);
         for( let ob of response2.rows ) {
             ethData.push(ob.ethnicity);
             ethCount.push(ob.count);
         };
         const response3 = await client.query(queryText3, [current360Id]);
-        console.log('RESPONSE # ', response3);
         for( let ob of response3.rows ) {
             genData.push(ob.generation);
             genCount.push(ob.count);

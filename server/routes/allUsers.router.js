@@ -12,7 +12,7 @@ router.get('/', employeesOnly, (req, res) => {
             JOIN access ON access.id = person.access_id
             FULL OUTER JOIN threesixty_user ON threesixty_user.user_id = person.id
             LEFT JOIN threesixty ON threesixty.id = threesixty_user.threesixty_id
-            WHERE access.access_level > 0 ORDER BY person.date_added DESC;`)
+            WHERE access.id > 1 ORDER BY person.date_added DESC;`)
   .then((response) => {
     res.send(response.rows);
   })
@@ -32,7 +32,7 @@ router.get('/search', employeesOnly, (req,res) => {
                 JOIN access ON access.id = person.access_id
                 FULL OUTER JOIN threesixty_user ON threesixty_user.user_id = person.id
                 LEFT JOIN threesixty ON threesixty.id = threesixty_user.threesixty_id 
-                WHERE access.access_level > 0 `;
+                WHERE access.id > 1 `;
   let search = req.query;
   let searchFields = [];
   let fieldCounter = 1;
@@ -70,7 +70,7 @@ router.get('/deactivated', employeesOnly, (req,res) => {
             JOIN access ON access.id = person.access_id
             FULL OUTER JOIN threesixty_user ON threesixty_user.user_id = person.id
             LEFT JOIN threesixty ON threesixty.id = threesixty_user.threesixty_id
-            WHERE access.access_level = 0 ORDER BY person.date_added DESC;`)
+            WHERE access.id = 1 ORDER BY person.date_added DESC;`)
   .then((response) => {
     res.send(response.rows);
   })

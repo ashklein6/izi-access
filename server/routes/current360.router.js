@@ -24,27 +24,27 @@ router.get('/section', (req, res) => {
 
   switch (section) {
     case 'goalsAssessment':
-      queryText = 'SELECT * FROM goals WHERE threesixty_id=$1 ORDER BY id';
+      queryText = 'SELECT * FROM goals WHERE threesixty_id=$1 ORDER BY id'; break;
     case 'dashboard':
-      queryText = `SELECT * FROM dashboard WHERE threesixty_id=$1 ORDER BY id;`
+      queryText = `SELECT * FROM dashboard WHERE threesixty_id=$1 ORDER BY id;`; break;
     case 'threesixty_reports':
-      queryText = `SELECT * FROM threesixty_reports WHERE threesixty_id=$1 ORDER BY id;`
+      queryText = `SELECT * FROM threesixty_reports WHERE threesixty_id=$1 ORDER BY id;`; break;
     case 'analysis_recommendation':
-      queryText = `SELECT * FROM analysis_recommendation WHERE threesixty_id=$1 ORDER BY id;`
+      queryText = `SELECT * FROM analysis_recommendation WHERE threesixty_id=$1 ORDER BY id;`; break;
     case 'demographics':
-      queryText = `SELECT * FROM demographic WHERE threesixty_id=$1 ORDER BY id;`
+      queryText = `SELECT * FROM demographic WHERE threesixty_id=$1 ORDER BY id;`; break;
     case 'sticky_stats':
-      queryText = ``
+      queryText = ``; break;
     case 'circle_share':
-      queryText = `SELECT * FROM circle_share WHERE threesixty_reports_id=$1 ORDER BY id;`
+      queryText = `SELECT * FROM circle_share WHERE threesixty_reports_id=$1 ORDER BY id;`; break;
     case 'question_set':
       queryText = `SELECT question_set.id AS question_set_id, threesixty_reports_id, set_title, breakdown, questions.id AS question_id, response.id AS response_id, response, response_category.id AS response_category_id, description AS response_category_description FROM question_set
       LEFT JOIN questions ON questions.set_id = question_set.id
       LEFT JOIN response ON response.question_id = questions.id
       LEFT JOIN response_category ON response_category.id = response.category_id
-      WHERE threesixty_reports_id=$1 ORDER BY question_set.id;`
+      WHERE threesixty_reports_id=$1 ORDER BY question_set.id;`; break;
     case 'oral_report':
-      queryText = `SELECT * FROM oral_report WHERE threesixty_reports_id=$1 ORDER BY id`
+      queryText = `SELECT * FROM oral_report WHERE threesixty_reports_id=$1 ORDER BY id`; break;
   }
   
   console.log('GET request for 360 section:', section, 'current 360 id:', current360Id);
@@ -62,6 +62,33 @@ router.get('/section', (req, res) => {
       res.sendStatus(400);
   }
 })
+
+// Setup a GET route to get current 360 information
+router.get('/info', (req, res) => {
+    let current360Id = req.query.current360Id;
+    let queryText = `SELECT threesixty.id, name, date, location, category_id, category, client, description,
+    published_status, analysis_recommendation_public, threesixty_reports_public, dashboard_public,
+    goals_public, demographics_public, oral_report_public, question_set_public, circle_share_public,
+    threesixty_freeform_public, freeform_public, upload_public, analysis_recommendation_published, 
+    threesixty_reports_published, dashboard_published, goals_published, demographics_published, 
+    oral_report_published, question_set_published, circle_share_published,
+    threesixty_freeform_published, freeform_published, upload_published FROM threesixty
+    JOIN izi_categories ON izi_categories.id = threesixty.category_id
+    WHERE threesixty.id=$1`;
+    
+    console.log('GET request for current 360 information. current 360 id:', current360Id);
+    
+    pool.query(queryText, [current360Id])
+        .then( (results) => {
+            console.log('successful with 360 information');
+            res.send(results.rows);
+        }).catch( (error) => {
+            console.log('error on get:', error);
+            res.sendStatus(500);
+        })
+    }
+);
+
 
 // Setup a GET route to get 360 section goalsAssessment
 router.get('/goalsAssessment', (req, res) => {
@@ -330,7 +357,122 @@ router.post('/lowdown', async (req, res) => {
     return res.send(id.rows[0]);
 });
 
-router.post('/edit/goalsAssessment', (async (req, res) => {
+// Change publish status of a section or entire 360 (published_status)
+router.put('/publish/:id', async (req,res) => {
+    console.log('in current360.router.js PUT for /current360/publish');
+    let current360Id = req.params.id;
+    let field = req.body.field;
+    let status = req.body.status;
+    let queryText = '';
+    console.log('current360Id:', current360Id, 'field:', field, 'status:', status);
+    switch (field) {
+        case 'published_status':
+            queryText = `UPDATE threesixty SET published_status = $2 WHERE id=$1;`; break;
+        case 'analysis_recommendation_published':
+            queryText = `UPDATE threesixty SET analysis_recommendation_published = $2 WHERE id=$1;`; break;
+        case 'threesixty_reports_published':
+            queryText = `UPDATE threesixty SET threesixty_reports_published = $2 WHERE id=$1;`; break;
+        case 'dashboard_published':
+            queryText = `UPDATE threesixty SET dashboard_published = $2 WHERE id=$1;`; break;
+        case 'goals_published':
+            queryText = `UPDATE threesixty SET goals_published = $2 WHERE id=$1;`; break;
+        case 'demographics_published':
+            queryText = `UPDATE threesixty SET demographics_published = $2 WHERE id=$1;`; break;
+        case 'oral_report_published':
+            queryText = `UPDATE threesixty SET oral_report_published = $2 WHERE id=$1;`; break;
+        case 'question_set_published':
+            queryText = `UPDATE threesixty SET question_set_published = $2 WHERE id=$1;`; break;
+        case 'circle_share_published':
+            queryText = `UPDATE threesixty SET circle_share_published = $2 WHERE id=$1;`; break;
+        case 'threesixty_freeform_published':
+            queryText = `UPDATE threesixty SET threesixty_freeform_published = $2 WHERE id=$1;`; break;
+        case 'freeform_published':
+            queryText = `UPDATE threesixty SET freeform_published = $2 WHERE id=$1;`; break;
+        case 'upload_published':
+            queryText = `UPDATE threesixty SET upload_published = $2 WHERE id=$1;`; break;
+    }
+    console.log('queryText:', queryText);
+    if (queryText !== '') {
+        pool.query(queryText, [current360Id, status])
+        .then( (results) => {
+            console.log('successful with publish');
+            res.sendStatus(200);
+        }).catch( (error) => {
+            console.log('error on publish:', error);
+            res.sendStatus(500);
+        })
+    } else {
+        res.sendStatus(400);
+    }
+})
+
+// Change public status of a section
+router.put('/public/:id', async (req,res) => {
+    console.log('in current360.router.js PUT for /current360/public');
+    let current360Id = req.params.id;
+    let field = req.body.field;
+    let status = req.body.status;
+    let queryText = '';
+    console.log('current360Id:', current360Id, 'field:', field, 'status:', status);
+    switch (field) {
+        case 'analysis_recommendation_public':
+            queryText = `UPDATE threesixty SET analysis_recommendation_public = $2 WHERE id=$1;`; break;
+        case 'threesixty_reports_public':
+            queryText = `UPDATE threesixty SET threesixty_reports_public = $2 WHERE id=$1;`; break;
+        case 'dashboard_public':
+            queryText = `UPDATE threesixty SET dashboard_public = $2 WHERE id=$1;`; break;
+        case 'goals_public':
+            queryText = `UPDATE threesixty SET goals_public = $2 WHERE id=$1;`; break;
+        case 'demographics_public':
+            queryText = `UPDATE threesixty SET demographics_public = $2 WHERE id=$1;`; break;
+        case 'oral_report_public':
+            queryText = `UPDATE threesixty SET oral_report_public = $2 WHERE id=$1;`; break;
+        case 'question_set_public':
+            queryText = `UPDATE threesixty SET question_set_public = $2 WHERE id=$1;`; break;
+        case 'circle_share_public':
+            queryText = `UPDATE threesixty SET circle_share_public = $2 WHERE id=$1;`; break;
+        case 'threesixty_freeform_public':
+            queryText = `UPDATE threesixty SET threesixty_freeform_public = $2 WHERE id=$1;`; break;
+        case 'freeform_public':
+            queryText = `UPDATE threesixty SET freeform_public = $2 WHERE id=$1;`; break;
+        case 'upload_public':
+            queryText = `UPDATE threesixty SET upload_public = $2 WHERE id=$1;`; break;
+    }
+    console.log('queryText:', queryText);
+    if (queryText !== '') {
+        pool.query(queryText, [current360Id, status])
+        .then( (results) => {
+            console.log('successful with public');
+            res.sendStatus(200);
+        }).catch( (error) => {
+            console.log('error on public:', error);
+            res.sendStatus(500);
+        })
+    } else {
+        res.sendStatus(400);
+    }
+})
+
+router.put('/edit/info/:id', async (req,res) => {
+    console.log('in current360.router.js PUT for /current360/edit/info');
+    let current360Id = req.params.id;
+    let newData = req.body;
+    console.log('to update info to:', newData);
+    let queryText = `UPDATE threesixty SET name=$1, date=$2, location=$3, category_id=$4, client=$5, description=$6
+    WHERE id=$7`;
+
+    pool.query(queryText, [newData.name, newData.date, newData.location, newData.category_id, newData.client,
+        newData.description, current360Id])
+    .then( (results) => {
+        console.log('successful with editing info');
+        res.sendStatus(200);
+    }).catch( (error) => {
+        console.log('error on editing info:', error);
+        res.sendStatus(500);
+    })
+})
+
+router.put('/edit/goalsAssessment', (async (req, res) => {
     console.log('in current360.router.js PUT for /current360/edit/goalsAssessment');
     let newData = req.body.data;
     console.log('to update goals to:', newData);

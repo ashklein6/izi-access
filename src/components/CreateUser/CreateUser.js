@@ -62,7 +62,7 @@ class CreateUser extends Component {
       email: 'jamesa@gmail.com',
       username: 'jandersen',
       password: 'a',
-      iziName: 'Health Matters!'
+      iziName: 'Community factors for emotional distress.'
     })
   };
 

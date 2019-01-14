@@ -108,7 +108,7 @@ class Create360 extends Component {
 
   handleDemo = () => {
     this.setState({
-        name: 'A study of community factors for emotional distress.',
+        name: 'Community factors for emotional distress.',
         client: 'Best Buy',
         location: 'Richfield',
         category: '2',

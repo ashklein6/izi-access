@@ -453,6 +453,7 @@ router.put('/public/:id', async (req,res) => {
     }
 })
 
+// Edit the 360 information section
 router.put('/edit/info/:id', async (req,res) => {
     console.log('in current360.router.js PUT for /current360/edit/info');
     let current360Id = req.params.id;
@@ -472,21 +473,46 @@ router.put('/edit/info/:id', async (req,res) => {
     })
 })
 
-router.put('/edit/goalsAssessment', (async (req, res) => {
+// Edit the goals assessment section
+router.put('/edit/goalsAssessment/:id', (async (req, res) => {
     console.log('in current360.router.js PUT for /current360/edit/goalsAssessment');
-    let newData = req.body.data;
+    let current360Id = req.params.id;
+    let newData = req.body;
     console.log('to update goals to:', newData);
 
     const client = await pool.connect();
 
     try {
         await client.query('BEGIN');
-        await client.query(`INSERT INTO goals (threesixty_id, description, desired, delivered, difference, percent, comments)
-        VALUES (1, 'Total Number', 125, 140, 15, 112, 'Based on in-room count. In room count is taken 3 to 6 times per account by at least two different people.');
-        `)
-        await client.query(`INSERT INTO goals (threesixty_id, description, desired, delivered, difference, percent, comments)
-        VALUES (1, 'Number of people of color/Indigenous', 71, 70, -1, 99, 'We generally set this goal at 51% in communities with at least 15% POC/Immigrant/Indigenous. Based on an in-room count.'),(1, 'Number of people under 24', 35, 33, -2, 94, 'We generally set this goal at 25 - 33% unless the [project/event] does not warrant. Based on both in room and sign-in sheet counts.'), (1, 'Measurable Indicators of Success 1: 80% of participants met 1 new person across race, class, culture or other means of self-identity', 112, 126, 14, 113, '80% of the room is our target goal for this MIS.');
-        `)
+        Object.keys(newData).map(async (key) => {
+            if (!isNaN(key)) {
+                console.log('key.new:', newData[key].new, 'key.updated', newData[key].updated)
+                if (newData[key].new) {
+                    console.log('caught insert:', newData[key]);
+                    await client.query(`INSERT INTO goals ("threesixty_id", "description", "desired", "delivered", "difference", "percent", "comments", "row_public")
+                    VALUES ($1, $2, $3, $4, $5, $6, $7, $8);`, 
+                    [current360Id, newData[key].description, newData[key].desired, newData[key].delivered,
+                    newData[key].difference, newData[key].percent, newData[key].comments, newData[key].row_public])
+                } else if (newData[key].updated) {
+                    console.log('caught update:', newData[key]);
+                    await client.query(`UPDATE goals
+                    SET threesixty_id = $2,
+                        description = $3, 
+                        desired = $4, 
+                        delivered = $5, 
+                        difference = $6, 
+                        percent = $7, 
+                        comments = $8,
+                        row_public = $9
+                    WHERE id = $1;`, 
+                    [newData[key].id, newData[key].threesixty_id, newData[key].description, newData[key].desired, newData[key].delivered, 
+                    newData[key].difference, newData[key].percent, newData[key].comments, newData[key].row_public])
+                } else if (newData[key] == 'deleted') {
+                    console.log('caught delete:', newData[key]);
+                    await client.query(`DELETE FROM goals WHERE id = $1;`, [key]);
+                }
+            };
+        });
         await client.query('COMMIT');
     } catch (error) {
         await client.query('ROLLBACK');

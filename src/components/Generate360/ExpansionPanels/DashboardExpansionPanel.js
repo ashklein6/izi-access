@@ -198,7 +198,7 @@ const styles = {
   },
   subheading: {
     fontSize: '1rem',
-    color: 'green',
+    color: colors.purple,
     fontWeight: 'bold'
   },
   summary: {

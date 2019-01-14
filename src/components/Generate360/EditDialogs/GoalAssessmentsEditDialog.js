@@ -35,6 +35,7 @@ class GoalsAssessmentEditDialog extends Component {
       difference: '',
       percent: '',
       comments: '',
+      row_public: true,
       // set flag that this row is new so that it can be added to database upon submittal
       new: true
     },
@@ -93,7 +94,7 @@ class GoalsAssessmentEditDialog extends Component {
  // calls handleClickClose.
  handleSave = () => {
   console.log('in handleSave');
-  this.props.dispatch({ type: 'EDIT_360', payload: {section: 'goalsAssessment', data: this.state} })
+  this.props.dispatch({ type: 'EDIT_360', payload: {section: 'goalsAssessment', current360Id: this.props.current360Id, data: this.state} })
   this.handleClickClose();
  } // end handleSave
 
@@ -106,7 +107,7 @@ class GoalsAssessmentEditDialog extends Component {
 
   // Map through current this.state and save parameters that are not integers (row data)
   Object.keys(this.state).map( (key) => {
-    if (isNaN(key) && key !== 'newState') {
+    if (isNaN(key)) {
       newState[key]=this.state[key]
     };
     return null;

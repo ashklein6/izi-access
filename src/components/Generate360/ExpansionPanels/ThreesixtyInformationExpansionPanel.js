@@ -36,7 +36,7 @@ class ThreesixyInformationExpansionPanel extends Component {
     // if 360 is being published, open publish dialog window to show warning
     this.handleClickOpen();
    }
- } // end handleChangeActive
+ } // end handleChangePublished
 
   // Opens a dialog window when user wants to publish.
   handleClickOpen = () => {
@@ -84,12 +84,12 @@ class ThreesixyInformationExpansionPanel extends Component {
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />} className={classes.summary}>
           <div className={classes.title}>
             <Typography variant="h2" className={classes.heading}>360 Information</Typography>
-            {JSON.stringify(this.props.reduxState.current360.info.published_status)}
           </div>
 
           <div className={classes.status}>
             {/* Render publication status on expansion panel summary. */}
-            <Typography variant="h2" className={classes.subheading}>{this.props.reduxState.current360.info[0].published_status ? 'Published' : 'Unpublished'}</Typography>
+            {this.props.reduxState.current360.info[0].published_status ? 
+             <Typography variant="h2" className={classes.subheading}>Published</Typography> : <Typography variant="h2" className={classes.subheadingUnpublished}>Unpublished</Typography>}
           </div>
 
 
@@ -194,7 +194,12 @@ const styles = {
   },
   subheading: {
     fontSize: '1rem',
-    color: 'green',
+    color: colors.red,
+    fontWeight: 'bold'
+  },
+  subheadingUnpublished: {
+    fontSize: '1rem',
+    color: colors.purple,
     fontWeight: 'bold'
   },
   summary: {

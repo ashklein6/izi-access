@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import colors from '../../App/colors';
+import TableTemplate from '../TableTemplate/TableTemplate';
 
 // import edit dialog component
 import GoalsAssessmentEditDialog from '../EditDialogs/GoalAssessmentsEditDialog';
@@ -15,28 +16,8 @@ import ExpansionPanelActions from '@material-ui/core/ExpansionPanelActions';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Divider from '@material-ui/core/Divider';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
-
-// Cleanly style table cells within Material-UI
-const CustomTableCell = withStyles(theme => ({
-  head: {
-    fontSize: '1rem',
-    backgroundColor: colors.orange,
-    color: 'white',
-    padding: 10,
-    textAlign: 'center'
-  },
-  body: {
-    padding: 5,
-  },
-}))(TableCell);
 
 class GoalsAssessmentExpansionPanel extends Component {
 
@@ -47,39 +28,27 @@ class GoalsAssessmentExpansionPanel extends Component {
   publicStatus: 'Private'
  };
 
- // handle the toggle of active/inactive for the section
- handleChangeActive = () => {
-   if (this.state.active) {
-     this.setState({
-       ...this.state,
-       active: false,
-       activeStatus: 'Inactive'
-     })
-   } else {
-    this.setState({
-      ...this.state,
-      active: true,
-      activeStatus: 'Active'
-    })
-   }
- } // end handleChangeActive
+ // handle the toggle of published/unpublished for the section
+ handleChangePublished = () => {
+  if (this.props.reduxState.current360.info[0].goals_published) {
+   // If section is being unpublished, dispatch action to unpublish:
+    this.props.dispatch({ type: 'CHANGE_PUBLISH_STATUS', payload: {field: 'goals_published', status: false, current360Id: this.props.current360Id}})
+  } else {
+   // If section is being published, dispatch action to publish:
+   this.props.dispatch({ type: 'CHANGE_PUBLISH_STATUS', payload: {field: 'goals_published', status: true, current360Id: this.props.current360Id}})
+  }
+} // end handleChangePublished
 
-  // handle the toggle of public/private for the section
-  handleChangePublic = () => {
-    if (this.state.public) {
-      this.setState({
-        ...this.state,
-        public: false,
-        publicStatus: 'Private'
-      })
-    } else {
-     this.setState({
-       ...this.state,
-       public: true,
-       publicStatus: 'Public'
-     })
-    }
-  } // end handleChangePublic
+ // handle the toggle of public/private for the section
+ handleChangePublic = () => {
+  if (this.props.reduxState.current360.info[0].goals_public) {
+   // If section is being changed to private, dispatch action to make private:
+    this.props.dispatch({ type: 'CHANGE_PUBLIC_STATUS', payload: {field: 'goals_public', status: false, current360Id: this.props.current360Id}})
+  } else {
+   // If section is being changed to public, dispatch action to make public:
+   this.props.dispatch({ type: 'CHANGE_PUBLIC_STATUS', payload: {field: 'goals_public', status: true, current360Id: this.props.current360Id}})
+  }
+} // end handleChangePublished
 
  componentDidMount() {
    // Get section when loaded
@@ -100,12 +69,12 @@ class GoalsAssessmentExpansionPanel extends Component {
           </div>
 
           <div className={classes.status}>
-            {/* Conditionally render "Active" on expansion panel summary if the section is active. */}
-            {(this.state.activeStatus === 'Active') ? 
-            <Typography variant="h2" className={classes.subheading}>{this.state.activeStatus},&nbsp;</Typography>
+            {/* Conditionally render "Published" on expansion panel summary if the section is active. */}
+            {(this.props.reduxState.current360.info[0].goals_published === true) ?
+            <Typography variant="h2" className={classes.subheading}>Published,&nbsp;</Typography>
             : null }
             {/* Render "Public" on expansion panel summary if the section is active. */}
-            <Typography variant="h2" className={classes.subheading}>{this.state.publicStatus}</Typography>
+            <Typography variant="h2" className={classes.subheading}>{this.props.reduxState.current360.info[0].goals_public ? 'Public' : 'Private'}</Typography>
           </div>
 
 
@@ -113,36 +82,13 @@ class GoalsAssessmentExpansionPanel extends Component {
 
         {/* Content that is within the expansion panel (shows when panel is expanded) */}
         <ExpansionPanelDetails className={classes.details}>
-          <Paper className={classes.rootTable}>
-            <Table className={classes.table}>
-              <TableHead>
-                <TableRow>
-                  <CustomTableCell width="25%">Description</CustomTableCell>
-                  <CustomTableCell>Desired</CustomTableCell>
-                  <CustomTableCell>Delivered</CustomTableCell>
-                  <CustomTableCell>Difference</CustomTableCell>
-                  <CustomTableCell>Percent</CustomTableCell>
-                  <CustomTableCell>Comments</CustomTableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {this.props.reduxState.current360.goalsAssessment.map(row => {
-                  return (
-                    <TableRow key={row.id}>
-                      <CustomTableCell component="th" scope="row" width="25%">
-                        {row.description}
-                      </CustomTableCell>
-                      <CustomTableCell className={classes.centerText}>{row.desired}</CustomTableCell>
-                      <CustomTableCell className={classes.centerText}>{row.delivered}</CustomTableCell>
-                      <CustomTableCell className={classes.centerText}>{row.difference}</CustomTableCell>
-                      <CustomTableCell className={classes.centerText}>{row.percent}%</CustomTableCell>
-                      <CustomTableCell>{row.comments}</CustomTableCell>
-                    </TableRow>
-                  );
-                })}
-              </TableBody>
-            </Table>
-          </Paper>
+          <TableTemplate 
+            headers={['Description', 'Desired', 'Delivered', 'Difference', 'Percent', 'Comments']} 
+            width={['25%',null,null,null,null,null]}
+            data={this.props.reduxState.current360.goalsAssessment} 
+            className={[null,classes.centerText,classes.centerText,classes.centerText,classes.centerText,null]}
+            cellVariables={['description', 'desired', 'delivered', 'difference', 'percent', 'comments']} 
+          />
         </ExpansionPanelDetails>
 
         <Divider />
@@ -152,9 +98,9 @@ class GoalsAssessmentExpansionPanel extends Component {
           <FormControlLabel
             control={
               <Switch
-                checked={this.state.active}
-                onChange={this.handleChangeActive}
-                value="active"
+                checked={this.props.reduxState.current360.info[0].goals_published}
+                onChange={this.handleChangePublished}
+                value="published"
                 classes={{
                   switchBase: classes.colorSwitchBase,
                   checked: classes.colorChecked,
@@ -162,12 +108,12 @@ class GoalsAssessmentExpansionPanel extends Component {
                 }}
               />
             }
-            label={this.state.activeStatus}
+            label={this.props.reduxState.current360.info[0].goals_published ? 'Published' : 'Unpublished'}
           />
           <FormControlLabel
             control={
               <Switch
-                checked={this.state.public}
+                checked={this.props.reduxState.current360.info[0].goals_public}
                 onChange={this.handleChangePublic}
                 value="public"
                 classes={{
@@ -177,7 +123,7 @@ class GoalsAssessmentExpansionPanel extends Component {
                 }}
               />
             }
-            label={this.state.publicStatus}
+            label={this.props.reduxState.current360.info[0].goals_public ? 'Public' : 'Private'}
           />
           
           <GoalsAssessmentEditDialog current360Id={this.props.current360Id}/>
@@ -237,7 +183,7 @@ const styles = {
   },
   subheading: {
     fontSize: '1rem',
-    color: 'green',
+    color: colors.purple,
     fontWeight: 'bold'
   },
   summary: {

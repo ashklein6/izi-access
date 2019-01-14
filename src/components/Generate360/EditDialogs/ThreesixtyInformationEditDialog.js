@@ -20,7 +20,6 @@ import OutlinedInput from '@material-ui/core/OutlinedInput';
 class ThreesixtyInformationEditDialog extends Component {
 
  state = {
-   // DO NOT create integer-only parameters as they are reserved for data rows
    open: false,
    updating: false,
    name: this.props.reduxState.current360.info[0].name,

@@ -7,7 +7,7 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import ReactLoading from 'react-loading';
-import colors from '../../App/colors';
+import colors from '../App/colors';
 
 class LoadingDialog extends Component {
 
@@ -16,7 +16,7 @@ class LoadingDialog extends Component {
  };
 
  componentDidMount() {
-    this.props.dispatch({ type: 'FETCH_360', payload: {current360Id: this.props.current360Id} })
+    this.props.dispatch({ type: 'FETCH_360', payload: {current360Id: 1} })
  }
 
  render() {

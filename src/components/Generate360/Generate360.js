@@ -17,12 +17,12 @@ import AnalysisRecExpansionPanel from './ExpansionPanels/AnalysisRecExpansionPan
 class Generate360 extends Component {
 
  state = {
-  current360Id: 1,
+  current360Id: this.props.location.state.current360Id,
  };
 
  render() {
    const { classes } = this.props;
-
+   console.log('CURRENT 360 ID CURRENT 360 ID CURRENT 360 ID:', this.state.current360Id);
    return (
      <div className={classes.div}>
        <Typography variant="h2" className={classes.header}>Generate360</Typography>

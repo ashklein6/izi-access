@@ -306,7 +306,7 @@ router.post('/complete', async (req, res) => {
         await client.query('BEGIN');
         id = await client.query(`INSERT INTO threesixty (name, date, location, category_id, client, description, published_status) 
             VALUES ($1, $2, $3, $4, $5, $6, $7)
-            RETURNING id`, [new360.name, new360.date, new360.location, new360.category, new360.client, new360.description, true]);
+            RETURNING id`, [new360.name, new360.date, new360.location, new360.category, new360.client, new360.description, false]);
         await client.query(`INSERT INTO analysis_recommendation (threesixty_id) VALUES ($1)`, [id.rows[0].id]);
         for(let row of dashboardRows){
             await client.query(`INSERT INTO dashboard (threesixty_id, row_title) VALUES ($1, $2)`, [id.rows[0].id, row]);

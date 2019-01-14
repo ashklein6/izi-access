@@ -135,7 +135,7 @@ class View360 extends Component {
             </div>
             {/* sticky header for section */}
             <div className={classes.sticky}>
-              <Typography variant="h4" className={classes.sectionHeader}>Analysis and Recommendation</Typography>
+              <Typography variant="h4" className={classes.sectionHeader}>Analysis and Recommendations</Typography>
             </div>
               <Typography variant="h5" className={classes.header5}>Outreach Findings</Typography>
                 <div className={classes.paragraph}>

@@ -63,7 +63,7 @@ class AnalysisRecExpansionPanel extends Component {
         {/* Information on the expansion panel's summary bar (always shows) */}
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />} className={classes.summary}>
           <div className={classes.title}>
-            <Typography variant="h2" className={classes.heading}>Analysis &amp; Recommendation</Typography>
+            <Typography variant="h2" className={classes.heading}>Analysis &amp; Recommendations</Typography>
           </div>
 
           <div className={classes.status}>

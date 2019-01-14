@@ -54,7 +54,7 @@ class App extends Component {
               />
               <Route
                 exact
-                path="/view360"
+                path="/view360/:id"
                 component={View360}
               />
               <Route
@@ -103,7 +103,7 @@ class App extends Component {
               />
               <EmployeeRoute
                 exact
-                path="/generate360"
+                path="/generate360/:id"
                 component={Generate360}
               />
 

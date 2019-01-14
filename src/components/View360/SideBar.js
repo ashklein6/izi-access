@@ -68,7 +68,7 @@ class SideBar extends Component {
         </Link>
         )} */}
         {this.props.reduxState.current360.info[0].goals_published ?
-        <Link key="#goal-assessment" smooth to="#goal-assessment"
+        <Link key="#goals-assessment" smooth to="#goals-assessment"
         scroll={el => scrollWithOffset(el, 150)}
         >
           <MenuItem

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 // Material-UI
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
 
 // Import loading dialog
 import LoadingDialog from './EditDialogs/LoadingDialog';
@@ -17,14 +18,29 @@ import AnalysisRecExpansionPanel from './ExpansionPanels/AnalysisRecExpansionPan
 class Generate360 extends Component {
 
  state = {
-  current360Id: this.props.location.state.current360Id,
+  current360Id: this.props.match.params.id
  };
+
+ // navigates to /manage360s
+ back = (event) => {
+  event.preventDefault();
+  this.props.history.push('/manage360s');
+  }
 
  render() {
    const { classes } = this.props;
    console.log('CURRENT 360 ID CURRENT 360 ID CURRENT 360 ID:', this.state.current360Id);
    return (
      <div className={classes.div}>
+       <div className={classes.returnButton}>
+          <Button
+            className={classes.manage360Btn} 
+            variant="contained"
+            onClick={this.back}
+          >
+            Return to Home Page
+          </Button>
+       </div>
        <Typography variant="h2" className={classes.header}>Generate360</Typography>
        <ThreesixtyInformationExpansionPanel current360Id={this.state.current360Id}/>
        <GoalsAssessmentExpansionPanel current360Id={this.state.current360Id}/>

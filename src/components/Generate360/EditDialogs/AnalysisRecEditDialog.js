@@ -93,7 +93,7 @@ class AnalysisRecEditDialog extends Component {
  // calls handleClickClose.
  handleSave = () => {
   console.log('in handleSave');
-  this.props.dispatch({ type: 'EDIT_360', payload: {section: 'analysis_recommendation', data: this.state} })
+  this.props.dispatch({ type: 'EDIT_360', payload: {section: 'analysis_recommendation', current360Id: this.props.current360Id, data: this.state} })
   this.handleClickClose();
  } // end handleSave
 
@@ -182,7 +182,7 @@ class AnalysisRecEditDialog extends Component {
       {/* Conditionally render a loading message until data is loaded into local state */}
       {(this.state.updating === true) ? 
       <React.Fragment>
-        <DialogTitle id="analysis-recommendation-edit-dialog">Edit Analysis &amp; Recommendation</DialogTitle>
+        <DialogTitle id="analysis-recommendation-edit-dialog">Edit Analysis &amp; Recommendations</DialogTitle>
         <DialogContent>
           <DialogContentText>
             New information is currently loading...
@@ -191,7 +191,7 @@ class AnalysisRecEditDialog extends Component {
       </React.Fragment>
         :
         <React.Fragment>
-          <DialogTitle id="analysis-recommendation-edit-dialog">Analysis &amp; Recommendation</DialogTitle>
+          <DialogTitle id="analysis-recommendation-edit-dialog">Analysis &amp; Recommendations</DialogTitle>
           <DialogContent id="analysis-recommendation-edit-dialog-content" ref={(el) => { this.scroll = el; }}>
             <DialogContentText>
               Remember to save changes before closing this edit dialog.

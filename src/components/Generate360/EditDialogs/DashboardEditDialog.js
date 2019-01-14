@@ -90,7 +90,7 @@ class DashboardEditDialog extends Component {
  // calls handleClickClose.
  handleSave = () => {
   console.log('in handleSave');
-  this.props.dispatch({ type: 'EDIT_360', payload: {section: 'dashboard', data: this.state} })
+  this.props.dispatch({ type: 'EDIT_360', payload: {section: 'dashboard', current360Id: this.props.current360Id, data: this.state} })
   this.handleClickClose();
  } // end handleSave
 

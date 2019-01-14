@@ -1,9 +1,11 @@
 import axios from 'axios';
-import { all, put, call, takeLatest } from 'redux-saga/effects';
+import { all, put, call, take, takeLatest } from 'redux-saga/effects';
 
-function* changePrivateStatus(action) {
+function* changePublicStatus(action) {
+  console.log('inside changePublicStatus. action.payload:', action.payload);
   try {
-    yield call(axios.put, `//${action.payload.id}`, {data: action.payload.status} );
+    yield call(axios.put, `current360/public/${action.payload.current360Id}`, action.payload );
+    yield put({ type: 'SET_PUBLIC_STATUS', payload: action.payload });
   } 
   catch (error) {
     console.log('error', error);
@@ -11,8 +13,10 @@ function* changePrivateStatus(action) {
 };
 
 function* changePublishStatus(action) {
+  console.log('inside changePublishStatus. action.payload:', action.payload);
   try {
-    yield call(axios.put, `//${action.payload.id}`, {data: action.payload.status} );
+    yield call(axios.put, `current360/publish/${action.payload.current360Id}`, action.payload );
+    yield put({ type: 'SET_PUBLISH_STATUS', payload: action.payload });
   } 
   catch (error) {
     console.log('error', error);
@@ -53,7 +57,8 @@ function* edit360(action) {
   console.log('inside edit360. action.payload:', action.payload);
   console.log('url:','current360/edit/'+action.payload.section);
   try {
-    yield call(axios.put, `/current360/edit/${action.payload.section}`, {data: action.payload.data} );
+    yield call(axios.put, `/current360/edit/${action.payload.section}/${action.payload.current360Id}`, action.payload.data );
+    yield put({ type: 'FETCH_360_SECTION', payload: action.payload })
   } 
   catch (error) {
     console.log('error', error);
@@ -64,8 +69,10 @@ function* edit360(action) {
 function* fetch360(action) {
   console.log('inside fetch360. action.payload:', action.payload);
   try {
+    yield put({ type: 'GENERATE_360_LOADING' })
     // Get all sections of the 360
     yield all ([
+      put({ type: 'FETCH_360_INFO', payload: action.payload }),
       put({ type: 'FETCH_GOALS', payload: action.payload }),
       put({ type: 'FETCH_DASHBOARD', payload: action.payload }),
       put({ type: 'FETCH_THREESIXTY_REPORTS', payload: action.payload }),
@@ -76,6 +83,9 @@ function* fetch360(action) {
       put({ type: 'FETCH_ORAL_REPORT', payload: action.payload }),
       put({ type: 'FETCH_CHART_DATA', payload: action.payload }),
     ]);
+    yield take(['SET_GOALS', 'SET_DASHBOARD', 'SET_THREESIXTY_REPORTS', 'SET_ANALYSIS_RECOMMENDATION',
+      'SET_DEMOGRAPHIC', 'SET_CIRCLE_SHARE', 'SET_QUESTION_SET', 'SET_ORAL_REPORT', 'SET_CHART_DATA'])
+    yield put({ type: 'GENERATE_360_LOADED' })
   } 
   catch (error) {
     console.log('error', error);
@@ -83,10 +93,23 @@ function* fetch360(action) {
 };
 
 // general worker saga. expect an action.payload with section and current360Id
+function* fetch360Info(action) {
+  console.log('inside fetch360Info in saga');
+  try {
+    const response = yield call(axios.get, `/current360/info`, {params: action.payload});
+    console.log('response for current 360 info:', response);
+    yield put({ type: 'SET_360_INFO', payload: {section: action.payload.section, content: response.data} });
+  } 
+  catch (error) {
+    console.log('error', error);
+  }
+}
+
+// general worker saga. expect an action.payload with section and current360Id
 function* fetch360Section(action) {
   console.log('inside fetch360Section in saga');
   try {
-    const response = yield call(axios.get, `/current360/section`, {params: action.payload});
+    const response = yield call(axios.get, `/current360/${action.payload.section}`, {params: action.payload});
     console.log('response for', action.payload.section, response);
     yield put({ type: 'SET_360_SECTION', payload: {section: action.payload.section, content: response.data} });
     yield put({ type: 'CURRENT_360_SECTION_NEEDS_UPDATE', payload: {section: action.payload.section} });
@@ -216,13 +239,14 @@ function* fetchChartData(action) {
 
 
 function* current360Saga() {
-  yield takeLatest( 'CHANGE_PRIVATE_STATUS', changePrivateStatus );
+  yield takeLatest( 'CHANGE_PUBLIC_STATUS', changePublicStatus );
   yield takeLatest( 'CHANGE_PUBLISH_STATUS', changePublishStatus );
   yield takeLatest( 'CREATE_360_COMPLETE', create360Complete );
   yield takeLatest( 'CREATE_360_LOWDOWN', create360Lowdown );
   yield takeLatest( 'DELETE_360', delete360 );
   yield takeLatest( 'EDIT_360', edit360 );
   yield takeLatest( 'FETCH_360', fetch360 );
+  yield takeLatest( 'FETCH_360_INFO', fetch360Info);
   yield takeLatest( 'FETCH_360_SECTION', fetch360Section);
   yield takeLatest( 'FETCH_GOALS', fetchGoals );
   yield takeLatest( 'FETCH_DASHBOARD', fetchDashboard );

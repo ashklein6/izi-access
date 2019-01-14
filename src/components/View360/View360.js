@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import colors from '../App/colors';
 import { Pie } from 'react-chartjs-2';
-
+import moment from 'moment';
+import { Textfit } from 'react-textfit';
 import SideBar from './SideBar';
 import TableTemplate from './TableTemplate/TableTemplate';
 import MarkDownOutput from '../MarkDownEditor/MarkdownOutput';
+import LoadingDialog from './LoadingDialog';
 
 // Material-UI
 import { withStyles } from '@material-ui/core/styles';
@@ -17,43 +19,50 @@ import Divider from '@material-ui/core/Divider';
 class View360 extends Component {
 
   state = {
+    current360Id: this.props.location.state.current360Id
   };
 
   // navigates to /manage360s
-  toManage360s = (event) => {
+  back = (event) => {
     event.preventDefault();
-    this.props.history.push('/manage360s');
+    this.props.history.goBack();
   }
 
   componentDidMount() {
-    this.props.dispatch({ type: 'FETCH_360', payload: {current360Id: 1} });
+    this.props.dispatch({ type: 'FETCH_360', payload: {current360Id: this.state.current360Id} });
     console.log('DATADTADTADTADT ', this.props.reduxState.current360);
   }
 
   render() {
     const { classes } = this.props;
+    console.log('this.props.history.location:',this.props.location);
 
     return (
       <Grid container spacing={0}>
+        <LoadingDialog />
         <Grid className={classes.sideBar} item xs={2}>
           <Button
             className={classes.manage360Btn} 
             variant="contained"
-            onClick={this.toManage360s}
+            onClick={this.back}
           >
-            Return to 360 Manager
+            Return
           </Button>
           <Divider />
           <SideBar />
         </Grid>
         <Grid className={classes.report} item xs={10}>
-          <Typography variant="h2" className={classes.header}>360 Name</Typography>
+          <Textfit forceSingleModeWidth={false} className={classes.header}>
+            {this.props.reduxState.current360.info[0].name}
+          </Textfit>
+          {/* <Typography variant="h2" className={classes.header}></Typography> */}
           <section className={classes.mainReportInfo}>
-            <Typography className={classes.subHeader}>Client</Typography>
-            <Typography className={classes.subHeader}>Location</Typography>
-            <Typography className={classes.subHeader}>Date</Typography>
+            <Typography className={classes.subHeader}>{this.props.reduxState.current360.info[0].client}</Typography>
+            <Typography className={classes.subHeader}>{this.props.reduxState.current360.info[0].location}</Typography>
+            <Typography className={classes.subHeader}>{moment(this.props.reduxState.current360.info[0].date).format('ll')}</Typography>
             <Divider className={classes.middleDivider} />
           </section>
+          {this.props.reduxState.current360.info[0].goals_published ?
           <section className={classes.section}>
             {/* anchor div for sidebar scroll placement */}
             <div style={{position: 'relative'}}>
@@ -71,7 +80,8 @@ class View360 extends Component {
               className={[null,classes.centerText,classes.centerText,classes.centerText,classes.centerText,null]}
               cellVariables={['description', 'desired', 'delivered', 'difference', 'percent', 'comments']} 
             />
-          </section>
+          </section> : null}
+          {this.props.reduxState.current360.info[0].dashboard_published ?
           <section className={classes.section}>
             {/* anchor div for sidebar scroll placement */}
             <div style={{position: 'relative'}}>
@@ -89,7 +99,8 @@ class View360 extends Component {
               className={[null,null]}
               cellVariables={['row_title', 'row_info']} 
             />
-          </section>
+          </section> : null}
+          {this.props.reduxState.current360.info[0].threesixty_reports_published ?
           <section className={classes.section}>
             {/* anchor div for sidebar scroll placement */}
             <div style={{position: 'relative'}}>
@@ -127,7 +138,8 @@ class View360 extends Component {
                   )}
                 </div>
             </div>
-          </section>
+          </section> : null }
+          {this.props.reduxState.current360.info[0].analysis_recommendation_published ?
           <section className={classes.section}>
             {/* anchor div for sidebar scroll placement */}
             <div style={{position: 'relative'}}>
@@ -135,7 +147,7 @@ class View360 extends Component {
             </div>
             {/* sticky header for section */}
             <div className={classes.sticky}>
-              <Typography variant="h4" className={classes.sectionHeader}>Analysis and Recommendation</Typography>
+              <Typography variant="h4" className={classes.sectionHeader}>Analysis and Recommendations</Typography>
             </div>
               <Typography variant="h5" className={classes.header5}>Outreach Findings</Typography>
                 <div className={classes.paragraph}>
@@ -147,7 +159,8 @@ class View360 extends Component {
                 {this.props.reduxState.current360.analysis_recommendation.map((row, index) => 
                     <MarkDownOutput display={row.recommendations} key={index}/>)}
                 </div>
-          </section>
+          </section> : null }
+          {this.props.reduxState.current360.info[0].demographics_published ?
           <section className={classes.section}>
             {/* anchor div for sidebar scroll placement */}
             <div style={{position: 'relative'}}>
@@ -177,6 +190,17 @@ class View360 extends Component {
                         'first_time','child_abuse','housing','transportation','education']}
               interpretBoolean={true}
             />
+            </section> : null }
+            {this.props.reduxState.current360.info[0].demographics_published ?
+            <section className={classes.section}>
+            {/* anchor div for sidebar scroll placement */}
+            <div style={{position: 'relative'}}>
+              <div id="demo-data-charts" style={{position: 'absolute', top: -80, left: 0}}></div>
+            </div>
+            {/* sticky header for section */}
+            <div className={classes.sticky}>
+              <Typography variant="h4" className={classes.sectionHeader}>IZI Demographic Data Charts</Typography>
+            </div>
             {/* <TrueFalse data={this.props.reduxState.current360.chart_data}/> */}
             {this.props.reduxState.current360.chart_data.map(data => (
               <div id="trueFalse" key={data.title}>
@@ -215,19 +239,19 @@ class View360 extends Component {
                 />
               </div>
             ))}
-          </section>
-          <section className={classes.section}>
-            {/* anchor div for sidebar scroll placement */}
+          </section> : null }
+          {/* <section className={classes.section}>
+            //anchor div for sidebar scroll placement
             <div style={{position: 'relative'}}>
               <div id="sticky-stats" style={{position: 'absolute', top: -80, left: 0}}></div>
             </div>
-            {/* sticky header for section */}
+            //sticky header for section
             <div className={classes.sticky}>
               <Typography variant="h4" className={classes.sectionHeader}>Sticky Stats and Event Materials</Typography>
             </div>
-            {/* section content */}
+            //section content
             <p className={classes.paragraph}>Sticky Stats will go here!</p>
-          </section>
+          </section> */} 
         </Grid>
       </Grid>
     );
@@ -262,7 +286,8 @@ const styles = {
     padding: '10px',
     zIndex: '1050',
     color: colors.purple,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    height: 60
   },
   header5: {
     margin: '0px 10px 0px 10px',

@@ -71,8 +71,18 @@ class CustomizedTable extends Component {
 
   }
 
-  goToGenerate360 = () => {
-    this.props.history.push('/generate360');
+  goToGenerate360 = (id) => {
+    this.props.history.push({
+      pathname: '/generate360',
+      state: { current360Id: id }
+    });
+  }
+
+  goToView360 = (id) => {
+    this.props.history.push({
+      pathname: '/view360',
+      state: { current360Id: id }
+    });
   }
 
   render() {
@@ -96,9 +106,9 @@ class CustomizedTable extends Component {
             return (
               <TableRow key={row.id}>
                 <CustomTableCell className={classes.centerText} component="th" scope="row">
-                  <Button variant="contained">View</Button>
+                  <Button onClick={() => this.goToView360(row.id)} variant="contained">View</Button>
 
-                  {!this.props.homeVersion && <Button onClick={this.goToGenerate360} variant="contained">Edit</Button>}
+                  {!this.props.homeVersion && <Button onClick={() => this.goToGenerate360(row.id)} variant="contained">Edit</Button>}
 
                 </CustomTableCell>
                 <CustomTableCell className={classes.centerText}>{row.name}</CustomTableCell>

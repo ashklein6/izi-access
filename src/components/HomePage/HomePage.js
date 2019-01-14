@@ -32,7 +32,10 @@ class Home extends Component {
  // so the correct information can be displayed on the next page
  handleClick = (id) => {
   this.props.dispatch({type: 'FETCH_360', payload: id});
-  this.props.history.push('/view360');
+  this.props.history.push({
+    pathname: '/generate360',
+    state: { current360Id: id }
+  });
  };
 
  render() {

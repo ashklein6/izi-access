@@ -246,79 +246,67 @@ methodology we use to engage community for meaningful, sustainable impact.'
 	)
 ;
 
-INSERT INTO dashboard (threesixty_id, row_title, row_info, row_public)
+INSERT INTO dashboard (threesixty_id, row_title, row_info)
 VALUES 
 	(
 	1, 
 	'Date(s)', 
-	'Tuesday, October 24th, 2017', 
-	true
+	'Tuesday, October 24th, 2017'
 	),
 	(
 	1,
 	'Timeline',
-	'(the most important thing you can do is "invite, invite, invite")',
-	true
+	'(the most important thing you can do is "invite, invite, invite")'
 	),
 	(
 	1,
 	'Six Weeks - 1 Month Out',
-	'Create Dashboard, identify date, host, overall theme, create dashboard invitees, create invitation, set concrete goals',
-	true
+	'Create Dashboard, identify date, host, overall theme, create dashboard invitees, create invitation, set concrete goals'
 	),
 	(
 	1,
 	'3 Weeks Out',
-	'Identify tools, design event flowverview, recruit volunteers & teen workers, invite more people, check to see who has not rsvpd to ensure you have your demographic mix',
-	true
+	'Identify tools, design event flowverview, recruit volunteers & teen workers, invite more people, check to see who has not rsvpd to ensure you have your demographic mix'
 	),
 	(
 	1,
 	'2 Weeks - 1 Week Out',
-	'Confirm menus with caterers, buy table supplies (if needed), create question cards, create pull out of the event to remember your marks for delivery of the event, print sign-in sheets, place on clipboards, make sure your supplies are ready for delivery of the event',
-	true
+	'Confirm menus with caterers, buy table supplies (if needed), create question cards, create pull out of the event to remember your marks for delivery of the event, print sign-in sheets, place on clipboards, make sure your supplies are ready for delivery of the event'
 	),
 	(
 	1,
 	'Day of Event',
-	'Deliver event, pick up sign-in sheets, Mindstorm forms, keep track of measurable indicators of success',
-	true
+	'Deliver event, pick up sign-in sheets, Mindstorm forms, keep track of measurable indicators of success'
 	),
 	(
 	1,
 	'1-2 Weeks After',
-	'Download data from sign in sheets and create reportage on outcomes',
-	true
+	'Download data from sign in sheets and create reportage on outcomes'
 	),
 	(
 	1,
 	'1 Month After',
-	'Evaluate effectiveness and debrief, turnover of all reportage',
-	true
+	'Evaluate effectiveness and debrief, turnover of all reportage'
 	),
 	(
 	1,
 	'Times(s)',
-	'6-9 pm',
-	true
+	'6-9 pm'
 	),
 	(
 	1,
 	'Location(s)',
-	'Shakopee',
-	true
+	'Shakopee'
 	),
 	(
 	1,
 	'Number Attending',
-	'100+',
-	true
+	'100+'
 	),
 	(
 	1,
 	'Fun Title or Theme',
-	'Health Matters!',
-	true
+	'Health Matters!'
 	),
 	(
 	1,
@@ -327,8 +315,7 @@ VALUES
 	➢	At least 51% people of color and/or immigrant community members
 	➢	25%-33% under 24 
 	➢	Focusing on key growing and underserved Latinx and Somali populations 
-	➢	Also intentionally inviting rural seniors; Nepalese, Hmong, Vietnamese, Sikh; Russian 7th Day Adventists; and POC employees in the hospitals',
-	true
+	➢	Also intentionally inviting rural seniors; Nepalese, Hmong, Vietnamese, Sikh; Russian 7th Day Adventists; and POC employees in the hospitals'
 	),
 	(
 	1,
@@ -343,8 +330,7 @@ the community to provide translation services
 	➢	Determine whether there are actions or behaviors SCPH can engage in to create more authentic welcome for	and their families
 	➢	Share negative and positive stories of healthcare experiences
 	➢	Identify family needs and/or healthcare priorities
-	',
-	true
+	'
 	),
 	(
 	1,
@@ -354,8 +340,8 @@ the community to provide translation services
 	➢	40% planned to tell someone about their experience
 	➢	50% say that they would like to invite someone to another conversation
 	➢	80% of participants say that they met someone across self-identity with whom they planned to stay in touch or collaborate
-	➢	% would come to another event',
-	true),
+	➢	% would come to another event'
+	),
 	(
 	1,
 	'Invite Example Language',
@@ -383,8 +369,7 @@ Marnitas Table seeks to measurably increase social capital across race, class, c
 Thank you for your consideration.
 
 If you would like to learn more about Marnitas Table, go to marnitastable.org.
-	',
-	true
+	'
 	),
 	(
 	1,
@@ -399,8 +384,7 @@ If you would like to learn more about Marnitas Table, go to marnitastable.org.
 			[Will need one scribe per table to note down ideas]
 7:45 p.m.	Oral Report from MindStorm
 8:15 p.m.	Catalyzing Circle Share-in
-8:50 p.m.	Closing/Thank You',
-	true
+8:50 p.m.	Closing/Thank You'
 	),
 	(
 	1,
@@ -414,8 +398,7 @@ If you would like to learn more about Marnitas Table, go to marnitastable.org.
 	➢	How does historical trauma impact your ability to access healthcare and wellness opportunities?
 	➢	How can we increase the capacity of your community to develop community-based solutions?
 	➢	How can we strengthen clinic-community linkages in order to develop options that work?
-	',
-	true
+	'
 	),
 	(
 	1,
@@ -425,8 +408,7 @@ If you would like to learn more about Marnitas Table, go to marnitastable.org.
 	➢	What is one thing about you that you would not be able to tell by looking at you? How did you come to be in this room?
 	➢	What/who/when has had the greatest impact on your life?
 	➢	If you had to pick 2 things about yourself that you value the most, what would they be?
-	',
-	true
+	'
 	),
 	(
 	1,
@@ -469,8 +451,7 @@ If you would like to learn more about Marnitas Table, go to marnitastable.org.
 	➢	Should all immigrants have access to healthcare?
 	➢	Should an immigrant tradition be honored when served by healthcare provider?
 	➢	Do you currently have any health and wellness needs?
-	',
-	true
+	'
 	),
 	(
 	1,
@@ -478,46 +459,39 @@ If you would like to learn more about Marnitas Table, go to marnitastable.org.
 	'
 Fact-based informative tidbits, opportunities for volunteering, etc.
 TBD
-	',
-	false
+	'
 	),
 	(
 	1,
 	'Scavenger Hunt',
-	'Uncover shared assets in the community.',
-	false
+	'Uncover shared assets in the community.'
 	),
 	(
 	1,
 	'Human Survey',
-	'Interactive physical survey utilizing participants bodies and the event space to illustrate the voices and experiences of attendees.',
-	false
+	'Interactive physical survey utilizing participants bodies and the event space to illustrate the voices and experiences of attendees.'
 	),
 	(
 	1,
 	'Lightning Rounds',
-	'Game show to allow the room to answer key questions that you want the entire room to know. Often part two of a scavenger hunt.',
-	false
+	'Game show to allow the room to answer key questions that you want the entire room to know. Often part two of a scavenger hunt.'
 	),
 	(
 	1,
 	'Resource Wall',
-	'Uncover valued resources in the community that comes from the community in the room. Compile and share after.',
-	false
+	'Uncover valued resources in the community that comes from the community in the room. Compile and share after.'
 	),
 	(
 	1,
 	'Menu',
 	'
 Feast appropriate from vegan to carnivore including dairy, wheat and soy intolerant.
-"Bars" of all types where people can have selection and build a meal on their plate are the most reliable way to achieve the feast.',
-	false
+"Bars" of all types where people can have selection and build a meal on their plate are the most reliable way to achieve the feast.'
 	),
 	(
 	1,
 	'Tools',
-	'MindStorm',
-	false
+	'MindStorm'
 	)
 ;
 
@@ -957,7 +931,7 @@ VALUES
 
 INSERT INTO gen_category (generation)
 VALUES
-	('undefined'),
+	('Not Specified'),
 	('Generation Z/Centennial (2000-present)'),
 	('Generation Y/Millennial (1980-1999)'),
 	('Generation X/Thirteener (1965-1979)'),

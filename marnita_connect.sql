@@ -12,7 +12,7 @@ CREATE TABLE "person" (
     "password_reset_expires" TIMESTAMP WITH TIME ZONE,
     "firstname" VARCHAR(255),
     "lastname" VARCHAR(255),
-    "access_id" INT DEFAULT 1 REFERENCES "access",
+    "access_id" INT DEFAULT 2 REFERENCES "access",
     "notes" VARCHAR(2560),
     "date_added" TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -74,8 +74,7 @@ CREATE TABLE "dashboard" (
     "id" SERIAL PRIMARY KEY,
     "threesixty_id" INT REFERENCES "threesixty" ON DELETE CASCADE,
     "row_title" VARCHAR(25600),
-    "row_info" VARCHAR(25600),
-    "row_public" BOOLEAN DEFAULT TRUE
+    "row_info" VARCHAR(25600)
 );
 
 CREATE TABLE "goals" (

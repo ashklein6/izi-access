@@ -93,7 +93,7 @@ class AnalysisRecEditDialog extends Component {
  // calls handleClickClose.
  handleSave = () => {
   console.log('in handleSave');
-  this.props.dispatch({ type: 'EDIT_360', payload: {section: 'analysis_recommendation', data: this.state} })
+  this.props.dispatch({ type: 'EDIT_360', payload: {section: 'analysis_recommendation', current360Id: this.props.current360Id, data: this.state} })
   this.handleClickClose();
  } // end handleSave
 

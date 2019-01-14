@@ -23,45 +23,30 @@ import Switch from '@material-ui/core/Switch';
 class DashboardExpansionPanel extends Component {
 
  state = {
-  active: true,
-  activeStatus: 'Active',
-  public: false,
-  publicStatus: 'Private'
+
  };
 
- // handle the toggle of active/inactive for the section
- handleChangeActive = () => {
-   if (this.state.active) {
-     this.setState({
-       ...this.state,
-       active: false,
-       activeStatus: 'Inactive'
-     })
-   } else {
-    this.setState({
-      ...this.state,
-      active: true,
-      activeStatus: 'Active'
-    })
-   }
- } // end handleChangeActive
+ // handle the toggle of published/unpublished for the section
+ handleChangePublished = () => {
+  if (this.props.reduxState.current360.info[0].dashboard_published) {
+   // If section is being unpublished, dispatch action to unpublish:
+    this.props.dispatch({ type: 'CHANGE_PUBLISH_STATUS', payload: {field: 'dashboard_published', status: false, current360Id: this.props.current360Id}})
+  } else {
+   // If section is being published, dispatch action to publish:
+   this.props.dispatch({ type: 'CHANGE_PUBLISH_STATUS', payload: {field: 'dashboard_published', status: true, current360Id: this.props.current360Id}})
+  }
+} // end handleChangePublished
 
-  // handle the toggle of public/private for the section
-  handleChangePublic = () => {
-    if (this.state.public) {
-      this.setState({
-        ...this.state,
-        public: false,
-        publicStatus: 'Private'
-      })
-    } else {
-     this.setState({
-       ...this.state,
-       public: true,
-       publicStatus: 'Public'
-     })
-    }
-  } // end handleChangePublic
+ // handle the toggle of public/private for the section
+ handleChangePublic = () => {
+  if (this.props.reduxState.current360.info[0].dashboard_public) {
+   // If section is being changed to private, dispatch action to make private:
+    this.props.dispatch({ type: 'CHANGE_PUBLIC_STATUS', payload: {field: 'dashboard_public', status: false, current360Id: this.props.current360Id}})
+  } else {
+   // If section is being changed to public, dispatch action to make public:
+   this.props.dispatch({ type: 'CHANGE_PUBLIC_STATUS', payload: {field: 'dashboard_public', status: true, current360Id: this.props.current360Id}})
+  }
+} // end handleChangePublished
 
  componentDidMount() {
    // Get section when loaded
@@ -82,12 +67,12 @@ class DashboardExpansionPanel extends Component {
           </div>
 
           <div className={classes.status}>
-            {/* Conditionally render "Active" on expansion panel summary if the section is active. */}
-            {(this.state.activeStatus === 'Active') ? 
-            <Typography variant="h2" className={classes.subheading}>{this.state.activeStatus},&nbsp;</Typography>
+            {/* Conditionally render "Published" on expansion panel summary if the section is active. */}
+            {(this.props.reduxState.current360.info[0].dashboard_published === true) ?
+            <Typography variant="h2" className={classes.subheading}>Visible,&nbsp;</Typography>
             : null }
             {/* Render "Public" on expansion panel summary if the section is active. */}
-            <Typography variant="h2" className={classes.subheading}>{this.state.publicStatus}</Typography>
+            <Typography variant="h2" className={classes.subheading}>{this.props.reduxState.current360.info[0].dashboard_public ? 'Public' : 'Private'}</Typography>
           </div>
 
 
@@ -113,9 +98,9 @@ class DashboardExpansionPanel extends Component {
           <FormControlLabel
             control={
               <Switch
-                checked={this.state.active}
-                onChange={this.handleChangeActive}
-                value="active"
+                checked={this.props.reduxState.current360.info[0].dashboard_published}
+                onChange={this.handleChangePublished}
+                value="published"
                 classes={{
                   switchBase: classes.colorSwitchBase,
                   checked: classes.colorChecked,
@@ -123,12 +108,12 @@ class DashboardExpansionPanel extends Component {
                 }}
               />
             }
-            label={this.state.activeStatus}
+            label={this.props.reduxState.current360.info[0].dashboard_published ? 'Published' : 'Unpublished'}
           />
           <FormControlLabel
             control={
               <Switch
-                checked={this.state.public}
+                checked={this.props.reduxState.current360.info[0].dashboard_public}
                 onChange={this.handleChangePublic}
                 value="public"
                 classes={{
@@ -138,7 +123,7 @@ class DashboardExpansionPanel extends Component {
                 }}
               />
             }
-            label={this.state.publicStatus}
+            label={this.props.reduxState.current360.info[0].dashboard_public ? 'Public' : 'Private'}
           />
           
           <DashboardEditDialog current360Id={this.props.current360Id}/>

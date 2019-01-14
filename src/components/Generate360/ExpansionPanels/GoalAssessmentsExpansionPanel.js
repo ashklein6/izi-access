@@ -22,10 +22,7 @@ import Switch from '@material-ui/core/Switch';
 class GoalsAssessmentExpansionPanel extends Component {
 
  state = {
-  active: true,
-  activeStatus: 'Active',
-  public: false,
-  publicStatus: 'Private'
+
  };
 
  // handle the toggle of published/unpublished for the section
@@ -71,7 +68,7 @@ class GoalsAssessmentExpansionPanel extends Component {
           <div className={classes.status}>
             {/* Conditionally render "Published" on expansion panel summary if the section is active. */}
             {(this.props.reduxState.current360.info[0].goals_published === true) ?
-            <Typography variant="h2" className={classes.subheading}>Published,&nbsp;</Typography>
+            <Typography variant="h2" className={classes.subheading}>Visible,&nbsp;</Typography>
             : null }
             {/* Render "Public" on expansion panel summary if the section is active. */}
             <Typography variant="h2" className={classes.subheading}>{this.props.reduxState.current360.info[0].goals_public ? 'Public' : 'Private'}</Typography>

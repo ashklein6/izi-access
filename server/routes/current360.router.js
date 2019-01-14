@@ -478,7 +478,6 @@ router.put('/edit/goalsAssessment/:id', (async (req, res) => {
     console.log('in current360.router.js PUT for /current360/edit/goalsAssessment');
     let current360Id = req.params.id;
     let newData = req.body;
-    console.log('to update goals to:', newData);
 
     const client = await pool.connect();
 
@@ -488,13 +487,13 @@ router.put('/edit/goalsAssessment/:id', (async (req, res) => {
             if (!isNaN(key)) {
                 console.log('key.new:', newData[key].new, 'key.updated', newData[key].updated)
                 if (newData[key].new) {
-                    console.log('caught insert:', newData[key]);
+                    console.log('caught insert:', key);
                     await client.query(`INSERT INTO goals ("threesixty_id", "description", "desired", "delivered", "difference", "percent", "comments", "row_public")
                     VALUES ($1, $2, $3, $4, $5, $6, $7, $8);`, 
                     [current360Id, newData[key].description, newData[key].desired, newData[key].delivered,
                     newData[key].difference, newData[key].percent, newData[key].comments, newData[key].row_public])
                 } else if (newData[key].updated) {
-                    console.log('caught update:', newData[key]);
+                    console.log('caught update:', key);
                     await client.query(`UPDATE goals
                     SET threesixty_id = $2,
                         description = $3, 
@@ -511,6 +510,80 @@ router.put('/edit/goalsAssessment/:id', (async (req, res) => {
                     console.log('caught delete:', newData[key]);
                     await client.query(`DELETE FROM goals WHERE id = $1;`, [key]);
                 }
+            };
+        });
+        await client.query('COMMIT');
+    } catch (error) {
+        await client.query('ROLLBACK');
+        return res.status(500).send(error);
+    } finally {
+        client.release();
+        return res.sendStatus(201)
+    }
+}))
+
+// Edit the dashboard section
+router.put('/edit/dashboard/:id', (async (req, res) => {
+    console.log('in current360.router.js PUT for /current360/edit/dashboard');
+    let current360Id = req.params.id;
+    let newData = req.body;
+
+    const client = await pool.connect();
+
+    try {
+        await client.query('BEGIN');
+        Object.keys(newData).map(async (key) => {
+            if (!isNaN(key)) {
+                console.log('key.new:', newData[key].new, 'key.updated', newData[key].updated)
+                if (newData[key].new) {
+                    console.log('caught insert:', key);
+                    await client.query(`INSERT INTO dashboard ("threesixty_id", "row_title", "row_info")
+                    VALUES ($1, $2, $3);`, 
+                    [current360Id, newData[key].row_title, newData[key].row_info])
+                } else if (newData[key].updated) {
+                    console.log('caught update:', key);
+                    await client.query(`UPDATE dashboard
+                    SET row_title = $2,
+                        row_info = $3
+                    WHERE id = $1;`, 
+                    [newData[key].id, newData[key].row_title, newData[key].row_info])
+                } else if (newData[key] == 'deleted') {
+                    console.log('caught delete:', key);
+                    await client.query(`DELETE FROM dashboard WHERE id = $1;`, [key]);
+                }
+            };
+        });
+        await client.query('COMMIT');
+    } catch (error) {
+        await client.query('ROLLBACK');
+        return res.status(500).send(error);
+    } finally {
+        client.release();
+        return res.sendStatus(201)
+    }
+}))
+
+// Edit the dashboard section
+router.put('/edit/analysis_recommendation/:id', (async (req, res) => {
+    console.log('in current360.router.js PUT for /current360/edit/analysis_recommendation');
+    let current360Id = req.params.id;
+    let newData = req.body;
+
+    const client = await pool.connect();
+
+    try {
+        await client.query('BEGIN');
+        Object.keys(newData).map(async (key) => {
+            if (!isNaN(key)) {
+                console.log('key.new:', newData[key].new, 'key.updated', newData[key].updated)
+                if (newData[key].updated) {
+                    console.log('caught update:', key);
+                    await client.query(`UPDATE analysis_recommendation
+                    SET findings = $2,
+                        recommendations = $3
+                    WHERE id = $1;`, 
+                    [newData[key].id, newData[key].findings, newData[key].recommendations])
+                } 
             };
         });
         await client.query('COMMIT');

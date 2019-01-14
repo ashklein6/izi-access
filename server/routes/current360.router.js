@@ -233,38 +233,81 @@ router.get('/oral_report', (req, res) => {
     }
 });
 
-router.get('/chart_data', (req, res) => {
+router.get('/chart_data', async (req, res) => {
     let data = [];
+    let genData = [];
+    let genCount = [];
+    let ethData = [];
+    let ethCount = [];
     let current360Id = req.query.current360Id;
-    let queryText = `SELECT COUNT(*) - SUM(plans_to_tell::int) as plans_to_tell_no, SUM(plans_to_tell::int) as plans_to_tell_yes, 
+    let queryText1 = `SELECT COUNT(*) - SUM(plans_to_tell::int) as plans_to_tell_no, SUM(plans_to_tell::int) as plans_to_tell_yes, 
                     COUNT(*) - SUM(first_time::int) as first_time_no, SUM(first_time::int) as first_time_yes, 
                     COUNT(*) - SUM(child_abuse::int) as child_abuse_no, SUM(child_abuse::int) as child_abuse_yes, 
                     COUNT(*) - SUM(housing::int) as housing_no, SUM(housing::int) as housing_yes, 
                     COUNT(*) - SUM(transportation::int) as transportation_no, SUM(transportation::int) as transportation_yes,
                     COUNT(*) - SUM(education::int) as education_no, SUM(education::int) as education_yes  
                     FROM demographic WHERE threesixty_id = $1;`;
-    pool.query(queryText, [current360Id])
-    .then((response) => {
+    let queryText2 = `SELECT ethnic_category.ethnicity as ethnicity, COUNT(demographic.ethnic_category) as count FROM demographic
+                    JOIN ethnic_category ON ethnic_category.id = demographic.ethnic_category
+                    WHERE demographic.threesixty_id = $1 GROUP BY ethnic_category.ethnicity;`;
+    let queryText3 = `SELECT gen_category.generation as generation, COUNT(demographic.gen_category) as count FROM demographic
+                    JOIN gen_category ON gen_category.id = demographic.gen_category
+                    WHERE demographic.threesixty_id = $1 GROUP BY gen_category.generation;`;
+    const client = await pool.connect();
+    try {
+        await client.query('BEGIN');
+        const response1 = await client.query(queryText1, [current360Id]);
+        console.log('RESPONSE ! ', response1);
+        const response2 = await client.query(queryText2, [current360Id]);
+        console.log('RESPONSE @ ', response2);
+        for( let ob of response2.rows ) {
+            ethData.push(ob.ethnicity);
+            ethCount.push(ob.count);
+        };
+        const response3 = await client.query(queryText3, [current360Id]);
+        console.log('RESPONSE # ', response3);
+        for( let ob of response3.rows ) {
+            genData.push(ob.generation);
+            genCount.push(ob.count);
+        };
         data = [
-            {title: 'plans_to_tell', 
-            data: [response.rows[0].plans_to_tell_yes, response.rows[0].plans_to_tell_no],
+            {title: 'Plans to tell someone', 
+            data: [response1.rows[0].plans_to_tell_yes, response1.rows[0].plans_to_tell_no],
+            labels: ['Yes', 'No'],
             legend: true},
-            {title: 'first_time', 
-            data: [response.rows[0].first_time_yes, response.rows[0].first_time_no]},
-            {title: 'child_abuse', 
-            data: [response.rows[0].child_abuse_yes, response.rows[0].child_abuse_no]},
-            {title: 'housing',
-            data: [response.rows[0].housing_yes, response.rows[0].housing_no]},
-            {title: 'transportation', 
-            data: [response.rows[0].transportation_yes, response.rows[0].transportation_no]},
-            {title: 'education', 
-            data: [response.rows[0].education_yes, response.rows[0].education_no]},
+            {title: 'First time at the Table', 
+            data: [response1.rows[0].first_time_yes, response1.rows[0].first_time_no],
+            labels: ['Yes', 'No']},
+            {title: 'Interested in future conversations about preventing child abuse and neglect', 
+            data: [response1.rows[0].child_abuse_yes, response1.rows[0].child_abuse_no],
+            labels: ['Yes', 'No']},
+            {title: 'Interested in future conversations about housing',
+            data: [response1.rows[0].housing_yes, response1.rows[0].housing_no],
+            labels: ['Yes', 'No']},
+            {title: 'Interested in future conversations about transportation', 
+            data: [response1.rows[0].transportation_yes, response1.rows[0].transportation_no],
+            labels: ['Yes', 'No']},
+            {title: 'Interested in future conversations about education', 
+            data: [response1.rows[0].education_yes, response1.rows[0].education_no],
+            labels: ['Yes', 'No']},
+            {title: 'Ethnicity breakdown', 
+            data: ethCount,
+            labels: ethData,
+            legend: true},
+            {title: 'Generation breakdown', 
+            data: genCount,
+            labels: genData,
+            legend: true},
         ];
-        res.send(data);
-    })
-    .catch(() => {
-        res.sendStatus(500);
-    })
+        await client.query('COMMIT'); 
+    } catch (error) {
+        await client.query('ROLLBACK');
+        console.log('error doing the charts');
+        throw error;   
+    } finally {
+        client.release();
+    }
+    return res.send(data);
 });
 
 /**

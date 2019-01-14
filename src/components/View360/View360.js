@@ -182,14 +182,20 @@ class View360 extends Component {
               <div id="trueFalse" key={data.title}>
                 <Pie
                   data={{
-                    labels: ['Yes', 'No'],
+                    labels: data.labels,
                     datasets: [
                       {
                         data: 
                         data.data,
                         backgroundColor: [
-                          'purple',
-                          'red',
+                          '#7d52a1',
+                          '#d71f2e',
+                          '#ec008c',
+                          '#eb983f',
+                          '#633589',
+                          '#aa0f18',
+                          '#de0082',
+                          '#d17818',
                         ]
                       }
                     ]
@@ -197,9 +203,9 @@ class View360 extends Component {
                   height={50}
                   options={{
                     title:{
-                      display:false,
-                      text: 'Are you even good?',
-                      fontSize:25
+                      display: true,
+                      text: data.title,
+                      fontSize:15
                     },
                     legend:{
                       display: data.legend,

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import colors from '../App/colors';
 
 // Material-UI
 import { withStyles } from '@material-ui/core/styles';
@@ -196,8 +197,7 @@ class CreateUser extends Component {
             </Button>
             <br />
             <Button
-              className={classes.button}
-              variant="contained"
+              className={classes.buttonDemo}
               onClick={this.handleDemo}
               name="demo"
               value="demo"
@@ -243,6 +243,12 @@ const styles = {
   button: {
     width: 200,
     marginTop: 15
+  },
+  buttonDemo: {
+    backgroundColor: 'inherit',
+    color: colors.lightGrey,
+    width: 200,
+    marginTop: 15,
   }
 };
 

@@ -804,115 +804,115 @@ VALUES
 	(
 	1,
 	'
-	➢	Primary prevention includes access
-	➢	Provide [sic] and resources before it becomes a problem – proactive 
-	➢	Diseases of despair ➔ gloomy 
-	➢	Educate adults and children at [the] same time 
-	➢	Change social norms around school 
+* Primary prevention includes access
+* Provide [sic] and resources before it becomes a problem – proactive 
+* Diseases of despair ➔ gloomy 
+* Educate adults and children at [the] same time 
+* Change social norms around school 
 
-	➢	Noticing symptoms of diabetes and chronic pain to treat the entire body (the leaves analogy)
-	➢	Look at the patient holistically
-	➢	Normalize the symptoms and the response to dysfunctional situations
-	➢	Prevention: surrounding people with people, making sure there is a support system for folks (having there [sic] back)
-	➢	Prevention might not happen in a clinical setting (make sure people have peace of mind)
-	➢	Make systems reflect what community needs. This work happens in community and we need systems that reflect what community needs. Reach out to social connections and do a check-in. Tell people you love them.
+* Noticing symptoms of diabetes and chronic pain to treat the entire body (the leaves analogy)
+* Look at the patient holistically
+* Normalize the symptoms and the response to dysfunctional situations
+* Prevention: surrounding people with people, making sure there is a support system for folks (having there [sic] back)
+* Prevention might not happen in a clinical setting (make sure people have peace of mind)
+* Make systems reflect what community needs. This work happens in community and we need systems that reflect what community needs. Reach out to social connections and do a check-in. Tell people you love them.
 
-	➢	How to meet despair?
-		o	Respect
-		o	Human-to-human connection
-		o	You care
-		o	Speak truth, ID “their gifts” 
+* How to meet despair?
+    * Respect
+    * Human-to-human connection
+    * You care
+    * Speak truth, ID “their gifts” 
 
-	➢	Recognizing role of white privilege and capitalism
-	➢	Historical trauma – of the oppressed and oppressors
-	➢	Trauma-based or trauma-informed model of care 
-	➢	Narrative medicine 
-		o	Teaching doctors to listen to human stories rather than just listening for symptoms 
-	➢	Mind-Body-Spirit skills for teachers, for restaurant workers, for ER staff  
-	➢	Using art as safe space
-	➢	Figuring out ways to connect people in their own communities
+* Recognizing role of white privilege and capitalism
+* Historical trauma – of the oppressed and oppressors
+* Trauma-based or trauma-informed model of care 
+* Narrative medicine 
+    * Teaching doctors to listen to human stories rather than just listening for symptoms 
+* Mind-Body-Spirit skills for teachers, for restaurant workers, for ER staff  
+* Using art as safe space
+* Figuring out ways to connect people in their own communities
 
-	➢	Keeping kids safe ➔ supporting parents 
-	➢	Suicide
-	➢	Disease [unclear handwriting] connection to be heard ➔ heart story
-	➢	Bringing resources to family ➔ workers who treat
-	➢	Insurance versus non-insurance
-	➢	Food/shelter – housing is healthcare 
-	➢	Leadership / modeling 
-	➢	Find ways to identify people are discounted and provide connectors 
-	➢	Important not to be in the [illegible] ➔ give time for storytelling
-	', 
+* Keeping kids safe ➔ supporting parents 
+* Suicide
+* Disease [unclear handwriting] connection to be heard ➔ heart story
+* Bringing resources to family ➔ workers who treat
+* Insurance versus non-insurance
+* Food/shelter – housing is healthcare 
+* Leadership / modeling 
+* Find ways to identify people are discounted and provide connectors 
+* Important not to be in the [illegible] ➔ give time for storytelling
+', 
 	1
 	),
 	(
 	2,
 	'
-	➢	Affects transportation, access to resources
-	➢	Amplifies
-	➢	Impacts access to resources
-	➢	Inability to seek resources
-	➢	Housing First models
-	➢	Penny a Pill
-	➢	Coding and zoning laws for housing
-	➢	Social connectedness is critical!
+* Affects transportation, access to resources
+* Amplifies
+* Impacts access to resources
+* Inability to seek resources
+* Housing First models
+* Penny a Pill
+* Coding and zoning laws for housing
+* Social connectedness is critical!
 
-	➢	Yes!!!
-	➢	People need to feel welcomed in the place they live
-	➢	Feel connected / not isolated 
+* Yes!!!
+* People need to feel welcomed in the place they live
+* Feel connected / not isolated 
 
-	➢	Listen to stories ➔ everyone is in pain
-	➢	Choose kindness ➔ versus be [sic] strong
-	➢	Kindness, humility
+* Listen to stories ➔ everyone is in pain
+* Choose kindness ➔ versus be [sic] strong
+* Kindness, humility
 	',
 	1
 	),
 	(
 	3,
 	'
-	➢	Ability to be / stay connected with community
-	➢	Q: Are there things to help a person survive?
-		o	People / community – sense of belonging / social connectedness
-	➢	Ability to BE a part of the communities we work / help
-	➢	Sense of being accepting, comforting (comfort level)
-	➢	How did / do people get to that state (of suicide?)
-		o	Social connectedness
-	➢	Acknowledging that people are in pain, trusting and building relationships
-	➢	Personal vulnerability – are we willing to be vulnerable?
+* Ability to be / stay connected with community
+* Q: Are there things to help a person survive?
+    * People / community – sense of belonging / social connectedness
+* Ability to BE a part of the communities we work / help
+* Sense of being accepting, comforting (comfort level)
+* How did / do people get to that state (of suicide?)
+    * Social connectedness
+* Acknowledging that people are in pain, trusting and building relationships
+* Personal vulnerability – are we willing to be vulnerable?
 	',
 	1
 	),
 	(
 	4,
-	'n/a',
+	null,
 	1
 	),
 	(
 	5,
 	'
-	➢	MH + Well 
-	➢	How do people [sic]
+* MH + Well 
+* How do people [sic]
 
-	➢	Positive Thriving 
-		o	Talk about what takes to be MH
-		o	Define mental health 
-		o	MH is more than absence of illness
-		o	Community and sense of belonging
-	➢	Bring self-care conversations to a policy convo [conversation]
-		o	What are the barriers and systemic challenges 
-		o	Know but need to hold space for [this]
-	➢	Minneapolis [is] facing housing crisis!
+* Positive Thriving 
+    * Talk about what takes to be MH
+    * Define mental health 
+    * MH is more than absence of illness
+    * Community and sense of belonging
+* Bring self-care conversations to a policy convo [conversation]
+    * What are the barriers and systemic challenges 
+    * Know but need to hold space for [this]
+* Minneapolis [is] facing housing crisis!
 
-	➢	Belonging 
-		o	Relationships	
-	➢	Build in peer opposition 
-		o	Consumers 
-		o	 Provides facing vicarious trauma 
-	➢	Workplace Policies 
-		o	11 floating vacation days
-		o	Quiet room
-		o	Change culture / understanding MH [mental health] is valuable 
-		o	Being able to leave a meeting
-			▪	Trusting employees
+* Belonging 
+    * Relationships	
+* Build in peer opposition 
+    * Consumers 
+    * Provides facing vicarious trauma 
+* Workplace Policies 
+    * 11 floating vacation days
+    * Quiet room
+    * Change culture / understanding MH [mental health] is valuable 
+    * Being able to leave a meeting
+        * Trusting employees
 	',
 	1
 	)
@@ -2008,46 +2008,46 @@ VALUES
 	('1', 
 	'What is one word summarizing your experience here today (bolded in the transcript below) and one action you have been inspired to commit to as a result of today’s unConference?', 
 	'
-	INSPIRED: I’m planning to follow through with people in this room to see how we can shift systems.
-	ENERGIZED: I will connect with people I met here today who are outside of my world.
-	REJUVENATION: I’ve had to take a break from working in Human Services, but today has inspired me to pick up where I left off.
-	INSPIRED: Give people space to tell their story.
-	PLAYFUL: Inspired to keep showing up as a vulnerable and playful leader.
-	GRATEFUL/OVERWHELMED: Continue working for change.
-	ABUNDANT: I want to take this example of abundance to a group I work with in NW MN on reducing alcohol and substance abuse.
-	REMINDED: Start by following up on all of the business cards I got today.
-	EXPANDED: Work with a mindfulness practitioner to bring that practice to the homeless community.
-	INSPIRED: Do what is good and what is life-affirming.
-	EDUCATED (ABOUT BEYONCE): It was good to get out of my own little world to see other perspectives on what I do. I’ll take this back to my students and share with them what I learned today, as well as to my research.
-	INSPIRED: Take what happened to my workplace and see what we can do.
-	INSPIRED: More peer support!
-	GROUNDED: I’m going to reflect and notice how I’m feeling, continue to take that energy forward.
-	CONNECTED: Build on community connections that exist and take new action.
-	INSPYRED (WITH A Y): If I could just inspire myself, well that’s the action I need.
-	APPRECIATION: I will be responsive to the people who asked to talk more to me or get stuff from me and continue to work to advanced systems change.
-	LIFTED: Make more connections.
-	EMPOWERED: I’ll go back to my community and continue to work to promote lifestyle medicine education and self-care.
-	EXCITED: To get going with lobbying season
-	ENLIGHTENED: Walk out with more friends than I walked in.
-	INSPIRED AND HOPEFUL: Everyone in this room is adding to humanity, we need more actions to build on our humanity.
-	WHOLE: I feel like I’ve been spoken to in many different realms, I’m going to follow up with all you folks to increase wellness in school.
-	CHALLENGED: My opinions have been challenged about nine medical ways people can be happier and healthier.
-	"GRUNTLED": I often think the opposite of hopelessness isn’t hope, it’s certainty. I need to take the action of doing nothing as a form of self-care, just being and having a calm way of connecting to get to the work I do in the 12-step arena and medical marijuana.
-	HOPEFUL: I came in not knowing what to expect being military myself, I am familiar with resilience and I love social justice – so thank you to everyone here.
-	CONTEMPLATIVE: Still thinking about self-care and how I can best listen to the voices I connect with in my job and provide advocacy or others who can provide needed resources.
-	EMOTIONAL: I want to be better at acknowledging the pain of the people I work with.
-	CONNECTED: Feeling a sense of momentum.
-	OPTIMISTIC: Know that there’s an undercurrent of change going on.
-	ENLIGHTENED THROUGH CONVERSATIONS WITH PEOPLE OF DIFFERENT CULTURES AND BACKGROUNDS: Encouraged to make connections with people who can help with our work.
-	POSITIVE: Knowing that we’re all working toward a positive outcome, I feel positive.
-	SAFE: I feel safe to take the time to hear stories, to take time for self-care, to acknowledge the trauma that until today I didn’t realize brought me here; safe because I found a community – every person I talked to, their hearts are so much bigger than I could have guessed; safe, moving into the future, knowing that you’re there.
-	GRATEFUL: My heart is so full, I escaped the stress in the office today.
-	GRATEFUL: It’s unique to have everyone show up authentically and speak your truth – it doesn’t often happen in a professional context. Also contemplate about how to embed this in my work.
-	CONTEMPLATIVE: To think about how to embed this work in the opportunities I have to influence things.
-	CONNECTEDNESS: When community shows up, cares for one another and maximizes that connection – that’s healthy power.
-	COMMUNITY: I haven’t been feeling very connected, but this is a space where I’ve been feeling connected to community.
-	POTENT: There’s so much potency here in this room, it’s juicy; there’s this amazing potential that we are on the cusp of change, and this must change. We are all making this change together – I’m going to take all the things we’re collecting here today, turn it into a beautiful report and send that information back to you.
-	')
+* INSPIRED: I’m planning to follow through with people in this room to see how we can shift systems.
+* ENERGIZED: I will connect with people I met here today who are outside of my world.
+* REJUVENATION: I’ve had to take a break from working in Human Services, but today has inspired me to pick up where I left off.
+* INSPIRED: Give people space to tell their story.
+* PLAYFUL: Inspired to keep showing up as a vulnerable and playful leader.
+* GRATEFUL/OVERWHELMED: Continue working for change.
+* ABUNDANT: I want to take this example of abundance to a group I work with in NW MN on reducing alcohol and substance abuse.
+* REMINDED: Start by following up on all of the business cards I got today.
+* EXPANDED: Work with a mindfulness practitioner to bring that practice to the homeless community.
+* INSPIRED: Do what is good and what is life-affirming.
+* EDUCATED (ABOUT BEYONCE): It was good to get out of my own little world to see other perspectives on what I do. I’ll take this back to my students and share with them what I learned today, as well as to my research.
+* INSPIRED: Take what happened to my workplace and see what we can do.
+* INSPIRED: More peer support!
+* GROUNDED: I’m going to reflect and notice how I’m feeling, continue to take that energy forward.
+* CONNECTED: Build on community connections that exist and take new action.
+* INSPYRED (WITH A Y): If I could just inspire myself, well that’s the action I need.
+* APPRECIATION: I will be responsive to the people who asked to talk more to me or get stuff from me and continue to work to advanced systems change.
+* LIFTED: Make more connections.
+* EMPOWERED: I’ll go back to my community and continue to work to promote lifestyle medicine education and self-care.
+* EXCITED: To get going with lobbying season
+* ENLIGHTENED: Walk out with more friends than I walked in.
+* INSPIRED AND HOPEFUL: Everyone in this room is adding to humanity, we need more actions to build on our humanity.
+* WHOLE: I feel like I’ve been spoken to in many different realms, I’m going to follow up with all you folks to increase wellness in school.
+* CHALLENGED: My opinions have been challenged about nine medical ways people can be happier and healthier.
+* "GRUNTLED": I often think the opposite of hopelessness isn’t hope, it’s certainty. I need to take the action of doing nothing as a form of self-care, just being and having a calm way of connecting to get to the work I do in the 12-step arena and medical marijuana.
+* HOPEFUL: I came in not knowing what to expect being military myself, I am familiar with resilience and I love social justice – so thank you to everyone here.
+* CONTEMPLATIVE: Still thinking about self-care and how I can best listen to the voices I connect with in my job and provide advocacy or others who can provide needed resources.
+* EMOTIONAL: I want to be better at acknowledging the pain of the people I work with.
+* CONNECTED: Feeling a sense of momentum.
+* OPTIMISTIC: Know that there’s an undercurrent of change going on.
+* ENLIGHTENED THROUGH CONVERSATIONS WITH PEOPLE OF DIFFERENT CULTURES AND BACKGROUNDS: Encouraged to make connections with people who can help with our work.
+* POSITIVE: Knowing that we’re all working toward a positive outcome, I feel positive.
+* SAFE: I feel safe to take the time to hear stories, to take time for self-care, to acknowledge the trauma that until today I didn’t realize brought me here; safe because I found a community – every person I talked to, their hearts are so much bigger than I could have guessed; safe, moving into the future, knowing that you’re there.
+* GRATEFUL: My heart is so full, I escaped the stress in the office today.
+* GRATEFUL: It’s unique to have everyone show up authentically and speak your truth – it doesn’t often happen in a professional context. Also contemplate about how to embed this in my work.
+* CONTEMPLATIVE: To think about how to embed this work in the opportunities I have to influence things.
+* CONNECTEDNESS: When community shows up, cares for one another and maximizes that connection – that’s healthy power.
+* COMMUNITY: I haven’t been feeling very connected, but this is a space where I’ve been feeling connected to community.
+* POTENT: There’s so much potency here in this room, it’s juicy; there’s this amazing potential that we are on the cusp of change, and this must change. We are all making this change together – I’m going to take all the things we’re collecting here today, turn it into a beautiful report and send that information back to you.
+')
 ;
 
 INSERT INTO threesixty_freeform (threesixty_reports_id, title, content, row_public)

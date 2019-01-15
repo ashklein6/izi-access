@@ -37,8 +37,8 @@ class Manage360s extends Component {
       <div >
         <Button variant="contained" onClick={this.returnToDash}>Return to Dashboard</Button>
         <span>
-          <Typography variant="h4" className={classes.header}>Unpublished 360s</Typography>
           <Button variant="contained" onClick={this.goToGenerator}>Create New 360</Button>
+          <Typography variant="h4" className={classes.header}>Unpublished 360s</Typography>
         </span>
         <span>
           <Typography>Search By</Typography>

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import colors from '../App/colors';
 
 // React-confirm-alert
 import { confirmAlert } from 'react-confirm-alert'; // Import
@@ -152,8 +153,8 @@ class Create360 extends Component {
           Return to Dashboard
         </Button>
         <Button 
-          variant="contained"
           onClick={this.handleDemo}
+          style={{color: 'white'}}
         >
           Demo Fill
         </Button>

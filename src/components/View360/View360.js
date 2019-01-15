@@ -324,7 +324,7 @@ const styles = {
     textAlign: 'center'
   },
   chart: {
-    // maxHeight: 300
+    padding: 20
   },
   report: {
     height: 'calc(100vh - 122px)',

@@ -19,7 +19,7 @@ import Divider from '@material-ui/core/Divider';
 class View360 extends Component {
 
   state = {
-    current360Id: this.props.match.params.id
+    current360Id: this.props.match.params.id,
   };
 
   // navigates to /
@@ -30,6 +30,7 @@ class View360 extends Component {
 
   componentDidMount() {
     this.props.dispatch({ type: 'FETCH_360', payload: {current360Id: this.state.current360Id} });
+    this.props.dispatch({ type: 'FETCH_USER_INFO' });
   }
 
   render() {
@@ -60,7 +61,14 @@ class View360 extends Component {
             <Typography className={classes.subHeader}>{moment(this.props.reduxState.current360.info[0].date).format('ll')}</Typography>
             <Divider className={classes.middleDivider} />
           </section>
-          {this.props.reduxState.current360.info[0].goals_published ?
+          {// Check if section is published
+          this.props.reduxState.current360.info[0].goals_published && 
+          // Then check if section is public
+          (this.props.reduxState.current360.info[0].goals_public ||
+          // OR if user is a client with access
+          (this.props.reduxState.userControls.user.some(e => e.id === String(this.state.current360Id))
+          // OR if user is an employee or admin
+          || this.props.reduxState.user.id >= 4)) ?
           <section className={classes.section}>
             {/* anchor div for sidebar scroll placement */}
             <div style={{position: 'relative'}}>
@@ -79,7 +87,14 @@ class View360 extends Component {
               cellVariables={['description', 'desired', 'delivered', 'difference', 'percent', 'comments']} 
             />
           </section> : null}
-          {this.props.reduxState.current360.info[0].dashboard_published ?
+          {// Check if section is published
+          this.props.reduxState.current360.info[0].dashboard_published && 
+          // Then check if section is public
+          (this.props.reduxState.current360.info[0].dashboard_public ||
+          // OR if user is a client with access
+          (this.props.reduxState.userControls.user.some(e => e.id === String(this.state.current360Id))
+          // OR if user is an employee or admin
+          || this.props.reduxState.user.id >= 4)) ?
           <section className={classes.section}>
             {/* anchor div for sidebar scroll placement */}
             <div style={{position: 'relative'}}>
@@ -98,7 +113,14 @@ class View360 extends Component {
               cellVariables={['row_title', 'row_info']} 
             />
           </section> : null}
-          {this.props.reduxState.current360.info[0].threesixty_reports_published ?
+          {// Check if section is published
+          this.props.reduxState.current360.info[0].threesixty_reports_published && 
+          // Then check if section is public
+          (this.props.reduxState.current360.info[0].threesixty_reports_public ||
+          // OR if user is a client with access
+          (this.props.reduxState.userControls.user.some(e => e.id === String(this.state.current360Id))
+          // OR if user is an employee or admin
+          || this.props.reduxState.user.id >= 4)) ?
           <section className={classes.section}>
             {/* anchor div for sidebar scroll placement */}
             <div style={{position: 'relative'}}>
@@ -110,13 +132,13 @@ class View360 extends Component {
             </div>
             {/* section content */}
             <div className={classes.threesixtyReport}>
-              <Typography variant="h5" className={classes.header5}>The 360 | Event Overview</Typography>
+              <Typography variant="h5" className={classes.header5}>The 360 Report | Event Overview</Typography>
                 <Typography variant="h6" className={classes.header6}>Demographics</Typography>
                   <div className={classes.paragraph}>
                     {this.props.reduxState.current360.threesixty_reports.map((row, index) => 
                       <MarkDownOutput display={row.demographic} key={index}/>)}
                   </div>
-                <Typography variant="h6" className={classes.header6}>The 360 | Summary, Overview</Typography>
+                <Typography variant="h6" className={classes.header6}>The 360 Report | Summary, Overview</Typography>
                   <div className={classes.paragraph}>
                     {this.props.reduxState.current360.threesixty_reports.map((row, index) => 
                       <MarkDownOutput display={row.summary} key={index}/>)}
@@ -130,14 +152,40 @@ class View360 extends Component {
                 <div className={classes.paragraph}>
                   {this.props.reduxState.current360.question_set.map((row, index) => 
                     <React.Fragment key={`question-set-${index}`}>
-                      <Typography variant="h6" className={classes.header6}>Question Importance Number {index + 1}</Typography>
+                      <Typography variant="h6" className={classes.header6}>{row.set_title}</Typography>
                       <MarkDownOutput display={row.breakdown} key={index}/>
+                      {row.response !== null ? 
+                        <React.Fragment>
+                          <Typography variant="h6">Responses:</Typography>
+                          <MarkDownOutput display={row.response} key={'response'+index}/> 
+                        </React.Fragment>: null}
                     </React.Fragment>
                   )}
                 </div>
+                <Typography variant="h5" className={classes.header5}>The 360 Report | Oral Report Notes</Typography>
+                <Typography variant="h6" className={classes.header6}>Mindstorm Oral Report Notes</Typography>
+                  <div className={classes.paragraph}>
+                    {this.props.reduxState.current360.oral_report.map((row, index) => 
+                      <p key={index}><strong>Group&nbsp;{row.group_num}:&nbsp;</strong>{row.response}</p>)}
+                  </div>
+                <Typography variant="h5" className={classes.header5}>Circle Share-In</Typography>
+                  <div className={classes.paragraph}>
+                    {this.props.reduxState.current360.circle_share.map((row, index) => 
+                      <React.Fragment key={index}>
+                        <p><strong>{row.question}</strong></p>
+                        <MarkDownOutput display={row.responses}/> 
+                    </React.Fragment>)}
+                  </div>
             </div>
           </section> : null }
-          {this.props.reduxState.current360.info[0].analysis_recommendation_published ?
+          {// Check if section is published
+          this.props.reduxState.current360.info[0].analysis_recommendation_published && 
+          // Then check if section is public
+          (this.props.reduxState.current360.info[0].analysis_recommendation_public ||
+          // OR if user is a client with access
+          (this.props.reduxState.userControls.user.some(e => e.id === String(this.state.current360Id))
+          // OR if user is an employee or admin
+          || this.props.reduxState.user.id >= 4))  ?
           <section className={classes.section}>
             {/* anchor div for sidebar scroll placement */}
             <div style={{position: 'relative'}}>
@@ -158,7 +206,14 @@ class View360 extends Component {
                     <MarkDownOutput display={row.recommendations} key={index}/>)}
                 </div>
           </section> : null }
-          {this.props.reduxState.current360.info[0].demographics_published ?
+          {// Check if section is published
+          this.props.reduxState.current360.info[0].demographics_published && 
+          // Then check if section is public
+          (this.props.reduxState.current360.info[0].demographics_public ||
+          // OR if user is a client with access
+          (this.props.reduxState.userControls.user.some(e => e.id === String(this.state.current360Id))
+          // OR if user is an employee or admin
+          || this.props.reduxState.user.id >= 4)) ?
           <section className={classes.section}>
             {/* anchor div for sidebar scroll placement */}
             <div style={{position: 'relative'}}>
@@ -200,8 +255,9 @@ class View360 extends Component {
               <Typography variant="h4" className={classes.sectionHeader}>IZI Demographic Data Charts</Typography>
             </div>
             {/* <TrueFalse data={this.props.reduxState.current360.chart_data}/> */}
+            <Grid container>
             {this.props.reduxState.current360.chart_data.map(data => (
-              <div id="trueFalse" key={data.title}>
+              <Grid item xs={data.grid_xs} sm={data.grid_sm} id="trueFalse" className={classes.chart} key={data.title}>
                 <Pie
                   data={{
                     labels: data.labels,
@@ -210,19 +266,19 @@ class View360 extends Component {
                         data: 
                         data.data,
                         backgroundColor: [
-                          '#7d52a1',
-                          '#d71f2e',
-                          '#ec008c',
-                          '#eb983f',
-                          '#633589',
-                          '#aa0f18',
-                          '#de0082',
-                          '#d17818',
+                          colors.purple,
+                          colors.red,
+                          colors.pink,
+                          colors.orange,
+                          colors.purpleHover,
+                          colors.redHover,
+                          colors.pinkHover,
+                          colors.orangeHover,
                         ]
                       }
                     ]
                   }}
-                  height={50}
+                  height={200}
                   options={{
                     title:{
                       display: true,
@@ -232,11 +288,13 @@ class View360 extends Component {
                     legend:{
                       display: data.legend,
                       position: 'left'
-                    }
+                    },
+                    responsive: true,
                   }}
                 />
-              </div>
+              </Grid>
             ))}
+            </Grid>
           </section> : null }
           {/* <section className={classes.section}>
             //anchor div for sidebar scroll placement
@@ -264,6 +322,9 @@ const styles = {
   },
   centerText: {
     textAlign: 'center'
+  },
+  chart: {
+    // maxHeight: 300
   },
   report: {
     height: 'calc(100vh - 122px)',

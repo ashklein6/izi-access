@@ -14,6 +14,7 @@ function* fetchUserInfo() {
 function* add360Access(action) {
   try {
     yield call(axios.post, '/userControls/add', {data: action.payload});
+    yield put({ type: 'FETCH_360_CLIENTS', payload: action.payload});
   } 
   catch (error) {
     console.log('error', error);
@@ -24,6 +25,17 @@ function* remove360Access(action) {
   try {
     yield call(axios.delete, `/userControls/threesixty/${action.payload}`);
     yield put({type: 'FETCH_ALL_USERS'});
+
+  } 
+  catch (error) {
+    console.log('error', error);
+  }
+};
+
+function* remove360AccessFrom360(action) {
+  try {
+    yield call(axios.delete, `/userControls/threesixty/${action.payload.threesixtyUserId}`);
+    yield put({type: 'FETCH_360_CLIENTS', payload: action.payload});
 
   } 
   catch (error) {
@@ -64,15 +76,6 @@ function* editCurrentUserInfo(action) {
   }
 };
 
-function* changeUserStatus() {
-  try {
-    
-  } 
-  catch (error) {
-    console.log('error', error);
-  }
-};
-
 function* deletePendingRequest(action) {
   try {
     yield call(axios.delete, `/userControls/${action.payload}`);
@@ -87,9 +90,9 @@ function* userControlsSaga() {
   yield takeLatest( 'FETCH_USER_INFO', fetchUserInfo );
   yield takeLatest( 'ADD_360_ACCESS', add360Access );
   yield takeLatest( 'REMOVE_360_ACCESS', remove360Access );
+  yield takeLatest( 'REMOVE_360_ACCESS_FROM_360', remove360AccessFrom360 );
   yield takeLatest( 'REQUEST_360_ACCESS', request360Access );
   yield takeLatest( 'EDIT_USER_INFO', editUserInfo );
-  yield takeLatest( 'CHANGE_USER_STATUS', changeUserStatus );
   yield takeLatest( 'DELETE_PENDING_REQUEST', deletePendingRequest );
   yield takeLatest( 'EDIT_CURRENT_USER_INFO', editCurrentUserInfo );
 }

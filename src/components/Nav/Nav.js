@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import './Nav.css';
-
+import MarnitaLogo from '../HomePage/marnita_logo.png';
 // Material-UI
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -23,6 +23,15 @@ const colors = {
 };
 
 class Nav extends Component {
+
+  employee = (user) => {
+    if(user >= 4) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   render() {
     const { classes } = this.props;
 
@@ -31,13 +40,14 @@ class Nav extends Component {
         <AppBar className={classes.nav} position="fixed">
           <Toolbar>
             <Link to="/home">
+              <img src={MarnitaLogo} alt="Marnita's Table Placeholder" className={classes.image}/>
               <Typography className={classes.title} variant="h4">
                 MarnitaConnect
               </Typography>
             </Link>
   
             <div className={classes.grow} />
-              {this.props.reduxState.user.id && (
+              {this.employee(this.props.reduxState.user.access_id) && (
                 <>
                   <Link className="nav-link" to="/dashboard">
                     Dashboard
@@ -72,6 +82,10 @@ const styles = {
   grow: {
     flexGrow: 1,
   },
+  image: {
+    height: '2.125rem',
+    marginRight: 10
+  },
   menuButton: {
     marginLeft: -12,
     marginRight: 20,
@@ -81,7 +95,8 @@ const styles = {
     backgroundColor: colors.purple,
   },
   title: {
-    color: '#fff'
+    color: '#fff',
+    display: 'inline-block'
   }
 };
 

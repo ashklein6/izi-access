@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import colors from '../../App/colors';
-import TableTemplate from '../TableTemplate/TableTemplate';
+import MarkDownOutput from '../../MarkDownEditor/MarkdownOutput';
 
 // import edit dialog component
-import DashboardEditDialog from '../EditDialogs/DashboardEditDialog';
+// import AnalysisRecEditDialog from '../EditDialogs/AnalysisRecEditDialog';
 
 // Material-UI
 import { withStyles } from '@material-ui/core/styles';
@@ -20,7 +20,7 @@ import Paper from '@material-ui/core/Paper';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 
-class DashboardExpansionPanel extends Component {
+class ThreesixtyMindstormExpansionPanel extends Component {
 
  state = {
 
@@ -28,29 +28,29 @@ class DashboardExpansionPanel extends Component {
 
  // handle the toggle of published/unpublished for the section
  handleChangePublished = () => {
-  if (this.props.reduxState.current360.info[0].dashboard_published) {
+  if (this.props.reduxState.current360.info[0].threesixty_reports_published) {
    // If section is being unpublished, dispatch action to unpublish:
-    this.props.dispatch({ type: 'CHANGE_PUBLISH_STATUS', payload: {field: 'dashboard_published', status: false, current360Id: this.props.current360Id}})
+    this.props.dispatch({ type: 'CHANGE_PUBLISH_STATUS', payload: {field: 'threesixty_reports_published', status: false, current360Id: this.props.current360Id}})
   } else {
    // If section is being published, dispatch action to publish:
-   this.props.dispatch({ type: 'CHANGE_PUBLISH_STATUS', payload: {field: 'dashboard_published', status: true, current360Id: this.props.current360Id}})
+   this.props.dispatch({ type: 'CHANGE_PUBLISH_STATUS', payload: {field: 'threesixty_reports_published', status: true, current360Id: this.props.current360Id}})
   }
 } // end handleChangePublished
 
  // handle the toggle of public/private for the section
  handleChangePublic = () => {
-  if (this.props.reduxState.current360.info[0].dashboard_public) {
+  if (this.props.reduxState.current360.info[0].threesixty_reports_public) {
    // If section is being changed to private, dispatch action to make private:
-    this.props.dispatch({ type: 'CHANGE_PUBLIC_STATUS', payload: {field: 'dashboard_public', status: false, current360Id: this.props.current360Id}})
+    this.props.dispatch({ type: 'CHANGE_PUBLIC_STATUS', payload: {field: 'threesixty_reports_public', status: false, current360Id: this.props.current360Id}})
   } else {
    // If section is being changed to public, dispatch action to make public:
-   this.props.dispatch({ type: 'CHANGE_PUBLIC_STATUS', payload: {field: 'dashboard_public', status: true, current360Id: this.props.current360Id}})
+   this.props.dispatch({ type: 'CHANGE_PUBLIC_STATUS', payload: {field: 'threesixty_reports_public', status: true, current360Id: this.props.current360Id}})
   }
 } // end handleChangePublished
 
  componentDidMount() {
    // Get section when loaded
-   this.props.dispatch({ type: 'FETCH_DASHBOARD', payload: {section: 'dashboard', current360Id: this.props.current360Id} });
+   this.props.dispatch({ type: 'FETCH_THREESIXTY_REPORTS', payload: {section: 'threesixty_reports', current360Id: this.props.current360Id} });
  }
 
  render() {
@@ -63,16 +63,16 @@ class DashboardExpansionPanel extends Component {
         {/* Information on the expansion panel's summary bar (always shows) */}
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />} className={classes.summary}>
           <div className={classes.title}>
-            <Typography variant="h2" className={classes.heading}>Dashboard</Typography>
+            <Typography variant="h2" className={classes.heading}>360 Report - Mindstorm</Typography>
           </div>
 
           <div className={classes.status}>
             {/* Conditionally render "Published" on expansion panel summary if the section is active. */}
-            {(this.props.reduxState.current360.info[0].dashboard_published === true) ?
+            {(this.props.reduxState.current360.info[0].threesixty_reports_published === true) ?
             <Typography variant="h2" className={classes.subheading}>Visible,&nbsp;</Typography>
             : null }
             {/* Render "Public" on expansion panel summary if the section is active. */}
-            <Typography variant="h2" className={classes.subheading}>{this.props.reduxState.current360.info[0].dashboard_public ? 'Public' : 'Private'}</Typography>
+            <Typography variant="h2" className={classes.subheading}>{this.props.reduxState.current360.info[0].threesixty_reports_public ? 'Public' : 'Private'}</Typography>
           </div>
 
 
@@ -81,13 +81,16 @@ class DashboardExpansionPanel extends Component {
         {/* Content that is within the expansion panel (shows when panel is expanded) */}
         <ExpansionPanelDetails className={classes.details}>
           <Paper className={classes.rootTable}>
-            <TableTemplate 
-              headers={['Description', 'Details']} 
-              width={['15%',null]}
-              data={this.props.reduxState.current360.dashboard} 
-              className={[null,null]}
-              cellVariables={['row_title', 'row_info']} 
-            />
+            <Typography variant="h5" className={classes.header5}>Outreach Findings</Typography>
+              <div className={classes.paragraph}>
+                {this.props.reduxState.current360.analysis_recommendation.map((row, index) => 
+                  <MarkDownOutput display={row.findings} key={index}/>)}
+              </div>
+            <Typography variant="h5" className={classes.header5}>Recommendation</Typography>
+              <div className={classes.paragraph}>
+              {this.props.reduxState.current360.analysis_recommendation.map((row, index) => 
+                  <MarkDownOutput display={row.recommendations} key={index}/>)}
+              </div>
           </Paper>
         </ExpansionPanelDetails>
 
@@ -98,7 +101,7 @@ class DashboardExpansionPanel extends Component {
           <FormControlLabel
             control={
               <Switch
-                checked={this.props.reduxState.current360.info[0].dashboard_published}
+                checked={this.props.reduxState.current360.info[0].threesixty_reports_published}
                 onChange={this.handleChangePublished}
                 value="published"
                 classes={{
@@ -108,12 +111,12 @@ class DashboardExpansionPanel extends Component {
                 }}
               />
             }
-            label={this.props.reduxState.current360.info[0].dashboard_published ? 'Published' : 'Unpublished'}
+            label={this.props.reduxState.current360.info[0].threesixty_reports_published ? 'Published' : 'Unpublished'}
           />
           <FormControlLabel
             control={
               <Switch
-                checked={this.props.reduxState.current360.info[0].dashboard_public}
+                checked={this.props.reduxState.current360.info[0].threesixty_reports_public}
                 onChange={this.handleChangePublic}
                 value="public"
                 classes={{
@@ -123,10 +126,10 @@ class DashboardExpansionPanel extends Component {
                 }}
               />
             }
-            label={this.props.reduxState.current360.info[0].dashboard_public ? 'Public' : 'Private'}
+            label={this.props.reduxState.current360.info[0].threesixty_reports_public ? 'Public' : 'Private'}
           />
           
-          <DashboardEditDialog current360Id={this.props.current360Id}/>
+          {/* <AnalysisRecEditDialog current360Id={this.props.current360Id}/> */}
         </ExpansionPanelActions>
 
       </ExpansionPanel>
@@ -173,7 +176,8 @@ const styles = {
   },
   rootTable: {
     width: '100%',
-    overflowX: 'scroll'
+    overflowX: 'scroll',
+    padding: 20
   },
   status: {
     flexBasis: '25.00%',
@@ -201,8 +205,8 @@ const mapReduxStateToProps = (reduxState) => ({
  reduxState
 });
 
-DashboardExpansionPanel.propTypes = {
+ThreesixtyMindstormExpansionPanel.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default connect(mapReduxStateToProps)(withStyles(styles)(DashboardExpansionPanel));
+export default connect(mapReduxStateToProps)(withStyles(styles)(ThreesixtyMindstormExpansionPanel));

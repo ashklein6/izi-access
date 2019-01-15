@@ -71,8 +71,16 @@ class CustomizedTable extends Component {
 
   }
 
-  goToGenerate360 = () => {
-    this.props.history.push('/generate360');
+  goToGenerate360 = (id) => {
+    this.props.history.push({
+      pathname: `/generate360/${id}`,
+    });
+  }
+
+  goToView360 = (id) => {
+    this.props.history.push({
+      pathname: `/view360/${id}`,
+    });
   }
 
   render() {
@@ -83,7 +91,7 @@ class CustomizedTable extends Component {
       <Table className={classes.table}>
         <TableHead>
           <TableRow>
-            <CustomTableCell>Actions</CustomTableCell>
+            <CustomTableCell width="20%" >Actions</CustomTableCell>
             <CustomTableCell>Name</CustomTableCell>
             <CustomTableCell>Client</CustomTableCell>
             <CustomTableCell>Location</CustomTableCell>
@@ -95,10 +103,10 @@ class CustomizedTable extends Component {
           {this.props.rows.map(row => {
             return (
               <TableRow key={row.id}>
-                <CustomTableCell className={classes.centerText} component="th" scope="row">
-                  <Button variant="contained">View</Button>
+                <CustomTableCell width="20%" className={classes.centerText} component="th" scope="row">
+                  <Button onClick={() => this.goToView360(row.id)} className={classes.button} variant="contained">View</Button>
 
-                  {!this.props.homeVersion && <Button onClick={this.goToGenerate360} variant="contained">Edit</Button>}
+                  {!this.props.homeVersion && <Button onClick={() => this.goToGenerate360(row.id)} className={classes.button} variant="contained">Edit</Button>}
 
                 </CustomTableCell>
                 <CustomTableCell className={classes.centerText}>{row.name}</CustomTableCell>
@@ -124,6 +132,10 @@ const styles = {
    width: '95%',
    overflowX: 'scroll',
    margin: '0px auto 100px'
+  },
+  button: {
+    marginRight: 5,
+    marginLeft: 5
   },
   centerText: {
    textAlign: 'center'

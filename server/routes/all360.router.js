@@ -1,6 +1,7 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
+const { employeesOnly } = require('../modules/employeesOnly');
 
 // this route handles the search function from the manage 360s page
 // it takes in a search query, then sets up the sql query based on the
@@ -56,15 +57,29 @@ router.get('/search', (req, res) => {
 });
 // end /search
 
+// this route gets 10 of the most recently published 360s and returns
+// them to be displayed on the home page
+router.get('/true', (req,res) => {
+  const sqlText = `SELECT threesixty.*, izi_categories.category FROM threesixty
+  JOIN izi_categories ON izi_categories.id = threesixty.category_id
+  WHERE threesixty.published_status = true LIMIT 10;`;
+  pool.query(sqlText)
+  .then((response) => {
+  res.send(response.rows);
+  })
+  .catch(() => {
+  res.sendStatus(500);
+  })
+})
+// end /public
+
 // this route gets 5 of the most recently published and unpublished 360s
 // and returns them to be added to the table on the manage 360s view.
-router.get('/:status', (req,res) => {
+router.get('/false', employeesOnly, (req,res) => {
   const sqlText = `SELECT threesixty.*, izi_categories.category FROM threesixty
                   JOIN izi_categories ON izi_categories.id = threesixty.category_id
-                  WHERE threesixty.published_status = $1 LIMIT 5;`;
-  const status = req.params.status;
-  console.log('status ', req.params.status);
-  pool.query(sqlText, [status])
+                  WHERE threesixty.published_status = false LIMIT 10;`;
+  pool.query(sqlText)
   .then((response) => {
     res.send(response.rows);
   })

@@ -72,7 +72,7 @@ class AnalysisRecEditDialog extends Component {
 
  // handles clicking of the "edit" button. Opens a dialog window.
  handleClickOpen = () => {
-  this.props.dispatch({ type: 'FETCH_360_SECTION', payload: {section: 'analysis_recommendation', current360Id: 1} });
+  this.props.dispatch({ type: 'FETCH_360_SECTION', payload: {section: 'analysis_recommendation', current360Id: this.props.current360Id} });
   this.setState({
     ...this.state,
     open: true,
@@ -93,7 +93,7 @@ class AnalysisRecEditDialog extends Component {
  // calls handleClickClose.
  handleSave = () => {
   console.log('in handleSave');
-  this.props.dispatch({ type: 'EDIT_360', payload: {section: 'analysis_recommendation', data: this.state} })
+  this.props.dispatch({ type: 'EDIT_360', payload: {section: 'analysis_recommendation', current360Id: this.props.current360Id, data: this.state} })
   this.handleClickClose();
  } // end handleSave
 
@@ -109,6 +109,7 @@ class AnalysisRecEditDialog extends Component {
     if (isNaN(key) && key !== 'newState') {
       newState[key]=this.state[key]
     };
+    return null;
   });
 
   // Initialize addRowId to be 1 
@@ -124,12 +125,14 @@ class AnalysisRecEditDialog extends Component {
         if (entry[1] == null) {
           rowCheck[entry[0]] = '';
         }
+        return null;
       })
     
     // increment addRowId to keep row count up to date
     addRowId++;
     // add updated row (with any converted null values) to the newState object
     newState[row.id]=rowCheck;
+    return null;
   });
 
   // Fix updating status and set addRowId in newState
@@ -179,7 +182,7 @@ class AnalysisRecEditDialog extends Component {
       {/* Conditionally render a loading message until data is loaded into local state */}
       {(this.state.updating === true) ? 
       <React.Fragment>
-        <DialogTitle id="analysis-recommendation-edit-dialog">Edit Analysis &amp; Recommendation</DialogTitle>
+        <DialogTitle id="analysis-recommendation-edit-dialog">Edit Analysis &amp; Recommendations</DialogTitle>
         <DialogContent>
           <DialogContentText>
             New information is currently loading...
@@ -188,7 +191,7 @@ class AnalysisRecEditDialog extends Component {
       </React.Fragment>
         :
         <React.Fragment>
-          <DialogTitle id="analysis-recommendation-edit-dialog">Analysis &amp; Recommendation</DialogTitle>
+          <DialogTitle id="analysis-recommendation-edit-dialog">Analysis &amp; Recommendations</DialogTitle>
           <DialogContent id="analysis-recommendation-edit-dialog-content" ref={(el) => { this.scroll = el; }}>
             <DialogContentText>
               Remember to save changes before closing this edit dialog.
@@ -201,6 +204,7 @@ class AnalysisRecEditDialog extends Component {
                   <AnalysisRecEditComponent key={this.state[key].id} row={this.state[key]} index={index} handleChangeFor={this.handleChangeFor} deleteRow={this.deleteRow} />
                 );
               } 
+              return null;
             })}
             <div style={{ float:"left", clear: "both" }} ref={(el) => { this.bottom = el; }}>
             </div>

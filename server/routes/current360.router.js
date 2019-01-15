@@ -2,11 +2,11 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 const goalsRows = ['Total Number', 'Number of People of Color/Indigenous', 'Number of People Under 24', 
-    'Measurable Indicators of Success 1: 80% of participants met 1 new person across race, class, culture or other means of self-identity', 
-    'Measurable Indicators of Success 2: 80% of participants met 2 new people across race, class, culture or other means of self-identity',
-    'Measurable Indicators of Success 3: 80% of participants say that they met someone across self-identity with whom they planned to stay in touch or collaborate',
-    'Measurable Indicators of Success 4: 40% of participants plan to tell someone about their experience',
-    'Measurable Indicators of Success 5: first time at the table', 'Interested in future conversations about preventing child abuse and neglect',
+    'Measurable Indicators of Success: 80% of participants met 1 new person across race, class, culture or other means of self-identity', 
+    'Measurable Indicators of Success: 80% of participants met 2 new people across race, class, culture or other means of self-identity',
+    'Measurable Indicators of Success: 80% of participants say that they met someone across self-identity with whom they planned to stay in touch or collaborate',
+    'Measurable Indicators of Success: 40% of participants plan to tell someone about their experience',
+    'Measurable Indicators of Success: first time at the table', 'Interested in future conversations about preventing child abuse and neglect',
     'Interested in future conversations about housing', 'Interested in future conversations about transportation', 
     'Interested in future conversations about education', 'Measurable Indicators of Success 6: total number of sign-in sheets'];
 const dashboardRows = ['Date(s)','Timeline', 'Six Weeks - 1 Month Out', '3 Weeks Out', '2 Weeks - 1 Week Out', 'Day of Event', 
@@ -24,27 +24,27 @@ router.get('/section', (req, res) => {
 
   switch (section) {
     case 'goalsAssessment':
-      queryText = 'SELECT * FROM goals WHERE threesixty_id=$1 ORDER BY id';
+      queryText = 'SELECT * FROM goals WHERE threesixty_id=$1 ORDER BY id'; break;
     case 'dashboard':
-      queryText = `SELECT * FROM dashboard WHERE threesixty_id=$1 ORDER BY id;`
+      queryText = `SELECT * FROM dashboard WHERE threesixty_id=$1 ORDER BY id;`; break;
     case 'threesixty_reports':
-      queryText = `SELECT * FROM threesixty_reports WHERE threesixty_id=$1 ORDER BY id;`
+      queryText = `SELECT * FROM threesixty_reports WHERE threesixty_id=$1 ORDER BY id;`; break;
     case 'analysis_recommendation':
-      queryText = `SELECT * FROM analysis_recommendation WHERE threesixty_id=$1 ORDER BY id;`
+      queryText = `SELECT * FROM analysis_recommendation WHERE threesixty_id=$1 ORDER BY id;`; break;
     case 'demographics':
-      queryText = `SELECT * FROM demographic WHERE threesixty_id=$1 ORDER BY id;`
+      queryText = `SELECT * FROM demographic WHERE threesixty_id=$1 ORDER BY id;`; break;
     case 'sticky_stats':
-      queryText = ``
+      queryText = ``; break;
     case 'circle_share':
-      queryText = `SELECT * FROM circle_share WHERE threesixty_reports_id=$1 ORDER BY id;`
+      queryText = `SELECT * FROM circle_share WHERE threesixty_reports_id=$1 ORDER BY id;`; break;
     case 'question_set':
       queryText = `SELECT question_set.id AS question_set_id, threesixty_reports_id, set_title, breakdown, questions.id AS question_id, response.id AS response_id, response, response_category.id AS response_category_id, description AS response_category_description FROM question_set
       LEFT JOIN questions ON questions.set_id = question_set.id
       LEFT JOIN response ON response.question_id = questions.id
       LEFT JOIN response_category ON response_category.id = response.category_id
-      WHERE threesixty_reports_id=$1 ORDER BY question_set.id;`
+      WHERE threesixty_reports_id=$1 ORDER BY question_set.id;`; break;
     case 'oral_report':
-      queryText = `SELECT * FROM oral_report WHERE threesixty_reports_id=$1 ORDER BY id`
+      queryText = `SELECT * FROM oral_report WHERE threesixty_reports_id=$1 ORDER BY id`; break;
   }
   
   console.log('GET request for 360 section:', section, 'current 360 id:', current360Id);
@@ -62,6 +62,33 @@ router.get('/section', (req, res) => {
       res.sendStatus(400);
   }
 })
+
+// Setup a GET route to get current 360 information
+router.get('/info', (req, res) => {
+    let current360Id = req.query.current360Id;
+    let queryText = `SELECT threesixty.id, name, date, location, category_id, category, client, description,
+    published_status, analysis_recommendation_public, threesixty_reports_public, dashboard_public,
+    goals_public, demographics_public, oral_report_public, question_set_public, circle_share_public,
+    threesixty_freeform_public, freeform_public, upload_public, analysis_recommendation_published, 
+    threesixty_reports_published, dashboard_published, goals_published, demographics_published, 
+    oral_report_published, question_set_published, circle_share_published,
+    threesixty_freeform_published, freeform_published, upload_published FROM threesixty
+    JOIN izi_categories ON izi_categories.id = threesixty.category_id
+    WHERE threesixty.id=$1`;
+    
+    console.log('GET request for current 360 information. current 360 id:', current360Id);
+    
+    pool.query(queryText, [current360Id])
+        .then( (results) => {
+            console.log('successful with 360 information');
+            res.send(results.rows);
+        }).catch( (error) => {
+            console.log('error on get:', error);
+            res.sendStatus(500);
+        })
+    }
+);
+
 
 // Setup a GET route to get 360 section goalsAssessment
 router.get('/goalsAssessment', (req, res) => {
@@ -233,39 +260,118 @@ router.get('/oral_report', (req, res) => {
     }
 });
 
-router.get('/chart_data', (req, res) => {
+router.get('/chart_data', async (req, res) => {
     let data = [];
+    let genData = [];
+    let genCount = [];
+    let ethData = [];
+    let ethCount = [];
     let current360Id = req.query.current360Id;
-    let queryText = `SELECT COUNT(*) - SUM(plans_to_tell::int) as plans_to_tell_no, SUM(plans_to_tell::int) as plans_to_tell_yes, 
+    let queryText1 = `SELECT COUNT(*) - SUM(plans_to_tell::int) as plans_to_tell_no, SUM(plans_to_tell::int) as plans_to_tell_yes, 
                     COUNT(*) - SUM(first_time::int) as first_time_no, SUM(first_time::int) as first_time_yes, 
                     COUNT(*) - SUM(child_abuse::int) as child_abuse_no, SUM(child_abuse::int) as child_abuse_yes, 
                     COUNT(*) - SUM(housing::int) as housing_no, SUM(housing::int) as housing_yes, 
                     COUNT(*) - SUM(transportation::int) as transportation_no, SUM(transportation::int) as transportation_yes,
                     COUNT(*) - SUM(education::int) as education_no, SUM(education::int) as education_yes  
                     FROM demographic WHERE threesixty_id = $1;`;
-    pool.query(queryText, [current360Id])
-    .then((response) => {
+    let queryText2 = `SELECT ethnic_category.ethnicity as ethnicity, COUNT(demographic.ethnic_category) as count FROM demographic
+                    JOIN ethnic_category ON ethnic_category.id = demographic.ethnic_category
+                    WHERE demographic.threesixty_id = $1 GROUP BY ethnic_category.ethnicity;`;
+    let queryText3 = `SELECT gen_category.generation as generation, COUNT(demographic.gen_category) as count FROM demographic
+                    JOIN gen_category ON gen_category.id = demographic.gen_category
+                    WHERE demographic.threesixty_id = $1 GROUP BY gen_category.generation;`;
+    const client = await pool.connect();
+    try {
+        await client.query('BEGIN');
+        const response1 = await client.query(queryText1, [current360Id]);
+        const response2 = await client.query(queryText2, [current360Id]);
+        for( let ob of response2.rows ) {
+            ethData.push(ob.ethnicity);
+            ethCount.push(ob.count);
+        };
+        const response3 = await client.query(queryText3, [current360Id]);
+        for( let ob of response3.rows ) {
+            genData.push(ob.generation);
+            genCount.push(ob.count);
+        };
         data = [
-            {title: 'plans_to_tell', 
-            data: [response.rows[0].plans_to_tell_yes, response.rows[0].plans_to_tell_no],
-            legend: true},
-            {title: 'first_time', 
-            data: [response.rows[0].first_time_yes, response.rows[0].first_time_no]},
-            {title: 'child_abuse', 
-            data: [response.rows[0].child_abuse_yes, response.rows[0].child_abuse_no]},
-            {title: 'housing',
-            data: [response.rows[0].housing_yes, response.rows[0].housing_no]},
-            {title: 'transportation', 
-            data: [response.rows[0].transportation_yes, response.rows[0].transportation_no]},
-            {title: 'education', 
-            data: [response.rows[0].education_yes, response.rows[0].education_no]},
+            {title: 'Plans to tell someone', 
+            data: [response1.rows[0].plans_to_tell_yes, response1.rows[0].plans_to_tell_no],
+            labels: ['Yes', 'No'],
+            legend: true,
+            grid_xs: 12,
+            grid_sm: 4},
+            {title: 'First time at the Table', 
+            data: [response1.rows[0].first_time_yes, response1.rows[0].first_time_no],
+            labels: ['Yes', 'No'],
+            legend: true,
+            grid_xs: 12,
+            grid_sm: 4},
+            {title: 'Interested in future conversations about preventing child abuse and neglect', 
+            data: [response1.rows[0].child_abuse_yes, response1.rows[0].child_abuse_no],
+            labels: ['Yes', 'No'],
+            legend: true,
+            grid_xs: 12,
+            grid_sm: 4},
+            {title: 'Interested in future conversations about housing',
+            data: [response1.rows[0].housing_yes, response1.rows[0].housing_no],
+            labels: ['Yes', 'No'],
+            legend: true,
+            grid_xs: 12,
+            grid_sm: 4},
+            {title: 'Interested in future conversations about transportation', 
+            data: [response1.rows[0].transportation_yes, response1.rows[0].transportation_no],
+            labels: ['Yes', 'No'],
+            legend: true,
+            grid_xs: 12,
+            grid_sm: 4},
+            {title: 'Interested in future conversations about education', 
+            data: [response1.rows[0].education_yes, response1.rows[0].education_no],
+            labels: ['Yes', 'No'],
+            legend: true,
+            grid_xs: 12,
+            grid_sm: 4},
+            {title: 'Ethnicity breakdown', 
+            data: ethCount,
+            labels: ethData,
+            legend: true,
+            grid_xs: 12,
+            grid_sm: 6},
+            {title: 'Generation breakdown', 
+            data: genCount,
+            labels: genData,
+            legend: true,
+            grid_xs: 12,
+            grid_sm: 6},
         ];
-        res.send(data);
+        await client.query('COMMIT'); 
+    } catch (error) {
+        await client.query('ROLLBACK');
+        console.log('error doing the charts');
+        throw error;   
+    } finally {
+        client.release();
+    }
+    return res.send(data);
+});
+
+// Get clients authorized to see a 360
+router.get('/clients/:id', (req, res) => {
+    const sqlText = `SELECT threesixty_user.id AS threesixty_user_id, person.id, username, email, 
+    firstname, lastname, notes FROM threesixty
+    JOIN threesixty_user ON threesixty_user.threesixty_id = threesixty.id
+    JOIN person ON threesixty_user.user_id = person.id
+    WHERE threesixty.id = $1;`
+    const current360Id = req.params.id;
+    pool.query(sqlText, [current360Id])
+    .then((results) => {
+      res.send(results.rows);
     })
     .catch(() => {
-        res.sendStatus(500);
+      res.sendStatus(500);
     })
-});
+  });
+  
 
 /**
  * POST route template
@@ -279,7 +385,7 @@ router.post('/complete', async (req, res) => {
         await client.query('BEGIN');
         id = await client.query(`INSERT INTO threesixty (name, date, location, category_id, client, description, published_status) 
             VALUES ($1, $2, $3, $4, $5, $6, $7)
-            RETURNING id`, [new360.name, new360.date, new360.location, new360.category, new360.client, new360.description, true]);
+            RETURNING id`, [new360.name, new360.date, new360.location, new360.category, new360.client, new360.description, false]);
         await client.query(`INSERT INTO analysis_recommendation (threesixty_id) VALUES ($1)`, [id.rows[0].id]);
         for(let row of dashboardRows){
             await client.query(`INSERT INTO dashboard (threesixty_id, row_title) VALUES ($1, $2)`, [id.rows[0].id, row]);
@@ -330,21 +436,235 @@ router.post('/lowdown', async (req, res) => {
     return res.send(id.rows[0]);
 });
 
-router.post('/edit/goalsAssessment', (async (req, res) => {
+// Change publish status of a section or entire 360 (published_status)
+router.put('/publish/:id', async (req,res) => {
+    console.log('in current360.router.js PUT for /current360/publish');
+    let current360Id = req.params.id;
+    let field = req.body.field;
+    let status = req.body.status;
+    let queryText = '';
+    console.log('current360Id:', current360Id, 'field:', field, 'status:', status);
+    switch (field) {
+        case 'published_status':
+            queryText = `UPDATE threesixty SET published_status = $2 WHERE id=$1;`; break;
+        case 'analysis_recommendation_published':
+            queryText = `UPDATE threesixty SET analysis_recommendation_published = $2 WHERE id=$1;`; break;
+        case 'threesixty_reports_published':
+            queryText = `UPDATE threesixty SET threesixty_reports_published = $2 WHERE id=$1;`; break;
+        case 'dashboard_published':
+            queryText = `UPDATE threesixty SET dashboard_published = $2 WHERE id=$1;`; break;
+        case 'goals_published':
+            queryText = `UPDATE threesixty SET goals_published = $2 WHERE id=$1;`; break;
+        case 'demographics_published':
+            queryText = `UPDATE threesixty SET demographics_published = $2 WHERE id=$1;`; break;
+        case 'oral_report_published':
+            queryText = `UPDATE threesixty SET oral_report_published = $2 WHERE id=$1;`; break;
+        case 'question_set_published':
+            queryText = `UPDATE threesixty SET question_set_published = $2 WHERE id=$1;`; break;
+        case 'circle_share_published':
+            queryText = `UPDATE threesixty SET circle_share_published = $2 WHERE id=$1;`; break;
+        case 'threesixty_freeform_published':
+            queryText = `UPDATE threesixty SET threesixty_freeform_published = $2 WHERE id=$1;`; break;
+        case 'freeform_published':
+            queryText = `UPDATE threesixty SET freeform_published = $2 WHERE id=$1;`; break;
+        case 'upload_published':
+            queryText = `UPDATE threesixty SET upload_published = $2 WHERE id=$1;`; break;
+    }
+    console.log('queryText:', queryText);
+    if (queryText !== '') {
+        pool.query(queryText, [current360Id, status])
+        .then( (results) => {
+            console.log('successful with publish');
+            res.sendStatus(200);
+        }).catch( (error) => {
+            console.log('error on publish:', error);
+            res.sendStatus(500);
+        })
+    } else {
+        res.sendStatus(400);
+    }
+})
+
+// Change public status of a section
+router.put('/public/:id', async (req,res) => {
+    console.log('in current360.router.js PUT for /current360/public');
+    let current360Id = req.params.id;
+    let field = req.body.field;
+    let status = req.body.status;
+    let queryText = '';
+    console.log('current360Id:', current360Id, 'field:', field, 'status:', status);
+    switch (field) {
+        case 'analysis_recommendation_public':
+            queryText = `UPDATE threesixty SET analysis_recommendation_public = $2 WHERE id=$1;`; break;
+        case 'threesixty_reports_public':
+            queryText = `UPDATE threesixty SET threesixty_reports_public = $2 WHERE id=$1;`; break;
+        case 'dashboard_public':
+            queryText = `UPDATE threesixty SET dashboard_public = $2 WHERE id=$1;`; break;
+        case 'goals_public':
+            queryText = `UPDATE threesixty SET goals_public = $2 WHERE id=$1;`; break;
+        case 'demographics_public':
+            queryText = `UPDATE threesixty SET demographics_public = $2 WHERE id=$1;`; break;
+        case 'oral_report_public':
+            queryText = `UPDATE threesixty SET oral_report_public = $2 WHERE id=$1;`; break;
+        case 'question_set_public':
+            queryText = `UPDATE threesixty SET question_set_public = $2 WHERE id=$1;`; break;
+        case 'circle_share_public':
+            queryText = `UPDATE threesixty SET circle_share_public = $2 WHERE id=$1;`; break;
+        case 'threesixty_freeform_public':
+            queryText = `UPDATE threesixty SET threesixty_freeform_public = $2 WHERE id=$1;`; break;
+        case 'freeform_public':
+            queryText = `UPDATE threesixty SET freeform_public = $2 WHERE id=$1;`; break;
+        case 'upload_public':
+            queryText = `UPDATE threesixty SET upload_public = $2 WHERE id=$1;`; break;
+    }
+    console.log('queryText:', queryText);
+    if (queryText !== '') {
+        pool.query(queryText, [current360Id, status])
+        .then( (results) => {
+            console.log('successful with public');
+            res.sendStatus(200);
+        }).catch( (error) => {
+            console.log('error on public:', error);
+            res.sendStatus(500);
+        })
+    } else {
+        res.sendStatus(400);
+    }
+})
+
+// Edit the 360 information section
+router.put('/edit/info/:id', async (req,res) => {
+    console.log('in current360.router.js PUT for /current360/edit/info');
+    let current360Id = req.params.id;
+    let newData = req.body;
+    console.log('to update info to:', newData);
+    let queryText = `UPDATE threesixty SET name=$1, date=$2, location=$3, category_id=$4, client=$5, description=$6
+    WHERE id=$7`;
+
+    pool.query(queryText, [newData.name, newData.date, newData.location, newData.category_id, newData.client,
+        newData.description, current360Id])
+    .then( (results) => {
+        console.log('successful with editing info');
+        res.sendStatus(200);
+    }).catch( (error) => {
+        console.log('error on editing info:', error);
+        res.sendStatus(500);
+    })
+})
+
+// Edit the goals assessment section
+router.put('/edit/goalsAssessment/:id', (async (req, res) => {
     console.log('in current360.router.js PUT for /current360/edit/goalsAssessment');
-    let newData = req.body.data;
-    console.log('to update goals to:', newData);
+    let current360Id = req.params.id;
+    let newData = req.body;
 
     const client = await pool.connect();
 
     try {
         await client.query('BEGIN');
-        await client.query(`INSERT INTO goals (threesixty_id, description, desired, delivered, difference, percent, comments)
-        VALUES (1, 'Total Number', 125, 140, 15, 112, 'Based on in-room count. In room count is taken 3 to 6 times per account by at least two different people.');
-        `)
-        await client.query(`INSERT INTO goals (threesixty_id, description, desired, delivered, difference, percent, comments)
-        VALUES (1, 'Number of people of color/Indigenous', 71, 70, -1, 99, 'We generally set this goal at 51% in communities with at least 15% POC/Immigrant/Indigenous. Based on an in-room count.'),(1, 'Number of people under 24', 35, 33, -2, 94, 'We generally set this goal at 25 - 33% unless the [project/event] does not warrant. Based on both in room and sign-in sheet counts.'), (1, 'Measurable Indicators of Success 1: 80% of participants met 1 new person across race, class, culture or other means of self-identity', 112, 126, 14, 113, '80% of the room is our target goal for this MIS.');
-        `)
+        Object.keys(newData).map(async (key) => {
+            if (!isNaN(key)) {
+                console.log('key.new:', newData[key].new, 'key.updated', newData[key].updated)
+                if (newData[key].new) {
+                    console.log('caught insert:', key);
+                    await client.query(`INSERT INTO goals ("threesixty_id", "description", "desired", "delivered", "difference", "percent", "comments", "row_public")
+                    VALUES ($1, $2, $3, $4, $5, $6, $7, $8);`, 
+                    [current360Id, newData[key].description, newData[key].desired, newData[key].delivered,
+                    newData[key].difference, newData[key].percent, newData[key].comments, newData[key].row_public])
+                } else if (newData[key].updated) {
+                    console.log('caught update:', key);
+                    await client.query(`UPDATE goals
+                    SET threesixty_id = $2,
+                        description = $3, 
+                        desired = $4, 
+                        delivered = $5, 
+                        difference = $6, 
+                        percent = $7, 
+                        comments = $8,
+                        row_public = $9
+                    WHERE id = $1;`, 
+                    [newData[key].id, newData[key].threesixty_id, newData[key].description, newData[key].desired, newData[key].delivered, 
+                    newData[key].difference, newData[key].percent, newData[key].comments, newData[key].row_public])
+                } else if (newData[key] == 'deleted') {
+                    console.log('caught delete:', newData[key]);
+                    await client.query(`DELETE FROM goals WHERE id = $1;`, [key]);
+                }
+            };
+        });
+        await client.query('COMMIT');
+    } catch (error) {
+        await client.query('ROLLBACK');
+        return res.status(500).send(error);
+    } finally {
+        client.release();
+        return res.sendStatus(201)
+    }
+}))
+
+// Edit the dashboard section
+router.put('/edit/dashboard/:id', (async (req, res) => {
+    console.log('in current360.router.js PUT for /current360/edit/dashboard');
+    let current360Id = req.params.id;
+    let newData = req.body;
+
+    const client = await pool.connect();
+
+    try {
+        await client.query('BEGIN');
+        Object.keys(newData).map(async (key) => {
+            if (!isNaN(key)) {
+                console.log('key.new:', newData[key].new, 'key.updated', newData[key].updated)
+                if (newData[key].new) {
+                    console.log('caught insert:', key);
+                    await client.query(`INSERT INTO dashboard ("threesixty_id", "row_title", "row_info")
+                    VALUES ($1, $2, $3);`, 
+                    [current360Id, newData[key].row_title, newData[key].row_info])
+                } else if (newData[key].updated) {
+                    console.log('caught update:', key);
+                    await client.query(`UPDATE dashboard
+                    SET row_title = $2,
+                        row_info = $3
+                    WHERE id = $1;`, 
+                    [newData[key].id, newData[key].row_title, newData[key].row_info])
+                } else if (newData[key] == 'deleted') {
+                    console.log('caught delete:', key);
+                    await client.query(`DELETE FROM dashboard WHERE id = $1;`, [key]);
+                }
+            };
+        });
+        await client.query('COMMIT');
+    } catch (error) {
+        await client.query('ROLLBACK');
+        return res.status(500).send(error);
+    } finally {
+        client.release();
+        return res.sendStatus(201)
+    }
+}))
+
+// Edit the dashboard section
+router.put('/edit/analysis_recommendation/:id', (async (req, res) => {
+    console.log('in current360.router.js PUT for /current360/edit/analysis_recommendation');
+    let current360Id = req.params.id;
+    let newData = req.body;
+
+    const client = await pool.connect();
+
+    try {
+        await client.query('BEGIN');
+        Object.keys(newData).map(async (key) => {
+            if (!isNaN(key)) {
+                console.log('key.new:', newData[key].new, 'key.updated', newData[key].updated)
+                if (newData[key].updated) {
+                    console.log('caught update:', key);
+                    await client.query(`UPDATE analysis_recommendation
+                    SET findings = $2,
+                        recommendations = $3
+                    WHERE id = $1;`, 
+                    [newData[key].id, newData[key].findings, newData[key].recommendations])
+                } 
+            };
+        });
         await client.query('COMMIT');
     } catch (error) {
         await client.query('ROLLBACK');

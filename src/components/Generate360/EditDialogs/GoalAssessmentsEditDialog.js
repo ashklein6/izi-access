@@ -35,6 +35,7 @@ class GoalsAssessmentEditDialog extends Component {
       difference: '',
       percent: '',
       comments: '',
+      row_public: true,
       // set flag that this row is new so that it can be added to database upon submittal
       new: true
     },
@@ -72,7 +73,7 @@ class GoalsAssessmentEditDialog extends Component {
 
  // handles clicking of the "edit" button. Opens a dialog window.
  handleClickOpen = () => {
-  this.props.dispatch({ type: 'FETCH_360_SECTION', payload: {section: 'goalsAssessment', current360Id: 1} });
+  this.props.dispatch({ type: 'FETCH_360_SECTION', payload: {section: 'goalsAssessment', current360Id: this.props.current360Id} });
   this.setState({
     ...this.state,
     open: true,
@@ -93,7 +94,7 @@ class GoalsAssessmentEditDialog extends Component {
  // calls handleClickClose.
  handleSave = () => {
   console.log('in handleSave');
-  this.props.dispatch({ type: 'EDIT_360', payload: {section: 'goalsAssessment', data: this.state} })
+  this.props.dispatch({ type: 'EDIT_360', payload: {section: 'goalsAssessment', current360Id: this.props.current360Id, data: this.state} })
   this.handleClickClose();
  } // end handleSave
 
@@ -106,30 +107,36 @@ class GoalsAssessmentEditDialog extends Component {
 
   // Map through current this.state and save parameters that are not integers (row data)
   Object.keys(this.state).map( (key) => {
-    if (isNaN(key) && key !== 'newState') {
+    if (isNaN(key)) {
       newState[key]=this.state[key]
     };
+    return null;
   });
 
-  // Initialize addRowId to be 1 
+  // Initialize addRowId
   // (if all rows are accidentally deleted, this will allow the user to still create a row)
-  let addRowId = 1;
+  let addRowId;
 
   // map through results from database pull
   this.props.reduxState.current360.goalsAssessment.map((row,index) => {
     let rowCheck = row;
+    if (index === 0) {
+      addRowId=row.id;
+    }
 
     // Check if any entries in the row are null and set to empty strings (for happy inputs)
     Object.entries(rowCheck).map((entry) => {
         if (entry[1] == null) {
           rowCheck[entry[0]] = '';
         }
+        return null;
       })
     
     // increment addRowId to keep row count up to date
     addRowId++;
     // add updated row (with any converted null values) to the newState object
     newState[row.id]=rowCheck;
+    return null;
   });
 
   // Fix updating status and set addRowId in newState
@@ -201,6 +208,7 @@ class GoalsAssessmentEditDialog extends Component {
                   <GoalsAssessmentEditComponent key={this.state[key].id} row={this.state[key]} index={index} handleChangeFor={this.handleChangeFor} deleteRow={this.deleteRow} />
                 );
               } 
+              return null;
             })}
             <div style={{ float:"left", clear: "both" }} ref={(el) => { this.bottom = el; }}>
             </div>

@@ -1,16 +1,18 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
+const { employeesOnly } = require('../modules/employeesOnly');
 
-router.get('/', (req, res) => {
+router.get('/', employeesOnly, (req, res) => {
+  console.log('req.user', req.user);
   pool.query(`SELECT person.firstname, person.lastname, person.email, person.id, 
-            person.access_id, person.notes, access.access_type, access.access_level, 
+            person.access_id, person.notes, access.access_type, 
             threesixty.name as threesixty, threesixty_user.id as connected_360_id 
             FROM person 
             JOIN access ON access.id = person.access_id
             FULL OUTER JOIN threesixty_user ON threesixty_user.user_id = person.id
             LEFT JOIN threesixty ON threesixty.id = threesixty_user.threesixty_id
-            WHERE access.access_level > 0 ORDER BY person.date_added DESC;`)
+            WHERE access.id > 1 ORDER BY person.date_added DESC;`)
   .then((response) => {
     res.send(response.rows);
   })
@@ -22,15 +24,15 @@ router.get('/', (req, res) => {
 // this route searches users based on a variety of criteria
 // first name, last name, or email, and/or level
 // and can sort them responses by a preselected category
-router.get('/search', (req,res) => {
+router.get('/search', employeesOnly, (req,res) => {
   let sqlText = `SELECT person.firstname, person.lastname, person.email, person.id,
-                person.access_id, person.notes, access.access_type, access.access_level, 
+                person.access_id, person.notes, access.access_type, 
                 threesixty.name as threesixty, threesixty_user.id as connected_360_id
                 FROM person 
                 JOIN access ON access.id = person.access_id
                 FULL OUTER JOIN threesixty_user ON threesixty_user.user_id = person.id
                 LEFT JOIN threesixty ON threesixty.id = threesixty_user.threesixty_id 
-                WHERE access.access_level > 0 `;
+                WHERE access.id > 1 `;
   let search = req.query;
   let searchFields = [];
   let fieldCounter = 1;
@@ -60,15 +62,15 @@ router.get('/search', (req,res) => {
   })
 });
 
-router.get('/deactivated', (req,res) => {
+router.get('/deactivated', employeesOnly, (req,res) => {
   pool.query(`SELECT person.firstname, person.lastname, person.email, 
-            person.id, person.access_id, person.notes, access.access_type, access.access_level, 
+            person.id, person.access_id, person.notes, access.access_type,
             threesixty.name as threesixty, threesixty_user.id as connected_360_id
             FROM person 
             JOIN access ON access.id = person.access_id
             FULL OUTER JOIN threesixty_user ON threesixty_user.user_id = person.id
             LEFT JOIN threesixty ON threesixty.id = threesixty_user.threesixty_id
-            WHERE access.access_level = 0 ORDER BY person.date_added DESC;`)
+            WHERE access.id = 1 ORDER BY person.date_added DESC;`)
   .then((response) => {
     res.send(response.rows);
   })
@@ -77,9 +79,9 @@ router.get('/deactivated', (req,res) => {
   })
 });
 
-router.get('/pendingRequests', (req,res) => {
+router.get('/pendingRequests', employeesOnly, (req,res) => {
   pool.query(`SELECT person.firstname, person.lastname, person.email, person.id, 
-            person.access_id, person.notes, access.access_type, access.access_level, 
+            person.access_id, person.notes, access.access_type, 
             client_request.id as request_id, threesixty.name as threesixty,
             threesixty_user.id as connected_360_id
             FROM client_request 
@@ -97,10 +99,10 @@ router.get('/pendingRequests', (req,res) => {
   })
 });
 
-router.get('/threesixty', (req, res) => {
+router.get('/threesixty', employeesOnly, (req, res) => {
   let threesixty = req.query.id;
   pool.query(`SELECT person.firstname, person.lastname, person.email, person.id, 
-            person.access_id, person.notes, access.access_type, access.access_level, 
+            person.access_id, person.notes, access.access_type, 
             threesixty.name as threesixty, threesixty_user.id as connected_360_id 
             FROM person 
             JOIN access ON access.id = person.access_id
@@ -114,6 +116,20 @@ router.get('/threesixty', (req, res) => {
     res.sendStatus(500);
   })
 });
+
+router.get('/checkRequests', employeesOnly, (req,res) => {
+  pool.query(`SELECT id FROM client_request;`)
+  .then((response) => {
+    if(response.rows[0]){
+      res.send(true);
+    } else {
+      res.send(false);
+    }
+  })
+  .catch(() => {
+    res.sendStatus(500);
+  })
+})
 
 /**
  * POST route template

@@ -11,7 +11,6 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Switch from '@material-ui/core/Switch';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -109,7 +108,7 @@ class Create360 extends Component {
 
   handleDemo = () => {
     this.setState({
-        name: 'A study of community factors for emotional distress.',
+        name: 'Community factors for emotional distress.',
         client: 'Best Buy',
         location: 'Richfield',
         category: '2',

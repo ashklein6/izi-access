@@ -67,7 +67,14 @@ class SideBar extends Component {
           <Divider />
         </Link>
         )} */}
-        {this.props.reduxState.current360.info[0].goals_published ?
+        {// Check if section is published
+        this.props.reduxState.current360.info[0].goals_published && 
+        // Then check if section is public
+        (this.props.reduxState.current360.info[0].goals_public ||
+        // OR if user is a client with access
+        (this.props.reduxState.userControls.user.some(e => e.id === String(this.state.current360Id))
+        // OR if user is an employee or admin
+        || this.props.reduxState.user.id >= 4))?
         <Link key="#goals-assessment" smooth to="#goals-assessment"
         scroll={el => scrollWithOffset(el, 150)}
         >
@@ -79,7 +86,14 @@ class SideBar extends Component {
           </MenuItem>
           <Divider />
         </Link> : null }
-        {this.props.reduxState.current360.info[0].dashboard_published ?
+        {// Check if section is published
+        this.props.reduxState.current360.info[0].dashboard_published && 
+        // Then check if section is public
+        (this.props.reduxState.current360.info[0].dashboard_public ||
+        // OR if user is a client with access
+        (this.props.reduxState.userControls.user.some(e => e.id === String(this.state.current360Id))
+        // OR if user is an employee or admin
+        || this.props.reduxState.user.id >= 4)) ?
         <Link key="#dashboard" smooth to="#dashboard"
         scroll={el => scrollWithOffset(el, 150)}
         >
@@ -91,7 +105,14 @@ class SideBar extends Component {
           </MenuItem>
           <Divider />
         </Link> : null }
-        {this.props.reduxState.current360.info[0].threesixty_reports_published ?
+        {// Check if section is published
+        this.props.reduxState.current360.info[0].threesixty_reports_published && 
+        // Then check if section is public
+        (this.props.reduxState.current360.info[0].threesixty_reports_public ||
+        // OR if user is a client with access
+        (this.props.reduxState.userControls.user.some(e => e.id === String(this.state.current360Id))
+        // OR if user is an employee or admin
+        || this.props.reduxState.user.id >= 4)) ?
         <Link key="#360report" smooth to="#360report"
         scroll={el => scrollWithOffset(el, 150)}
         >
@@ -103,7 +124,14 @@ class SideBar extends Component {
           </MenuItem>
           <Divider />
         </Link> : null }
-        {this.props.reduxState.current360.info[0].analysis_recommendation_published ?
+        {// Check if section is published
+        this.props.reduxState.current360.info[0].analysis_recommendation_published && 
+        // Then check if section is public
+        (this.props.reduxState.current360.info[0].analysis_recommendation_public ||
+        // OR if user is a client with access
+        (this.props.reduxState.userControls.user.some(e => e.id === String(this.state.current360Id))
+        // OR if user is an employee or admin
+        || this.props.reduxState.user.id >= 4)) ?
         <Link key="#analysis" smooth to="#analysis"
         scroll={el => scrollWithOffset(el, 150)}
         >
@@ -115,7 +143,14 @@ class SideBar extends Component {
           </MenuItem>
           <Divider />
         </Link> : null }
-        {this.props.reduxState.current360.info[0].demographics_published ?
+        {// Check if section is published
+        this.props.reduxState.current360.info[0].demographics_published && 
+        // Then check if section is public
+        (this.props.reduxState.current360.info[0].demographics_public ||
+        // OR if user is a client with access
+        (this.props.reduxState.userControls.user.some(e => e.id === String(this.state.current360Id))
+        // OR if user is an employee or admin
+        || this.props.reduxState.user.id >= 4)) ?
         <Link key="#demo-data" smooth to="#demo-data"
         scroll={el => scrollWithOffset(el, 150)}
         >
@@ -124,6 +159,19 @@ class SideBar extends Component {
             onClick={event => this.handleMenuItemClick(event, 'demoData')}
           >
             <Typography>{'Demographic Data'}</Typography>
+          </MenuItem>
+          <Divider />
+        </Link> : null }
+        {// Check if section is published
+        this.props.reduxState.current360.info[0].demographics_published ?
+        <Link key="#demo-data-charts" smooth to="#demo-data-charts"
+        scroll={el => scrollWithOffset(el, 150)}
+        >
+          <MenuItem
+            selected={'demoDataCharts' === this.state.selectedIndex}
+            onClick={event => this.handleMenuItemClick(event, 'demoDataCharts')}
+          >
+            <Typography>{'Demographic Data Charts'}</Typography>
           </MenuItem>
           <Divider />
         </Link> : null }

@@ -73,7 +73,7 @@ class GoalsAssessmentEditDialog extends Component {
 
  // handles clicking of the "edit" button. Opens a dialog window.
  handleClickOpen = () => {
-  this.props.dispatch({ type: 'FETCH_360_SECTION', payload: {section: 'goalsAssessment', current360Id: 1} });
+  this.props.dispatch({ type: 'FETCH_360_SECTION', payload: {section: 'goalsAssessment', current360Id: this.props.current360Id} });
   this.setState({
     ...this.state,
     open: true,
@@ -113,13 +113,16 @@ class GoalsAssessmentEditDialog extends Component {
     return null;
   });
 
-  // Initialize addRowId to be 1 
+  // Initialize addRowId
   // (if all rows are accidentally deleted, this will allow the user to still create a row)
-  let addRowId = 1;
+  let addRowId;
 
   // map through results from database pull
   this.props.reduxState.current360.goalsAssessment.map((row,index) => {
     let rowCheck = row;
+    if (index === 0) {
+      addRowId=row.id;
+    }
 
     // Check if any entries in the row are null and set to empty strings (for happy inputs)
     Object.entries(rowCheck).map((entry) => {

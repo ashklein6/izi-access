@@ -22,7 +22,6 @@ router.get('/', (req, res) => {
   })
 });
 
-
 router.post('/', rejectUnauthenticated, (req, res) => {
   console.log(req.body);
   const sqlText = `INSERT INTO client_request (person_id, name, date) VALUES ($1, $2, $3);`
@@ -38,8 +37,8 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 
 router.post('/add', employeesOnly, (req,res) => {
   const sqlText = `INSERT INTO threesixty_user (user_id, threesixty_id) VALUES ($1, $2);`;
-  const user = req.body.data.user;
-  const threesixty = req.body.data.threesixty;
+  const user = req.body.data.userId;
+  const threesixty = req.body.data.current360Id;
   pool.query(sqlText, [user, threesixty])
   .then(() => {
     res.sendStatus(200);

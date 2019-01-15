@@ -108,7 +108,7 @@ class App extends Component {
               />
 
               {/* If none of the other routes matched, we will show a 404. */}
-              <Route render={() => <h1>404</h1>} />
+              <Route render={() => <h1 style={{textAlign: 'center', paddingTop: 20}}>404 - This site is not found.</h1>} />
             </Switch>
           </section>
           <Footer />

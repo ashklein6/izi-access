@@ -298,30 +298,51 @@ router.get('/chart_data', async (req, res) => {
             {title: 'Plans to tell someone', 
             data: [response1.rows[0].plans_to_tell_yes, response1.rows[0].plans_to_tell_no],
             labels: ['Yes', 'No'],
-            legend: true},
+            legend: true,
+            grid_xs: 12,
+            grid_sm: 4},
             {title: 'First time at the Table', 
             data: [response1.rows[0].first_time_yes, response1.rows[0].first_time_no],
-            labels: ['Yes', 'No']},
+            labels: ['Yes', 'No'],
+            legend: true,
+            grid_xs: 12,
+            grid_sm: 4},
             {title: 'Interested in future conversations about preventing child abuse and neglect', 
             data: [response1.rows[0].child_abuse_yes, response1.rows[0].child_abuse_no],
-            labels: ['Yes', 'No']},
+            labels: ['Yes', 'No'],
+            legend: true,
+            grid_xs: 12,
+            grid_sm: 4},
             {title: 'Interested in future conversations about housing',
             data: [response1.rows[0].housing_yes, response1.rows[0].housing_no],
-            labels: ['Yes', 'No']},
+            labels: ['Yes', 'No'],
+            legend: true,
+            grid_xs: 12,
+            grid_sm: 4},
             {title: 'Interested in future conversations about transportation', 
             data: [response1.rows[0].transportation_yes, response1.rows[0].transportation_no],
-            labels: ['Yes', 'No']},
+            labels: ['Yes', 'No'],
+            legend: true,
+            grid_xs: 12,
+            grid_sm: 4},
             {title: 'Interested in future conversations about education', 
             data: [response1.rows[0].education_yes, response1.rows[0].education_no],
-            labels: ['Yes', 'No']},
+            labels: ['Yes', 'No'],
+            legend: true,
+            grid_xs: 12,
+            grid_sm: 4},
             {title: 'Ethnicity breakdown', 
             data: ethCount,
             labels: ethData,
-            legend: true},
+            legend: true,
+            grid_xs: 12,
+            grid_sm: 6},
             {title: 'Generation breakdown', 
             data: genCount,
             labels: genData,
-            legend: true},
+            legend: true,
+            grid_xs: 12,
+            grid_sm: 6},
         ];
         await client.query('COMMIT'); 
     } catch (error) {
@@ -333,6 +354,24 @@ router.get('/chart_data', async (req, res) => {
     }
     return res.send(data);
 });
+
+// Get clients authorized to see a 360
+router.get('/clients/:id', (req, res) => {
+    const sqlText = `SELECT threesixty_user.id AS threesixty_user_id, person.id, username, email, 
+    firstname, lastname, notes FROM threesixty
+    JOIN threesixty_user ON threesixty_user.threesixty_id = threesixty.id
+    JOIN person ON threesixty_user.user_id = person.id
+    WHERE threesixty.id = $1;`
+    const current360Id = req.params.id;
+    pool.query(sqlText, [current360Id])
+    .then((results) => {
+      res.send(results.rows);
+    })
+    .catch(() => {
+      res.sendStatus(500);
+    })
+  });
+  
 
 /**
  * POST route template

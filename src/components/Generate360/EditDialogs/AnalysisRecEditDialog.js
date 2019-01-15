@@ -72,7 +72,7 @@ class AnalysisRecEditDialog extends Component {
 
  // handles clicking of the "edit" button. Opens a dialog window.
  handleClickOpen = () => {
-  this.props.dispatch({ type: 'FETCH_360_SECTION', payload: {section: 'analysis_recommendation', current360Id: 1} });
+  this.props.dispatch({ type: 'FETCH_360_SECTION', payload: {section: 'analysis_recommendation', current360Id: this.props.current360Id} });
   this.setState({
     ...this.state,
     open: true,

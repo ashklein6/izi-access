@@ -6,7 +6,7 @@ const current360 = (state = { loadingDialogOpen: true, info: [{published_status:
   threesixty_freeform_published: false, freeform_published: false, upload_published: false}], 
   goalsAssessment: [], dashboard: [], threesixty_reports: [], 
   analysis_recommendation: [], demographics: [], circle_share: [], question_set: [], oral_report: [],
-  chart_data: [], updateNeeded: { goalsAssessment: false, dashboard: false, threesixty_reports: false, 
+  chart_data: [], clients: [], updateNeeded: { goalsAssessment: false, dashboard: false, threesixty_reports: false, 
   analysis_recommendation: false, demographics: false, circle_share: false, question_set: false, 
   oral_report: false, updateNeeded: false} }, action) => {
     switch (action.type) {
@@ -36,6 +36,8 @@ const current360 = (state = { loadingDialogOpen: true, info: [{published_status:
         }]}
       case 'SET_360_SECTION':
         return {...state, [action.payload.section]: action.payload.content};
+      case 'SET_360_CLIENTS':
+        return {...state, clients: action.payload.content};
       case 'SET_360_INFO':
         return {...state, info: action.payload.content};
       case 'SET_GOALS':

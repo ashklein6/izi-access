@@ -13,7 +13,15 @@ import LoadingDialog from './EditDialogs/LoadingDialog';
 import ThreesixtyInformationExpansionPanel from './ExpansionPanels/ThreesixtyInformationExpansionPanel';
 import GoalsAssessmentExpansionPanel from './ExpansionPanels/GoalAssessmentsExpansionPanel';
 import DashboardExpansionPanel from './ExpansionPanels/DashboardExpansionPanel';
+import ThreeSixtyEventOverviewExpansionPanel from './ExpansionPanels/ThreesixtyEventOverviewExpansionPanel';
+import ThreesixtyMindstormExpansionPanel from './ExpansionPanels/ThreesixtyMindstormExpansionPanel';
+import ThreesixtyOralReportExpansionPanel from './ExpansionPanels/ThreesixtyOralReportExpansionPanel';
+import ThreesixtyFreeformExpansionPanel from './ExpansionPanels/ThreesixtyFreeformExpansionPanel';
+import ThreesixtyCircleShareInExpansionPanel from './ExpansionPanels/ThreesixtyCircleShareInExpansionPanel';
 import AnalysisRecExpansionPanel from './ExpansionPanels/AnalysisRecExpansionPanel';
+import DemographicDataExpansionPanel from './ExpansionPanels/DemographicDataExpansionPanel';
+import FreeformExpansionPanel from './ExpansionPanels/FreeformExpansionPanel';
+import ClientAccessExpansionPanel from './ExpansionPanels/ClientAccessExpansionPanel';
 
 class Generate360 extends Component {
 
@@ -45,7 +53,15 @@ class Generate360 extends Component {
        <ThreesixtyInformationExpansionPanel current360Id={this.state.current360Id}/>
        <GoalsAssessmentExpansionPanel current360Id={this.state.current360Id}/>
        <DashboardExpansionPanel current360Id={this.state.current360Id}/>
+       <ThreeSixtyEventOverviewExpansionPanel current360Id={this.state.current360Id}/>
+       <ThreesixtyMindstormExpansionPanel current360Id={this.state.current360Id}/>
+       <ThreesixtyOralReportExpansionPanel current360Id={this.state.current360Id}/>
+       <ThreesixtyFreeformExpansionPanel current360Id={this.state.current360Id}/>
+       <ThreesixtyCircleShareInExpansionPanel current360Id={this.state.current360Id}/>
        <AnalysisRecExpansionPanel current360Id={this.state.current360Id}/>
+       <DemographicDataExpansionPanel current360Id={this.state.current360Id}/>
+       <FreeformExpansionPanel current360Id={this.state.current360Id}/>
+       <ClientAccessExpansionPanel current360Id={this.state.current360Id}/>
        <LoadingDialog current360Id={this.state.current360Id}/>
      </div>
    );

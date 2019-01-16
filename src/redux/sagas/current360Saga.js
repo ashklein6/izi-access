@@ -206,6 +206,7 @@ function* fetchOralReport(action) {
   }
 }
 
+// gets data for charts displayed in 360 report
 function* fetchChartData(action) {
   try {
     const response = yield call(axios.get, `/current360/chart_data`, {params: action.payload});

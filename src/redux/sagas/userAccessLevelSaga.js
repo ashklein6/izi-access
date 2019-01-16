@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { put, call, takeLatest } from 'redux-saga/effects';
 
-
+// gets all users access levels
 function* fetchAccessLevels(action) {
   try {
     const response = yield call(axios.get, '/userAccessLevel' );

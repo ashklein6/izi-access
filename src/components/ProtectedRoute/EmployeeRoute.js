@@ -37,7 +37,7 @@ const EmployeeRoute = (props) => {
     ComponentToShow = Login;
   } else {
     // the the user is not logged in and the mode is not 'login'
-    // show the RegisterPage
+    // show the CreateUser
     ComponentToShow = CreateUser;
   }
 

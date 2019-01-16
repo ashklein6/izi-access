@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { put, call, takeLatest } from 'redux-saga/effects';
 
+// gets all IZI categories
 function* fetchIziCategories() {
   try {
     const response = yield call(axios.get, '/iziCategories');

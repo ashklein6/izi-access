@@ -46,7 +46,7 @@ class Generate360 extends Component {
             variant="contained"
             onClick={this.back}
           >
-            Return to Home Page
+            Return to 360 Manager
           </Button>
        </div>
        <Typography variant="h2" className={classes.header}>Generate360</Typography>

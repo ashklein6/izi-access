@@ -4,6 +4,7 @@ const router = express.Router();
 const encryptLib = require('../modules/encryption');
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
+// Check the encryption and change password
 router.put('/', rejectUnauthenticated, (req, res) => {
   const newPassword = encryptLib.encryptPassword(req.body.newPassword);
   const oldPassword = req.body.oldPassword;

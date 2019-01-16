@@ -1,6 +1,8 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
+
+// define goalsRows and dashboardRows for creating 360s
 const goalsRows = ['Total Number', 'Number of People of Color/Indigenous', 'Number of People Under 24', 
     'Measurable Indicators of Success: 80% of participants met 1 new person across race, class, culture or other means of self-identity', 
     'Measurable Indicators of Success: 80% of participants met 2 new people across race, class, culture or other means of self-identity',
@@ -46,13 +48,10 @@ router.get('/section', (req, res) => {
     case 'oral_report':
       queryText = `SELECT * FROM oral_report WHERE threesixty_reports_id=$1 ORDER BY id`; break;
   }
-  
-  console.log('GET request for 360 section:', section, 'current 360 id:', current360Id);
-  
+    
   if (queryText !== '') {
     pool.query(queryText, [current360Id])
         .then( (results) => {
-            console.log('successful with section:', section);
             res.send(results.rows);
         }).catch( (error) => {
             console.log('error on get:', error);
@@ -75,12 +74,9 @@ router.get('/info', (req, res) => {
     threesixty_freeform_published, freeform_published, upload_published FROM threesixty
     JOIN izi_categories ON izi_categories.id = threesixty.category_id
     WHERE threesixty.id=$1`;
-    
-    console.log('GET request for current 360 information. current 360 id:', current360Id);
-    
+        
     pool.query(queryText, [current360Id])
         .then( (results) => {
-            console.log('successful with 360 information');
             res.send(results.rows);
         }).catch( (error) => {
             console.log('error on get:', error);
@@ -94,12 +90,9 @@ router.get('/info', (req, res) => {
 router.get('/goalsAssessment', (req, res) => {
     let current360Id = req.query.current360Id;
     let queryText = 'SELECT * FROM goals WHERE threesixty_id=$1 ORDER BY id';
-    
-    console.log('GET request for 360 section goalsAssessment. current 360 id:', current360Id);
-    
+        
     pool.query(queryText, [current360Id])
         .then( (results) => {
-            console.log('successful with goalsAssessment');
             res.send(results.rows);
         }).catch( (error) => {
             console.log('error on get:', error);
@@ -113,13 +106,10 @@ router.get('/goalsAssessment', (req, res) => {
 router.get('/dashboard', (req, res) => {
     let current360Id = req.query.current360Id;
     let queryText = `SELECT * FROM dashboard WHERE threesixty_id=$1 ORDER BY id;`;
-    
-    console.log('GET request for 360 section dashboard. current 360 id:', current360Id);
-    
+        
     if (queryText !== '') {
       pool.query(queryText, [current360Id])
           .then( (results) => {
-              console.log('successful with dashboard');
               res.send(results.rows);
           }).catch( (error) => {
               console.log('error on get:', error);
@@ -134,13 +124,10 @@ router.get('/dashboard', (req, res) => {
 router.get('/threesixty_reports', (req, res) => {
     let current360Id = req.query.current360Id;
     let queryText = `SELECT * FROM threesixty_reports WHERE threesixty_id=$1 ORDER BY id;`;
-    
-    console.log('GET request for 360 section threesixty_reports. current 360 id:', current360Id);
-    
+        
     if (queryText !== '') {
       pool.query(queryText, [current360Id])
           .then( (results) => {
-              console.log('successful with threesixty_reports');
               res.send(results.rows);
           }).catch( (error) => {
               console.log('error on get:', error);
@@ -155,13 +142,10 @@ router.get('/threesixty_reports', (req, res) => {
 router.get('/analysis_recommendation', (req, res) => {
     let current360Id = req.query.current360Id;
     let queryText = `SELECT * FROM analysis_recommendation WHERE threesixty_id=$1 ORDER BY id;`;
-    
-    console.log('GET request for 360 section analysis_recommendation. current 360 id:', current360Id);
-    
+        
     if (queryText !== '') {
       pool.query(queryText, [current360Id])
           .then( (results) => {
-              console.log('successful with analysis_recommendation');
               res.send(results.rows);
           }).catch( (error) => {
               console.log('error on get:', error);
@@ -176,13 +160,10 @@ router.get('/analysis_recommendation', (req, res) => {
 router.get('/demographics', (req, res) => {
     let current360Id = req.query.current360Id;
     let queryText = `SELECT * FROM demographic WHERE threesixty_id=$1 ORDER BY id;`;
-    
-    console.log('GET request for 360 section demographics. current 360 id:', current360Id);
-    
+        
     if (queryText !== '') {
       pool.query(queryText, [current360Id])
           .then( (results) => {
-              console.log('successful with demographics');
               res.send(results.rows);
           }).catch( (error) => {
               console.log('error on get:', error);
@@ -197,13 +178,10 @@ router.get('/demographics', (req, res) => {
 router.get('/circle_share', (req, res) => {
     let current360Id = req.query.current360Id;
     let queryText = `SELECT * FROM circle_share WHERE threesixty_reports_id=$1 ORDER BY id;`;
-    
-    console.log('GET request for 360 section circle_share. current 360 id:', current360Id);
-    
+        
     if (queryText !== '') {
       pool.query(queryText, [current360Id])
           .then( (results) => {
-              console.log('successful with circle_share');
               res.send(results.rows);
           }).catch( (error) => {
               console.log('error on get:', error);
@@ -222,13 +200,10 @@ router.get('/question_set', (req, res) => {
     LEFT JOIN response ON response.question_id = questions.id
     LEFT JOIN response_category ON response_category.id = response.category_id
     WHERE threesixty_reports_id=$1 ORDER BY question_set.id;`;
-    
-    console.log('GET request for 360 section question_set. current 360 id:', current360Id);
-    
+        
     if (queryText !== '') {
       pool.query(queryText, [current360Id])
           .then( (results) => {
-              console.log('successful with question_set');
               res.send(results.rows);
           }).catch( (error) => {
               console.log('error on get:', error);
@@ -243,13 +218,10 @@ router.get('/question_set', (req, res) => {
 router.get('/oral_report', (req, res) => {
     let current360Id = req.query.current360Id;
     let queryText = `SELECT * FROM oral_report WHERE threesixty_reports_id=$1 ORDER BY id`;
-    
-    console.log('GET request for 360 section oral_report. current 360 id:', current360Id);
-    
+        
     if (queryText !== '') {
       pool.query(queryText, [current360Id])
           .then( (results) => {
-              console.log('successful with oral_report');
               res.send(results.rows);
           }).catch( (error) => {
               console.log('error on get:', error);
@@ -260,6 +232,7 @@ router.get('/oral_report', (req, res) => {
     }
 });
 
+// get information to create charts on view 360
 router.get('/chart_data', async (req, res) => {
     let data = [];
     let genData = [];
@@ -368,14 +341,12 @@ router.get('/clients/:id', (req, res) => {
       res.send(results.rows);
     })
     .catch(() => {
+      console.log('error getting authorized clients')
       res.sendStatus(500);
     })
   });
-  
 
-/**
- * POST route template
- */
+// post to create a new long-form 360
 router.post('/complete', async (req, res) => {
     const new360 = req.body.data; 
     const client = await pool.connect();
@@ -401,7 +372,7 @@ router.post('/complete', async (req, res) => {
         await client.query('COMMIT'); 
     } catch (error) {
         await client.query('ROLLBACK');
-        console.log('error doing the thing');
+        console.log('error doing posting new 360', error);
         throw error;   
     } finally {
         client.release();
@@ -409,6 +380,7 @@ router.post('/complete', async (req, res) => {
     return res.send(id.rows[0]);
 });
 
+// post to create a new short-form 360
 router.post('/lowdown', async (req, res) => {
     const new360 = req.body.data;
     const client = await pool.connect();
@@ -438,12 +410,10 @@ router.post('/lowdown', async (req, res) => {
 
 // Change publish status of a section or entire 360 (published_status)
 router.put('/publish/:id', async (req,res) => {
-    console.log('in current360.router.js PUT for /current360/publish');
     let current360Id = req.params.id;
     let field = req.body.field;
     let status = req.body.status;
     let queryText = '';
-    console.log('current360Id:', current360Id, 'field:', field, 'status:', status);
     switch (field) {
         case 'published_status':
             queryText = `UPDATE threesixty SET published_status = $2 WHERE id=$1;`; break;
@@ -470,11 +440,9 @@ router.put('/publish/:id', async (req,res) => {
         case 'upload_published':
             queryText = `UPDATE threesixty SET upload_published = $2 WHERE id=$1;`; break;
     }
-    console.log('queryText:', queryText);
     if (queryText !== '') {
         pool.query(queryText, [current360Id, status])
         .then( (results) => {
-            console.log('successful with publish');
             res.sendStatus(200);
         }).catch( (error) => {
             console.log('error on publish:', error);
@@ -487,12 +455,10 @@ router.put('/publish/:id', async (req,res) => {
 
 // Change public status of a section
 router.put('/public/:id', async (req,res) => {
-    console.log('in current360.router.js PUT for /current360/public');
     let current360Id = req.params.id;
     let field = req.body.field;
     let status = req.body.status;
     let queryText = '';
-    console.log('current360Id:', current360Id, 'field:', field, 'status:', status);
     switch (field) {
         case 'analysis_recommendation_public':
             queryText = `UPDATE threesixty SET analysis_recommendation_public = $2 WHERE id=$1;`; break;
@@ -517,11 +483,9 @@ router.put('/public/:id', async (req,res) => {
         case 'upload_public':
             queryText = `UPDATE threesixty SET upload_public = $2 WHERE id=$1;`; break;
     }
-    console.log('queryText:', queryText);
     if (queryText !== '') {
         pool.query(queryText, [current360Id, status])
         .then( (results) => {
-            console.log('successful with public');
             res.sendStatus(200);
         }).catch( (error) => {
             console.log('error on public:', error);
@@ -534,17 +498,14 @@ router.put('/public/:id', async (req,res) => {
 
 // Edit the 360 information section
 router.put('/edit/info/:id', async (req,res) => {
-    console.log('in current360.router.js PUT for /current360/edit/info');
     let current360Id = req.params.id;
     let newData = req.body;
-    console.log('to update info to:', newData);
     let queryText = `UPDATE threesixty SET name=$1, date=$2, location=$3, category_id=$4, client=$5, description=$6
     WHERE id=$7`;
 
     pool.query(queryText, [newData.name, newData.date, newData.location, newData.category_id, newData.client,
         newData.description, current360Id])
     .then( (results) => {
-        console.log('successful with editing info');
         res.sendStatus(200);
     }).catch( (error) => {
         console.log('error on editing info:', error);
@@ -554,7 +515,6 @@ router.put('/edit/info/:id', async (req,res) => {
 
 // Edit the goals assessment section
 router.put('/edit/goalsAssessment/:id', (async (req, res) => {
-    console.log('in current360.router.js PUT for /current360/edit/goalsAssessment');
     let current360Id = req.params.id;
     let newData = req.body;
 
@@ -564,15 +524,12 @@ router.put('/edit/goalsAssessment/:id', (async (req, res) => {
         await client.query('BEGIN');
         Object.keys(newData).map(async (key) => {
             if (!isNaN(key)) {
-                console.log('key.new:', newData[key].new, 'key.updated', newData[key].updated)
                 if (newData[key].new) {
-                    console.log('caught insert:', key);
                     await client.query(`INSERT INTO goals ("threesixty_id", "description", "desired", "delivered", "difference", "percent", "comments", "row_public")
                     VALUES ($1, $2, $3, $4, $5, $6, $7, $8);`, 
                     [current360Id, newData[key].description, newData[key].desired, newData[key].delivered,
                     newData[key].difference, newData[key].percent, newData[key].comments, newData[key].row_public])
                 } else if (newData[key].updated) {
-                    console.log('caught update:', key);
                     await client.query(`UPDATE goals
                     SET threesixty_id = $2,
                         description = $3, 
@@ -586,7 +543,6 @@ router.put('/edit/goalsAssessment/:id', (async (req, res) => {
                     [newData[key].id, newData[key].threesixty_id, newData[key].description, newData[key].desired, newData[key].delivered, 
                     newData[key].difference, newData[key].percent, newData[key].comments, newData[key].row_public])
                 } else if (newData[key] == 'deleted') {
-                    console.log('caught delete:', newData[key]);
                     await client.query(`DELETE FROM goals WHERE id = $1;`, [key]);
                 }
             };
@@ -603,7 +559,6 @@ router.put('/edit/goalsAssessment/:id', (async (req, res) => {
 
 // Edit the dashboard section
 router.put('/edit/dashboard/:id', (async (req, res) => {
-    console.log('in current360.router.js PUT for /current360/edit/dashboard');
     let current360Id = req.params.id;
     let newData = req.body;
 
@@ -613,21 +568,17 @@ router.put('/edit/dashboard/:id', (async (req, res) => {
         await client.query('BEGIN');
         Object.keys(newData).map(async (key) => {
             if (!isNaN(key)) {
-                console.log('key.new:', newData[key].new, 'key.updated', newData[key].updated)
                 if (newData[key].new) {
-                    console.log('caught insert:', key);
                     await client.query(`INSERT INTO dashboard ("threesixty_id", "row_title", "row_info")
                     VALUES ($1, $2, $3);`, 
                     [current360Id, newData[key].row_title, newData[key].row_info])
                 } else if (newData[key].updated) {
-                    console.log('caught update:', key);
                     await client.query(`UPDATE dashboard
                     SET row_title = $2,
                         row_info = $3
                     WHERE id = $1;`, 
                     [newData[key].id, newData[key].row_title, newData[key].row_info])
                 } else if (newData[key] == 'deleted') {
-                    console.log('caught delete:', key);
                     await client.query(`DELETE FROM dashboard WHERE id = $1;`, [key]);
                 }
             };
@@ -644,7 +595,6 @@ router.put('/edit/dashboard/:id', (async (req, res) => {
 
 // Edit the dashboard section
 router.put('/edit/analysis_recommendation/:id', (async (req, res) => {
-    console.log('in current360.router.js PUT for /current360/edit/analysis_recommendation');
     let current360Id = req.params.id;
     let newData = req.body;
 
@@ -654,9 +604,7 @@ router.put('/edit/analysis_recommendation/:id', (async (req, res) => {
         await client.query('BEGIN');
         Object.keys(newData).map(async (key) => {
             if (!isNaN(key)) {
-                console.log('key.new:', newData[key].new, 'key.updated', newData[key].updated)
                 if (newData[key].updated) {
-                    console.log('caught update:', key);
                     await client.query(`UPDATE analysis_recommendation
                     SET findings = $2,
                         recommendations = $3

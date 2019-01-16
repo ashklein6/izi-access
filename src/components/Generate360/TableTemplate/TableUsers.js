@@ -94,39 +94,8 @@ const styles = {
    }
   }
  },
- details: {
-  alignItems: 'center',
- },
- heading: {
-  fontSize: "1.5rem",
- },
-//  editBtn: {
-//   float: 'right'
-//  },
- icon: {
-  verticalAlign: 'bottom',
-  height: 20,
-  width: 20,
- },
- status: {
-  flexBasis: '25.00%',
-  alignItems: 'center',
-  justifyContent: 'flex-end',
-  display: 'flex'
- },
- subheading: {
-  fontSize: '1rem',
-  color: 'green',
-  fontWeight: 'bold'
- },
- summary: {
-  alignItems: 'center'
- },
  table: {
   minWidth: 700
- },
- title: {
-  flexBasis: '75.00%',
  },
 };
 

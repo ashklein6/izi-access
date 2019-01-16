@@ -2,7 +2,7 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 
-
+// get izi_categories from database
 router.get('/', (req, res) => {
     pool.query(`SELECT * FROM izi_categories`)
     .then((response) => {
@@ -11,10 +11,6 @@ router.get('/', (req, res) => {
     .catch(() => {
       res.sendStatus(500);
     });
-});
-
-router.post('/', (req, res) => {
-
 });
 
 module.exports = router;

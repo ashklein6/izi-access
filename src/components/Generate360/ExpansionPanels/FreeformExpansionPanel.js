@@ -81,13 +81,7 @@ class FreeformExpansionPanel extends Component {
         {/* Content that is within the expansion panel (shows when panel is expanded) */}
         <ExpansionPanelDetails className={classes.details}>
           <Paper className={classes.rootTable}>
-            <TableTemplate 
-              headers={['Description', 'Details']} 
-              width={['15%',null]}
-              data={this.props.reduxState.current360.dashboard} 
-              className={[null,null]}
-              cellVariables={['row_title', 'row_info']} 
-            />
+
           </Paper>
         </ExpansionPanelDetails>
 

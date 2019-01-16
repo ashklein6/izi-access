@@ -59,8 +59,6 @@ class GoalsAssessmentEditDialog extends Component {
  handleChangeFor= (event, id) => {
   event.preventDefault();
 
-  console.log('event:', event, 'id:', id);
-
   this.setState({
     [id]: {
       ...this.state[id],
@@ -93,7 +91,6 @@ class GoalsAssessmentEditDialog extends Component {
  // dispatches an action to update the database with the new values and 
  // calls handleClickClose.
  handleSave = () => {
-  console.log('in handleSave');
   this.props.dispatch({ type: 'EDIT_360', payload: {section: 'goalsAssessment', current360Id: this.props.current360Id, data: this.state} })
   this.handleClickClose();
  } // end handleSave
@@ -162,8 +159,6 @@ class GoalsAssessmentEditDialog extends Component {
 
  render() {
    const { classes } = this.props;
-
-   console.log(this.state);
 
    // Check if the section information updated since this site was last loaded.
    // A section is re-downloaded each time the edit dialog is opened.

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import colors from '../App/colors';
 
 // Material-UI
 import { withStyles } from '@material-ui/core/styles';
@@ -55,17 +54,6 @@ class CreateUser extends Component {
   handleCancel = () => {
     this.props.dispatch({type: 'SET_TO_LOGIN_MODE'});
   }
-
-  handleDemo = () => {
-    this.setState({
-      firstname: 'James',
-      lastname: 'Andersen',
-      email: 'jamesa@gmail.com',
-      username: 'jandersen',
-      password: 'a',
-      iziName: 'Community factors for emotional distress.'
-    })
-  };
 
   handleInputChangeFor = propertyName => (event) => {
     this.setState({
@@ -195,15 +183,6 @@ class CreateUser extends Component {
             >
               Cancel
             </Button>
-            <br />
-            <Button
-              className={classes.buttonDemo}
-              onClick={this.handleDemo}
-              name="demo"
-              value="demo"
-            >
-              Demo Fill
-            </Button>
           </div>
         </form>
       </div>
@@ -217,7 +196,7 @@ const styles = {
     textAlign: 'center',
   },
   textField: {
-    backgroundColor: '#fff',
+    backgroundColor: 'white',
     margin: 'auto',
     minWidth: 350,
     marginBottom: 15
@@ -243,12 +222,6 @@ const styles = {
   button: {
     width: 200,
     marginTop: 15
-  },
-  buttonDemo: {
-    backgroundColor: 'inherit',
-    color: colors.lightGrey,
-    width: 200,
-    marginTop: 15,
   }
 };
 

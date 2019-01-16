@@ -4,6 +4,7 @@ import EditUser from './EditUser/EditUser';
 import EditPassword from './EditUser/EditPassword';
 import RequestAccess from './EditUser/RequestAccess';
 import moment from 'moment';
+import colors from '../App/colors';
 
 // Material-UI
 import { withStyles } from '@material-ui/core/styles';
@@ -88,7 +89,7 @@ const styles = {
     margin: '25px auto',
     padding: 20,
     fontSize: 18,
-    background: '#eceff0',
+    background: colors.lightGrey,
     borderRadius: 10
   }
 };

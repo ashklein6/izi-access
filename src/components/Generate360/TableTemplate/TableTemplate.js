@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import colors from '../../App/colors';
 
 // Material-UI
 import { withStyles } from '@material-ui/core/styles';
@@ -12,18 +13,6 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import CheckCircleOutline from '@material-ui/icons/CheckCircleOutline';
 import Close from '@material-ui/icons/Close';
-
-let root = document.querySelector(':root');
-const colors = {
-  purple: window.getComputedStyle(root).getPropertyValue('--main-purple'),
-  purpleHover: window.getComputedStyle(root).getPropertyValue('--main-purple-hover'),
-  red: window.getComputedStyle(root).getPropertyValue('--main-red'),
-  redHover: window.getComputedStyle(root).getPropertyValue('--main-red-hover'),
-  pink: window.getComputedStyle(root).getPropertyValue('--main-pink'),
-  pinkHover: window.getComputedStyle(root).getPropertyValue('--main-pink-hover'),
-  orange: window.getComputedStyle(root).getPropertyValue('--main-orange'),
-  orangeHover: window.getComputedStyle(root).getPropertyValue('--main-orange-hover'),
-};
 
 // Cleanly style table cells within Material-UI
 const CustomTableCell = withStyles(theme => ({
@@ -82,41 +71,13 @@ class TableUsers extends Component {
 };
 
 const styles = {
- root: {
-  width: '100%',
- },
  rootTable: {
   alignItems: 'center',
   overflowX: 'scroll'
-
  },
  centerText: {
   textAlign: 'center'
  },
- colorBar: {
-  // needs to be here for custom-css switch to work.
- },
- colorChecked: {
-  // needs to be here for custom-css switch to work.
- },
- colorSwitchBase: {
-  color: colors.orange,
-  '&$colorChecked': {
-   color: colors.orange,
-   '& + $colorBar': {
-    backgroundColor: colors.orange
-   }
-  }
- },
- details: {
-  alignItems: 'center',
- },
- heading: {
-  fontSize: "1.5rem",
- },
-//  editBtn: {
-//   float: 'right'
-//  },
  icon: {
   verticalAlign: 'bottom',
   height: 20,
@@ -124,20 +85,6 @@ const styles = {
  },
  iconColored: {
   color: colors.pink
- },
- status: {
-  flexBasis: '25.00%',
-  alignItems: 'center',
-  justifyContent: 'flex-end',
-  display: 'flex'
- },
- subheading: {
-  fontSize: '1rem',
-  color: 'green',
-  fontWeight: 'bold'
- },
- summary: {
-  alignItems: 'center'
  },
  table: {
   minWidth: 700

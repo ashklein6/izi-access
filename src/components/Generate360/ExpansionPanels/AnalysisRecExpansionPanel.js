@@ -55,7 +55,7 @@ class AnalysisRecExpansionPanel extends Component {
 
  render() {
    const { classes } = this.props;
-   console.log('analysis rec 360 id', this.props.current360Id);
+
    return (
     <div className={classes.root}>
       <ExpansionPanel className={classes.expansionPanel}>

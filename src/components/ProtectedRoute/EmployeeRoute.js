@@ -28,7 +28,7 @@ const EmployeeRoute = (props) => {
   let ComponentToShow;
 
   if(user.access_id >= 4) {
-    // if the user's access level is employee or higher'
+    // if the user's access level is employee or higher
     // show the component that is protected
     ComponentToShow = ComponentToProtect;
   } else if (loginMode === 'login') {

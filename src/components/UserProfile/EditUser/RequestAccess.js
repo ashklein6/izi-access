@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+// Material-UI
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
@@ -18,7 +19,7 @@ const styles = {
     textField: {
       width: 400,
       marginBottom: 15,
-      backgroundColor: '#fff'
+      backgroundColor: 'white'
     },
     text: {
       textAlign: 'left',

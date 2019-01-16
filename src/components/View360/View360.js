@@ -296,18 +296,6 @@ class View360 extends Component {
             ))}
             </Grid>
           </section> : null }
-          {/* <section className={classes.section}>
-            //anchor div for sidebar scroll placement
-            <div style={{position: 'relative'}}>
-              <div id="sticky-stats" style={{position: 'absolute', top: -80, left: 0}}></div>
-            </div>
-            //sticky header for section
-            <div className={classes.sticky}>
-              <Typography variant="h4" className={classes.sectionHeader}>Sticky Stats and Event Materials</Typography>
-            </div>
-            //section content
-            <p className={classes.paragraph}>Sticky Stats will go here!</p>
-          </section> */} 
         </Grid>
       </Grid>
     );
@@ -315,29 +303,14 @@ class View360 extends Component {
 };
 
 const styles = {
-  sideBar: {
-    height: 'calc(100vh - 122px)',
-    backgroundColor: '#ccc',
-    textAlign: 'center',
-  },
   centerText: {
     textAlign: 'center'
   },
   chart: {
     padding: 20
   },
-  report: {
-    height: 'calc(100vh - 122px)',
-    overflowY: 'auto',
-    overflowX: 'auto',
-  },
-  mainReportInfo: {
-    textAlign: 'center',
-    // height: '35vh',
-  },
   header: {
     margin: '50px 0px 25px 0px',
-    // position: '-webkit-sticky',
     position: 'sticky',
     top: 0,
     backgroundColor: 'white',
@@ -359,9 +332,8 @@ const styles = {
     textAlign: 'right',
     fontWeight: 'bold'
   },
-  subHeader: {
-    marginBottom: '15px',
-    fontSize: '1.5rem'
+  mainReportInfo: {
+    textAlign: 'center',
   },
   manage360Btn: {
     margin: '15px 0px',
@@ -371,19 +343,14 @@ const styles = {
     margin: '25px auto',
     width: '90%'
   },
-  content: {
-    textAlign: 'left',
-    margin: 'auto',
-    width: '85%',
-    height: '100%',
-    overflow: 'auto'
-  },
   paragraph: {
     margin: '0px 10px 0px 10px',
     fontSize: '0.8125rem'
   },
-  markDownEditorContainer: {
-    width: '100%',
+  report: {
+    height: 'calc(100vh - 122px)',
+    overflowY: 'auto',
+    overflowX: 'auto',
   },
   section: {
     paddingBottom: 20
@@ -394,16 +361,21 @@ const styles = {
     fontWeight: 'bold',
     color: colors.purple
   },
+  sideBar: {
+    height: 'calc(100vh - 122px)',
+    backgroundColor: '#ccc',
+    textAlign: 'center',
+  },
   sticky: {
-    // position: '-webkit-sticky',
     position: 'sticky',
     top: 80,
     backgroundColor: 'white',
     boxShadow: 'box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);'
   },
-  textMargin: {
-    margin: '0px 10px 0px 10px'
-  }
+  subHeader: {
+    marginBottom: '15px',
+    fontSize: '1.5rem'
+  },
 };
 
 const mapReduxStateToProps = (reduxState) => ({

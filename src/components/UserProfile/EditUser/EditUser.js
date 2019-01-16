@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import colors from '../../App/colors';
 
+// Material-UI
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
@@ -10,36 +12,6 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-const styles = {
-    
-    textField: {
-      width: 400,
-      marginBottom: 15,
-      backgroundColor: '#fff'
-    },
-    
-    header: {
-      textAlign: 'center',
-      marginBottom: 25
-    },
-    
-    editButton: {
-      marginTop: 2,
-      marginRight: 10,
-      float: 'right',
-    },
-    
-    div: {
-      textAlign: 'left',
-      width: 400,
-      margin: 'auto',
-      padding: 20,
-      fontSize: 18,
-      background: '#eceff0',
-      borderRadius: 10
-    }
-  };
-
 class EditUser extends Component {
 
 state = {
@@ -48,13 +20,13 @@ state = {
     lastName: '',
     email: '',
     id: 0
-    };
+};
 
-    handleChange = (event) => {
-        this.setState({
-            [event.target.name]: event.target.value
-        })
-    };
+handleChange = (event) => {
+    this.setState({
+        [event.target.name]: event.target.value
+    })
+};
 
 handleClickOpen = () => {
     this.setState({
@@ -143,9 +115,35 @@ render () {
             </DialogActions>
           </Dialog>
         </div>
-    )
+    )}
 }
-}
+
+
+const styles = {
+    textField: {
+      width: 400,
+      marginBottom: 15,
+      backgroundColor: 'white'
+    },
+    header: {
+      textAlign: 'center',
+      marginBottom: 25
+    },
+    editButton: {
+      marginTop: 2,
+      marginRight: 10,
+      float: 'right',
+    },
+    div: {
+      textAlign: 'left',
+      width: 400,
+      margin: 'auto',
+      padding: 20,
+      fontSize: 18,
+      background: colors.lightGrey,
+      borderRadius: 10
+    }
+  };
 
 const mapReduxStateToProps = (reduxState) => ({
     reduxState

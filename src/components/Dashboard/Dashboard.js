@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
+import colors from '../App/colors';
 
 // Material-UI
 import { withStyles } from '@material-ui/core/styles';
@@ -118,7 +119,7 @@ const styles = {
     display: 'flex',
     width: 380,
     padding: 5,
-    backgroundColor: '#ddd',
+    backgroundColor: colors.grey,
   },
   button: {
     marginBottom: 25

@@ -21,7 +21,7 @@ import classNames from 'classnames';
 class ViewUser extends Component {
 
   state = {
-    open: false, // true for dev purposes
+    open: false,
     edit: false, // true should show view user, false should show edit user
     firstname: '',
     lastname: '',
@@ -32,7 +32,6 @@ class ViewUser extends Component {
   };
 
   handleChange = (event) => {
-    console.log('in handleChange');
     this.setState({
       ...this.state,
       [event.target.name]: event.target.value,

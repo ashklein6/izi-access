@@ -39,13 +39,11 @@ class ClientAccessExpansionPanel extends Component {
       ...this.state,
       publishDialogOpen: false
     })
-    console.log('this.state:', this.state);
    } // end handleClickClose
   
    // dispatches an action to update the database with the new values and 
    // calls handleClickClose.
    handleSave = () => {
-    console.log('in handleSave');
     this.setState({
       ...this.state,
       published: true,
@@ -55,7 +53,6 @@ class ClientAccessExpansionPanel extends Component {
    } // end handleSave
 
    removeAccess = (threesixtyUserId) => {
-     console.log('remove access for threesixty_user_id:', threesixtyUserId);
      this.props.dispatch({ type: 'REMOVE_360_ACCESS_FROM_360', payload: {threesixtyUserId: threesixtyUserId, current360Id: this.props.current360Id} });
    }
 

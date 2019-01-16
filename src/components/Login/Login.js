@@ -123,7 +123,7 @@ const styles = {
     padding: 10,
   },
   textField: {
-    backgroundColor: '#fff',
+    backgroundColor: 'white',
     margin: 'auto',
     minWidth: 350,
     marginBottom: 15

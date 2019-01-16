@@ -56,7 +56,6 @@ class Search360s extends Component {
           name="date" value={this.state.date}/>
         <TextField
           select
-          // className={classNames(classes.margin, classes.textField)}
           className={classes.textField}
           value={this.state.category}
           onChange={this.handleChange}
@@ -80,18 +79,9 @@ class Search360s extends Component {
 const styles = {
   form: {
     display: 'inline-block',
-    // justifyContent: 'center',
     margin: 'auto'
   },
-  margin: {
-    // margin: theme.spacing.unit,
-  },
-  withoutLabel: {
-    // marginTop: theme.spacing.unit * 3,
-  },
   textField: {
-    
-    // flexBasis: 200,
     padding: 25
   },
   button: {

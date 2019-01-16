@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import colors from '../App/colors';
 
 // React-confirm-alert
 import { confirmAlert } from 'react-confirm-alert'; // Import
@@ -57,7 +56,6 @@ class Create360 extends Component {
 
   // handles change for inputs
   handleChange = (event) => {
-    console.log('in handleChange');
     this.setState({
       ...this.state,
       [event.target.name]: event.target.value,
@@ -66,7 +64,6 @@ class Create360 extends Component {
 
   // handles change for switch
   handleSwitch = (event) => {
-    console.log('in handleSwitch', this.state.status);
     let newValue = !this.state.status;
     this.setState({
       ...this.state,
@@ -107,17 +104,6 @@ class Create360 extends Component {
     };
   }
 
-  handleDemo = () => {
-    this.setState({
-        name: 'Community factors for emotional distress.',
-        client: 'Best Buy',
-        location: 'Richfield',
-        category: '2',
-        description: 'Studying factors that cause employees to feel emotional and mental distress.',
-        status: false,
-    })
-  }
-
   confirmSubmit = () => {
     confirmAlert({
       title: 'Confirm to submit',
@@ -144,19 +130,11 @@ class Create360 extends Component {
     const { classes } = this.props;
     return (
       <div className={classes.container}>
-        {/* {JSON.stringify(this.state)} */}
-        {/* {JSON.stringify(this.props.mapReduxStateToProps)} */}
         <Button 
           variant="contained"
           onClick={this.returnToDashboard}
         >
           Return to Dashboard
-        </Button>
-        <Button 
-          onClick={this.handleDemo}
-          style={{color: 'white'}}
-        >
-          Demo Fill
         </Button>
         <form className={classes.form} onSubmit={this.handleSubmit}>
           <Typography variant="h2" className={classes.header}>Create 360</Typography>
@@ -183,7 +161,6 @@ class Create360 extends Component {
           /><br />
 
           <TextField
-            // label="Date"
             className={classes.textField}
             type="date"
             margin="dense"

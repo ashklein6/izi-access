@@ -6,20 +6,22 @@ const encryptLib = require('../modules/encryption');
 const crypto = require('crypto');
 const nodemailer = require('nodemailer');
 
+// Checks if email exists in database, creates token, sends email with token
+// and saves the token in database
 router.post('/', (req, res) => {
   if (req.body.email === '') {
     res.json('email required');
   }
-  console.log(req.body.email);
   pool.query(`SELECT id, email FROM person WHERE email = $1`, [req.body.email])
   .then(user => {
     if (user.rows[0] === undefined) {
-      console.log('email not in database');
       res.json('email not in db');
     } else {
       const token = crypto.randomBytes(20).toString('hex');
       pool.query(`UPDATE person SET password_reset_token = '${token}', password_reset_expires = 'tomorrow' WHERE id = ${user.rows[0].id}`);
       
+      // THESE CONST SECTIONS (transporter, mailOptions) NEED TO BE CONFIGURED FOR FORGOT 
+      // PASSWORD TO FUNCTION. REFER TO DOCS FOR DETAILS.
       const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
@@ -54,10 +56,10 @@ router.post('/', (req, res) => {
   })
 });
 
+// checks that token is valid and not expired
 router.get('/', (req,res) => {
   pool.query(`SELECT username FROM person WHERE password_reset_token = $1 AND NOW() < password_reset_expires;`, [req.query.passwordResetToken])
   .then(user => {
-    console.log('USER', user);
     if(user.rows[0] == undefined) {
       res.json('password reset link is invalid or has expired');
     } else {
@@ -72,11 +74,11 @@ router.get('/', (req,res) => {
   })
 });
 
+// update password and clears token information
 router.put('/', (req, res) => {
   const password = encryptLib.encryptPassword(req.body.password);
   const username  = req.body.username;
   const token = req.body.token;
-  console.log(req.body);
   pool.query(`UPDATE person SET password = $1, password_reset_token = null, password_reset_expires = null 
             WHERE username = $2 AND password_reset_token = $3`, [password, username, token])
   .then(() => {

@@ -53,13 +53,11 @@ class ThreesixyInformationExpansionPanel extends Component {
       ...this.state,
       publishDialogOpen: false
     })
-    console.log('this.state:', this.state);
    } // end handleClickClose
   
    // dispatches an action to update the database with the new values and 
    // calls handleClickClose.
    handleSave = () => {
-    console.log('in handleSave');
     this.setState({
       ...this.state,
       published: true,

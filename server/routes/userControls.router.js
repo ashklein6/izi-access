@@ -4,9 +4,7 @@ const router = express.Router();
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 const { employeesOnly } = require('../modules/employeesOnly');
 
-/**
- * GET route template
- */
+// get 360s that a specific user has access to
 router.get('/', (req, res) => {
   const sqlText = `SELECT threesixty.name, threesixty.date, threesixty.id FROM threesixty
                   JOIN threesixty_user ON threesixty_user.threesixty_id = threesixty.id
@@ -22,6 +20,7 @@ router.get('/', (req, res) => {
   })
 });
 
+// add a client request for 360 access
 router.post('/', rejectUnauthenticated, (req, res) => {
   console.log(req.body);
   const sqlText = `INSERT INTO client_request (person_id, name, date) VALUES ($1, $2, $3);`
@@ -35,6 +34,7 @@ router.post('/', rejectUnauthenticated, (req, res) => {
   })
 });
 
+// give a user access to a 360's protected information
 router.post('/add', employeesOnly, (req,res) => {
   const sqlText = `INSERT INTO threesixty_user (user_id, threesixty_id) VALUES ($1, $2);`;
   const user = req.body.data.userId;
@@ -48,6 +48,7 @@ router.post('/add', employeesOnly, (req,res) => {
   })
 });
 
+// update a user's information from "Manage Users"
 router.put('/', employeesOnly, (req,res) => {
   const sqlText = `UPDATE person SET firstname = $1, lastname = $2, email = $3, 
                   access_id = $4, notes = $5 WHERE id = $6;`;
@@ -68,6 +69,7 @@ router.put('/', employeesOnly, (req,res) => {
   })
 });
 
+// update a user's information from user profile
 router.put('/currentUser', rejectUnauthenticated, (req,res) => {
   const sqlText = `UPDATE person SET firstname = $1, lastname = $2, email = $3 WHERE id = $4;`;
   const update = [
@@ -85,6 +87,7 @@ router.put('/currentUser', rejectUnauthenticated, (req,res) => {
   });
 });
 
+// Remove client access to a 360
 router.delete('/threesixty/:id', employeesOnly, (req,res) => {
   const sqlText = `DELETE FROM threesixty_user WHERE id = $1;`;
   const threesixtyId = req.params.id;
@@ -97,6 +100,7 @@ router.delete('/threesixty/:id', employeesOnly, (req,res) => {
   })
 })
 
+// Remove client request to access a 360
 router.delete('/:id', employeesOnly, (req,res) => {
   const sqlText = `DELETE FROM client_request WHERE id = $1;`;
   const requestId = req.params.id;

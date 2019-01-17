@@ -8,12 +8,5 @@
     width: 100%;
     text-align: center;
     background-color: var(--main-purple);
-    color: 'white';
-    position: fixed;
-    bottom: 0;
-<<<<<<< HEAD
-=======
-    /* left: 0; */
->>>>>>> 54a10a8a25929839aa7a28812b6b3815d3c7c17b
-    width: 100%;
+    color: white;
 }

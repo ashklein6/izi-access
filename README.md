@@ -48,11 +48,14 @@ To get a copy of marnita-connect running on your local machine:
 1. Download this project.
 2. Create a new database called `marnita_connect` and create tables using the marnita_connect.sql file. If you would like to name your database something else, you will need to change `prime_app` to the name of your new database name in `server/modules/pool.js`
 3. Install node modules using `npm install`.
-4. Create a `.env` file at the root of the project and paste this line into the file:
+4. Create a `.env` file at the root of the project and paste these lines into the file:
     ```
     SERVER_SESSION_SECRET=superDuperSecret
+    EMAIL_ADDRESS=emailAddress
+    EMAIL_PASSWORD=emailPassword
     ```
     While you're in your new `.env` file, take the time to replace `superDuperSecret` with some long random string like `25POUbVtx6RKVNWszd9ERB9Bb6` to keep your application secure. Here's a site that can help you: [https://passwordsgenerator.net/](https://passwordsgenerator.net/). If you don't do this step, create a secret with less than eight characters, or leave it as `superDuperSecret`, you will get a warning.
+    Additionally, replace `emailAddress` and `emailPassword` with the email address and corresponding password of the email that will be used to send the forgot password links.
 5. Start postgres if not running already by using `brew services start postgresql`.
 6. Start server with `npm run server` in one terminal.
 7. Start client with `npm run client` in a separate terminal.
@@ -102,11 +105,10 @@ Before pushing to Heroku, run `npm run build` in terminal. This will create a bu
     1. Click "Deploy Branch"
         1. The build may take several minutes
 1. Set up configuration variables on Heroku
-    1. On the settings tab click "Reveal Config Bars"
-    1. In the "Key" box, add 'EMAIL_ADDRESS' (exactly like that, all caps with underscore)
-    1. in the "Value" box, input the email address from which users will receive their password reset link
-    1. Click the "Add" button on Heroku, repeat the above process for the password
-    1. In the Config Vars section, add an environment variable for `SERVER_SESSION_SECRET` with a nice random string for security
+    1. On the settings tab click "Reveal Config Vars"
+    1. In an empty KEY box, add `EMAIL_ADDRESS`. In the corresponding VALUE box, enter the email address from which users will receive their password reset link.
+    1. In an empty KEY box, add `EMAIL_ADDRESS`. In the corresponding VALUE box, enter the email address from which users will receive their password reset link. (Click the "Add" button to add another row if necessary)
+    1. In an empty KEY box, add `SERVER_SESSION_SECRET`. In the corresponding VALUE box, enter a random string that will be used for encryption and security. (Click the "Add" button to add another row if necessary)
 1. Create a Heroku Postgres database
     1. Click "Configure Add-ons" on the overview tab
     1. Search for Heroku Postgres

@@ -8,6 +8,7 @@
     --main-orange: #eb983f;
     --main-orange-hover: #d17818;
     --main-light-grey: #f2f2f2;
+    --main-grey: #dddddd;
 }
 
 body {
@@ -67,12 +68,6 @@ a {
     text-decoration: none;
 }
 
-/* .paper {
-    padding-top: 64px;
-    height: calc(100vh - 122px);
-} */
-
 .paper {
     padding: 65px 0px 58px 0px;
-    /* height: calc(100vh - 122px); */
 }

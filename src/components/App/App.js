@@ -5,7 +5,6 @@ import {
   Redirect,
   Switch,
 } from 'react-router-dom';
-
 import {connect} from 'react-redux';
 
 import Nav from '../Nav/Nav';
@@ -24,7 +23,6 @@ import Manage360s from '../Manage360s/Manage360s';
 import ManageUsers from '../ManageUsers/ManageUsers';
 import UserProfile from '../UserProfile/UserProfile';
 import View360 from '../View360/View360';
-// import ForgotPassword from '../ForgotPassword/ForgotPassword';
 import ResetPassword from '../ResetPassword/ResetPassword';
 
 import './App.css';
@@ -43,7 +41,6 @@ class App extends Component {
           <section className="paper"> 
             <Switch>
               
-              {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
               <Redirect exact from="/" to="/home" />
 
               {/* For the following pages, no login is necessary. */}

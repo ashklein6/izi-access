@@ -34,8 +34,6 @@ class ThreesixtyInformationEditDialog extends Component {
  handleChangeFor= (event) => {
   event.preventDefault();
 
-  console.log('event:', event);
-
   this.setState({
     [event.target.name]: event.target.value,
     // set flag that this row has been updated so that it can be updated in database upon submittal 
@@ -65,7 +63,6 @@ class ThreesixtyInformationEditDialog extends Component {
  // dispatches an action to update the database with the new values and 
  // calls handleClickClose.
  handleSave = () => {
-  console.log('in handleSave');
   this.props.dispatch({ type: 'EDIT_360', payload: {section: 'info', current360Id: this.props.current360Id, data: this.state} })
   this.handleClickClose();
  } // end handleSave
@@ -99,8 +96,6 @@ class ThreesixtyInformationEditDialog extends Component {
 
  render() {
    const { classes } = this.props;
-
-   console.log(this.state);
 
    // Check if the section information updated since this site was last loaded.
    // A section is re-downloaded each time the edit dialog is opened.

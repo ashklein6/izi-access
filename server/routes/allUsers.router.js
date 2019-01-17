@@ -3,8 +3,8 @@ const pool = require('../modules/pool');
 const router = express.Router();
 const { employeesOnly } = require('../modules/employeesOnly');
 
+// Gets all non-deactivated users
 router.get('/', employeesOnly, (req, res) => {
-  console.log('req.user', req.user);
   pool.query(`SELECT person.firstname, person.lastname, person.email, person.id, 
             person.access_id, person.notes, access.access_type, 
             threesixty.name as threesixty, threesixty_user.id as connected_360_id 
@@ -51,10 +51,8 @@ router.get('/search', employeesOnly, (req,res) => {
   } else {
     sqlText += `ORDER BY person.date_added DESC;`;
   };
-  console.log(sqlText, searchFields);
   pool.query(sqlText, searchFields)
   .then((response) => {
-    console.log(response.rows);
     res.send(response.rows);
   })
   .catch(() => {
@@ -62,6 +60,7 @@ router.get('/search', employeesOnly, (req,res) => {
   })
 });
 
+// gets deactivated users
 router.get('/deactivated', employeesOnly, (req,res) => {
   pool.query(`SELECT person.firstname, person.lastname, person.email, 
             person.id, person.access_id, person.notes, access.access_type,
@@ -79,6 +78,7 @@ router.get('/deactivated', employeesOnly, (req,res) => {
   })
 });
 
+// gets pending requests for client access to 360s
 router.get('/pendingRequests', employeesOnly, (req,res) => {
   pool.query(`SELECT person.firstname, person.lastname, person.email, person.id, 
             person.access_id, person.notes, access.access_type, 
@@ -99,6 +99,7 @@ router.get('/pendingRequests', employeesOnly, (req,res) => {
   })
 });
 
+// gets users that can access the protected information of a 360
 router.get('/threesixty', employeesOnly, (req, res) => {
   let threesixty = req.query.id;
   pool.query(`SELECT person.firstname, person.lastname, person.email, person.id, 
@@ -117,6 +118,7 @@ router.get('/threesixty', employeesOnly, (req, res) => {
   })
 });
 
+// checks to see if there are pending client requests
 router.get('/checkRequests', employeesOnly, (req,res) => {
   pool.query(`SELECT id FROM client_request;`)
   .then((response) => {
@@ -130,12 +132,5 @@ router.get('/checkRequests', employeesOnly, (req,res) => {
     res.sendStatus(500);
   })
 })
-
-/**
- * POST route template
- */
-router.post('/', (req, res) => {
-
-});
 
 module.exports = router;

@@ -24,7 +24,6 @@ class ResetPassword extends Component {
   }
 
   async componentDidMount() {
-    console.log(this.props.match.params.token);
     await axios
       .get('/forgotPassword', {
         params: {
@@ -32,7 +31,6 @@ class ResetPassword extends Component {
         },
       })
       .then(response => {
-        console.log(response);
         if (response.data.message === 'password reset link ok') {
           this.setState({
             username: response.data.username,
@@ -68,7 +66,6 @@ class ResetPassword extends Component {
         token: this.props.match.params.token,
       })
       .then(response => {
-        console.log(response.data);
         if (response.data.message === 'password updated') {
           this.setState({
             updated: true,
@@ -109,7 +106,6 @@ class ResetPassword extends Component {
           <form onSubmit={this.updatePassword}>
           <Typography className={classes.header} variant="h6">Enter New Password</Typography>
             <TextField
-              // style={inputStyle}
               id="password"
               label="password"
               onChange={this.handleChange('password')}
@@ -143,7 +139,7 @@ const styles = {
   error: {
     marginBottom: 50,
     padding: 10,
-    color: '#fff',
+    color: 'white',
     backgroundColor: colors.red
   },
   submitButton:{

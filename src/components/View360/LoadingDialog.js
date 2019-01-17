@@ -53,11 +53,6 @@ const styles = {
     width: 300,
     height: 200,
   },
-  spaceBetween: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    flexWrap: 'wrap'
-  }
 };
 
 const mapReduxStateToProps = (reduxState) => ({

@@ -3,9 +3,7 @@ const pool = require('../modules/pool');
 const router = express.Router();
 const { employeesOnly } = require('../modules/employeesOnly');
 
-/**
- * GET route template
- */
+// get user access level ids and types
 router.get('/', employeesOnly, (req, res) => {
   pool.query('SELECT * FROM access')
   .then((response) => {
@@ -14,13 +12,6 @@ router.get('/', employeesOnly, (req, res) => {
   .catch(() => {
     res.sendStatus(500);
   })
-});
-
-/**
- * POST route template
- */
-router.post('/', (req, res) => {
-
 });
 
 module.exports = router;

@@ -7,7 +7,6 @@ const { employeesOnly } = require('../modules/employeesOnly');
 // it takes in a search query, then sets up the sql query based on the
 // the information the user has provided.
 router.get('/search', (req, res) => {
-    console.log('params: ', req.query);
     let sqlText = `SELECT threesixty.*, izi_categories.category FROM threesixty
     JOIN izi_categories ON izi_categories.id = threesixty.category_id WHERE `;
     let search = req.query;
@@ -88,10 +87,5 @@ router.get('/false', employeesOnly, (req,res) => {
   })
 });
 // end /:status
-
-
-router.post('/', (req, res) => {
-
-});
 
 module.exports = router;

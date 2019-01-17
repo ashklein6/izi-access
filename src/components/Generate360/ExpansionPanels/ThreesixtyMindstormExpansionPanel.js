@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import colors from '../../App/colors';
-import MarkDownOutput from '../../MarkDownEditor/MarkdownOutput';
+import MarkDownOutput from '../../MarkdownOutput/MarkdownOutput';
 
 // import edit dialog component
 // import AnalysisRecEditDialog from '../EditDialogs/AnalysisRecEditDialog';
@@ -81,16 +81,7 @@ class ThreesixtyMindstormExpansionPanel extends Component {
         {/* Content that is within the expansion panel (shows when panel is expanded) */}
         <ExpansionPanelDetails className={classes.details}>
           <Paper className={classes.rootTable}>
-            <Typography variant="h5" className={classes.header5}>Outreach Findings</Typography>
-              <div className={classes.paragraph}>
-                {this.props.reduxState.current360.analysis_recommendation.map((row, index) => 
-                  <MarkDownOutput display={row.findings} key={index}/>)}
-              </div>
-            <Typography variant="h5" className={classes.header5}>Recommendation</Typography>
-              <div className={classes.paragraph}>
-              {this.props.reduxState.current360.analysis_recommendation.map((row, index) => 
-                  <MarkDownOutput display={row.recommendations} key={index}/>)}
-              </div>
+
           </Paper>
         </ExpansionPanelDetails>
 

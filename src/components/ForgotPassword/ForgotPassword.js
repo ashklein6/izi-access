@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import colors from '../App/colors';
 
+// Material-UI
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
@@ -39,7 +40,6 @@ class ForgotPassword extends Component {
           email: this.state.email,
         })
         .then(response => {
-          console.log(response.data);
           if (response.data === 'email not in db') {
             this.setState({
               showError: true,
@@ -140,16 +140,13 @@ const styles = {
     height: 350,
     width: 275
   },
-  input: {
-    // marginBottom: 25
-  },
   header: {
     marginBottom: 25,
   },
   error: {
     marginBottom: 50,
     padding: 10,
-    color: '#fff',
+    color: 'white',
     backgroundColor: colors.red
   },
   emailSent: {
@@ -158,9 +155,7 @@ const styles = {
     backgroundColor: colors.lightGrey
   },
   button: {
-    // display: 'block',
     textAlign: 'center',
-
     width: 200,
     padding: 10,
     margin: 10,

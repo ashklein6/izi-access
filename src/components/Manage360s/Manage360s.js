@@ -8,10 +8,17 @@ import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 
-
-//this page has all sorts of weird problems, but the general idea is there...
-//ashley, if you're reading this, you should probs go get a hot apple blahst
 class Manage360s extends Component {
+
+  // operates the button that returns users to the admin dashboard
+  returnToDash = () => {
+    this.props.history.push('/dashboard');
+  };
+
+  // operates button that takes users to the 360 generator
+  goToCreate360 = () => {
+    this.props.history.push('/create360');
+  };
 
   // dispatches action to get both published and unpublished 360s
   // to populate the tables
@@ -20,16 +27,6 @@ class Manage360s extends Component {
     this.props.dispatch({type: 'FETCH_UNPUBLISHED'});
   }; // end componentDidMount
 
-  // operates the button that returns users to the admin dashboard
-  returnToDash = () => {
-    this.props.history.push('/dashboard');
-  };
-
-  // operates button that takes users to the 360 generator
-  goToGenerator = () => {
-    this.props.history.push('/create360');
-  };
-
  render() {
    const { classes } = this.props;
 
@@ -37,7 +34,7 @@ class Manage360s extends Component {
       <div >
         <Button variant="contained" onClick={this.returnToDash}>Return to Dashboard</Button>
         <span>
-          <Button variant="contained" onClick={this.goToGenerator}>Create New 360</Button>
+          <Button variant="contained" onClick={this.goToCreate360}>Create New 360</Button>
           <Typography variant="h4" className={classes.header}>Unpublished 360s</Typography>
         </span>
         <span>
@@ -57,19 +54,7 @@ class Manage360s extends Component {
 };
 
 const styles = theme => ({
-  root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-  },
-  margin: {
-    margin: theme.spacing.unit,
-  },
-  withoutLabel: {
-    marginTop: theme.spacing.unit * 3,
-  },
-  textField: {
-    flexBasis: 200,
-  },
+
 });
 
 const mapReduxStateToProps = (reduxState) => ({

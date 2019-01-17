@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { put, call, takeLatest } from 'redux-saga/effects';
 
+// gets all users
 function* fetchAllUsers() {
   try {
     const response = yield call(axios.get, '/allUsers');
@@ -11,6 +12,7 @@ function* fetchAllUsers() {
   }
 };
 
+// gets all pending requests for 360 report access
 function* fetchPendingRequests() {
   try {
     const response = yield call(axios.get, '/allUsers/pendingRequests');
@@ -21,6 +23,7 @@ function* fetchPendingRequests() {
   }
 };
 
+// gets all deactivated users
 function* fetchDeactivatedUsers() {
   try {
     const response = yield call(axios.get, '/allUsers/deactivated');
@@ -31,10 +34,10 @@ function* fetchDeactivatedUsers() {
   }
 };
 
+// gets user search results
 function* fetchUsersSearch(action) {
   try {
     const response = yield call(axios.get, '/allUsers/search', { params: action.payload } );
-    console.log('response', response.data);
     yield put({type: 'SET_ALL_USERS', payload: response.data});
   } 
   catch (error) {
@@ -42,6 +45,7 @@ function* fetchUsersSearch(action) {
   }
 };
 
+// gets all users with access to 360 report
 function* fetchThreesixtyUsers(action) {
   try {
     const response = yield call(axios.get, '/allUsers/threesixty', { params: action.payload } );

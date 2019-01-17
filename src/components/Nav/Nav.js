@@ -4,23 +4,13 @@ import { connect } from 'react-redux';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import './Nav.css';
 import MarnitaLogo from '../HomePage/marnita_logo.png';
+import colors from '../App/colors';
+
 // Material-UI
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
-
-let root = document.querySelector(':root');
-const colors = {
-  purple: window.getComputedStyle(root).getPropertyValue('--main-purple'),
-  purpleHover: window.getComputedStyle(root).getPropertyValue('--main-purple-hover'),
-  red: window.getComputedStyle(root).getPropertyValue('--main-red'),
-  redHover: window.getComputedStyle(root).getPropertyValue('--main-red-hover'),
-  pink: window.getComputedStyle(root).getPropertyValue('--main-pink'),
-  pinkHover: window.getComputedStyle(root).getPropertyValue('--main-pink-hover'),
-  orange: window.getComputedStyle(root).getPropertyValue('--main-orange'),
-  orangeHover: window.getComputedStyle(root).getPropertyValue('--main-orange-hover'),
-};
 
 class Nav extends Component {
 
@@ -86,16 +76,12 @@ const styles = {
     height: '2.125rem',
     marginRight: 10
   },
-  menuButton: {
-    marginLeft: -12,
-    marginRight: 20,
-  },
   nav: {
     overflow: 'hidden',
     backgroundColor: colors.purple,
   },
   title: {
-    color: '#fff',
+    color: 'white',
     display: 'inline-block'
   }
 };

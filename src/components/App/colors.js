@@ -9,6 +9,7 @@ const colors = {
   orange: window.getComputedStyle(root).getPropertyValue('--main-orange'),
   orangeHover: window.getComputedStyle(root).getPropertyValue('--main-orange-hover'),
   lightGrey: window.getComputedStyle(root).getPropertyValue('--main-light-grey'),
+  grey: window.getComputedStyle(root).getPropertyValue('--main-grey'),
 };
 
 export default colors;

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { put, call, takeLatest } from 'redux-saga/effects';
 
+// gets user's info
 function* fetchUserInfo() {
   try {
     const response = yield call(axios.get, '/userControls');
@@ -11,6 +12,7 @@ function* fetchUserInfo() {
   }
 };
 
+// grants a user access to a 360 report
 function* add360Access(action) {
   try {
     yield call(axios.post, '/userControls/add', {data: action.payload});
@@ -21,6 +23,7 @@ function* add360Access(action) {
   }
 };
 
+// removes a user's access permissions to a 360 report
 function* remove360Access(action) {
   try {
     yield call(axios.delete, `/userControls/threesixty/${action.payload}`);
@@ -32,6 +35,7 @@ function* remove360Access(action) {
   }
 };
 
+// removes a user's access permissions to a 360 report
 function* remove360AccessFrom360(action) {
   try {
     yield call(axios.delete, `/userControls/threesixty/${action.payload.threesixtyUserId}`);
@@ -43,6 +47,7 @@ function* remove360AccessFrom360(action) {
   }
 };
 
+// posts that a user has requested access to a 360 report
 function* request360Access(action) {
   try {
     yield call(axios.post, '/userControls', {data: action.payload});
@@ -52,6 +57,7 @@ function* request360Access(action) {
   }
 };
 
+// saves edits an admin makes to a user's info
 function* editUserInfo(action) {
   try {
     yield call(axios.put, '/userControls', {data: action.payload});
@@ -66,6 +72,7 @@ function* editUserInfo(action) {
   }
 };
 
+// saves edits a user makes to their profile
 function* editCurrentUserInfo(action) {
   try {
     yield call(axios.put, '/userControls/currentUser', {data: action.payload});
@@ -76,6 +83,7 @@ function* editCurrentUserInfo(action) {
   }
 };
 
+// removes user's request from admin's pending requests table
 function* deletePendingRequest(action) {
   try {
     yield call(axios.delete, `/userControls/${action.payload}`);

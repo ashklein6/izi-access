@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
+import colors from '../../App/colors';
 
+// Material-UI
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
@@ -171,7 +173,7 @@ const styles = {
   textField: {
     width: 400,
     marginBottom: 15,
-    backgroundColor: '#fff'
+    backgroundColor: 'white'
   },
   header: {
     textAlign: 'center',
@@ -187,7 +189,7 @@ const styles = {
     margin: 'auto',
     padding: 20,
     fontSize: 18,
-    background: '#eceff0',
+    background: colors.lightGrey,
     borderRadius: 10
   },
   feedback: {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import colors from '../../App/colors';
-import MarkDownOutput from '../../MarkDownEditor/MarkdownOutput';
+import MarkDownOutput from '../../MarkdownOutput/MarkdownOutput';
 
 // import edit dialog component
 import AnalysisRecEditDialog from '../EditDialogs/AnalysisRecEditDialog';
@@ -55,7 +55,7 @@ class AnalysisRecExpansionPanel extends Component {
 
  render() {
    const { classes } = this.props;
-   console.log('analysis rec 360 id', this.props.current360Id);
+
    return (
     <div className={classes.root}>
       <ExpansionPanel className={classes.expansionPanel}>

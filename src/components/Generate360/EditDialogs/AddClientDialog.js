@@ -44,7 +44,6 @@ class AddClientDialog extends Component {
  };
 
  addAccess = (person) => {
-   console.log('person:', person);
   if (person.access_id >= 4) {
     alert(`Users with Employee and Admin access levels already have access to every 360.`);
   } else if (person.access_id <=2) {
@@ -59,7 +58,6 @@ class AddClientDialog extends Component {
 
   // handles change for inputs
   handleChange = (event) => {
-    console.log('in handleChange');
     this.setState({
       ...this.state,
       [event.target.name]: event.target.value,

@@ -43,7 +43,6 @@ class Home extends Component {
    const { classes } = this.props;
    return (
      <div>
-       {/* {JSON.stringify(this.props.reduxState.all360s.recent)} */}
         <Typography variant="h4" className={classes.header}>
           Check out some recent 360s!
         </Typography>
@@ -89,7 +88,6 @@ class Home extends Component {
           Or search through our public 360s:
         </Typography>
         <div className={classes.centerContainer}>
-          {/* <Typography>Search By</Typography> */}
           <Search360s  status="true"/>
         </div>
         {/* this sends the array of published 360s to the table, */}
@@ -137,13 +135,12 @@ const styles = {
   cardHeader: {
     height: '100%',
     fontWeight: 'bold',
-    // fontSize: '2rem',
     color: colors.pink
   },
   cardBody: {
     minHeight: 100,
     padding: 15,
-    backgroundColor: '#f2f2f2',
+    backgroundColor: colors.lightGrey,
     borderRadius: 5,
     flexGrow: 0,
     width: 'calc(100% - 20px)',

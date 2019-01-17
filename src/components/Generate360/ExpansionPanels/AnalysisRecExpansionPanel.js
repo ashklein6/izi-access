@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import colors from '../../App/colors';
-import MarkDownOutput from '../../MarkDownEditor/MarkdownOutput';
+import MarkDownOutput from '../../MarkdownOutput/MarkdownOutput';
 
 // import edit dialog component
 import AnalysisRecEditDialog from '../EditDialogs/AnalysisRecEditDialog';

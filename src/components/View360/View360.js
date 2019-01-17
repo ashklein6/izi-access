@@ -6,7 +6,7 @@ import moment from 'moment';
 import { Textfit } from 'react-textfit';
 import SideBar from './SideBar';
 import TableTemplate from './TableTemplate/TableTemplate';
-import MarkDownOutput from '../MarkDownEditor/MarkdownOutput';
+import MarkDownOutput from '../MarkdownOutput/MarkdownOutput';
 import LoadingDialog from './LoadingDialog';
 
 // Material-UI

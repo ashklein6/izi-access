@@ -11,10 +11,24 @@ JavaScript, Node.js, React, Redux, Saga, Material-UI, PostgreSQL
 ### Completed
 
 - [x] Users are able to create an account and log-in
+- [x] Users can edit their profile and change their password
+- [x] Users can reset forgotten passwords
+- [x] Users are able to request client access
+- [x] Employees and Administrators are able to create new 360s and input information that   will be automatically formatted
+- [x] Administrators can manage users and 360s
+- [x] Employees and Administrators are able to set privacy levels of different 360 sections
+- [x] Employees and Administrators are able to publish 360s
+- [x] Employees and Administrators can give client level access to a 360
+- [x] Users can search for public 360s from the homepage
+- [x] Users can view sections of a 360 based on access level on the view360 pagegit 
 
 ### Next Steps
 
-- [ ] Create Admin suite for managing users and 360s.
+- [ ] Implement a photo gallery on each 360
+- [ ] Implement ability to comment on a 360, where comments are published after admin approval
+- [ ] Implement file upload and download functionality
+- [ ] Connect CSV interface for demographics
+- [ ] Increase mobile viewability
 
 ## Getting Started
 
@@ -24,6 +38,7 @@ Before you get started, make sure you have the following software installed on y
 
 - [Node.js](https://nodejs.org/en/)
 - [PostrgeSQL](https://www.postgresql.org/)
+- [Postico](https://eggerapps.at/postico/) 
 - [NPM](https://www.npmjs.com/)
 
 ### Installing
@@ -71,13 +86,46 @@ Before pushing to Heroku, run `npm run build` in terminal. This will create a bu
 
 ### Deployment
 
+1. Create a Heroku account
 1. Create a new Heroku project
+    1. From the Heroku dashboard click "New"
+    1. Enter app name
+    1. Click "Create App"
 1. Link the Heroku project to the project GitHub Repo
-1. Create an Heroku Postgres database
-1. Connect to the Heroku Postgres database from Postico
-1. Create the necessary tables
-1. Add an environment variable for `SERVER_SESSION_SECRET` with a nice random string for security
-1. In the deploy section, select manual deploy
+    1. From the Heroku dashboard, click on the app that was just created
+    1. On the Deploy tab, select "GitHub" as the deployment method
+    1. Click "Connect to Github"
+    1. In new window, login to GitHub and select "Authorize Heroku"
+    1. Search for repo name
+    1. Click "Connect" on appropriate repo
+    1. Under "Manual Deploy" select "Master Branch"
+    1. Click "Deploy Branch"
+        1. The build may take several minutes
+1. Set up configuration variables on Heroku
+    1. On the settings tab click "Reveal Config Bars"
+    1. In the "Key" box, add 'EMAIL_ADDRESS' (exactly like that, all caps with underscore)
+    1. in the "Value" box, input the email address from which users will receive their password reset link
+    1. Click the "Add" button on Heroku, repeat the above process for the password
+    1. In the Config Vars section, add an environment variable for `SERVER_SESSION_SECRET` with a nice random string for security
+1. Create a Heroku Postgres database
+    1. Click "Configure Add-ons" on the overview tab
+    1. Search for Heroku Postgres
+    1. Select "Hobby Basic" and click "Provision"
+    1. Click on the Heroku Postgres
+    1. Select "Settings" tab
+    1. Click "View Credentials"
+    1. Use the listed credentials to log into Postico or other database management software
+1. Connect to the Heroku Postgres database from Postico and create necessary tables.
+    1. Open Postico
+    1. Click "New Favorite"
+    1. Enter "marnita_connect" as the nickname
+    1. Copy the information from the credentials on Heroku for host, port, user, and database
+    1. Click "Connect" if prompted about verifying server identity
+    1. Click "SQL Query"
+    1. Click "Load Query"
+    1. Load query `marnita_connect.sql` from the GitHub repo
+    1. Select all and click "Execute Selection"
+    1. If desired, repeat the previous 2 steps with `threesixty_demo_data_insert.sql` to fill database with test data.
 
 ## Authors
 

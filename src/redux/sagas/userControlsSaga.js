@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { put, call, takeLatest } from 'redux-saga/effects';
 
-// gets user's info
+//Gets all user info from the database
 function* fetchUserInfo() {
   try {
     const response = yield call(axios.get, '/userControls');
@@ -12,7 +12,7 @@ function* fetchUserInfo() {
   }
 };
 
-// grants a user access to a 360 report
+//Adds 360 request to the database
 function* add360Access(action) {
   try {
     yield call(axios.post, '/userControls/add', {data: action.payload});

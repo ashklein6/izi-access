@@ -2,7 +2,6 @@ import axios from 'axios';
 import { all, put, call, take, takeLatest } from 'redux-saga/effects';
 
 function* changePublicStatus(action) {
-  console.log('inside changePublicStatus. action.payload:', action.payload);
   try {
     yield call(axios.put, `current360/public/${action.payload.current360Id}`, action.payload );
     yield put({ type: 'SET_PUBLIC_STATUS', payload: action.payload });
@@ -13,7 +12,6 @@ function* changePublicStatus(action) {
 };
 
 function* changePublishStatus(action) {
-  console.log('inside changePublishStatus. action.payload:', action.payload);
   try {
     yield call(axios.put, `current360/publish/${action.payload.current360Id}`, action.payload );
     yield put({ type: 'SET_PUBLISH_STATUS', payload: action.payload });
@@ -58,8 +56,6 @@ function* delete360(action) {
 };
 
 function* edit360(action) {
-  console.log('inside edit360. action.payload:', action.payload);
-  console.log('url:','current360/edit/'+action.payload.section);
   try {
     yield call(axios.put, `/current360/edit/${action.payload.section}/${action.payload.current360Id}`, action.payload.data );
     yield put({ type: 'FETCH_360_SECTION', payload: action.payload })
@@ -71,7 +67,6 @@ function* edit360(action) {
 
 // dispatches actions to fetch each of the 360 sections. (expects current360Id)
 function* fetch360(action) {
-  console.log('inside fetch360. action.payload:', action.payload);
   try {
     yield put({ type: 'GENERATE_360_LOADING' })
     // Get all sections of the 360
@@ -99,10 +94,8 @@ function* fetch360(action) {
 // general worker saga to fetch clients with access to a specific 360.
 // expect an action.payload with current360Id
 function* fetch360Clients(action) {
-  console.log('inside fetch360Info in saga');
   try {
     const response = yield call(axios.get, `/current360/clients/${action.payload.current360Id}`);
-    console.log('response for current 360 clients:', response);
     yield put({ type: 'SET_360_CLIENTS', payload: {section: action.payload.section, content: response.data} });
   } 
   catch (error) {
@@ -112,10 +105,8 @@ function* fetch360Clients(action) {
 
 // general worker saga. expect an action.payload with section and current360Id
 function* fetch360Info(action) {
-  console.log('inside fetch360Info in saga');
   try {
     const response = yield call(axios.get, `/current360/info`, {params: action.payload});
-    console.log('response for current 360 info:', response);
     yield put({ type: 'SET_360_INFO', payload: {section: action.payload.section, content: response.data} });
   } 
   catch (error) {
@@ -125,10 +116,8 @@ function* fetch360Info(action) {
 
 // general worker saga. expect an action.payload with section and current360Id
 function* fetch360Section(action) {
-  console.log('inside fetch360Section in saga');
   try {
     const response = yield call(axios.get, `/current360/${action.payload.section}`, {params: action.payload});
-    console.log('response for', action.payload.section, response);
     yield put({ type: 'SET_360_SECTION', payload: {section: action.payload.section, content: response.data} });
     yield put({ type: 'CURRENT_360_SECTION_NEEDS_UPDATE', payload: {section: action.payload.section} });
   } 

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { put, call, takeLatest } from 'redux-saga/effects';
 
+//Gets all user info from the database
 function* fetchUserInfo() {
   try {
     const response = yield call(axios.get, '/userControls');
@@ -11,6 +12,7 @@ function* fetchUserInfo() {
   }
 };
 
+//Adds 360 request to the database
 function* add360Access(action) {
   try {
     yield call(axios.post, '/userControls/add', {data: action.payload});
@@ -21,6 +23,7 @@ function* add360Access(action) {
   }
 };
 
+//Removes user access
 function* remove360Access(action) {
   try {
     yield call(axios.delete, `/userControls/threesixty/${action.payload}`);
@@ -43,6 +46,7 @@ function* remove360AccessFrom360(action) {
   }
 };
 
+//
 function* request360Access(action) {
   try {
     yield call(axios.post, '/userControls', {data: action.payload});

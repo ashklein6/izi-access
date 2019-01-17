@@ -4,7 +4,7 @@ This application for Marnita's Table displays the reports (360s) generated from 
 
 ## Built With
 
-JavaScript, Node.js, React, Redux, Saga, Material-UI, PostgreSQL
+JavaScript, Node.js, React, Redux, Saga, Material-UI, PostgreSQL, Chart.js, Nodemailer, Passport
 
 ## Features
 
@@ -24,6 +24,7 @@ JavaScript, Node.js, React, Redux, Saga, Material-UI, PostgreSQL
 
 ### Next Steps
 
+- [ ] Connect additional sections of 360 to allow edits
 - [ ] Implement a photo gallery on each 360
 - [ ] Implement ability to comment on a 360, where comments are published after admin approval
 - [ ] Implement file upload and download functionality
@@ -89,6 +90,7 @@ Before pushing to Heroku, run `npm run build` in terminal. This will create a bu
 
 ### Deployment
 
+The following steps will walk you through deploying the application on Heroku through GitHub:
 1. Create a Heroku account
 1. Create a new Heroku project
     1. From the Heroku dashboard click "New"
@@ -98,7 +100,7 @@ Before pushing to Heroku, run `npm run build` in terminal. This will create a bu
     1. From the Heroku dashboard, click on the app that was just created
     1. On the Deploy tab, select "GitHub" as the deployment method
     1. Click "Connect to Github"
-    1. In new window, login to GitHub and select "Authorize Heroku"
+    1. In popup window, login to GitHub and select "Authorize Heroku"
     1. Search for repo name
     1. Click "Connect" on appropriate repo
     1. Under "Manual Deploy" select "Master Branch"
@@ -106,9 +108,15 @@ Before pushing to Heroku, run `npm run build` in terminal. This will create a bu
         1. The build may take several minutes
 1. Set up configuration variables on Heroku
     1. On the settings tab click "Reveal Config Vars"
-    1. In an empty KEY box, add `EMAIL_ADDRESS`. In the corresponding VALUE box, enter the email address from which users will receive their password reset link.
-    1. In an empty KEY box, add `EMAIL_ADDRESS`. In the corresponding VALUE box, enter the email address from which users will receive their password reset link. (Click the "Add" button to add another row if necessary)
-    1. In an empty KEY box, add `SERVER_SESSION_SECRET`. In the corresponding VALUE box, enter a random string that will be used for encryption and security. (Click the "Add" button to add another row if necessary)
+    1. In an empty KEY box, add EMAIL_ADDRESS. In the corresponding VALUE box, enter the email address from which users will receive their password reset link.
+        1. NOTE: You will want this address to be an address used solely for this purpose. Most email services will require a lower security setting for this email address to allow access to it. This email address should NOT hold any confidential information or be connected to the GitHub or Heroku account for the code/site.
+    1. In an empty KEY box, add EMAIL_PASSWORD. In the corresponding VALUE box, enter the email password of the address from which users will receive their password reset link. (Click the "Add" button to add another row if necessary)
+    1. In an empty KEY box, add SERVER_SESSION_SECRET. In the corresponding VALUE box, enter a random string that will be used for encryption and security. This string should preferably have 20+ random characters. https://passwordsgenerator.net/ is a great place for a random password. (Click the "Add" button to add another row if necessary)
+1. Update email information in source code to complete set up for Password Reset via email.
+    1. Open server/routes/forgotPassword.js.
+    1. Navigate to the `const transporter` and `const mailOptions` sections. They are commented to help direct you to them.
+    1. In the `const transporter` section, the “service” value is currently set to “gmail”. This should be set to whatever mail service is used by the email that you would like to send the forgot password links.
+    1. In the `const mailOptions` section, the value for “from” should be set to the full email address. The “subject” and “text” values can also be changed as desired. The `marnita-connect.herokuapp.com` will need to be set to the appropriate URL, but the `/#/reset/${token}\n\n`  should remain unchanged.
 1. Create a Heroku Postgres database
     1. Click "Configure Add-ons" on the overview tab
     1. Search for Heroku Postgres
@@ -128,6 +136,14 @@ Before pushing to Heroku, run `npm run build` in terminal. This will create a bu
     1. Load query `marnita_connect.sql` from the GitHub repo
     1. Select all and click "Execute Selection"
     1. If desired, repeat the previous 2 steps with `threesixty_demo_data_insert.sql` to fill database with test data.
+1. Create a user account and give them Admin access.
+    1. Go to the deployed app’s url (click “View App” from Heroku) and register to create a new account.
+    1. In Postico, navigate to the “Persons” table.
+    1. Update the `access_id` of the account that should be an admin to 5.
+    
+The following link will provide additional troubleshooting when deploying with Git through Heroku: https://devcenter.heroku.com/articles/git.
+
+
 
 ## Authors
 

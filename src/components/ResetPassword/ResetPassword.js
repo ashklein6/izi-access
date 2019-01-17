@@ -117,7 +117,7 @@ class ResetPassword extends Component {
           {updated && (
             <div>
               <Typography variant="h6">
-                Your password has been successfully reset, please try <a href="/login#/profile">logging in</a> again.
+                Your password has been successfully reset, please try <a href="/#/profile">logging in</a> again.
               </Typography>
             </div>
           )}

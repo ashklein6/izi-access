@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import colors from '../../App/colors';
-import TableTemplate from '../TableTemplate/TableTemplate';
 
 // import edit dialog component
 // import GoalsAssessmentEditDialog from '../EditDialogs/GoalAssessmentsEditDialog';

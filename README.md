@@ -31,6 +31,14 @@ JavaScript, Node.js, React, Redux, Saga, Material-UI, PostgreSQL, Chart.js, Node
 - [ ] Connect CSV interface for demographics
 - [ ] Increase mobile viewability
 
+## Screenshots
+
+<img src="screenshots/Home.PNG" alt="Home" width="400">     <img src="screenshots/EditDialog.PNG" alt="EditDialog" width="400">
+
+<img src="screenshots/Generate360.PNG" alt="Generate360" width="400">     <img src="screenshots/View360.PNG" alt="View360" width="400">
+
+<img src="screenshots/Demographics.PNG" alt="Demographic" width="400">     <img src="screenshots/DemographicCharts.PNG" alt="DemographicCharts" width="400">
+
 ## Getting Started
 
 ### Prerequisites

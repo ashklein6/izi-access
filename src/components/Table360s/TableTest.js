@@ -117,7 +117,7 @@ class CustomizedTable extends Component {
     order: 'asc',
     orderBy: '',
     page: 0,
-    rowsPerPage: 1,
+    rowsPerPage: 5,
   }
 
   goToGenerate360 = (id) => {
@@ -195,7 +195,7 @@ class CustomizedTable extends Component {
         </TableBody>
       </Table>
       <TablePagination
-        rowsPerPageOptions={[1, 2, 3]}
+        rowsPerPageOptions={[5, 10, 25]}
         component="div"
         count={this.props.rows.length}
         rowsPerPage={rowsPerPage}

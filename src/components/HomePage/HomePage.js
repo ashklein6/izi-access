@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Table360s from '../Table360s/Table360s';
+// table pagination test
+import TableTest from '../Table360s/TableTest';
 import Search360s from '../Search360s/Search360s';
 import moment from 'moment';
 import LinesEllipsis from 'react-lines-ellipsis';
@@ -93,7 +95,8 @@ class Home extends Component {
         {/* this sends the array of published 360s to the table, */}
         {/* and specificies that this table is for the home page,  */}
         {/* and will not render the edit button. */}
-        <Table360s rows={this.props.reduxState.all360s.published} homeVersion />
+        {/* <Table360s rows={this.props.reduxState.all360s.published} homeVersion /> */}
+        <TableTest rows={this.props.reduxState.all360s.published} homeVersion/>
      </div>
    );
  }

@@ -117,7 +117,7 @@ class CustomizedTable extends Component {
     order: 'asc',
     orderBy: '',
     page: 0,
-    rowsPerPage: 5,
+    rowsPerPage: 10, // rowsPerPage is the initial default # of IZIs in table
   }
 
   goToGenerate360 = (id) => {
@@ -132,24 +132,22 @@ class CustomizedTable extends Component {
     });
   }
 
-  // for pagination
+  // for pagination // sorts columns onClick of corresponding th
   handleRequestSort = (event, property) => {
     const orderBy = property;
     let order = 'desc';
-
     if (this.state.orderBy === property && this.state.order === 'desc') {
       order = 'asc';
     }
-
     this.setState({ order, orderBy });
   };
 
-  // for pagination
+  // for pagination // displays the next page of the table
   handleChangePage = (event, page) => {
     this.setState({ page });
   };
 
-  // for pagination
+  // for pagination // sets the number of rows displayed in table
   handleChangeRowsPerPage = event => {
     this.setState({ rowsPerPage: event.target.value });
   };
@@ -157,7 +155,8 @@ class CustomizedTable extends Component {
   render() {
   const { classes } = this.props;
   const { order, orderBy, rowsPerPage, page } = this.state;
-  const emptyRows = rowsPerPage - Math.min(rowsPerPage, this.props.rows.length - page * rowsPerPage);
+  // will add empty rows to fill table = rowsPerPage if no data is provided
+  // const emptyRows = rowsPerPage - Math.min(rowsPerPage, this.props.rows.length - page * rowsPerPage);
 
   return (
     <Paper className={classes.rootTable}>
@@ -187,15 +186,21 @@ class CustomizedTable extends Component {
               </TableRow>
             );
           })}
-          {emptyRows > 0 && (
+          
+          {/* will add empty rows to fill table = rowsPerPage if no data is provided */}
+          {/* {emptyRows > 0 && (
             <TableRow style={{ height: 49 * emptyRows }}>
               <TableCell colSpan={6} />
             </TableRow>
-          )}
+          )} */}
+
         </TableBody>
       </Table>
+
+      {/* pagination controls will render if there are more than 10 IZIs */}
+      {this.props.rows.length > 10 &&
       <TablePagination
-        rowsPerPageOptions={[5, 10, 25]}
+        rowsPerPageOptions={[10, 15, 25]} // select sets the # of IZIs displayed
         component="div"
         count={this.props.rows.length}
         rowsPerPage={rowsPerPage}
@@ -208,10 +213,10 @@ class CustomizedTable extends Component {
         }}
         onChangePage={this.handleChangePage}
         onChangeRowsPerPage={this.handleChangeRowsPerPage}
-      />
+      />}
     </Paper>
-  );
-        }
+    );
+  }
 }
 
 const styles = {

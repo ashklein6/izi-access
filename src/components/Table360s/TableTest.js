@@ -31,6 +31,7 @@ const CustomTableCell = withStyles(theme => ({
   },
 }))(TableCell);
 
+// will adjust based on what we decide the sort method should be for the columns
 function desc(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
     return -1;

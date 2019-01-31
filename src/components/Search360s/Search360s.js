@@ -43,40 +43,50 @@ class Search360s extends Component {
     });
   }; // end handlesearch
 
+  viewAll = () => {
+    this.props.dispatch({type: 'FETCH_PUBLISHED'});
+  }
+
   render() {
     const { classes } = this.props;
 
     return (
-      <form className={classes.form} onSubmit={this.handleSearch}>
-        <TextField className={classes.textField} placeholder="Name or Client" type="search" onChange={this.handleChange}
-          name="name" value={this.state.name}/>
-        <TextField className={classes.textField} placeholder="Location" type="search" onChange={this.handleChange}
-          name="location" value={this.state.location}/>
-        <TextField className={classes.textField} placeholder="Date" type="date" onChange={this.handleChange}
-          name="date" value={this.state.date}/>
-        <TextField
-          select
-          className={classes.textField}
-          value={this.state.category}
-          onChange={this.handleChange}
-          name="category"
-          InputProps={{
-            startAdornment: <InputAdornment position="start">Category</InputAdornment>,
-          }}
-        >
-          {this.props.reduxState.iziCategories.map(category => (
-            <MenuItem key={category.id} value={category.id}>
-              {category.category}
-            </MenuItem>
-          ))}
-        </TextField>
-        <Button className={classes.button} variant="contained" type="submit">Search</Button>
-      </form>
+      <div className={classes.root}>
+        <form className={classes.form} onSubmit={this.handleSearch}>
+          <TextField className={classes.textField} placeholder="Name or Client" type="search" onChange={this.handleChange}
+            name="name" value={this.state.name}/>
+          <TextField className={classes.textField} placeholder="Location" type="search" onChange={this.handleChange}
+            name="location" value={this.state.location}/>
+          <TextField className={classes.textField} placeholder="Date" type="date" onChange={this.handleChange}
+            name="date" value={this.state.date}/>
+          <TextField
+            select
+            className={classes.textField}
+            value={this.state.category}
+            onChange={this.handleChange}
+            name="category"
+            InputProps={{
+              startAdornment: <InputAdornment position="start">Category</InputAdornment>,
+            }}
+          >
+            {this.props.reduxState.iziCategories.map(category => (
+              <MenuItem key={category.id} value={category.id}>
+                {category.category}
+              </MenuItem>
+            ))}
+          </TextField>
+          <Button className={classes.button} variant="contained" type="submit">Search</Button>
+        </form>
+        <Button className={classes.button} variant="contained" onClick={this.viewAll}>View All</Button>
+      </div>
     );
   }
 };
 
 const styles = {
+  root: {
+    textAlign: 'center'
+  },
   form: {
     display: 'inline-block',
     margin: 'auto'

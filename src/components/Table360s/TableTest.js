@@ -31,12 +31,11 @@ const CustomTableCell = withStyles(theme => ({
   },
 }))(TableCell);
 
-// will adjust based on what we decide the sort method should be for the columns
-function desc(a, b, orderBy) {
-  if (b[orderBy] < a[orderBy]) {
+function asc(a, b, orderBy) {
+  if (b[orderBy] > a[orderBy]) {
     return -1;
   }
-  if (b[orderBy] > a[orderBy]) {
+  if (b[orderBy] < a[orderBy]) {
     return 1;
   }
   return 0;
@@ -53,7 +52,7 @@ function stableSort(array, cmp) {
 }
 
 function getSorting(order, orderBy) {
-  return order === 'desc' ? (a, b) => desc(a, b, orderBy) : (a, b) => -desc(a, b, orderBy);
+  return order === 'asc' ? (a, b) => asc(a, b, orderBy) : (a, b) => -asc(a, b, orderBy);
 }
 
 const tableHeadRows = [
@@ -115,7 +114,7 @@ EnhancedTableHead.propTypes = {
 class CustomizedTable extends Component {
 
   state = {
-    order: 'asc',
+    order: 'desc',
     orderBy: '',
     page: 0,
     rowsPerPage: 10, // rowsPerPage is the initial default # of IZIs in table
@@ -136,9 +135,9 @@ class CustomizedTable extends Component {
   // for pagination // sorts columns onClick of corresponding th
   handleRequestSort = (event, property) => {
     const orderBy = property;
-    let order = 'desc';
-    if (this.state.orderBy === property && this.state.order === 'desc') {
-      order = 'asc';
+    let order = 'asc';
+    if (this.state.orderBy === property && this.state.order === 'asc') {
+      order = 'desc';
     }
     this.setState({ order, orderBy });
   };
@@ -156,8 +155,6 @@ class CustomizedTable extends Component {
   render() {
   const { classes } = this.props;
   const { order, orderBy, rowsPerPage, page } = this.state;
-  // will add empty rows to fill table = rowsPerPage if no data is provided
-  // const emptyRows = rowsPerPage - Math.min(rowsPerPage, this.props.rows.length - page * rowsPerPage);
 
   return (
     <Paper className={classes.rootTable}>
@@ -187,21 +184,13 @@ class CustomizedTable extends Component {
               </TableRow>
             );
           })}
-          
-          {/* will add empty rows to fill table = rowsPerPage if no data is provided */}
-          {/* {emptyRows > 0 && (
-            <TableRow style={{ height: 49 * emptyRows }}>
-              <TableCell colSpan={6} />
-            </TableRow>
-          )} */}
-
         </TableBody>
       </Table>
 
       {/* pagination controls will render if there are more than 10 IZIs */}
-      {this.props.rows.length > 10 &&
+      {this.props.rows.length > 9 &&
       <TablePagination
-        rowsPerPageOptions={[10, 15, 25]} // select sets the # of IZIs displayed
+        rowsPerPageOptions={[10, 15, 25]} // dropdown select sets the # of IZIs displayed
         component="div"
         count={this.props.rows.length}
         rowsPerPage={rowsPerPage}

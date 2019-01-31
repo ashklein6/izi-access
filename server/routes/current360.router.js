@@ -524,6 +524,12 @@ router.put('/edit/goalsAssessment/:id', (async (req, res) => {
         await client.query('BEGIN');
         Object.keys(newData).map(async (key) => {
             if (!isNaN(key)) {
+                // for column names of type integer, set to null if empty
+                if (newData[key].desired === '') {newData[key].desired = null;}
+                if (newData[key].delivered === '') {newData[key].delivered = null;}
+                if (newData[key].difference === '') {newData[key].difference = null;}
+                if (newData[key].percent === '') {newData[key].percent = null;}
+
                 if (newData[key].new) {
                     await client.query(`INSERT INTO goals ("threesixty_id", "description", "desired", "delivered", "difference", "percent", "comments", "row_public")
                     VALUES ($1, $2, $3, $4, $5, $6, $7, $8);`, 

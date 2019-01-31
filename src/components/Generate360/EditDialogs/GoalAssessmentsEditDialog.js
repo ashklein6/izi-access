@@ -55,8 +55,8 @@ class GoalsAssessmentEditDialog extends Component {
    })
  } // end deleteRow
 
- // Update the rows array when a textbox is typed in.
- handleChangeFor= (event, id) => {
+ // Update the row entry when a textbox is typed in.
+ handleChangeFor = (event, id) => {
   event.preventDefault();
 
   this.setState({
@@ -68,6 +68,18 @@ class GoalsAssessmentEditDialog extends Component {
     }
   })
  } // end handleChangeFor
+
+ // Update the row entry when the public/private status is toggled
+ handleChangePublic = (id) => {
+   this.setState({
+     [id]: {
+       ...this.state[id],
+       row_public: !this.state[id].row_public,
+       // set flag that this row has been updated so that it can be updated in database upon submittal 
+       updated: true
+     }
+   })
+ } // end handleChangePublic
 
  // handles clicking of the "edit" button. Opens a dialog window.
  handleClickOpen = () => {
@@ -106,9 +118,12 @@ class GoalsAssessmentEditDialog extends Component {
   Object.keys(this.state).map( (key) => {
     if (isNaN(key)) {
       newState[key]=this.state[key]
+    } else {
+      newState[key]='deleted';
     };
     return null;
   });
+  console.log('in loadCurrentData. state after copying old state:', newState);
 
   // Initialize addRowId
   // (if all rows are accidentally deleted, this will allow the user to still create a row)
@@ -117,9 +132,9 @@ class GoalsAssessmentEditDialog extends Component {
   // map through results from database pull
   this.props.reduxState.current360.goalsAssessment.map((row,index) => {
     let rowCheck = row;
-    if (index === 0) {
-      addRowId=row.id;
-    }
+    // if (index === 0) {
+    //   addRowId=row.id;
+    // }
 
     // Check if any entries in the row are null and set to empty strings (for happy inputs)
     Object.entries(rowCheck).map((entry) => {
@@ -130,7 +145,7 @@ class GoalsAssessmentEditDialog extends Component {
       })
     
     // increment addRowId to keep row count up to date
-    addRowId++;
+    addRowId = row.id + 1;
     // add updated row (with any converted null values) to the newState object
     newState[row.id]=rowCheck;
     return null;
@@ -160,9 +175,13 @@ class GoalsAssessmentEditDialog extends Component {
  render() {
    const { classes } = this.props;
 
+   console.log('rendering goals assessment edit dialog');
+   console.log('this.state:',this.state);
+   
    // Check if the section information updated since this site was last loaded.
    // A section is re-downloaded each time the edit dialog is opened.
    if (this.props.reduxState.current360.updateNeeded.goalsAssessment === true) {
+     console.log('updating information from reduxState:');
      this.loadCurrentData();
    }
 
@@ -200,7 +219,8 @@ class GoalsAssessmentEditDialog extends Component {
             {Object.keys(this.state).map( (key,index) => {
               if (!isNaN(key) && this.state[key] !== 'deleted') {
                 return (
-                  <GoalsAssessmentEditComponent key={this.state[key].id} row={this.state[key]} index={index} handleChangeFor={this.handleChangeFor} deleteRow={this.deleteRow} />
+                  <GoalsAssessmentEditComponent key={this.state[key].id} row={this.state[key]} index={index} handleChangeFor={this.handleChangeFor} deleteRow={this.deleteRow} 
+                  handleChangePublic={this.handleChangePublic}/>
                 );
               } 
               return null;

@@ -9,6 +9,8 @@ import TextField from '@material-ui/core/TextField';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteForever from '@material-ui/icons/DeleteForever';
 import Grid from '@material-ui/core/Grid';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Switch from '@material-ui/core/Switch';
 
 class GoalsAssessmentEditComponent extends Component {
 
@@ -26,6 +28,22 @@ class GoalsAssessmentEditComponent extends Component {
           <Typography variant="subtitle1" className={classes.rowLabel}>Row {this.props.index + 1}</Typography>
         </Grid>
         <Grid item xs={6} className={classes.rowHeaderRight}>
+          <FormControlLabel
+            control={
+              <Switch
+                checked={this.props.row.row_public}
+                onChange={() => this.props.handleChangePublic(this.props.row.id)}
+                name="row_public"
+                value="public"
+                classes={{
+                  switchBase: classes.colorSwitchBase,
+                  checked: classes.colorChecked,
+                  bar: classes.colorBar
+                }}
+              />
+            }
+            label={this.props.row.row_public ? 'Public' : 'Private'}
+          />
           <IconButton aria-label="Delete" className={classes.margin} onClick={() => this.props.deleteRow(this.props.row.id)}>
             <DeleteForever fontSize="small"/>
           </IconButton>

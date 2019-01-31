@@ -102,11 +102,11 @@ render() {
                 </MenuItem>
               ))}
             </TextField>
-            <Button variant="contained" onClick={this.submitSearch}>Search</Button>
+            <Button className={classes.button} variant="contained" onClick={this.submitSearch}>Search</Button>
 
-            <Button variant="contained" onClick={this.viewAllUsers}>View All Users</Button>
+            <Button className={classes.button} variant="contained" onClick={this.viewAllUsers}>View All Users</Button>
 
-            <TextField
+            {/* <TextField
               select
               className={classNames(classes.margin, classes.textField)}
               value={this.state.sortBy}
@@ -121,7 +121,7 @@ render() {
                   {option.label}
                 </MenuItem>
               ))}
-            </TextField>
+            </TextField> */}
 
           </form>
         </span>
@@ -170,6 +170,9 @@ const styles = {
   },
   form: {
     textAlign: 'center'
+  },
+  button: {
+    margin: '0px 25px'
   }
 };
 

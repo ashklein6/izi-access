@@ -18,7 +18,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 
 const styles = {
-  container: {
+  button: {
     margin: 25
   },
   textField: {
@@ -27,14 +27,12 @@ const styles = {
   },
   form: {
     textAlign: 'center',
-    padding: 50
   },
   header: {
     textAlign: 'center',
     marginBottom: 25
   }
 };
-
 
 class Create360 extends Component {
 
@@ -129,8 +127,9 @@ class Create360 extends Component {
   render() {
     const { classes } = this.props;
     return (
-      <div className={classes.container}>
-        <Button 
+      <div>
+        <Button
+          className={classes.button} 
           variant="contained"
           onClick={this.returnToDashboard}
         >

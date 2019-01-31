@@ -51,7 +51,7 @@ class Search360s extends Component {
     const { classes } = this.props;
 
     return (
-      <div>
+      <div className={classes.root}>
         <form className={classes.form} onSubmit={this.handleSearch}>
           <TextField className={classes.textField} placeholder="Name or Client" type="search" onChange={this.handleChange}
             name="name" value={this.state.name}/>
@@ -84,6 +84,9 @@ class Search360s extends Component {
 };
 
 const styles = {
+  root: {
+    textAlign: 'center'
+  },
   form: {
     display: 'inline-block',
     margin: 'auto'

@@ -32,9 +32,9 @@ class Manage360s extends Component {
 
    return (
       <div >
-        <Button variant="contained" onClick={this.returnToDash}>Return to Dashboard</Button>
+        <Button className={classes.button} variant="contained" onClick={this.returnToDash}>Return to Dashboard</Button>
         <span>
-          <Button variant="contained" onClick={this.goToCreate360}>Create New 360</Button>
+          <Button className={classes.button} variant="contained" onClick={this.goToCreate360}>Create New 360</Button>
           <Typography variant="h4" className={classes.header}>Unpublished 360s</Typography>
         </span>
         <span>
@@ -54,6 +54,9 @@ class Manage360s extends Component {
 };
 
 const styles = theme => ({
+  button: {
+    margin: 25,
+  }
 
 });
 

@@ -22,7 +22,7 @@ class ManageUsers extends Component {
     const { classes } = this.props;
   return (
     <div className={classes.root}>
-      <Button variant="contained" onClick={this.returnToDash}>Return to Dashboard</Button>
+      <Button className={classes.button} variant="contained" onClick={this.returnToDash}>Return to Dashboard</Button>
       <PendingClientRequests />
       <Users />
       <DeactivatedUsers />
@@ -35,6 +35,9 @@ const styles = {
   root: {
     width: '100%',
   },
+  button: {
+    margin: 25,
+  }
 };
 
 const mapReduxStateToProps = (reduxState) => ({

@@ -3,7 +3,7 @@ const pool = require('../modules/pool');
 const router = express.Router();
 const { employeesOnly } = require('../modules/employeesOnly');
 
-// this route handles the search function from the manage 360s page
+// this route handles the search function from the manage 360s page and home page
 // it takes in a search query, then sets up the sql query based on the
 // the information the user has provided.
 router.get('/search', (req, res) => {
@@ -44,8 +44,12 @@ router.get('/search', (req, res) => {
       fieldCounter++;
       searchFields.push(search.category);
     };
+    if (req.user.access_id < 4) {
+      sqlText += `AND published_status = true;`
+    } else {
     sqlText += `AND published_status = $${fieldCounter};`;
     searchFields.push(search.publishedStatus);
+    }
     pool.query(sqlText, searchFields)
     .then((response) => {
       res.send(response.rows);
@@ -56,12 +60,12 @@ router.get('/search', (req, res) => {
 });
 // end /search
 
-// this route gets 10 of the most recently published 360s and returns
-// them to be displayed on the home page
+// this route gets  published 360s and returns
+// them to be displayed on the home page and manage 360s view.
 router.get('/true', (req,res) => {
   const sqlText = `SELECT threesixty.*, izi_categories.category FROM threesixty
   JOIN izi_categories ON izi_categories.id = threesixty.category_id
-  WHERE threesixty.published_status = true LIMIT 10;`;
+  WHERE threesixty.published_status = true;`;
   pool.query(sqlText)
   .then((response) => {
   res.send(response.rows);
@@ -72,12 +76,12 @@ router.get('/true', (req,res) => {
 })
 // end /public
 
-// this route gets 5 of the most recently published and unpublished 360s
+// this route gets unpublished 360s
 // and returns them to be added to the table on the manage 360s view.
 router.get('/false', employeesOnly, (req,res) => {
   const sqlText = `SELECT threesixty.*, izi_categories.category FROM threesixty
                   JOIN izi_categories ON izi_categories.id = threesixty.category_id
-                  WHERE threesixty.published_status = false LIMIT 10;`;
+                  WHERE threesixty.published_status = false;`;
   pool.query(sqlText)
   .then((response) => {
     res.send(response.rows);

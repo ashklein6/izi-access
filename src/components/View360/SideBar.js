@@ -47,7 +47,7 @@ class SideBar extends Component {
         // OR if user is a client with access
         (this.props.reduxState.userControls.user.some(e => e.id === String(this.state.current360Id))
         // OR if user is an employee or admin
-        || this.props.reduxState.user.id >= 4))?
+        || this.props.reduxState.user.access_id >= 4))?
         <Link key="#goals-assessment" smooth to="#goals-assessment"
         scroll={el => scrollWithOffset(el, 150)}
         >
@@ -66,7 +66,7 @@ class SideBar extends Component {
         // OR if user is a client with access
         (this.props.reduxState.userControls.user.some(e => e.id === String(this.state.current360Id))
         // OR if user is an employee or admin
-        || this.props.reduxState.user.id >= 4)) ?
+        || this.props.reduxState.user.access_id >= 4)) ?
         <Link key="#dashboard" smooth to="#dashboard"
         scroll={el => scrollWithOffset(el, 150)}
         >
@@ -85,7 +85,7 @@ class SideBar extends Component {
         // OR if user is a client with access
         (this.props.reduxState.userControls.user.some(e => e.id === String(this.state.current360Id))
         // OR if user is an employee or admin
-        || this.props.reduxState.user.id >= 4)) ?
+        || this.props.reduxState.user.access_id >= 4)) ?
         <Link key="#360report" smooth to="#360report"
         scroll={el => scrollWithOffset(el, 150)}
         >
@@ -104,7 +104,7 @@ class SideBar extends Component {
         // OR if user is a client with access
         (this.props.reduxState.userControls.user.some(e => e.id === String(this.state.current360Id))
         // OR if user is an employee or admin
-        || this.props.reduxState.user.id >= 4)) ?
+        || this.props.reduxState.user.access_id >= 4)) ?
         <Link key="#analysis" smooth to="#analysis"
         scroll={el => scrollWithOffset(el, 150)}
         >
@@ -123,7 +123,7 @@ class SideBar extends Component {
         // OR if user is a client with access
         (this.props.reduxState.userControls.user.some(e => e.id === String(this.state.current360Id))
         // OR if user is an employee or admin
-        || this.props.reduxState.user.id >= 4)) ?
+        || this.props.reduxState.user.access_id >= 4)) ?
         <Link key="#demo-data" smooth to="#demo-data"
         scroll={el => scrollWithOffset(el, 150)}
         >

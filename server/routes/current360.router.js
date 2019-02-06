@@ -17,51 +17,6 @@ const dashboardRows = ['Date(s)','Timeline', 'Six Weeks - 1 Month Out', '3 Weeks
     'Flowverview', 'Proposed Questions', 'Opening Questions/Around-the-Room Questions', 'Topic-Specific Questions', 
     'Sticky Stats/Community Snapshots', 'Scavenger Hunt', 'Human Survey', 'Lightning Rounds', 'Resource Wall', 'Menu', 'Tools'];
 
-// Setup a GET route to get a 360 section
-router.get('/section', (req, res) => {
-  let section = req.query.section;
-  let current360Id = req.query.current360Id;
-
-  let queryText = '';
-
-  switch (section) {
-    case 'goalsAssessment':
-      queryText = 'SELECT * FROM goals WHERE threesixty_id=$1 ORDER BY id'; break;
-    case 'dashboard':
-      queryText = `SELECT * FROM dashboard WHERE threesixty_id=$1 ORDER BY id;`; break;
-    case 'threesixty_reports':
-      queryText = `SELECT * FROM threesixty_reports WHERE threesixty_id=$1 ORDER BY id;`; break;
-    case 'analysis_recommendation':
-      queryText = `SELECT * FROM analysis_recommendation WHERE threesixty_id=$1 ORDER BY id;`; break;
-    case 'demographics':
-      queryText = `SELECT * FROM demographic WHERE threesixty_id=$1 ORDER BY id;`; break;
-    case 'sticky_stats':
-      queryText = ``; break;
-    case 'circle_share':
-      queryText = `SELECT * FROM circle_share WHERE threesixty_reports_id=$1 ORDER BY id;`; break;
-    case 'question_set':
-      queryText = `SELECT question_set.id AS question_set_id, threesixty_reports_id, set_title, breakdown, questions.id AS question_id, response.id AS response_id, response, response_category.id AS response_category_id, description AS response_category_description FROM question_set
-      LEFT JOIN questions ON questions.set_id = question_set.id
-      LEFT JOIN response ON response.question_id = questions.id
-      LEFT JOIN response_category ON response_category.id = response.category_id
-      WHERE threesixty_reports_id=$1 ORDER BY question_set.id;`; break;
-    case 'oral_report':
-      queryText = `SELECT * FROM oral_report WHERE threesixty_reports_id=$1 ORDER BY id`; break;
-  }
-    
-  if (queryText !== '') {
-    pool.query(queryText, [current360Id])
-        .then( (results) => {
-            res.send(results.rows);
-        }).catch( (error) => {
-            console.log('error on get:', error);
-            res.sendStatus(500);
-        })
-  } else {
-      res.sendStatus(400);
-  }
-})
-
 // Setup a GET route to get current 360 information
 router.get('/info', (req, res) => {
     let current360Id = req.query.current360Id;
@@ -87,10 +42,35 @@ router.get('/info', (req, res) => {
 
 
 // Setup a GET route to get 360 section goalsAssessment
-router.get('/goalsAssessment', (req, res) => {
+router.get('/goalsAssessment', async (req, res) => {
     let current360Id = req.query.current360Id;
-    let queryText = 'SELECT * FROM goals WHERE threesixty_id=$1 ORDER BY id';
-        
+    let clientWithAccess = false;
+
+    // If user is a client, check if they have access to the current 360
+    if (req.user.access_id === 3) {
+        let response = await pool.query(`SELECT EXISTS(SELECT 1 FROM threesixty_user 
+        WHERE threesixty_id=$1 AND user_id=$2)`, [current360Id, req.user.id]);
+        // Update clientWithAccess boolean to result (exists will return true if they do)
+        clientWithAccess = response.rows[0].exists;
+        console.log('client with access?',clientWithAccess);
+    }
+
+    // Set query text based on user access permissions
+    let queryText;
+    if (req.user.access_id >= 4) {
+        // If user is employee or admin, return all
+        queryText = 'SELECT * FROM goals WHERE threesixty_id=$1 ORDER BY id';
+    } else if (clientWithAccess) {
+        // If user is a client with access to the current 360, return all published info
+        queryText = `SELECT goals_public, goals_published, goals.* FROM goals 
+        JOIN threesixty ON threesixty.id = goals.threesixty_id 
+        WHERE threesixty_id=$1 AND goals_published=TRUE ORDER BY id;`
+    } else {
+        queryText = `SELECT goals_public, goals_published, goals.* FROM goals 
+        JOIN threesixty ON threesixty.id = goals.threesixty_id 
+        WHERE threesixty_id=$1 AND goals_published=TRUE AND goals_public=TRUE AND row_public=TRUE ORDER BY id;`
+    }
+    
     pool.query(queryText, [current360Id])
         .then( (results) => {
             res.send(results.rows);

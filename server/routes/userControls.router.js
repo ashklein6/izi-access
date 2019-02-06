@@ -5,7 +5,7 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 const { employeesOnly } = require('../modules/employeesOnly');
 
 // get 360s that a specific user has access to
-router.get('/', (req, res) => {
+router.get('/', rejectUnauthenticated, (req, res) => {
   const sqlText = `SELECT threesixty.name, threesixty.date, threesixty.id FROM threesixty
                   JOIN threesixty_user ON threesixty_user.threesixty_id = threesixty.id
                   JOIN person ON threesixty_user.user_id = person.id

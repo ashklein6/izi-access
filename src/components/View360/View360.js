@@ -68,7 +68,7 @@ class View360 extends Component {
           // OR if user is a client with access
           (this.props.reduxState.userControls.user.some(e => e.id === String(this.state.current360Id))
           // OR if user is an employee or admin
-          || this.props.reduxState.user.id >= 4)) ?
+          || this.props.reduxState.user.access_id >= 4)) ?
           <section className={classes.section}>
             {/* anchor div for sidebar scroll placement */}
             <div style={{position: 'relative'}}>
@@ -76,6 +76,8 @@ class View360 extends Component {
             </div>            
             {/* sticky header for section */}
             <div className={classes.sticky}>
+              {JSON.stringify(this.props.reduxState.userControls.user.some(e => e.id === String(this.state.current360Id)))}
+              {JSON.stringify(this.props.reduxState.user.id)}
               <Typography variant="h4" className={classes.sectionHeader}>Goals Assessment</Typography>
             </div>
             {/* section content */}
@@ -94,7 +96,7 @@ class View360 extends Component {
           // OR if user is a client with access
           (this.props.reduxState.userControls.user.some(e => e.id === String(this.state.current360Id))
           // OR if user is an employee or admin
-          || this.props.reduxState.user.id >= 4)) ?
+          || this.props.reduxState.user.access_id >= 4)) ?
           <section className={classes.section}>
             {/* anchor div for sidebar scroll placement */}
             <div style={{position: 'relative'}}>
@@ -120,7 +122,7 @@ class View360 extends Component {
           // OR if user is a client with access
           (this.props.reduxState.userControls.user.some(e => e.id === String(this.state.current360Id))
           // OR if user is an employee or admin
-          || this.props.reduxState.user.id >= 4)) ?
+          || this.props.reduxState.user.access_id >= 4)) ?
           <section className={classes.section}>
             {/* anchor div for sidebar scroll placement */}
             <div style={{position: 'relative'}}>
@@ -185,7 +187,7 @@ class View360 extends Component {
           // OR if user is a client with access
           (this.props.reduxState.userControls.user.some(e => e.id === String(this.state.current360Id))
           // OR if user is an employee or admin
-          || this.props.reduxState.user.id >= 4))  ?
+          || this.props.reduxState.user.access_id >= 4))  ?
           <section className={classes.section}>
             {/* anchor div for sidebar scroll placement */}
             <div style={{position: 'relative'}}>
@@ -213,7 +215,7 @@ class View360 extends Component {
           // OR if user is a client with access
           (this.props.reduxState.userControls.user.some(e => e.id === String(this.state.current360Id))
           // OR if user is an employee or admin
-          || this.props.reduxState.user.id >= 4)) ?
+          || this.props.reduxState.user.access_id >= 4)) ?
           <section className={classes.section}>
             {/* anchor div for sidebar scroll placement */}
             <div style={{position: 'relative'}}>

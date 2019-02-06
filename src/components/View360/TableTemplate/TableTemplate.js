@@ -49,18 +49,18 @@ class TableUsers extends Component {
           </TableHead>
           <TableBody>
             {this.props.data.map(row => {
-            return (
-              <TableRow key={row.id}>
-                {this.props.cellVariables.map(( variable, index ) => 
-                  <CustomTableCell key={index} width={this.props.width[index]} component="th" scope="row" className={this.props.className[index]}>
-                    {/* Check if value is truthie. If true, print 'yes' */}
-                    {row[variable] === true ? <CheckCircleOutline className={classes.iconColored}/> : 
-                    // Next, check if value is falsie. If not, print the value
-                    ((row[variable] === false || row[variable] === null) ? <Close /> : row[variable])}
-                  </CustomTableCell>
-                )}
-              </TableRow>
-            );
+              return (
+                <TableRow key={row.id}>
+                  {this.props.cellVariables.map(( variable, index ) => 
+                    <CustomTableCell key={index} width={this.props.width[index]} component="th" scope="row" className={this.props.className[index]}>
+                      {/* Check if value is truthie. If true, print 'yes' */}
+                      {row[variable] === true ? <CheckCircleOutline className={classes.iconColored}/> : 
+                      // Next, check if value is falsie. If not, print the value
+                      ((row[variable] === false || row[variable] === null) ? <Close /> : row[variable])}
+                    </CustomTableCell>
+                  )}
+                </TableRow>
+              );
             })}
           </TableBody>
         </Table>

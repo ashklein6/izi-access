@@ -83,9 +83,13 @@ class ClientAccessExpansionPanel extends Component {
               {this.props.reduxState.current360.clients.length === 0 ? <li>None</li> : null}
               {this.props.reduxState.current360.clients.map((person, index) => {
                 return (
-                  <li key={index}><strong>{person.firstname}&nbsp;{person.lastname}</strong>&nbsp;(Username:&nbsp;{person.username},&nbsp;
-                  Email:{person.email}, Database Id:{person.id})
-                  <button onClick={() => this.removeAccess(person.threesixty_user_id)}>Remove Access</button></li>
+                  <li key={index}><strong>{person.firstname}&nbsp;{person.lastname}</strong> <button onClick={() => this.removeAccess(person.threesixty_user_id)}>Remove Access</button>
+                    <ul>
+                      <li>Username: {person.username}</li>
+                      <li>Email: {person.email}</li>
+                      <li>Database Id: {person.id}</li>
+                      <li>Notes: {person.notes}</li>
+                  </ul></li>
                 );
               })}
             </ul>

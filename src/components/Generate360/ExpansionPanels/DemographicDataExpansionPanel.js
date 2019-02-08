@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import colors from '../../App/colors';
+import TableTemplate from '../TableTemplate/TableTemplate';
 
 // import edit dialog component
-// import GoalsAssessmentEditDialog from '../EditDialogs/GoalAssessmentsEditDialog';
+import DemographicDataEditDialog from '../EditDialogs/DemographicDataEditDialog';
 
 // Material-UI
 import { withStyles } from '@material-ui/core/styles';
@@ -80,7 +81,25 @@ class DemographicDataExpansionPanel extends Component {
         {/* Content that is within the expansion panel (shows when panel is expanded) */}
         <ExpansionPanelDetails className={classes.details}>
           <Paper className={classes.rootTable}>
-
+            <p className={classes.paragraph}>
+              IZI Demo Key:<br></br>
+              A - Plans to tell someone<br></br>
+              B - First time at the Table<br></br>
+              C - Interested in future conversations about preventing child abuse and neglect<br></br>
+              D - Interested in future conversations about housing<br></br>
+              E - Interested in future conversations about transportation<br></br>
+              F - Interested in future conversations about education
+            </p>
+            <TableTemplate 
+              headers={['Ethnic', 'Passion', 'Profession', 'Generation', 'Referral', 'Comments',
+                        'A', 'B', 'C', 'D', 'E', 'F']} 
+              width={['10%', '10%', '10%', '10%', null, null, null, null, null, null, null, null]}
+              data={this.props.reduxState.current360.demographics} 
+              className={[null,null]}
+              cellVariables={['ethnicity','passion', 'profession','generation','referral','comments','plans_to_tell',
+                        'first_time','child_abuse','housing','transportation','education']}
+              interpretBoolean={true}
+            />
           </Paper>
         </ExpansionPanelDetails>
 
@@ -119,7 +138,7 @@ class DemographicDataExpansionPanel extends Component {
             label={this.props.reduxState.current360.info[0].demographics_public ? 'Public' : 'Private'}
           />
           
-          {/* <GoalsAssessmentEditDialog current360Id={this.props.current360Id}/> */}
+          <DemographicDataEditDialog current360Id={this.props.current360Id}/>
         </ExpansionPanelActions>
 
       </ExpansionPanel>
@@ -160,6 +179,10 @@ const styles = {
     verticalAlign: 'bottom',
     height: 20,
     width: 20,
+  },
+  paragraph: {
+    margin: 15,
+    fontSize: '0.8125rem'
   },
   root: {
     width: '100%',

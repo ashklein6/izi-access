@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import GoalsAssessmentEditComponent from './Supplements/GoalsAssessmentsEditComponent';
+import DemographicDataEditComponent from './Supplements/DemographicDataEditComponent';
 
 // Material-UI
 import { withStyles } from '@material-ui/core/styles';
@@ -12,7 +12,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-class GoalsAssessmentEditDialog extends Component {
+class DemographicDataEditDialog extends Component {
 
  state = {
    // DO NOT create integer-only parameters as they are reserved for data rows
@@ -83,7 +83,7 @@ class GoalsAssessmentEditDialog extends Component {
 
  // handles clicking of the "edit" button. Opens a dialog window.
  handleClickOpen = () => {
-  this.props.dispatch({ type: 'FETCH_360_SECTION', payload: {section: 'goalsAssessment', current360Id: this.props.current360Id} });
+  this.props.dispatch({ type: 'FETCH_360_SECTION', payload: {section: 'demographics', current360Id: this.props.current360Id} });
   this.setState({
     ...this.state,
     open: true,
@@ -103,7 +103,7 @@ class GoalsAssessmentEditDialog extends Component {
  // dispatches an action to update the database with the new values and 
  // calls handleClickClose.
  handleSave = () => {
-  this.props.dispatch({ type: 'EDIT_360', payload: {section: 'goalsAssessment', current360Id: this.props.current360Id, data: this.state} })
+  this.props.dispatch({ type: 'EDIT_360', payload: {section: 'demographics', current360Id: this.props.current360Id, data: this.state} })
   this.handleClickClose();
  } // end handleSave
 
@@ -123,13 +123,14 @@ class GoalsAssessmentEditDialog extends Component {
     };
     return null;
   });
+  console.log('in loadCurrentData. state after copying old state:', newState);
 
   // Initialize addRowId
   // (if all rows are accidentally deleted, this will allow the user to still create a row)
   let addRowId;
 
   // map through results from database pull
-  this.props.reduxState.current360.goalsAssessment.map((row,index) => {
+  this.props.reduxState.current360.demographics.map((row,index) => {
     let rowCheck = row;
     // if (index === 0) {
     //   addRowId=row.id;
@@ -158,7 +159,7 @@ class GoalsAssessmentEditDialog extends Component {
   this.setState( newState );
 
   // Dispatch action to indicate the update has been completed
-  this.props.dispatch({ type: 'CURRENT_360_SECTION_UPDATE_COMPLETE', payload: {section: 'goalsAssessment'} });
+  this.props.dispatch({ type: 'CURRENT_360_SECTION_UPDATE_COMPLETE', payload: {section: 'demographics'} });
 
  } // end loadCurrentData
 
@@ -173,10 +174,10 @@ class GoalsAssessmentEditDialog extends Component {
 
  render() {
    const { classes } = this.props;
-
+   
    // Check if the section information updated since this site was last loaded.
    // A section is re-downloaded each time the edit dialog is opened.
-   if (this.props.reduxState.current360.updateNeeded.goalsAssessment === true) {
+   if (this.props.reduxState.current360.updateNeeded.demographics === true) {
      console.log('updating information from reduxState:');
      this.loadCurrentData();
    }
@@ -187,7 +188,7 @@ class GoalsAssessmentEditDialog extends Component {
       <Dialog
         open={this.state.open}
         onClose={this.handleClickClose}
-        aria-labelledby="goal-assessment-edit-dialog"
+        aria-labelledby="demographics-edit-dialog"
         scroll="paper"
         fullWidth
         maxWidth="lg"
@@ -196,7 +197,7 @@ class GoalsAssessmentEditDialog extends Component {
       {/* Conditionally render a loading message until data is loaded into local state */}
       {(this.state.updating === true) ? 
       <React.Fragment>
-        <DialogTitle id="goal-assessment-edit-dialog">Edit Goals Assessment</DialogTitle>
+        <DialogTitle id="demographics-edit-dialog">Edit Demogrpahic Data</DialogTitle>
         <DialogContent>
           <DialogContentText>
             New information is currently loading...
@@ -205,8 +206,8 @@ class GoalsAssessmentEditDialog extends Component {
       </React.Fragment>
         :
         <React.Fragment>
-          <DialogTitle id="goal-assessment-edit-dialog">Edit Goals Assessment</DialogTitle>
-          <DialogContent id="goal-assessment-edit-dialog-content" ref={(el) => { this.scroll = el; }}>
+          <DialogTitle id="demographics-edit-dialog">Edit Demographic Data</DialogTitle>
+          <DialogContent id="demographics-edit-dialog-content" ref={(el) => { this.scroll = el; }}>
             <DialogContentText>
               Remember to save changes before closing this edit dialog.
             </DialogContentText>
@@ -215,7 +216,7 @@ class GoalsAssessmentEditDialog extends Component {
             {Object.keys(this.state).map( (key,index) => {
               if (!isNaN(key) && this.state[key] !== 'deleted') {
                 return (
-                  <GoalsAssessmentEditComponent key={this.state[key].id} row={this.state[key]} index={index} handleChangeFor={this.handleChangeFor} deleteRow={this.deleteRow} 
+                  <DemographicDataEditComponent key={this.state[key].id} row={this.state[key]} index={index} handleChangeFor={this.handleChangeFor} deleteRow={this.deleteRow} 
                   handleChangePublic={this.handleChangePublic}/>
                 );
               } 
@@ -260,4 +261,4 @@ const mapReduxStateToProps = (reduxState) => ({
  reduxState
 });
 
-export default connect(mapReduxStateToProps)(withStyles(styles)(GoalsAssessmentEditDialog));
+export default connect(mapReduxStateToProps)(withStyles(styles)(DemographicDataEditDialog));

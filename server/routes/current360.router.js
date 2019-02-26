@@ -83,94 +83,260 @@ router.get('/goalsAssessment', async (req, res) => {
 
 
 // Setup a GET route to get 360 section dashboard
-router.get('/dashboard', (req, res) => {
-    let current360Id = req.query.current360Id;
-    let queryText = `SELECT * FROM dashboard WHERE threesixty_id=$1 ORDER BY id;`;
+// router.get('/dashboard', (req, res) => {
+//     let current360Id = req.query.current360Id;
+//     let queryText = `SELECT * FROM dashboard WHERE threesixty_id=$1 ORDER BY id;`;
         
-    if (queryText !== '') {
-      pool.query(queryText, [current360Id])
-          .then( (results) => {
-              res.send(results.rows);
-          }).catch( (error) => {
-              console.log('error on get:', error);
-              res.sendStatus(500);
-          })
-    } else {
-        res.sendStatus(400);
+//     if (queryText !== '') {
+//       pool.query(queryText, [current360Id])
+//           .then( (results) => {
+//               res.send(results.rows);
+//           }).catch( (error) => {
+//               console.log('error on get:', error);
+//               res.sendStatus(500);
+//           })
+//     } else {
+//         res.sendStatus(400);
+//     }
+// })
+
+// Setup a GET route to get 360 section dashboard
+router.get('/dashboard', async (req, res) => {
+    let current360Id = req.query.current360Id;
+    let clientWithAccess = false;
+    
+    if (req.user.access_id === 3) {
+      let response = await pool.query(`SELECT EXISTS(SELECT 1 FROM threesixty_user 
+      WHERE threesixty_id=$1 AND user_id=$2);`, [current360Id, req.user.access_id ]);
+      clientWithAccess = response.rows[0].exists;
     }
-})
+
+    let queryText;
+    if (req.user.access_id >= 4) {
+      queryText = `SELECT * FROM dashboard WHERE threesixty_id=$1 ORDER BY id;`;
+    } else if (clientWithAccess) {
+      queryText = `SELECT dashboard_public, dashboard_published, dashboard.* FROM dashboard
+      JOIN threesixty ON threesixty.id = dashboard.threesixty_id 
+      WHERE threesixty_id=$1 AND dashboard_published=TRUE ORDER BY id;`
+    } else {
+      queryText = `SELECT dashboard_public, dashboard_published, dashboard.* FROM dashboard 
+      JOIN threesixty ON threesixty.id = dashboard.threesixty_id 
+      WHERE threesixty_id=$1 AND dashboard_published=TRUE AND dashboard_public=TRUE ORDER BY id;`
+    }
+
+    pool.query(queryText, [current360Id])
+      .then( (results) => {
+          res.send(results.rows);
+      }).catch( (error) => {
+          console.log('error on get:', error);
+          res.sendStatus(500);
+      })
+  }
+);
 
 // Setup a GET route to get 360 section threesixty_reports
-router.get('/threesixty_reports', (req, res) => {
-    let current360Id = req.query.current360Id;
-    let queryText = `SELECT * FROM threesixty_reports WHERE threesixty_id=$1 ORDER BY id;`;
+// router.get('/threesixty_reports', (req, res) => {
+//     let current360Id = req.query.current360Id;
+//     let queryText = `SELECT * FROM threesixty_reports WHERE threesixty_id=$1 ORDER BY id;`;
         
-    if (queryText !== '') {
-      pool.query(queryText, [current360Id])
-          .then( (results) => {
-              res.send(results.rows);
-          }).catch( (error) => {
-              console.log('error on get:', error);
-              res.sendStatus(500);
-          })
-    } else {
-        res.sendStatus(400);
-    }
-})
+//     if (queryText !== '') {
+//       pool.query(queryText, [current360Id])
+//           .then( (results) => {
+//               res.send(results.rows);
+//           }).catch( (error) => {
+//               console.log('error on get:', error);
+//               res.sendStatus(500);
+//           })
+//     } else {
+//         res.sendStatus(400);
+//     }
+// })
+
+router.get('/threesixty_reports', async (req, res) => {
+  let current360Id = req.query.current360Id;
+  let clientWithAccess = false;
+
+  if (req.user.access_id === 3) {
+    let response = await pool.query(`SELECT EXISTS(SELECT 1 FROM threesixty_user 
+    WHERE threesixty_id=$1 AND user_id=$2);`, [current360Id, req.user.access_id ]);
+    clientWithAccess = response.rows[0].exists;
+  }
+
+  let queryText;
+  if (req.user.access_id >= 4) {
+    queryText = `SELECT * FROM threesixty_reports WHERE threesixty_id=$1 ORDER BY id;`;
+  } else if (clientWithAccess) {
+    queryText = `SELECT threesixty_reports_public, threesixty_reports_published, threesixty_reports.* FROM threesixty_reports
+    JOIN threesixty ON threesixty.id = threesixty_reports.threesixty_id 
+    WHERE threesixty_id=$1 AND threesixty_reports_published=TRUE ORDER BY id;`
+  } else {
+    queryText = `SELECT threesixty_reports_public, threesixty_reports_published, threesixty_reports.* FROM threesixty_reports
+    JOIN threesixty ON threesixty.id = threesixty_reports.threesixty_id 
+    WHERE threesixty_id=$1 AND threesixty_reports_published=TRUE AND threesixty_reports_public=TRUE ORDER BY id;`
+  }
+
+  pool.query(queryText, [current360Id])
+    .then( (results) => {
+        res.send(results.rows);
+    }).catch( (error) => {
+        console.log('error on get:', error);
+        res.sendStatus(500);
+    })
+  }
+);
 
 // Setup a GET route to get 360 section analysis_recommendation
-router.get('/analysis_recommendation', (req, res) => {
-    let current360Id = req.query.current360Id;
-    let queryText = `SELECT * FROM analysis_recommendation WHERE threesixty_id=$1 ORDER BY id;`;
+// router.get('/analysis_recommendation', (req, res) => {
+//     let current360Id = req.query.current360Id;
+//     let queryText = `SELECT * FROM analysis_recommendation WHERE threesixty_id=$1 ORDER BY id;`;
         
-    if (queryText !== '') {
-      pool.query(queryText, [current360Id])
-          .then( (results) => {
-              res.send(results.rows);
-          }).catch( (error) => {
-              console.log('error on get:', error);
-              res.sendStatus(500);
-          })
-    } else {
-        res.sendStatus(400);
-    }
-})
+//     if (queryText !== '') {
+//       pool.query(queryText, [current360Id])
+//           .then( (results) => {
+//               res.send(results.rows);
+//           }).catch( (error) => {
+//               console.log('error on get:', error);
+//               res.sendStatus(500);
+//           })
+//     } else {
+//         res.sendStatus(400);
+//     }
+// })
+
+router.get('/analysis_recommendation', async (req, res) => {
+  let current360Id = req.query.current360Id;
+  let clientWithAccess = false;
+
+  if (req.user.access_id === 3) {
+    let response = await pool.query(`SELECT EXISTS(SELECT 1 FROM threesixty_user 
+    WHERE threesixty_id=$1 AND user_id=$2);`, [current360Id, req.user.access_id ]);
+    clientWithAccess = response.rows[0].exists;
+  }
+
+  let queryText;
+  if (req.user.access_id >= 4) {
+    queryText = `SELECT * FROM analysis_recommendation WHERE threesixty_id=$1 ORDER BY id;`;
+  } else if (clientWithAccess) {
+    queryText = `SELECT threesixty_reports_public, threesixty_reports_published, analysis_recommendation.* FROM analysis_recommendation
+    JOIN threesixty ON threesixty.id = analysis_recommendation.threesixty_id 
+    WHERE threesixty_id=$1 AND analysis_recommendation_published=TRUE ORDER BY id;`
+  } else {
+    queryText = `SELECT threesixty_reports_public, threesixty_reports_published, analysis_recommendation.* FROM analysis_recommendation
+    JOIN threesixty ON threesixty.id = analysis_recommendation.threesixty_id 
+    WHERE threesixty_id=$1 AND analysis_recommendation_published=TRUE AND analysis_recommendation_public=TRUE ORDER BY id;`
+  }
+
+  pool.query(queryText, [current360Id])
+    .then( (results) => {
+        res.send(results.rows);
+    }).catch( (error) => {
+        console.log('error on get:', error);
+        res.sendStatus(500);
+    })
+  }
+);
 
 // Setup a GET route to get 360 section demographics
-router.get('/demographics', (req, res) => {
-    let current360Id = req.query.current360Id;
-    let queryText = `SELECT * FROM demographic WHERE threesixty_id=$1 ORDER BY id;`;
+// router.get('/demographics', (req, res) => {
+//     let current360Id = req.query.current360Id;
+//     let queryText = `SELECT * FROM demographic WHERE threesixty_id=$1 ORDER BY id;`;
         
-    if (queryText !== '') {
-      pool.query(queryText, [current360Id])
-          .then( (results) => {
-              res.send(results.rows);
-          }).catch( (error) => {
-              console.log('error on get:', error);
-              res.sendStatus(500);
-          })
-    } else {
-        res.sendStatus(400);
-    }
-})
+//     if (queryText !== '') {
+//       pool.query(queryText, [current360Id])
+//           .then( (results) => {
+//               res.send(results.rows);
+//           }).catch( (error) => {
+//               console.log('error on get:', error);
+//               res.sendStatus(500);
+//           })
+//     } else {
+//         res.sendStatus(400);
+//     }
+// })
+
+router.get('/demographics', async (req, res) => {
+  let current360Id = req.query.current360Id;
+  let clientWithAccess = false;
+    
+  if (req.user.access_id === 3) {
+    let response = await pool.query(`SELECT EXISTS(SELECT 1 FROM threesixty_user 
+    WHERE threesixty_id=$1 AND user_id=$2);`, [current360Id, req.user.access_id ]);
+    clientWithAccess = response.rows[0].exists;
+  }
+
+  let queryText;
+  if (req.user.access_id >= 4) {
+    queryText = `SELECT * FROM demographic WHERE threesixty_id=$1 ORDER BY id;`;
+  } else if (clientWithAccess) {
+    queryText = `SELECT demographic_publics, demographics_published, demographic.* FROM demographic
+    JOIN threesixty ON threesixty.id = demographic.threesixty_id 
+    WHERE threesixty_id=$1 AND demographics_published=TRUE ORDER BY id;`
+  } else {
+    queryText = `SELECT demographics_public, demographics_published, demographic.* FROM demographic
+    JOIN threesixty ON threesixty.id = demographic.threesixty_id 
+    WHERE threesixty_id=$1 AND demographics_published=TRUE AND demographics_public=TRUE ORDER BY id;`
+  }
+
+  pool.query(queryText, [current360Id])
+    .then( (results) => {
+        res.send(results.rows);
+    }).catch( (error) => {
+        console.log('error on get:', error);
+        res.sendStatus(500);
+    })
+  }
+);
 
 // Setup a GET route to get 360 section circle_share
-router.get('/circle_share', (req, res) => {
-    let current360Id = req.query.current360Id;
-    let queryText = `SELECT * FROM circle_share WHERE threesixty_reports_id=$1 ORDER BY id;`;
+// router.get('/circle_share', (req, res) => {
+//     let current360Id = req.query.current360Id;
+//     let queryText = `SELECT * FROM circle_share WHERE threesixty_reports_id=$1 ORDER BY id;`;
         
-    if (queryText !== '') {
-      pool.query(queryText, [current360Id])
-          .then( (results) => {
-              res.send(results.rows);
-          }).catch( (error) => {
-              console.log('error on get:', error);
-              res.sendStatus(500);
-          })
-    } else {
-        res.sendStatus(400);
-    }
-})
+//     if (queryText !== '') {
+//       pool.query(queryText, [current360Id])
+//           .then( (results) => {
+//               res.send(results.rows);
+//           }).catch( (error) => {
+//               console.log('error on get:', error);
+//               res.sendStatus(500);
+//           })
+//     } else {
+//         res.sendStatus(400);
+//     }
+// })
+
+router.get('/circle_share', async (req, res) => {
+  let current360Id = req.query.current360Id;
+  let clientWithAccess = false;
+    
+  if (req.user.access_id === 3) {
+    let response = await pool.query(`SELECT EXISTS(SELECT 1 FROM threesixty_user 
+    WHERE threesixty_id=$1 AND user_id=$2);`, [current360Id, req.user.access_id ]);
+    clientWithAccess = response.rows[0].exists;
+  }
+
+  let queryText;
+  if (req.user.access_id >= 4) {
+    queryText = `SELECT * FROM circle_share WHERE threesixty_reports_id=$1 ORDER BY id;`;
+  } else if (clientWithAccess) {
+    queryText = `SELECT circle_share_public, circle_share_published, circle_share.* FROM circle_share
+    JOIN threesixty ON threesixty.id = circle_share.threesixty_reports_id 
+    WHERE threesixty_id=$1 AND circle_share_published=TRUE ORDER BY id;`
+  } else {
+    queryText = `SELECT circle_share_public, circle_share_published, circle_share.* FROM circle_share
+    JOIN threesixty ON threesixty.id = circle_share.threesixty_reports_id 
+    WHERE threesixty_reports_id=$1 AND circle_share_published=TRUE AND circle_share_public=TRUE ORDER BY id;`
+  }
+
+  pool.query(queryText, [current360Id])
+    .then( (results) => {
+        res.send(results.rows);
+    }).catch( (error) => {
+        console.log('error on get:', error);
+        res.sendStatus(500);
+    })
+  }
+);
 
 // Setup a GET route to get 360 section question_set
 router.get('/question_set', (req, res) => {

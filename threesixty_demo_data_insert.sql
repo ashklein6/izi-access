@@ -56,60 +56,35 @@ VALUES
     ('Community'), 
     ('Education');
 
-INSERT INTO threesixty ("name", "date", "location", "category_id", "client", "description", "published_status", "analysis_recommendation_public", "threesixty_reports_public", "dashboard_public", "goals_public", "demographics_public", "oral_report_public", "question_set_public", "circle_share_public", "threesixty_freeform_public", "freeform_public", "upload_public", "analysis_recommendation_published", "threesixty_reports_published", "dashboard_published", "goals_published", "demographics_published", "oral_report_published", "question_set_published", "circle_share_published", "threesixty_freeform_published", "freeform_published", "upload_published")
+INSERT INTO threesixty ("name", "date", "location", "category_id", "client", "description", "published_status", "analysis_recommendation_public", "threesixty_reports_public", "dashboard_public", "goals_public", "demographics_public", "oral_report_public", "question_set_public", "circle_share_public", "event_overview_public", "mindstorm_public", "sticky_stats_public", "threesixty_freeform_public", "freeform_public", "analysis_recommendation_published", "threesixty_reports_published", "dashboard_published", "goals_published", "demographics_published", "oral_report_published", "question_set_published", "circle_share_published", "event_overview_published", "mindstorm_published", "sticky_stats_published", "threesixty_freeform_published", "freeform_published") 
 VALUES (
 	'Catalyst Initiative of The Minneapolis Foundation - Building Initiative: Preventing Diseases of Despair', 
 	'9-18-2018', 
 	'Minneapolis', 
 	2, 
-	'MTI',
+	'MTI', 
 	'121 community members and representatives of organizations and programs with a vested interest in preventing diseases of despair engaged in a conversation and collaborative planning session on primary prevention and holistic and integrative strategies for preventing diseases of despair including suicide, alcoholism and other chemical dependency disorders.', 
-	false,
-	true,
-	true,
-	false,
-	false,
-	false,
-	true,
-	true,
-	true,
-	true,
-	true,
-	true,
-	true,
-	true,
-	true,
-	true,
-	true,
-	true,
-	true,
-	true,
-	true,
-	true,
-	true
-);
+	FALSE, TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, TRUE, TRUE, FALSE, FALSE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, FALSE, FALSE);
 
-INSERT INTO threesixty ("name", "date", "location", "category_id", "client", "description", "published_status")
+INSERT INTO threesixty ("name", "date", "location", "category_id", "client", "description", "published_status") 
 VALUES (
 	'Carver County Public Health - A Healthy Welcome', 
 	'10-4-2018', 
 	'Chaska', 
 	1, 
-	'MTI',
-	'86 community members gathered to discuss healthcare and community health needs.',
-	true
-);
+	'MTI', 
+	'86 community members gathered to discuss healthcare and community health needs.', 
+	TRUE);
 
-INSERT INTO threesixty ("name", "date", "location", "category_id", "client", "description", "published_status")
+INSERT INTO threesixty ("name", "date", "location", "category_id", "client", "description", "published_status") 
 VALUES (
 	'Health Matters!', 
 	'10-24-2017', 
 	'Shakopee', 
 	3, 
-	'Scott County Health Care System Collaborative',
-	'140 community members gathered together to discuss healthcare.',
-	true
-);
+	'Scott County Health Care System Collaborative', 
+	'140 community members gathered together to discuss healthcare.', 
+	TRUE);
 
 INSERT INTO analysis_recommendation (threesixty_id, findings, recommendations)
 VALUES (
@@ -1989,20 +1964,6 @@ For more participant-submitted comments and feedback, please see the attached De
 	)
 ;
 
-INSERT INTO upload (threesixty_id, title, url)
-VALUES
-	(
-	1,
-	'12 Years of Radical Hospitality',
-	'https://www.marnitastable.org/wp-content/uploads/2018/12/MTI_annual-report_2017.pdf'
-	),
-	(
-	1,
-	'Sustainable Progress',
-	'https://www.marnitastable.org/wp-content/uploads/2017/08/Marnitas-Table-2016-Annual-Report.pdf'
-	)
-;
-
 INSERT INTO circle_share (threesixty_reports_id, question, responses)
 VALUES 
 	('1', 
@@ -2186,3 +2147,61 @@ c) Healthy food potlucks
 INSERT INTO threesixty_user ("user_id", "threesixty_id")
 VALUES
 	(3, 2);
+
+INSERT INTO comments ("user_id", "threesixty_id", "comment", "approved") 
+VALUES (
+	1, 
+	1, 
+	'I attended this IZI and was so impressed at how thought-provoking the conversation was!', 
+	TRUE
+);
+
+INSERT INTO comments ("user_id", "threesixty_id", "parent_id", "comment", "approved") 
+VALUES (
+	2, 
+	1, 
+	1, 
+	'I completely agree! It gave me so much to think about. It was very cool to hear from so many different people.', 
+	TRUE
+);
+
+INSERT INTO comments ("user_id", "threesixty_id", "parent_id", "comment", "approved") 
+VALUES (
+	3, 
+	1,
+	2,
+	'I thought the same thing! It truly opened my eyes.', 
+	FALSE
+);
+
+INSERT INTO files ("user_id", "title", "url") 
+VALUES (
+	1, 
+	'Picture of our table at IZI', 
+	'https://www.marnitastable.org/wp-content/uploads/2017/01/SilosToCircles2015_034-1.jpg'
+);
+
+INSERT INTO files ("user_id", "title", "url") 
+VALUES (
+	3, 
+	'12 Years of Radical Hospitality', 
+	'https://www.marnitastable.org/wp-content/uploads/2018/12/MTI_annual-report_2017.pdf'
+);
+
+INSERT INTO files ("user_id", "title", "url") 
+VALUES (
+	3, 
+	'Sustainable Progress', 
+	'https://www.marnitastable.org/wp-content/uploads/2017/08/Marnitas-Table-2016-Annual-Report.pdf'
+);
+
+INSERT INTO files_comments ("files_id", "comment_id")
+VALUES (
+	1, 1
+);
+
+INSERT INTO files_threesixty ("files_id", "threesixty_id")
+VALUES
+	(2, 1),
+	(3, 1)
+;

@@ -70,6 +70,7 @@ class EnhancedTableHead extends React.Component {
   };
 
   render() {
+    console.log('COLOR ORANGE IN TABLE 360S:', colors.orange)
     const { order, orderBy } = this.props;
     return (
       <TableHead>

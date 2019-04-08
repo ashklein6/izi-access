@@ -32,10 +32,10 @@ import './App.css';
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: '#7d52a1',
+      main: colors.purple
     },
     secondary: {
-      main: '#eb983f'
+      main: colors.orange
     }
   },
   typography: {

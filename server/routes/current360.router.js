@@ -42,7 +42,7 @@ router.get('/section', (req, res) => {
     case 'question_set':
       queryText = `SELECT question_set.id AS question_set_id, threesixty_reports_id, set_title, breakdown, questions.id AS question_id, response.id AS response_id, response, response_category.id AS response_category_id, description AS response_category_description FROM question_set
       LEFT JOIN questions ON questions.set_id = question_set.id
-      LEFT JOIN response ON response.question_id = questions.id
+      LEFT JOIN response ON responsea.question_id = questions.id
       LEFT JOIN response_category ON response_category.id = response.category_id
       WHERE threesixty_reports_id=$1 ORDER BY question_set.id;`; break;
     case 'oral_report':
@@ -65,13 +65,7 @@ router.get('/section', (req, res) => {
 // Setup a GET route to get current 360 information
 router.get('/info', (req, res) => {
     let current360Id = req.query.current360Id;
-    let queryText = `SELECT threesixty.id, name, date, location, category_id, category, client, description,
-    published_status, analysis_recommendation_public, threesixty_reports_public, dashboard_public,
-    goals_public, demographics_public, oral_report_public, question_set_public, circle_share_public,
-    threesixty_freeform_public, freeform_public, upload_public, analysis_recommendation_published, 
-    threesixty_reports_published, dashboard_published, goals_published, demographics_published, 
-    oral_report_published, question_set_published, circle_share_published,
-    threesixty_freeform_published, freeform_published, upload_published FROM threesixty
+    let queryText = `SELECT threesixty.* FROM threesixty
     JOIN izi_categories ON izi_categories.id = threesixty.category_id
     WHERE threesixty.id=$1`;
         

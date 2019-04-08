@@ -16,25 +16,6 @@ import MenuItem from '@material-ui/core/MenuItem';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import classNames from 'classnames';
 
-const ranges = [
-  {
-    value: 'person.firstname',
-    label:  'First Name'
-  },
-  {
-    value: 'person.lastname',
-    label:  'Last Name'
-  },
-  {
-    value: 'person.email',
-    label:  'Email'
-  },
-  {
-    value: 'person.access_id',
-    label:  'Access Level'
-  }
-];
-
 class Users extends Component {
 
   state = {

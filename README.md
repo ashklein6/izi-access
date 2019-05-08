@@ -55,7 +55,7 @@ Before you get started, make sure you have the following software installed on y
 To get a copy of marnita-connect running on your local machine:
 
 1. Download this project.
-2. Create a new database called `marnita_connect` and create tables using the marnita_connect.sql file. If you would like to name your database something else, you will need to change `marnita_connect` to the name of your new database name in `server/modules/pool.js`
+2. Create a new database called `izi_access` and create tables using the izi_access.sql file. If you would like to name your database something else, you will need to change `izi_access` to the name of your new database name in `server/modules/pool.js`
 3. Install node modules using `npm install`.
 4. Create a `.env` file at the root of the project and paste these lines into the file:
     ```
@@ -136,12 +136,12 @@ The following steps will walk you through deploying the application on Heroku th
 1. Connect to the Heroku Postgres database from Postico and create necessary tables.
     1. Open Postico
     1. Click "New Favorite"
-    1. Enter "marnita_connect" as the nickname
+    1. Enter "izi_access" as the nickname
     1. Copy the information from the credentials on Heroku for host, port, user, and database
     1. Click "Connect" if prompted about verifying server identity
     1. Click "SQL Query"
     1. Click "Load Query"
-    1. Load query `marnita_connect.sql` from the GitHub repo
+    1. Load query `izi_access.sql` from the GitHub repo
     1. Select all and click "Execute Selection"
     1. If desired, repeat the previous 2 steps with `threesixty_demo_data_insert.sql` to fill database with test data.
 1. Create a user account and give them Admin access.

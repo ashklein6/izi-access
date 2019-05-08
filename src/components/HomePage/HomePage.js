@@ -4,7 +4,6 @@ import Table360s from '../Table360s/Table360s';
 import Search360s from '../Search360s/Search360s';
 import moment from 'moment';
 import LinesEllipsis from 'react-lines-ellipsis';
-import { Textfit } from 'react-textfit';
 import colors from '../App/colors';
 import './HomePage.css';
 
@@ -57,14 +56,27 @@ class Home extends Component {
               <CardContent className={classes.card}>
                   <img src={MarnitaLogo} alt="Marnita's Table Placeholder" className={classes.image}/>
                 <div className={classes.divHeader}>
-                  <Textfit mode="multi" className={classes.cardHeader}>
-                    {izi.name}
-                  </Textfit>
+                  <LinesEllipsis
+                    text={izi.name}
+                    className={classes.cardHeader}
+                    maxLine='3'
+                    ellipsis='...'
+                    trimRight
+                    basedOn='letters'
+                  />
                 </div>
                 <div className={classes.cardBody}>
-                  <Typography className={classes.iziInfo} component="p">
+                  <LinesEllipsis
+                    text={izi.location + ' - ' + moment(izi.date).format('LL')}
+                    className={classes.iziInfo}
+                    maxLine='1'
+                    ellipsis='...'
+                    trimRight
+                    basedOn='letters'
+                  />
+                  {/* <Typography className={classes.iziInfo} component="p">
                   {izi.location} - {moment(izi.date).format('LL')}
-                  </Typography>
+                  </Typography> */}
                   <LinesEllipsis
                     text={izi.description}
                     className="ellipsis-text"
@@ -85,7 +97,7 @@ class Home extends Component {
         </div>
         </Grid>
         <Typography variant="h4" className={classes.header}>
-          Or search through our public 360s:
+          Or search through past 360s:
         </Typography>
         <div className={classes.centerContainer}>
           <Search360s  status="true"/>
@@ -109,7 +121,7 @@ const styles = {
     textAlign: 'center',
   },
   card: {
-    display: 'flex',
+    width: 260,
     flexDirection: 'column',
     justifyContent: 'space-between',
     height: 250,
@@ -117,9 +129,10 @@ const styles = {
     textAlign: 'center',
     padding: 0,
     margin: 20,
+    display: 'flex'
   },
   cardSize: {
-    maxWidth: 'calc(30vw - 40px)',
+    maxWidth: 300,
     display: 'inline-block',
     margin: 20,
     padding: 0
@@ -142,8 +155,7 @@ const styles = {
     padding: 15,
     backgroundColor: colors.lightGrey,
     borderRadius: 5,
-    flexGrow: 0,
-    width: 'calc(100% - 20px)',
+    width: 240,
   },
   cardActions: {
     display: 'flex',
@@ -152,13 +164,18 @@ const styles = {
   header: {
     padding: 20,
     textAlign: 'center',
-    fontSize: '1.5rem'
+    fontSize: '1.5rem',
+    fontWeight: 'bold',
+    marginTop: 20,
+    marginBottom: 0
   },
   button: {
     marginBottom: 20,
   },
   iziInfo: {
     marginTop: 5,
+    fontWeight: 'bold',
+    fontSize: '0.875rem'
   },
   image: {
     width: 75,

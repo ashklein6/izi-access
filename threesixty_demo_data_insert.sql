@@ -42,6 +42,18 @@ VALUES (
 	'12-19-2018'
 );
 
+INSERT INTO person ("email", "username", "password", "firstname", "lastname", "access_id", "notes", "date_added")
+VALUES (
+	'admin@email.com',
+	'admin',
+	'$2b$10$sbi8Gf4AhWK8m4P6wfoMTuxtB9NwpDwK6DGUL5CrG2iONYR93DH3u',
+	'admin',
+	'admin',
+	5,
+	'default admin account',
+	'12-19-2018'
+);
+
 INSERT INTO client_request (person_id, name, date)
 VALUES (
 	3,
@@ -89,135 +101,49 @@ VALUES (
 INSERT INTO analysis_recommendation (threesixty_id, findings, recommendations)
 VALUES (
 	1, 
-	'In support of our community engagement efforts in connection with the Health Matters IZI, Marnitas 
-Table brought in Latinx outreach specialist, Blanca Martinez Gavina to connect with hard-to-reach 
-immigrant stakeholders. Her one-on-one outreach efforts included Scott County Public Schools, local 
-churches, apartment complexes, Latinx restaurants and other businesses where she had direct contact 
-with approximately 250 Latinx individuals. She reported two prominent themes while in conversation 
-with local community, as detailed below.
-Fear of being out in the community: Gavina found in her outreach that an estimated 40%-50% 
-of the people she spoke with expressed that they felt afraid when they were out in the community. Both 
-undocumented and documented Latinxs said that they preferred to stay home and not go outside. 
-When asked why, many stated that they experienced police profiling and that they felt that members of 
-the "mainstream" community did not want them there. Many felt there was a link between local police 
-and immigration enforcement.
-One woman reported that she had an experience where ICE (Immigration Customs Enforcement) had 
-held her outside of her apartment. She had begged them not to enter the apartment without her as her 
-six-year-old was inside alone and would be terrified by their presence.
-The agent disregarded her plea and almost knocked down the apartment door to find the daughter 
-hiding in the bathroom. Both were taken into custody, but were released within a week. The mother 
-explained that to this day (4 years later) her daughter suffers from PTSD and something as simple as 
-someone knocking on the door sends her daughter into a traumatic state. She reported that neither 
-have received any mental health support. Nor has she been given an explanation for their detainment. 
-She stated that they barely go out and stay at home most of the time due to fear since that experience.
-Another individual stated that police monitor and racially profile Latinx (and other communities of 
-color) on Marshall Street near the highly Latinx populated apartment complexes. They stated that even 
-teenagers and children are often stopped and harassed without cause and that many community 
-members avoid going outside as they often see two or three police patrols around their neighborhood.
-Our outreach also found that this fear even impacts the healthcare access of U.S. citizens — including 
-children and other relatives of undocumented people. Despite having access to insurance, parents are 
-afraid to sign up and have their names and addresses on record.
-Lack of insurance and access to health services: An estimated 40-60% of the Latinx 
-individuals she spoke with mentioned that they did not have health insurance or alternately, that 
-someone in their family did not have access to any type of healthcare. She found that the majority of the 
-people she had contact with stated that they had never been approached about or seen any information 
-regarding healthcare services offered in Scott County.
-Examples:
-A 59-year-old woman reported she did not have health insurance for over a year. She had to buy her 
-medication at full price out-of-pocket and sometimes skips taking it due to the expense. She reported 
-that she was directed to go to St. Paul when she inquired at a local service agency (unnamed). Due to a 
-lack of transportation she has not been able to go and obtain insurance.
-A 70-year-old woman reported that she has not had health insurance for the past five years. She was 
-diagnosed with diabetes yet she does not get medical treatment to manage it because of the expense. 
-This individual stated that she takes home remedies to "feel better."
-A 45-year-old woman reported that she had to travel out of state to get a life-saving surgery that kept 
-her away from her family for a month. Despite having some health insurance, she reported that she 
-could not afford the expense to have the surgery in Minnesota.
-A 60-year-old man stopped going to his follow-up appointments because he was told by a medical 
-professional that local hospitals were sharing patient information with ICE.
-Blanca estimates that more than half of the people she contacted stated that their one-on-one interview 
-with her was the first time anyone had approached them about healthcare access. Many individuals 
-shared that the community is only receiving care when there are emergency situations, and that they are 
-not able to access preventative services.
-We do not intend the sharing of these findings as an indictment of the outreach work of Public Health 
-or the other agencies involved in the Health Care Collaborative. We merely want to bring to light that 
-there are pockets of vulnerable people in the community who are not aware of the resources that might 
-be available to them or who are at present unable or unwilling to access those resources due to the 
-current climate of fear caused by anti-Latinx rhetoric and policies. We hope that the good relationships 
-catalyzed during the IZI will create pathways into these pockets and begin to build trust in the local 
-healthcare systems.', 
-	'We feel strongly that this initial event has created a great opportunity to strengthen relationships 
-between underserved community members and healthcare organizations in the county. In order to reap 
-the full benefits of Intentional Social Interaction, it is important to trust the process. Every detail is 
-intentional (hence the name!) and so when we provide critical feedback on central issues, it is because 
-we do not want deviations from the model to detract from our overall project and collaborator goals. 
-Our model has been refined and proven through the experience of bringing over 40,000 individuals 
-together across difference for over 10 years, and while we always aim to exceed the goals of our clients 
-and collaborative partners, that can only happen when we stay true to all twenty touchpoints of the 
+	`In support of our community engagement efforts in connection with the Health Matters IZI, Marnitas Table brought in Latinx outreach specialist, Blanca Martinez Gavina to connect with hard-to-reach immigrant stakeholders. Her one-on-one outreach efforts included Scott County Public Schools, local churches, apartment complexes, Latinx restaurants and other businesses where she had direct contact 
+with approximately 250 Latinx individuals. She reported two prominent themes while in conversation with local community, as detailed below.
+
+**Fear of being out in the community**: Gavina found in her outreach that an estimated 40%-50% of the people she spoke with expressed that they felt afraid when they were out in the community. Both undocumented and documented Latinxs said that they preferred to stay home and not go outside. 
+
+When asked why, many stated that they experienced police profiling and that they felt that members of the "mainstream" community did not want them there. Many felt there was a link between local police and immigration enforcement.
+
+One woman reported that she had an experience where ICE (Immigration Customs Enforcement) had held her outside of her apartment. She had begged them not to enter the apartment without her as her six-year-old was inside alone and would be terrified by their presence. The agent disregarded her plea and almost knocked down the apartment door to find the daughter hiding in the bathroom. Both were taken into custody, but were released within a week. The mother explained that to this day (4 years later) her daughter suffers from PTSD and something as simple as someone knocking on the door sends her daughter into a traumatic state. She reported that neither have received any mental health support. Nor has she been given an explanation for their detainment. She stated that they barely go out and stay at home most of the time due to fear since that experience.
+
+Another individual stated that police monitor and racially profile Latinx (and other communities of color) on Marshall Street near the highly Latinx populated apartment complexes. They stated that even teenagers and children are often stopped and harassed without cause and that many community members avoid going outside as they often see two or three police patrols around their neighborhood.
+
+Our outreach also found that this fear even impacts the healthcare access of U.S. citizens — including children and other relatives of undocumented people. Despite having access to insurance, parents are afraid to sign up and have their names and addresses on record.
+**Lack of insurance and access to health services**: An estimated 40-60% of the Latinx individuals she spoke with mentioned that they did not have health insurance or alternately, that someone in their family did not have access to any type of healthcare. She found that the majority of the people she had contact with stated that they had never been approached about or seen any information regarding healthcare services offered in Scott County.
+
+**Examples**:
+- A 59-year-old woman reported she did not have health insurance for over a year. She had to buy her medication at full price out-of-pocket and sometimes skips taking it due to the expense. She reported that she was directed to go to St. Paul when she inquired at a local service agency (unnamed). Due to a lack of transportation she has not been able to go and obtain insurance.
+- A 70-year-old woman reported that she has not had health insurance for the past five years. She was diagnosed with diabetes yet she does not get medical treatment to manage it because of the expense. This individual stated that she takes home remedies to "feel better."
+- A 45-year-old woman reported that she had to travel out of state to get a life-saving surgery that kept her away from her family for a month. Despite having some health insurance, she reported that she could not afford the expense to have the surgery in Minnesota.
+- A 60-year-old man stopped going to his follow-up appointments because he was told by a medical professional that local hospitals were sharing patient information with ICE.
+
+Blanca estimates that more than half of the people she contacted stated that their one-on-one interview with her was the first time anyone had approached them about healthcare access. Many individuals shared that the community is only receiving care when there are emergency situations, and that they are not able to access preventative services.
+
+We do not intend the sharing of these findings as an indictment of the outreach work of Public Health or the other agencies involved in the Health Care Collaborative. We merely want to bring to light that there are pockets of vulnerable people in the community who are not aware of the resources that might be available to them or who are at present unable or unwilling to access those resources due to the current climate of fear caused by anti-Latinx rhetoric and policies. We hope that the good relationships catalyzed during the IZI will create pathways into these pockets and begin to build trust in the local healthcare systems.`,
+	`We feel strongly that this initial event has created a great opportunity to strengthen relationships between underserved community members and healthcare organizations in the county. In order to reap the full benefits of Intentional Social Interaction, it is important to trust the process. Every detail is intentional (hence the name!) and so when we provide critical feedback on central issues, it is because we do not want deviations from the model to detract from our overall project and collaborator goals. Our model has been refined and proven through the experience of bringing over 40,000 individuals together across difference for over 10 years, and while we always aim to exceed the goals of our clients and collaborative partners, that can only happen when we stay true to all twenty touchpoints of the 
 model.
-With this in mind, we have outlined below some of our findings and recommendations to improve 
-future collaboration and fidelity to the model:
-   • Resist focusing too heavily on the RSVP lists. In IZI, we collect RSVPs only, I) to get a sense of 
-     the numbers of people who will be in attendance for ordering food, and 2) to get a sense of 
-     which communities we might need to put extra attention into intentionally inviting to ensure a 
-     good mix of people in the room.
-   • Do not release information about other events on the day of the event. During the afternoon of 
-     the event, our outreach specialist Blanca was inundated with frantic calls from members of the 
-     community who were concerned they could not attend because they were told they had to 
-     "register." We later found out that there was information released about an additional event 
-     being held by Public Health and that was what caused the confusion. Due to the number of 
-     people who initially reported they were attending from the Latinx community being much higher 
-     than the number that actually attended, we believe this may have negatively impacted 
-     attendance.
 
-The power of IZI is in moving from the transactional to the transformational. When one attempts to 
-insert more transactional approaches into the process, the momentum is lost. Circle Share-in is 
-designed to allow people leaving the event to feel inspired and changed, and represents the final ritual 
-moment of the night. People feel it in their bodies. In order to maximize the impact of Circle Share-in 
-we recommend that hosts:
+With this in mind, we have outlined below some of our findings and recommendations to improve future collaboration and fidelity to the model:
+- Resist focusing too heavily on the RSVP lists. In IZI, we collect RSVPs only, I) to get a sense of the numbers of people who will be in attendance for ordering food, and 2) to get a sense of which communities we might need to put extra attention into intentionally inviting to ensure a good mix of people in the room.
+- Do not release information about other events on the day of the event. During the afternoon of the event, our outreach specialist Blanca was inundated with frantic calls from members of the community who were concerned they could not attend because they were told they had to "register." We later found out that there was information released about an additional event being held by Public Health and that was what caused the confusion. Due to the number of people who initially reported they were attending from the Latinx community being much higher than the number that actually attended, we believe this may have negatively impacted attendance.
 
-   • Avoid ending with announcements of future events. If there is a desire to recruit for future 
-     events, have each collaborative and/or staff member agree to invite at least three people one- 
-     on-one and intentionally bring them into the conversation. You could also create a Sticky Stat 
-     on the upcoming events and have the question answered in the Lightning Rounds activity to 
-     bring it to everyones attention in the room.
-   • We also do not recommend promising another "event like this" as people will expect something 
-     exactly like IZI. If you do not have the training to execute all twenty touchpoints, or the 
-     support of our team, it is unlikely to have the same feel and impact as an IZI. Participants will 
-     also anticipate that there will be ample food, a place for children and cross-cultural 
-     communication supports, and if these expectations are not met, this may negatively impact your 
-     capacity to bring people into conversation in the future!
+The power of IZI is in moving from the transactional to the transformational. When one attempts to insert more transactional approaches into the process, the momentum is lost. Circle Share-in is designed to allow people leaving the event to feel inspired and changed, and represents the final ritual moment of the night. People feel it in their bodies. In order to maximize the impact of Circle Share-in we recommend that hosts:
 
-Based on the community feedback shared during the outreach and engagement processes, it is clear that 
-deepening trust and increasing community engagement is an important sector for the ongoing efforts of 
-the collaborative. Deepening connection came up in response to several of the questions in Mindstorm 
-and across many of the conversation groups, both the need for healthcare providers and organizations 
-to deepen their relationships with their clients and underserved communities as well as the need for the 
-community as a whole to have spaces and opportunities to connect with one another for their health 
-and wellbeing. This desire to connect was indicated both within cultural and other affinity groups but 
-also across difference and among community broadly.
+- Avoid ending with announcements of future events. If there is a desire to recruit for future events, have each collaborative and/or staff member agree to invite at least three people one-on-one and intentionally bring them into the conversation. You could also create a Sticky Stat on the upcoming events and have the question answered in the Lightning Rounds activity to bring it to everyones attention in the room.
+- We also do not recommend promising another "event like this" as people will expect something exactly like IZI. If you do not have the training to execute all twenty touchpoints, or the support of our team, it is unlikely to have the same feel and impact as an IZI. Participants will also anticipate that there will be ample food, a place for children and cross-cultural communication supports, and if these expectations are not met, this may negatively impact your capacity to bring people into conversation in the future!
+
+Based on the community feedback shared during the outreach and engagement processes, it is clear that deepening trust and increasing community engagement is an important sector for the ongoing efforts of the collaborative. Deepening connection came up in response to several of the questions in Mindstorm and across many of the conversation groups, both the need for healthcare providers and organizations to deepen their relationships with their clients and underserved communities as well as the need for the community as a whole to have spaces and opportunities to connect with one another for their health and wellbeing. This desire to connect was indicated both within cultural and other affinity groups but also across difference and among community broadly.
 
 We recommend:
-  • Continuing to create opportunities to meet with the community on their terms. This means 
-    outside of the regular workday hours, on evenings and weekends, in community locations with 
-    ample food and spaces for children and families to fully participate.
-  • Interpretation is important in cross-cultural conversations but immigrant communities would 
-    also like to talk about their health and wellbeing in their first languages, so culturally-specific 
-    conversations were also requested so that cultural communities can focus on their unique 
-    needs and situations as well.
-  • Inviting works best when it is initiated peer-to-peer. Electronic communication only reaches a 
-    select few and written materials are helpful, but only when used in collaboration with direct 
-    contact and encouragement.
+- Continuing to create opportunities to meet with the community on their terms. This means outside of the regular workday hours, on evenings and weekends, in community locations with ample food and spaces for children and families to fully participate.
+- Interpretation is important in cross-cultural conversations but immigrant communities would also like to talk about their health and wellbeing in their first languages, so culturally-specific conversations were also requested so that cultural communities can focus on their unique needs and situations as well.
+- Inviting works best when it is initiated peer-to-peer. Electronic communication only reaches a select few and written materials are helpful, but only when used in collaboration with direct contact and encouragement.
 
-We have truly valued the experience of partnering on this event with the Scott County Health Care 
-Collaborative and would be happy to deepen the work in the future to further the impact. It was 
-wonderful to witness the deepening of relationships and bridging social capital that occurred in the 
-room and to see how well-received the experience of authentic welcome was for so many diverse 
-members of the county. It is our hope that this event met the needs and goals of the Collaborative as a
-whole and of each individual member who went through the process with us. We believe that any of the 
-procedural adjustments covered in this report might easily be smoothed out in the future, as you have 
-now experienced the process with first-hand knowledge and understanding of the tools and 
-methodology we use to engage community for meaningful, sustainable impact.'
+We have truly valued the experience of partnering on this event with the Scott County Health Care Collaborative and would be happy to deepen the work in the future to further the impact. It was wonderful to witness the deepening of relationships and bridging social capital that occurred in the room and to see how well-received the experience of authentic welcome was for so many diverse members of the county. It is our hope that this event met the needs and goals of the Collaborative as a whole and of each individual member who went through the process with us. We believe that any of the procedural adjustments covered in this report might easily be smoothed out in the future, as you have now experienced the process with first-hand knowledge and understanding of the tools and methodology we use to engage community for meaningful, sustainable impact.`
 	)
 ;
 
@@ -1915,51 +1841,51 @@ INSERT INTO freeform (threesixty_id, title, content, row_public)
 VALUES
 	('1',
 	'"Heard in the Hall"',
-	'Here’s what participants had to say about their experience:
+	`Here’s what participants had to say about their experience:
 
-	➢	“Thank you for creating a safe place to engage others who are different than ourselves, and the freedom to be vulnerable and learn from each other.” – Public Health Professional 
+- “Thank you for creating a safe place to engage others who are different than ourselves, and the freedom to be vulnerable and learn from each other.”  – Public Health Professional
 
-	➢	“Thank you! I struggle with feelings of helplessness and hopelessness.” – Trainer for Child Support Workers, MN State Human Services 
+- “Thank you! I struggle with feelings of helplessness and hopelessness.”  – Trainer for Child Support Workers, MN State Human Services
 
-	➢	“I enjoyed the space, the conversations and especially the engaging activities.” Hmong Small Business Owner
+- “I enjoyed the space, the conversations and especially the engaging activities.”  – Hmong Small Business Owner
 	
-		➢	“Loved conversations, ideation, inclusion and removal of power dynamic.” – Community Health & Wellbeing Partnership Specialist  
+- “Loved conversations, ideation, inclusion and removal of power dynamic.”  – Community Health & Wellbeing Partnership Specialist
 
-	➢	“Great experience and networking! Thanks for bringing this group together. Very educational…I will be back.” – YMCA Staff Member
+- “Great experience and networking! Thanks for bringing this group together. Very educational…I will be back.”  – YMCA Staff Member
 
-	➢	“This was very needed and specifically on this day when I struggle with if what I do is enough.” – Client Service Representative / Case Manager 
+- “This was very needed and specifically on this day when I struggle with if what I do is enough.” – Client Service Representative / Case Manager 
 
-	➢	“I enjoyed the facilitation that brought people the safety to share freely.” – Social Worker
+- “I enjoyed the facilitation that brought people the safety to share freely.” – Social Worker
 
-	➢	“It is very interactive and enlightening.” – Healthcare Professional 
+- “It is very interactive and enlightening.” – Healthcare Professional 
 
-	➢	“It was profound and emotional for me.” – Public Health Professional 
+- “It was profound and emotional for me.” – Public Health Professional 
 
-	➢	“Uplifting and supportive; [I] made a good connection with someone I will contact after today. Thank you! Great food.” – Retired ESL Teacher
+- “Uplifting and supportive; [I] made a good connection with someone I will contact after today. Thank you! Great food.” – Retired ESL Teacher
 
-	➢	“Every time I attend a Marnitas Table event, it never ceases to amaze me with all the wonderful conversation and interactions that occur. Events like these are essential to the healing of our communities.” – Community Improvement Coordinator
+- “Every time I attend a Marnitas Table event, it never ceases to amaze me with all the wonderful conversation and interactions that occur. Events like these are essential to the healing of our communities.” – Community Improvement Coordinator
 
-	➢	“Eye opening - how many people from diverse experiences are noticing the same challenges and barriers and frustrations to achieving wellness and healing that I have seen/noticed.” – EMT/Paramedic
+- “Eye opening - how many people from diverse experiences are noticing the same challenges and barriers and frustrations to achieving wellness and healing that I have seen/noticed.” – EMT/Paramedic
 
-	➢	“I am grateful to be in the room speaking and learning about resources to combat trauma, depression, and mental illness.” – Teacher, Writer & Creative 
+- “I am grateful to be in the room speaking and learning about resources to combat trauma, depression, and mental illness.” – Teacher, Writer & Creative 
 
-	➢	“Exciting and affirming conversations!” – Project Director & Women’s Service Lead for Women, Children & Families, ISUD
+- “Exciting and affirming conversations!” – Project Director & Women’s Service Lead for Women, Children & Families, ISUD
 
-	➢	“Really enjoyed the table conversation. Excellent!” – Chaplain 
+- “Really enjoyed the table conversation. Excellent!” – Chaplain 
 
-	➢	“Thank you, what an amazing day! This experience serves to build on personal and professional wellbeing and the ability to serve.” – LADC Therapist 
+- “Thank you, what an amazing day! This experience serves to build on personal and professional wellbeing and the ability to serve.” – LADC Therapist 
 
-	➢	“Thank you so much for creating this space. As a therapist, I work to provide the space for change. Just the opportunity to change – really change – is transformative. So many are not given any space for real change. So, I deeply appreciate the work it takes to provide this space for us. Thank you.” – Therapist 
+- “Thank you so much for creating this space. As a therapist, I work to provide the space for change. Just the opportunity to change – really change – is transformative. So many are not given any space for real change. So, I deeply appreciate the work it takes to provide this space for us. Thank you.” – Therapist 
 
-	➢	“[The] cohort of people here willing to interact and present makes this a rich and healing environment. Love the pop-ups. Marnita sets the tone perfectly.” – Twin Cities Public Television Staff 
+- “[The] cohort of people here willing to interact and present makes this a rich and healing environment. Love the pop-ups. Marnita sets the tone perfectly.” – Twin Cities Public Television Staff 
 
-	➢	“It is encouraging to be with so many people who care about this subject. Discussing the systemic issues and toxic environments was helpful for my work.” – Educator
+- “It is encouraging to be with so many people who care about this subject. Discussing the systemic issues and toxic environments was helpful for my work.” – Educator
 	
-		➢	“Reinforced [my] belief[s] about the role of belonging and identity, as well as [the] need to focus on wellbeing at corp.” – Mental Health Promotion Specialist
+- “Reinforced [my] belief[s] about the role of belonging and identity, as well as [the] need to focus on wellbeing at corp.” – Mental Health Promotion Specialist
 
-	➢	“This was one of the first experiences of a safe place for ALL members of community regardless of race, religion, ethnicity, sexual orientation, ability, or even dietary. Truly a shift, a challenge, and a hope to me moving forward.” – Fundraising Professional 
+- “This was one of the first experiences of a safe place for ALL members of community regardless of race, religion, ethnicity, sexual orientation, ability, or even dietary. Truly a shift, a challenge, and a hope to me moving forward.” – Fundraising Professional 
 
-For more participant-submitted comments and feedback, please see the attached Demo Data report.',
+For more participant-submitted comments and feedback, please see the attached Demo Data report.`,
 	true
 	)
 ;

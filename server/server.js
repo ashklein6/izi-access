@@ -31,6 +31,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 /* Routes */
+console.log('inside server.js')
 app.use('/api/user', userRouter);
 app.use('/current360', current360Router);
 app.use('/all360', all360Router);

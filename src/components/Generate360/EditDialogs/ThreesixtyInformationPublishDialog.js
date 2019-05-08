@@ -34,7 +34,7 @@ class ThreesixtyInformationPublishDialog extends Component {
         <DialogContent id="info-publish-dialog-content" ref={(el) => { this.scroll = el; }}>
           <DialogContentText>
             Are you sure you want to publish this 360? Publishing will make this 360 available 
-            on the MarnitaConnect homepage. Make sure that your sections are accurately set
+            on the IZIAccess homepage. Make sure that your sections are accurately set
             to public/private before completing this action.
           </DialogContentText>
         </DialogContent>

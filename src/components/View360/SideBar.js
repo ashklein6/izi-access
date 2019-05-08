@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { HashLink as Link } from 'react-router-hash-link';
+import './SideBar.css';
 
 // Material-UI
 import { withStyles } from '@material-ui/core/styles';
@@ -54,6 +55,7 @@ class SideBar extends Component {
           <MenuItem
             selected={'goals' === this.state.selectedIndex}
             onClick={event => this.handleMenuItemClick(event, 'goals')}
+            classes={{ root: 'menu-item' }}
           >
             <Typography>{'Goals Assessment'}</Typography>
           </MenuItem>
@@ -73,6 +75,7 @@ class SideBar extends Component {
           <MenuItem
             selected={'dashboard' === this.state.selectedIndex}
             onClick={event => this.handleMenuItemClick(event, 'dashboard')}
+            classes={{ root: 'menu-item' }}
           >
             <Typography>{'Dashboard'}</Typography>
           </MenuItem>
@@ -92,6 +95,7 @@ class SideBar extends Component {
           <MenuItem
             selected={'360report' === this.state.selectedIndex}
             onClick={event => this.handleMenuItemClick(event, '360report')}
+            classes={{ root: 'menu-item' }}
           >
             <Typography>{'360 Report'}</Typography>
           </MenuItem>

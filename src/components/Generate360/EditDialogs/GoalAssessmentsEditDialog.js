@@ -35,7 +35,7 @@ class GoalsAssessmentEditDialog extends Component {
       difference: '',
       percent: '',
       comments: '',
-      row_public: true,
+      row_public: false,
       // set flag that this row is new so that it can be added to database upon submittal
       new: true
     },
@@ -68,6 +68,20 @@ class GoalsAssessmentEditDialog extends Component {
     }
   })
  } // end handleChangeFor
+
+ // Update the rows array when a checkbox is edited.
+ handleCheckboxChange = (event, id) => {
+  event.preventDefault();
+
+  this.setState({
+    [id]: {
+      ...this.state[id],
+      [event.target.name]: event.target.checked,
+      // set flag that this row has been updated so that it can be updated in database upon submittal 
+      updated: true
+    }
+  })
+ } // end handleCheckboxChange
 
  // handles clicking of the "edit" button. Opens a dialog window.
  handleClickOpen = () => {
@@ -106,20 +120,17 @@ class GoalsAssessmentEditDialog extends Component {
   Object.keys(this.state).map( (key) => {
     if (isNaN(key)) {
       newState[key]=this.state[key]
+    } else {
+      newState[key]=undefined
     };
     return null;
   });
 
-  // Initialize addRowId
-  // (if all rows are accidentally deleted, this will allow the user to still create a row)
-  let addRowId;
+  let currentSection = this.props.reduxState.current360.goalsAssessment
 
   // map through results from database pull
-  this.props.reduxState.current360.goalsAssessment.map((row,index) => {
+  currentSection.map((row,index) => {
     let rowCheck = row;
-    if (index === 0) {
-      addRowId=row.id;
-    }
 
     // Check if any entries in the row are null and set to empty strings (for happy inputs)
     Object.entries(rowCheck).map((entry) => {
@@ -129,8 +140,6 @@ class GoalsAssessmentEditDialog extends Component {
         return null;
       })
     
-    // increment addRowId to keep row count up to date
-    addRowId++;
     // add updated row (with any converted null values) to the newState object
     newState[row.id]=rowCheck;
     return null;
@@ -138,7 +147,11 @@ class GoalsAssessmentEditDialog extends Component {
 
   // Fix updating status and set addRowId in newState
   newState.updating = false;
-  newState.addRowId = addRowId;
+  if (currentSection.length > 0) {
+    newState.addRowId = currentSection[currentSection.length-1].id + 1;
+  } else {
+    newState.addRowId = 1;
+  }
 
   // Set state to newState object
   this.setState( newState );
@@ -197,13 +210,13 @@ class GoalsAssessmentEditDialog extends Component {
             </DialogContentText>
             {/* Map through keys of this.state. Only render the edit component for integers (which are 
             reserved for row data) */}
-            {Object.keys(this.state).map( (key,index) => {
-              if (!isNaN(key) && this.state[key] !== 'deleted') {
-                return (
-                  <GoalsAssessmentEditComponent key={this.state[key].id} row={this.state[key]} index={index} handleChangeFor={this.handleChangeFor} deleteRow={this.deleteRow} />
-                );
-              } 
-              return null;
+            {Object.keys(this.state).filter((key) => !isNaN(key) && this.state[key] !== undefined && this.state[key] !== 'deleted')
+            .map((key,index) => {
+              return (
+                <GoalsAssessmentEditComponent key={this.state[key].id} row={this.state[key]} index={index} 
+                handleChangeFor={this.handleChangeFor} deleteRow={this.deleteRow} 
+                handleCheckboxChange={this.handleCheckboxChange}/>
+              );
             })}
             <div style={{ float:"left", clear: "both" }} ref={(el) => { this.bottom = el; }}>
             </div>

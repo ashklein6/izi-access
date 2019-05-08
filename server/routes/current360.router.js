@@ -47,6 +47,8 @@ router.get('/section', (req, res) => {
       WHERE threesixty_reports_id=$1 ORDER BY question_set.id;`; break;
     case 'oral_report':
       queryText = `SELECT * FROM oral_report WHERE threesixty_reports_id=$1 ORDER BY id`; break;
+    case 'freeform':
+      queryText = `SELECT * FROM freeform WHERE threesixty_id=$1 ORDER BY id`; break;
   }
     
   if (queryText !== '') {
@@ -65,7 +67,7 @@ router.get('/section', (req, res) => {
 // Setup a GET route to get current 360 information
 router.get('/info', (req, res) => {
     let current360Id = req.query.current360Id;
-    let queryText = `SELECT threesixty.* FROM threesixty
+    let queryText = `SELECT threesixty.*, category FROM threesixty
     JOIN izi_categories ON izi_categories.id = threesixty.category_id
     WHERE threesixty.id=$1`;
         
@@ -82,6 +84,7 @@ router.get('/info', (req, res) => {
 
 // Setup a GET route to get 360 section goalsAssessment
 router.get('/goalsAssessment', (req, res) => {
+    console.log('getting /goalsAssessment. current360Id:', req.query.current360Id)
     let current360Id = req.query.current360Id;
     let queryText = 'SELECT * FROM goals WHERE threesixty_id=$1 ORDER BY id';
         
@@ -95,9 +98,12 @@ router.get('/goalsAssessment', (req, res) => {
     }
 );
 
-
+console.log('inside current360.router.js')
 // Setup a GET route to get 360 section dashboard
 router.get('/dashboard', (req, res) => {
+    console.log('made it to /dashboard')
+    // console.log('req:', req)
+    console.log('getting /dashboard. current360Id:', req.query.current360Id)
     let current360Id = req.query.current360Id;
     let queryText = `SELECT * FROM dashboard WHERE threesixty_id=$1 ORDER BY id;`;
         
@@ -153,10 +159,48 @@ router.get('/analysis_recommendation', (req, res) => {
 // Setup a GET route to get 360 section demographics
 router.get('/demographics', (req, res) => {
     let current360Id = req.query.current360Id;
-    let queryText = `SELECT * FROM demographic WHERE threesixty_id=$1 ORDER BY id;`;
+    let queryText = `SELECT demographic.*, gen_category.generation FROM demographic 
+    JOIN gen_category ON demographic.gen_category = gen_category.id
+    WHERE threesixty_id=$1 ORDER BY demographic.id;`;
         
     if (queryText !== '') {
       pool.query(queryText, [current360Id])
+          .then( (results) => {
+              res.send(results.rows);
+          }).catch( (error) => {
+              console.log('error on get:', error);
+              res.sendStatus(500);
+          })
+    } else {
+        res.sendStatus(400);
+    }
+})
+
+// Setup a GET route to get 360 section demographic's generation categories
+router.get('/demographics/gen_cat', (req, res) => {
+    let current360Id = req.query.current360Id;
+    let queryText = `SELECT * FROM gen_category ORDER BY id;`;
+        
+    if (queryText !== '') {
+      pool.query(queryText)
+          .then( (results) => {
+              res.send(results.rows);
+          }).catch( (error) => {
+              console.log('error on get:', error);
+              res.sendStatus(500);
+          })
+    } else {
+        res.sendStatus(400);
+    }
+})
+
+// Setup a GET route to get 360 section demographic's ethnic categories
+router.get('/demographics/ethnic_cat', (req, res) => {
+    let current360Id = req.query.current360Id;
+    let queryText = `SELECT * FROM ethnic_category ORDER BY id;`;
+        
+    if (queryText !== '') {
+      pool.query(queryText)
           .then( (results) => {
               res.send(results.rows);
           }).catch( (error) => {
@@ -212,6 +256,24 @@ router.get('/question_set', (req, res) => {
 router.get('/oral_report', (req, res) => {
     let current360Id = req.query.current360Id;
     let queryText = `SELECT * FROM oral_report WHERE threesixty_reports_id=$1 ORDER BY id`;
+        
+    if (queryText !== '') {
+      pool.query(queryText, [current360Id])
+          .then( (results) => {
+              res.send(results.rows);
+          }).catch( (error) => {
+              console.log('error on get:', error);
+              res.sendStatus(500);
+          })
+    } else {
+        res.sendStatus(400);
+    }
+});
+
+// Setup a GET route to get 360 section freeform
+router.get('/freeform', (req, res) => {
+    let current360Id = req.query.current360Id;
+    let queryText = `SELECT * FROM freeform WHERE threesixty_id=$1 ORDER BY id`;
         
     if (queryText !== '') {
       pool.query(queryText, [current360Id])
@@ -521,8 +583,12 @@ router.put('/edit/goalsAssessment/:id', (async (req, res) => {
                 if (newData[key].new) {
                     await client.query(`INSERT INTO goals ("threesixty_id", "description", "desired", "delivered", "difference", "percent", "comments", "row_public")
                     VALUES ($1, $2, $3, $4, $5, $6, $7, $8);`, 
-                    [current360Id, newData[key].description, newData[key].desired, newData[key].delivered,
-                    newData[key].difference, newData[key].percent, newData[key].comments, newData[key].row_public])
+                    [current360Id, newData[key].description, 
+                    newData[key].desired === '' ? null : newData[key].desired, 
+                    newData[key].delivered === '' ? null : newData[key].delivered,
+                    newData[key].difference === '' ? null : newData[key].difference, 
+                    newData[key].percent === '' ? null : newData[key].percent, 
+                    newData[key].comments, newData[key].row_public])
                 } else if (newData[key].updated) {
                     await client.query(`UPDATE goals
                     SET threesixty_id = $2,
@@ -534,8 +600,12 @@ router.put('/edit/goalsAssessment/:id', (async (req, res) => {
                         comments = $8,
                         row_public = $9
                     WHERE id = $1;`, 
-                    [newData[key].id, newData[key].threesixty_id, newData[key].description, newData[key].desired, newData[key].delivered, 
-                    newData[key].difference, newData[key].percent, newData[key].comments, newData[key].row_public])
+                    [newData[key].id, current360Id, newData[key].description, 
+                    newData[key].desired === '' ? null : newData[key].desired, 
+                    newData[key].delivered === '' ? null : newData[key].delivered,
+                    newData[key].difference === '' ? null : newData[key].difference, 
+                    newData[key].percent === '' ? null : newData[key].percent, 
+                    newData[key].comments, newData[key].row_public])
                 } else if (newData[key] == 'deleted') {
                     await client.query(`DELETE FROM goals WHERE id = $1;`, [key]);
                 }
@@ -587,7 +657,60 @@ router.put('/edit/dashboard/:id', (async (req, res) => {
     }
 }))
 
-// Edit the dashboard section
+// Edit the demographics section
+router.put('/edit/demographics/:id', (async (req, res) => {
+    let current360Id = req.params.id;
+    let newData = req.body;
+
+    const client = await pool.connect();
+
+    try {
+        await client.query('BEGIN');
+        Object.keys(newData).map(async (key) => {
+            if (!isNaN(key)) {
+                if (newData[key].new) {
+                    await client.query(`INSERT INTO demographic ("threesixty_id", "ethnicity", "ethnic_category", "passion", "profession", "gen_category", "referral", "comments", "plans_to_tell", "first_time", "child_abuse", "housing", "transportation", "education")
+                    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14);`, 
+                    [current360Id, newData[key].ethnicity, newData[key].ethnic_category, newData[key].passion,
+                    newData[key].profession, newData[key].gen_category, newData[key].referral, newData[key].comments, 
+                    newData[key].plans_to_tell, newData[key].first_time, newData[key].child_abuse, newData[key].housing, 
+                    newData[key].transportation, newData[key].education])
+                } else if (newData[key].updated) {
+                    await client.query(`UPDATE demographic
+                    SET ethnicity = $2,
+                        ethnic_category = $3,
+                        passion = $4,
+                        profession = $5,
+                        gen_category = $6,
+                        referral = $7,
+                        comments = $8,
+                        plans_to_tell = $9,
+                        first_time = $10,
+                        child_abuse = $11,
+                        housing = $12,
+                        transportation = $13,
+                        education = $14
+                    WHERE id = $1;`, 
+                    [newData[key].id, newData[key].ethnicity, newData[key].ethnic_category, newData[key].passion,
+                    newData[key].profession, newData[key].gen_category, newData[key].referral, newData[key].comments, 
+                    newData[key].plans_to_tell, newData[key].first_time, newData[key].child_abuse, newData[key].housing, 
+                    newData[key].transportation, newData[key].education])
+                } else if (newData[key] == 'deleted') {
+                    await client.query(`DELETE FROM demographic WHERE id = $1;`, [key]);
+                }
+            };
+        });
+        await client.query('COMMIT');
+    } catch (error) {
+        await client.query('ROLLBACK');
+        return res.status(500).send(error);
+    } finally {
+        client.release();
+        return res.sendStatus(201)
+    }
+}))
+
+// Edit the analysis_recommendation section
 router.put('/edit/analysis_recommendation/:id', (async (req, res) => {
     let current360Id = req.params.id;
     let newData = req.body;
@@ -605,6 +728,43 @@ router.put('/edit/analysis_recommendation/:id', (async (req, res) => {
                     WHERE id = $1;`, 
                     [newData[key].id, newData[key].findings, newData[key].recommendations])
                 } 
+            };
+        });
+        await client.query('COMMIT');
+    } catch (error) {
+        await client.query('ROLLBACK');
+        return res.status(500).send(error);
+    } finally {
+        client.release();
+        return res.sendStatus(201)
+    }
+}))
+
+// Edit the freeform section
+router.put('/edit/freeform/:id', (async (req, res) => {
+    let current360Id = req.params.id;
+    let newData = req.body;
+
+    const client = await pool.connect();
+
+    try {
+        await client.query('BEGIN');
+        Object.keys(newData).map(async (key) => {
+            if (!isNaN(key)) {
+                if (newData[key].new) {
+                    await client.query(`INSERT INTO freeform ("threesixty_id", "title", "content", "row_public")
+                    VALUES ($1, $2, $3, $4);`, 
+                    [current360Id, newData[key].title, newData[key].content, newData[key].row_public])
+                } else if (newData[key].updated) {
+                    await client.query(`UPDATE freeform
+                    SET title = $2,
+                        content = $3,
+                        row_public = $4
+                    WHERE id = $1;`, 
+                    [newData[key].id, newData[key].title, newData[key].content, newData[key].row_public])
+                } else if (newData[key] == 'deleted') {
+                    await client.query(`DELETE FROM freeform WHERE id = $1;`, [key]);
+                }
             };
         });
         await client.query('COMMIT');

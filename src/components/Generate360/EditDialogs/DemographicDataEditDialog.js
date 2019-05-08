@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import DashboardEditComponent from './Supplements/DashboardEditComponent';
+import DemographicDataEditComponent from './Supplements/DemographicDataEditComponent';
 
 // Material-UI
 import { withStyles } from '@material-ui/core/styles';
@@ -12,7 +12,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-class DashboardEditDialog extends Component {
+class DemographicDataEditDialog extends Component {
 
  state = {
    // DO NOT create integer-only parameters as they are reserved for data rows
@@ -29,9 +29,19 @@ class DashboardEditDialog extends Component {
     ...this.state,
     [newRowName]: {
       id: newRowName,
-      row_info: '',
-      row_public: true,
-      row_title: '',
+      ethnicity: '',
+      passion: '',
+      profession: '',
+      gen_category: 1,
+      ethnic_category: 1,
+      referral: '',
+      comments: '',
+      plans_to_tell: false,
+      first_time: false,
+      child_abuse: false,
+      housing: false,
+      transportation: false,
+      education: false,
       // set flag that this row is new so that it can be added to database upon submittal
       new: true
     },
@@ -65,9 +75,23 @@ class DashboardEditDialog extends Component {
   })
  } // end handleChangeFor
 
+  // Update the rows array when a checkbox is edited.
+  handleCheckboxChange = (event, id) => {
+    event.preventDefault();
+  
+    this.setState({
+      [id]: {
+        ...this.state[id],
+        [event.target.name]: event.target.checked,
+        // set flag that this row has been updated so that it can be updated in database upon submittal 
+        updated: true
+      }
+    })
+   } // end handleCheckboxChange
+
  // handles clicking of the "edit" button. Opens a dialog window.
  handleClickOpen = () => {
-  this.props.dispatch({ type: 'FETCH_360_SECTION', payload: {section: 'dashboard', current360Id: this.props.current360Id} });
+  this.props.dispatch({ type: 'FETCH_360_SECTION', payload: {section: 'demographics', current360Id: this.props.current360Id} });
   this.setState({
     ...this.state,
     open: true,
@@ -87,7 +111,7 @@ class DashboardEditDialog extends Component {
  // dispatches an action to update the database with the new values and 
  // calls handleClickClose.
  handleSave = () => {
-  this.props.dispatch({ type: 'EDIT_360', payload: {section: 'dashboard', current360Id: this.props.current360Id, data: this.state} })
+  this.props.dispatch({ type: 'EDIT_360', payload: {section: 'demographics', current360Id: this.props.current360Id, data: this.state} })
   this.handleClickClose();
  } // end handleSave
 
@@ -108,7 +132,7 @@ class DashboardEditDialog extends Component {
     return null;
   });
 
-  let currentSection = this.props.reduxState.current360.dashboard
+  let currentSection = this.props.reduxState.current360.demographics
 
   // map through results from database pull
   currentSection.map((row,index) => {
@@ -134,11 +158,12 @@ class DashboardEditDialog extends Component {
   } else {
     newState.addRowId = 1;
   }
+
   // Set state to newState object
   this.setState( newState );
 
   // Dispatch action to indicate the update has been completed
-  this.props.dispatch({ type: 'CURRENT_360_SECTION_UPDATE_COMPLETE', payload: {section: 'dashboard'} });
+  this.props.dispatch({ type: 'CURRENT_360_SECTION_UPDATE_COMPLETE', payload: {section: 'demographics'} });
 
  } // end loadCurrentData
 
@@ -156,7 +181,7 @@ class DashboardEditDialog extends Component {
 
    // Check if the section information updated since this site was last loaded.
    // A section is re-downloaded each time the edit dialog is opened.
-   if (this.props.reduxState.current360.updateNeeded.dashboard === true) {
+   if (this.props.reduxState.current360.updateNeeded.demographics === true) {
      this.loadCurrentData();
    }
 
@@ -166,7 +191,7 @@ class DashboardEditDialog extends Component {
       <Dialog
         open={this.state.open}
         onClose={this.handleClickClose}
-        aria-labelledby="dashboard-edit-dialog"
+        aria-labelledby="demographics-edit-dialog"
         scroll="paper"
         fullWidth
         maxWidth="lg"
@@ -175,7 +200,7 @@ class DashboardEditDialog extends Component {
       {/* Conditionally render a loading message until data is loaded into local state */}
       {(this.state.updating === true) ? 
       <React.Fragment>
-        <DialogTitle id="dashboard-edit-dialog">Edit Dashboard</DialogTitle>
+        <DialogTitle id="demographics-edit-dialog">Edit Demographic Data</DialogTitle>
         <DialogContent>
           <DialogContentText>
             New information is currently loading...
@@ -184,8 +209,8 @@ class DashboardEditDialog extends Component {
       </React.Fragment>
         :
         <React.Fragment>
-          <DialogTitle id="dashboard-edit-dialog">Edit Dashboard</DialogTitle>
-          <DialogContent id="dashboard-edit-dialog-content" ref={(el) => { this.scroll = el; }}>
+          <DialogTitle id="demographic-edit-dialog">Edit Demographic Data</DialogTitle>
+          <DialogContent id="demographic-edit-dialog-content" ref={(el) => { this.scroll = el; }}>
             <DialogContentText>
               Remember to save changes before closing this edit dialog.
             </DialogContentText>
@@ -194,7 +219,11 @@ class DashboardEditDialog extends Component {
             {Object.keys(this.state).filter((key) => !isNaN(key) && this.state[key] !== undefined && this.state[key] !== 'deleted')
             .map((key,index) => {
               return (
-                <DashboardEditComponent key={this.state[key].id} row={this.state[key]} index={index} handleChangeFor={this.handleChangeFor} deleteRow={this.deleteRow} />
+                <DemographicDataEditComponent key={this.state[key].id} row={this.state[key]} index={index} 
+                handleChangeFor={this.handleChangeFor} deleteRow={this.deleteRow} 
+                generationCategories={this.props.reduxState.current360.generationCategories}
+                ethnicCategories={this.props.reduxState.current360.ethnicCategories}
+                handleCheckboxChange={this.handleCheckboxChange}/>
               );
             })}
             <div style={{ float:"left", clear: "both" }} ref={(el) => { this.bottom = el; }}>
@@ -236,4 +265,4 @@ const mapReduxStateToProps = (reduxState) => ({
  reduxState
 });
 
-export default connect(mapReduxStateToProps)(withStyles(styles)(DashboardEditDialog));
+export default connect(mapReduxStateToProps)(withStyles(styles)(DemographicDataEditDialog));

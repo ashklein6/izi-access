@@ -32,7 +32,7 @@ class Nav extends Component {
             <Link to="/home">
               <img src={MarnitaLogo} alt="Marnita's Table Placeholder" className={classes.image}/>
               <Typography className={classes.title} variant="h4">
-                MarnitaConnect
+                IZIAccess
               </Typography>
             </Link>
   
@@ -82,7 +82,8 @@ const styles = {
   },
   title: {
     color: 'white',
-    display: 'inline-block'
+    display: 'inline-block',
+    fontWeight: 'bold'
   }
 };
 

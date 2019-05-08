@@ -80,11 +80,11 @@ class GoalsAssessmentExpansionPanel extends Component {
         {/* Content that is within the expansion panel (shows when panel is expanded) */}
         <ExpansionPanelDetails className={classes.details}>
           <TableTemplate 
-            headers={['Description', 'Desired', 'Delivered', 'Difference', 'Percent', 'Comments']} 
-            width={['25%',null,null,null,null,null]}
+            headers={['Description', 'Desired', 'Delivered', 'Difference', 'Percent', 'Comments', 'Public']} 
+            width={['25%',null,null,null,null,null,null]}
             data={this.props.reduxState.current360.goalsAssessment} 
-            className={[null,classes.centerText,classes.centerText,classes.centerText,classes.centerText,null]}
-            cellVariables={['description', 'desired', 'delivered', 'difference', 'percent', 'comments']} 
+            className={[null,classes.centerText,classes.centerText,classes.centerText,classes.centerText,null,classes.centerText]}
+            cellVariables={['description', 'desired', 'delivered', 'difference', 'percent', 'comments', 'row_public']} 
           />
         </ExpansionPanelDetails>
 

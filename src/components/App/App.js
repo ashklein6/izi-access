@@ -6,9 +6,11 @@ import {
   Switch,
 } from 'react-router-dom';
 import {connect} from 'react-redux';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
+import colors from './colors';
 
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import EmployeeRoute from '../ProtectedRoute/EmployeeRoute';
@@ -27,6 +29,20 @@ import ResetPassword from '../ResetPassword/ResetPassword';
 
 import './App.css';
 
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: colors.purple
+    },
+    secondary: {
+      main: colors.orange
+    }
+  },
+  typography: {
+    fontFamily: ['Gill Sans', 'sans-serif']
+  }
+});
+
 class App extends Component {
   componentDidMount () {
     this.props.dispatch({type: 'FETCH_USER'});
@@ -35,6 +51,7 @@ class App extends Component {
 
   render() {
     return (
+      <MuiThemeProvider theme={theme}>
       <Router>
         <div style= {{height: '100%'}}>
           <Nav />
@@ -111,6 +128,7 @@ class App extends Component {
           <Footer />
         </div>
       </Router>
+      </MuiThemeProvider>
   )}
 }
 

@@ -72,7 +72,7 @@ class View360 extends Component {
           <section className={classes.section}>
             {/* anchor div for sidebar scroll placement */}
             <div style={{position: 'relative'}}>
-              <div id="goals-assessment" style={{position: 'absolute', top: -80, left: 0}}></div>
+              <div id="goals-assessment" style={{position: 'absolute', top: -145, left: 0}}></div>
             </div>            
             {/* sticky header for section */}
             <div className={classes.sticky}>
@@ -98,7 +98,7 @@ class View360 extends Component {
           <section className={classes.section}>
             {/* anchor div for sidebar scroll placement */}
             <div style={{position: 'relative'}}>
-              <div id="dashboard" style={{position: 'absolute', top: -80, left: 0}}></div>
+              <div id="dashboard" style={{position: 'absolute', top: -145, left: 0}}></div>
             </div>
             {/* sticky header for section */}
             <div className={classes.sticky}>
@@ -124,7 +124,7 @@ class View360 extends Component {
           <section className={classes.section}>
             {/* anchor div for sidebar scroll placement */}
             <div style={{position: 'relative'}}>
-              <div id="360report" style={{position: 'absolute', top: -80, left: 0}}></div>
+              <div id="360report" style={{position: 'absolute', top: -145, left: 0}}></div>
             </div>
             {/* sticky header for section */}
             <div className={classes.sticky}>
@@ -189,7 +189,7 @@ class View360 extends Component {
           <section className={classes.section}>
             {/* anchor div for sidebar scroll placement */}
             <div style={{position: 'relative'}}>
-              <div id="analysis" style={{position: 'absolute', top: -80, left: 0}}></div>
+              <div id="analysis" style={{position: 'absolute', top: -145, left: 0}}></div>
             </div>
             {/* sticky header for section */}
             <div className={classes.sticky}>
@@ -217,7 +217,7 @@ class View360 extends Component {
           <section className={classes.section}>
             {/* anchor div for sidebar scroll placement */}
             <div style={{position: 'relative'}}>
-              <div id="demo-data" style={{position: 'absolute', top: -80, left: 0}}></div>
+              <div id="demo-data" style={{position: 'absolute', top: -145, left: 0}}></div>
             </div>
             {/* sticky header for section */}
             <div className={classes.sticky}>
@@ -248,7 +248,7 @@ class View360 extends Component {
             <section className={classes.section}>
             {/* anchor div for sidebar scroll placement */}
             <div style={{position: 'relative'}}>
-              <div id="demo-data-charts" style={{position: 'absolute', top: -80, left: 0}}></div>
+              <div id="demo-data-charts" style={{position: 'absolute', top: -145, left: 0}}></div>
             </div>
             {/* sticky header for section */}
             <div className={classes.sticky}>
@@ -312,7 +312,7 @@ const styles = {
   header: {
     margin: '50px 0px 25px 0px',
     position: 'sticky',
-    top: 0,
+    top: 65,
     backgroundColor: 'white',
     textAlign: 'center',
     padding: '10px',
@@ -348,9 +348,9 @@ const styles = {
     fontSize: '0.8125rem'
   },
   report: {
-    height: 'calc(100vh - 122px)',
-    overflowY: 'auto',
-    overflowX: 'auto',
+    // height: 'calc(100vh)',
+    overflowY: 'visible',
+    overflowX: 'visible',
   },
   section: {
     paddingBottom: 20
@@ -362,13 +362,16 @@ const styles = {
     color: colors.purple
   },
   sideBar: {
-    height: 'calc(100vh - 122px)',
+    height: 'calc(100vh - 65px)',
     backgroundColor: '#ccc',
     textAlign: 'center',
+    overflowY: 'auto',
+    position: 'sticky',
+    top: 65,
   },
   sticky: {
     position: 'sticky',
-    top: 80,
+    top: 145,
     backgroundColor: 'white',
     boxShadow: 'box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);'
   },

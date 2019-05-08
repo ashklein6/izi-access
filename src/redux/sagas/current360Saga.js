@@ -70,10 +70,11 @@ function* fetch360(action) {
       put({ type: 'FETCH_CIRCLE_SHARE', payload: action.payload }),
       put({ type: 'FETCH_QUESTION_SET', payload: action.payload }),
       put({ type: 'FETCH_ORAL_REPORT', payload: action.payload }),
+      put({ type: 'FETCH_FREEFORM', payload: action.payload }),
       put({ type: 'FETCH_CHART_DATA', payload: action.payload }),
     ]);
     yield take(['SET_GOALS', 'SET_DASHBOARD', 'SET_THREESIXTY_REPORTS', 'SET_ANALYSIS_RECOMMENDATION',
-      'SET_DEMOGRAPHIC', 'SET_CIRCLE_SHARE', 'SET_QUESTION_SET', 'SET_ORAL_REPORT', 'SET_CHART_DATA'])
+      'SET_DEMOGRAPHIC', 'SET_CIRCLE_SHARE', 'SET_QUESTION_SET', 'SET_ORAL_REPORT', 'SET_FREEFORM', 'SET_CHART_DATA'])
     yield put({ type: 'GENERATE_360_LOADED' })
   } 
   catch (error) {
@@ -107,8 +108,14 @@ function* fetch360Info(action) {
 // general worker saga. expect an action.payload with section and current360Id
 function* fetch360Section(action) {
   try {
-    const response = yield call(axios.get, `/current360/${action.payload.section}`, {params: action.payload});
+    const response = yield call(axios.get, `/current360/${action.payload.section}`, {params: {current360Id: action.payload.current360Id}});
     yield put({ type: 'SET_360_SECTION', payload: {section: action.payload.section, content: response.data} });
+    if (action.payload.section === 'demographics') {
+      const gen_cat = yield call(axios.get, `current360/demographics/gen_cat`)
+      yield put({ type: 'SET_GEN_CAT', payload: gen_cat.data })
+      const ethnic_cat = yield call(axios.get, `current360/demographics/ethnic_cat`)
+      yield put({ type: 'SET_ETHNIC_CAT', payload: ethnic_cat.data })
+    }
     yield put({ type: 'CURRENT_360_SECTION_NEEDS_UPDATE', payload: {section: action.payload.section} });
   } 
   catch (error) {
@@ -164,6 +171,10 @@ function* fetchDemographics(action) {
   try {
     const response = yield call(axios.get, `/current360/demographics`, {params: action.payload});
     yield put({ type: 'SET_DEMOGRAPHICS', payload: {section: 'demographics', content: response.data} });
+    const gen_cat = yield call(axios.get, `current360/demographics/gen_cat`)
+    yield put({ type: 'SET_GEN_CAT', payload: gen_cat.data })
+    const ethnic_cat = yield call(axios.get, `current360/demographics/ethnic_cat`)
+    yield put({ type: 'SET_ETHNIC_CAT', payload: ethnic_cat.data })
     yield put({ type: 'CURRENT_360_SECTION_NEEDS_UPDATE', payload: {section: 'demographics'} });
   } 
   catch (error) {
@@ -206,6 +217,17 @@ function* fetchOralReport(action) {
   }
 }
 
+function* fetchFreeform(action) {
+  try {
+    const response = yield call(axios.get, `/current360/freeform`, {params: action.payload});
+    yield put({ type: 'SET_FREEFORM', payload: {section: 'freeform', content: response.data} });
+    yield put({ type: 'CURRENT_360_SECTION_NEEDS_UPDATE', payload: {section: 'freeform'} });
+  } 
+  catch (error) {
+    console.log('error', error);
+  }
+}
+
 // gets data for charts displayed in 360 report
 function* fetchChartData(action) {
   try {
@@ -236,6 +258,7 @@ function* current360Saga() {
   yield takeLatest( 'FETCH_CIRCLE_SHARE', fetchCircleShare );
   yield takeLatest( 'FETCH_QUESTION_SET', fetchQuestionSet );
   yield takeLatest( 'FETCH_ORAL_REPORT', fetchOralReport );
+  yield takeLatest( 'FETCH_FREEFORM', fetchFreeform );
   yield takeLatest( 'FETCH_CHART_DATA', fetchChartData );
 };
 

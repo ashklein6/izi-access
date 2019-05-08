@@ -47,9 +47,11 @@ CREATE TABLE "threesixty" (
 	"oral_report_public" BOOLEAN DEFAULT TRUE NOT NULL,
 	"question_set_public" BOOLEAN DEFAULT TRUE NOT NULL,
 	"circle_share_public" BOOLEAN DEFAULT TRUE NOT NULL,
+    "event_overview_public" BOOLEAN DEFAULT TRUE NOT NULL,
+    "mindstorm_public" BOOLEAN DEFAULT TRUE NOT NULL,
+    "sticky_stats_public" BOOLEAN DEFAULT TRUE NOT NULL,
 	"threesixty_freeform_public" BOOLEAN DEFAULT FALSE NOT NULL,
 	"freeform_public" BOOLEAN DEFAULT FALSE NOT NULL,
-    "upload_public" BOOLEAN DEFAULT TRUE NOT NULL,
 	"analysis_recommendation_published" BOOLEAN DEFAULT TRUE NOT NULL,
 	"threesixty_reports_published" BOOLEAN DEFAULT TRUE NOT NULL,
 	"dashboard_published" BOOLEAN DEFAULT TRUE NOT NULL,
@@ -58,16 +60,18 @@ CREATE TABLE "threesixty" (
 	"oral_report_published" BOOLEAN DEFAULT TRUE NOT NULL,
 	"question_set_published" BOOLEAN DEFAULT TRUE NOT NULL,
 	"circle_share_published" BOOLEAN DEFAULT TRUE NOT NULL,
+    "event_overview_published" BOOLEAN DEFAULT TRUE NOT NULL,
+    "mindstorm_published" BOOLEAN DEFAULT TRUE NOT NULL,
+    "sticky_stats_published" BOOLEAN DEFAULT TRUE NOT NULL,
 	"threesixty_freeform_published" BOOLEAN DEFAULT FALSE NOT NULL,
-	"freeform_published" BOOLEAN DEFAULT FALSE NOT NULL,
-    "upload_published" BOOLEAN DEFAULT TRUE NOT NULL
+	"freeform_published" BOOLEAN DEFAULT FALSE NOT NULL
 );
 
 CREATE TABLE "analysis_recommendation" (
     "id" SERIAL PRIMARY KEY,
     "threesixty_id" INT REFERENCES "threesixty" ON DELETE CASCADE,
-    "findings" VARCHAR(25600),
-    "recommendations" VARCHAR(25600)
+    "findings" VARCHAR(36000),
+    "recommendations" VARCHAR(36000)
 );
 
 CREATE TABLE "dashboard" (
@@ -101,7 +105,7 @@ CREATE TABLE "oral_report" (
     "id" SERIAL PRIMARY KEY,
     "threesixty_reports_id" INT REFERENCES "threesixty_reports" ON DELETE CASCADE,
     "group_num" INT,
-    "response" VARCHAR(25600)
+    "response" VARCHAR(36000)
 );
 
 CREATE TABLE "response_category" (
@@ -125,7 +129,7 @@ CREATE TABLE "questions" (
 CREATE TABLE "response" (
     "id" SERIAL PRIMARY KEY,
     "question_id" INT REFERENCES "questions" ON DELETE CASCADE,
-    "response" VARCHAR(25600),
+    "response" VARCHAR(36000),
     "category_id" INT REFERENCES "response_category"
 );
 
@@ -161,15 +165,8 @@ CREATE TABLE "freeform" (
 	"id" SERIAL PRIMARY KEY,
 	"threesixty_id" INT REFERENCES "threesixty" ON DELETE CASCADE,
 	"title" VARCHAR(800),
-	"content" VARCHAR(25600),
+	"content" VARCHAR(36000),
 	"row_public" BOOLEAN DEFAULT FALSE
-);
-
-CREATE TABLE "upload" (
-	"id" SERIAL PRIMARY KEY,
-	"threesixty_id" INT REFERENCES "threesixty" ON DELETE CASCADE,
-	"title" VARCHAR(800),
-	"url" VARCHAR(25600)
 );
 
 CREATE TABLE "circle_share" (
@@ -191,4 +188,35 @@ CREATE TABLE "threesixty_user" (
     "id" SERIAL PRIMARY KEY,
     "user_id" INT REFERENCES "person" ON DELETE CASCADE,
     "threesixty_id" INT REFERENCES "threesixty" ON DELETE CASCADE
+);
+
+CREATE TABLE "comments" (
+    "id" SERIAL PRIMARY KEY,
+    "user_id" INT REFERENCES "person" ON DELETE CASCADE,
+    "threesixty_id" INT REFERENCES "threesixty" ON DELETE CASCADE,
+    "parent_id" INT NULL DEFAULT NULL REFERENCES "comments" ON DELETE CASCADE,
+    "created_at" TIMESTAMP WITH TIME ZONE DEFAULT NOW() NOT NULL,
+    "comment" VARCHAR(2500) NOT NULL,
+    "approved" BOOLEAN DEFAULT FALSE
+);
+
+CREATE TABLE "files" (
+    "id" SERIAL PRIMARY KEY,
+    "user_id" INT REFERENCES "person" ON DELETE CASCADE,
+    "created_at" TIMESTAMP WITH TIME ZONE DEFAULT NOW() NOT NULL,
+    "title" VARCHAR(800) NOT NULL,
+    "description" VARCHAR(2500),
+    "url" VARCHAR(2500) NOT NULL
+);
+
+CREATE TABLE "files_threesixty" (
+    "id" SERIAL PRIMARY KEY,
+    "files_id" INT REFERENCES "files" ON DELETE CASCADE,
+    "threesixty_id" INT REFERENCES "threesixty" ON DELETE CASCADE
+);
+
+CREATE TABLE "files_comments" (
+    "id" SERIAL PRIMARY KEY,
+    "files_id" INT REFERENCES "files" ON DELETE CASCADE,
+    "comment_id" INT REFERENCES "comments" ON DELETE CASCADE
 );

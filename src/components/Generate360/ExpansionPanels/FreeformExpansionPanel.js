@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import colors from '../../App/colors';
-
+import MarkDownOutput from '../../MarkdownOutput/MarkdownOutput';
+import '../MarkdownOutputStyle.css'
 // import edit dialog component
-// import DashboardEditDialog from '../EditDialogs/DashboardEditDialog';
+import FreeformEditDialog from '../EditDialogs/FreeformEditDialog';
 
 // Material-UI
 import { withStyles } from '@material-ui/core/styles';
@@ -49,7 +50,7 @@ class FreeformExpansionPanel extends Component {
 
  componentDidMount() {
    // Get section when loaded
-   this.props.dispatch({ type: 'FETCH_THREESIXTY_REPORTS', payload: {section: 'threesixty_reports', current360Id: this.props.current360Id} });
+   this.props.dispatch({ type: 'FETCH_FREEFORM', payload: {section: 'freeform', current360Id: this.props.current360Id} });
  }
 
  render() {
@@ -80,7 +81,15 @@ class FreeformExpansionPanel extends Component {
         {/* Content that is within the expansion panel (shows when panel is expanded) */}
         <ExpansionPanelDetails className={classes.details}>
           <Paper className={classes.rootTable}>
-
+            {this.props.reduxState.current360.freeform.map((freeform, index) => {
+              return <div className={classes.bottomPadding}>
+                <Typography variant="h3" className={classes.header3}>** The following section is {freeform.row_public ? 'PUBLIC' : 'PRIVATE'} **</Typography>
+                <Typography variant="h4" className={classes.sectionHeader}>{freeform.title}</Typography>
+                <div className={classes.paragraph}>
+                  <MarkDownOutput className={'MarkdownOutputStyle'} display={freeform.content} key={index}/>
+                </div>
+              </div>
+            })}
           </Paper>
         </ExpansionPanelDetails>
 
@@ -119,7 +128,7 @@ class FreeformExpansionPanel extends Component {
             label={this.props.reduxState.current360.info[0].freeform_public ? 'Public' : 'Private'}
           />
           
-          {/* <DashboardEditDialog current360Id={this.props.current360Id}/> */}
+          <FreeformEditDialog current360Id={this.props.current360Id}/>
         </ExpansionPanelActions>
 
       </ExpansionPanel>
@@ -129,6 +138,9 @@ class FreeformExpansionPanel extends Component {
 };
 
 const styles = {
+  bottomPadding: {
+    paddingBottom: 20
+  },
   centerText: {
     textAlign: 'center'
   },
@@ -156,6 +168,13 @@ const styles = {
   heading: {
     fontSize: "1.5rem",
   },
+  header3: {
+    fontSize: "1rem",
+    color: colors.red,
+    marginBottom: 0,
+    fontWeight: 'bold',
+    textAlign: 'center'
+  },
   icon: {
     verticalAlign: 'bottom',
     height: 20,
@@ -166,7 +185,13 @@ const styles = {
   },
   rootTable: {
     width: '100%',
-    overflowX: 'scroll'
+    padding: 20
+  },
+  sectionHeader: {
+    padding: 10,
+    fontSize: '1.5rem',
+    fontWeight: 'bold',
+    color: colors.purple
   },
   status: {
     flexBasis: '25.00%',

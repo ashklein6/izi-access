@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import colors from '../../App/colors';
+import TableTemplate from '../TableTemplate/TableTemplate';
 
 // import edit dialog component
-// import GoalsAssessmentEditDialog from '../EditDialogs/GoalAssessmentsEditDialog';
+import DemographicDataEditDialog from '../EditDialogs/DemographicDataEditDialog';
 
 // Material-UI
 import { withStyles } from '@material-ui/core/styles';
@@ -78,7 +79,16 @@ class DemographicDataExpansionPanel extends Component {
 
         {/* Content that is within the expansion panel (shows when panel is expanded) */}
         <ExpansionPanelDetails className={classes.details}>
-
+          <TableTemplate 
+            headers={['Ethnic', 'Passion', 'Profession', 'Generation', 'Referral', 'Comments',
+                      'A', 'B', 'C', 'D', 'E', 'F']} 
+            width={['10%', '10%', '10%', '10%', null, null, null, null, null, null, null, null]}
+            data={this.props.reduxState.current360.demographics} 
+            className={[null,null]}
+            cellVariables={['ethnicity','passion', 'profession','generation','referral','comments','plans_to_tell',
+                      'first_time','child_abuse','housing','transportation','education']}
+            interpretBoolean={true}
+          />
         </ExpansionPanelDetails>
 
         <Divider />
@@ -116,7 +126,7 @@ class DemographicDataExpansionPanel extends Component {
             label={this.props.reduxState.current360.info[0].demographics_public ? 'Public' : 'Private'}
           />
           
-          {/* <GoalsAssessmentEditDialog current360Id={this.props.current360Id}/> */}
+          <DemographicDataEditDialog current360Id={this.props.current360Id}/>
         </ExpansionPanelActions>
 
       </ExpansionPanel>

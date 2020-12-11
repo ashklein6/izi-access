@@ -10,14 +10,20 @@ router.get('/', (req, res) => {
                   JOIN threesixty_user ON threesixty_user.threesixty_id = threesixty.id
                   JOIN person ON threesixty_user.user_id = person.id
                   WHERE person.id = $1;`
-  const user = req.user.id;
-  pool.query(sqlText, [user])
-  .then((response) => {
-    res.send(response.rows);
-  })
-  .catch(() => {
-    res.sendStatus(500);
-  })
+  
+  if (!req.user || !req.user.id) {
+    res.sendStatus(403)
+  } else {
+    const user = req.user.id;
+
+    pool.query(sqlText, [user])
+    .then((response) => {
+      res.send(response.rows);
+    })
+    .catch(() => {
+      res.sendStatus(500);
+    })
+  }
 });
 
 // add a client request for 360 access

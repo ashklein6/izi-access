@@ -101,7 +101,7 @@ VALUES (
 INSERT INTO analysis_recommendation (threesixty_id, findings, recommendations)
 VALUES (
 	1, 
-	`In support of our community engagement efforts in connection with the Health Matters IZI, Marnitas Table brought in Latinx outreach specialist, Blanca Martinez Gavina to connect with hard-to-reach immigrant stakeholders. Her one-on-one outreach efforts included Scott County Public Schools, local churches, apartment complexes, Latinx restaurants and other businesses where she had direct contact 
+	'In support of our community engagement efforts in connection with the Health Matters IZI, Marnitas Table brought in Latinx outreach specialist, Blanca Martinez Gavina to connect with hard-to-reach immigrant stakeholders. Her one-on-one outreach efforts included Scott County Public Schools, local churches, apartment complexes, Latinx restaurants and other businesses where she had direct contact 
 with approximately 250 Latinx individuals. She reported two prominent themes while in conversation with local community, as detailed below.
 
 **Fear of being out in the community**: Gavina found in her outreach that an estimated 40%-50% of the people she spoke with expressed that they felt afraid when they were out in the community. Both undocumented and documented Latinxs said that they preferred to stay home and not go outside. 
@@ -123,8 +123,8 @@ Our outreach also found that this fear even impacts the healthcare access of U.S
 
 Blanca estimates that more than half of the people she contacted stated that their one-on-one interview with her was the first time anyone had approached them about healthcare access. Many individuals shared that the community is only receiving care when there are emergency situations, and that they are not able to access preventative services.
 
-We do not intend the sharing of these findings as an indictment of the outreach work of Public Health or the other agencies involved in the Health Care Collaborative. We merely want to bring to light that there are pockets of vulnerable people in the community who are not aware of the resources that might be available to them or who are at present unable or unwilling to access those resources due to the current climate of fear caused by anti-Latinx rhetoric and policies. We hope that the good relationships catalyzed during the IZI will create pathways into these pockets and begin to build trust in the local healthcare systems.`,
-	`We feel strongly that this initial event has created a great opportunity to strengthen relationships between underserved community members and healthcare organizations in the county. In order to reap the full benefits of Intentional Social Interaction, it is important to trust the process. Every detail is intentional (hence the name!) and so when we provide critical feedback on central issues, it is because we do not want deviations from the model to detract from our overall project and collaborator goals. Our model has been refined and proven through the experience of bringing over 40,000 individuals together across difference for over 10 years, and while we always aim to exceed the goals of our clients and collaborative partners, that can only happen when we stay true to all twenty touchpoints of the 
+We do not intend the sharing of these findings as an indictment of the outreach work of Public Health or the other agencies involved in the Health Care Collaborative. We merely want to bring to light that there are pockets of vulnerable people in the community who are not aware of the resources that might be available to them or who are at present unable or unwilling to access those resources due to the current climate of fear caused by anti-Latinx rhetoric and policies. We hope that the good relationships catalyzed during the IZI will create pathways into these pockets and begin to build trust in the local healthcare systems.',
+	'We feel strongly that this initial event has created a great opportunity to strengthen relationships between underserved community members and healthcare organizations in the county. In order to reap the full benefits of Intentional Social Interaction, it is important to trust the process. Every detail is intentional (hence the name!) and so when we provide critical feedback on central issues, it is because we do not want deviations from the model to detract from our overall project and collaborator goals. Our model has been refined and proven through the experience of bringing over 40,000 individuals together across difference for over 10 years, and while we always aim to exceed the goals of our clients and collaborative partners, that can only happen when we stay true to all twenty touchpoints of the 
 model.
 
 With this in mind, we have outlined below some of our findings and recommendations to improve future collaboration and fidelity to the model:
@@ -143,7 +143,7 @@ We recommend:
 - Interpretation is important in cross-cultural conversations but immigrant communities would also like to talk about their health and wellbeing in their first languages, so culturally-specific conversations were also requested so that cultural communities can focus on their unique needs and situations as well.
 - Inviting works best when it is initiated peer-to-peer. Electronic communication only reaches a select few and written materials are helpful, but only when used in collaboration with direct contact and encouragement.
 
-We have truly valued the experience of partnering on this event with the Scott County Health Care Collaborative and would be happy to deepen the work in the future to further the impact. It was wonderful to witness the deepening of relationships and bridging social capital that occurred in the room and to see how well-received the experience of authentic welcome was for so many diverse members of the county. It is our hope that this event met the needs and goals of the Collaborative as a whole and of each individual member who went through the process with us. We believe that any of the procedural adjustments covered in this report might easily be smoothed out in the future, as you have now experienced the process with first-hand knowledge and understanding of the tools and methodology we use to engage community for meaningful, sustainable impact.`
+We have truly valued the experience of partnering on this event with the Scott County Health Care Collaborative and would be happy to deepen the work in the future to further the impact. It was wonderful to witness the deepening of relationships and bridging social capital that occurred in the room and to see how well-received the experience of authentic welcome was for so many diverse members of the county. It is our hope that this event met the needs and goals of the Collaborative as a whole and of each individual member who went through the process with us. We believe that any of the procedural adjustments covered in this report might easily be smoothed out in the future, as you have now experienced the process with first-hand knowledge and understanding of the tools and methodology we use to engage community for meaningful, sustainable impact.'
 	)
 ;
 
@@ -1841,7 +1841,7 @@ INSERT INTO freeform (threesixty_id, title, content, row_public)
 VALUES
 	('1',
 	'"Heard in the Hall"',
-	`Here’s what participants had to say about their experience:
+	'Here’s what participants had to say about their experience:
 
 - “Thank you for creating a safe place to engage others who are different than ourselves, and the freedom to be vulnerable and learn from each other.”  – Public Health Professional
 
@@ -1885,7 +1885,7 @@ VALUES
 
 - “This was one of the first experiences of a safe place for ALL members of community regardless of race, religion, ethnicity, sexual orientation, ability, or even dietary. Truly a shift, a challenge, and a hope to me moving forward.” – Fundraising Professional 
 
-For more participant-submitted comments and feedback, please see the attached Demo Data report.`,
+For more participant-submitted comments and feedback, please see the attached Demo Data report.',
 	true
 	)
 ;

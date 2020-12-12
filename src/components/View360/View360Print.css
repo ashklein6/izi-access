@@ -1,0 +1,16 @@
+@media print {
+  .sideBar {
+    display: none;
+  }
+  .sticky {
+    position: static !important;
+  }
+  #view-360-header {
+    position: static;
+  }
+  #view-360-report {
+    flex-grow: 1;
+    max-width: 100%;
+    flex-basis: 100%;
+  }
+}

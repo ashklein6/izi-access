@@ -8,6 +8,8 @@ import SideBar from './SideBar';
 import TableTemplate from './TableTemplate/TableTemplate';
 import MarkDownOutput from '../MarkdownOutput/MarkdownOutput';
 import LoadingDialog from './LoadingDialog';
+import './View360Print.css';
+import classNames from 'classnames';
 
 // Material-UI
 import { withStyles } from '@material-ui/core/styles';
@@ -39,7 +41,7 @@ class View360 extends Component {
     return (
       <Grid container spacing={0}>
         <LoadingDialog />
-        <Grid className={classes.sideBar} item xs={2}>
+        <Grid className={[classes.sideBar,'sideBar']} item xs={2}>
           <Button
             className={classes.manage360Btn} 
             variant="contained"
@@ -50,8 +52,8 @@ class View360 extends Component {
           <Divider />
           <SideBar />
         </Grid>
-        <Grid className={classes.report} item xs={10}>
-          <Textfit forceSingleModeWidth={false} className={classes.header}>
+        <Grid item xs={10} className={classes.report} id={'view-360-report'}>
+          <Textfit forceSingleModeWidth={false} className={classes.header} id={'view-360-header'}>
             {this.props.reduxState.current360.info[0].name}
           </Textfit>
           {/* <Typography variant="h2" className={classes.header}></Typography> */}
@@ -101,7 +103,7 @@ class View360 extends Component {
               <div id="dashboard" style={{position: 'absolute', top: -145, left: 0}}></div>
             </div>
             {/* sticky header for section */}
-            <div className={classes.sticky}>
+            <div className={classNames(classes.sticky, 'sticky')}>
               <Typography variant="h4" className={classes.sectionHeader}>Dashboard</Typography>
             </div>
             {/* section content */}

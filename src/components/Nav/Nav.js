@@ -27,7 +27,7 @@ class Nav extends Component {
 
     return (
       <div className={classes.root}>
-        <AppBar className={classes.nav} position="fixed">
+        <AppBar className={classes.nav} position="fixed" id='nav-app-bar'>
           <Toolbar>
             <Link to="/home">
               <img src={MarnitaLogo} alt="Marnita's Table Placeholder" className={classes.image}/>

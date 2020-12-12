@@ -36,3 +36,9 @@
 .nav-right {
   float: right;
 }
+
+@media print {
+  #nav-app-bar {
+    position: static;
+  }
+}

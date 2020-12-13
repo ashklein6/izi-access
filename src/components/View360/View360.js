@@ -77,7 +77,7 @@ class View360 extends Component {
               <div id="goals-assessment" style={{position: 'absolute', top: -145, left: 0}}></div>
             </div>            
             {/* sticky header for section */}
-            <div className={classes.sticky}>
+            <div className={classNames(classes.sticky, 'sticky')}>
               <Typography variant="h4" className={classes.sectionHeader}>Goals Assessment</Typography>
             </div>
             {/* section content */}
@@ -129,7 +129,7 @@ class View360 extends Component {
               <div id="360report" style={{position: 'absolute', top: -145, left: 0}}></div>
             </div>
             {/* sticky header for section */}
-            <div className={classes.sticky}>
+            <div className={classNames(classes.sticky, 'sticky')}>
               <Typography variant="h4" className={classes.sectionHeader}>360 Report</Typography>
             </div>
             {/* section content */}
@@ -194,7 +194,7 @@ class View360 extends Component {
               <div id="analysis" style={{position: 'absolute', top: -145, left: 0}}></div>
             </div>
             {/* sticky header for section */}
-            <div className={classes.sticky}>
+            <div className={classNames(classes.sticky, 'sticky')}>
               <Typography variant="h4" className={classes.sectionHeader}>Analysis and Recommendations</Typography>
             </div>
               <Typography variant="h5" className={classes.header5}>Outreach Findings</Typography>
@@ -222,7 +222,7 @@ class View360 extends Component {
               <div id="demo-data" style={{position: 'absolute', top: -145, left: 0}}></div>
             </div>
             {/* sticky header for section */}
-            <div className={classes.sticky}>
+            <div className={classNames(classes.sticky, 'sticky')}>
               <Typography variant="h4" className={classes.sectionHeader}>IZI Demographic Data</Typography>
             </div>
             {/* section content */}
@@ -253,7 +253,7 @@ class View360 extends Component {
               <div id="demo-data-charts" style={{position: 'absolute', top: -145, left: 0}}></div>
             </div>
             {/* sticky header for section */}
-            <div className={classes.sticky}>
+            <div className={classNames(classes.sticky, 'sticky')}>
               <Typography variant="h4" className={classes.sectionHeader}>IZI Demographic Data Charts</Typography>
             </div>
             {/* <TrueFalse data={this.props.reduxState.current360.chart_data}/> */}

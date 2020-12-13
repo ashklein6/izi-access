@@ -15,8 +15,6 @@ import Cancel from '@material-ui/icons/Cancel';
 import Tooltip from '@material-ui/core/Tooltip';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import classNames from 'classnames';
 
 class ViewUser extends Component {
 
@@ -173,13 +171,10 @@ class ViewUser extends Component {
           <InputLabel>Access Level:</InputLabel>
           <TextField
               select
-              className={classNames(classes.margin, classes.textField)}
+              className={classes.dropdown}
               value={this.state.access_id}
               onChange={this.handleChange}
               name="access_id"
-              InputProps={{
-                startAdornment: <InputAdornment position="start">Level</InputAdornment>,
-              }}
             >
               {level.map(option => (
                 <MenuItem key={option.id} value={option.id}>
@@ -255,6 +250,9 @@ const styles = {
   },
   removeAccess: {
     marginLeft: 10
+  },
+  dropdown: {
+    margin: '0px 0px 15px 15px'
   },
   notes: {
     margin: 'auto',
